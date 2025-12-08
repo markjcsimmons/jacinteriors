@@ -269,3 +269,102 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 console.log('Hero carousel and scroll animations initialized');
+
+// ===================================
+// STICKY CONSULTATION BUTTON
+// ===================================
+
+const stickyBtn = document.getElementById('stickyConsultBtn');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 800) {
+        stickyBtn.classList.add('visible');
+    } else {
+        stickyBtn.classList.remove('visible');
+    }
+});
+
+// ===================================
+// EXIT-INTENT POPUP
+// ===================================
+
+const exitPopup = document.getElementById('exitPopup');
+const exitPopupClose = document.getElementById('exitPopupClose');
+const exitPopupForm = document.getElementById('exitPopupForm');
+let exitPopupShown = sessionStorage.getItem('exitPopupShown');
+let isExitPopupActive = false;
+
+// Detect mouse leaving viewport (exit intent)
+document.addEventListener('mouseleave', (e) => {
+    // Only trigger if mouse leaves from top of page (navigating away)
+    if (e.clientY <= 0 && !exitPopupShown && !isExitPopupActive) {
+        showExitPopup();
+    }
+});
+
+function showExitPopup() {
+    exitPopup.classList.add('active');
+    isExitPopupActive = true;
+    sessionStorage.setItem('exitPopupShown', 'true');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function hideExitPopup() {
+    exitPopup.classList.remove('active');
+    document.body.style.overflow = ''; // Re-enable scrolling
+}
+
+// Close popup on X button
+if (exitPopupClose) {
+    exitPopupClose.addEventListener('click', hideExitPopup);
+}
+
+// Close popup on overlay click
+exitPopup.addEventListener('click', (e) => {
+    if (e.target === exitPopup) {
+        hideExitPopup();
+    }
+});
+
+// Close popup on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isExitPopupActive) {
+        hideExitPopup();
+    }
+});
+
+// Handle form submission
+if (exitPopupForm) {
+    exitPopupForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(exitPopupForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const phone = formData.get('phone');
+        
+        // Here you would send to your backend/CRM
+        console.log('Consultation request:', { name, email, phone });
+        
+        // Show success message
+        exitPopup.querySelector('.exit-popup-content').innerHTML = `
+            <div style="text-align: center; padding: 2rem 0;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+                <h2 style="color: var(--color-primary); margin-bottom: 1rem;">Thank You!</h2>
+                <p style="font-size: 1.125rem; line-height: 1.8; color: var(--color-text);">
+                    We've received your request for a free 30-minute design consultation.<br><br>
+                    <strong>We'll contact you within 24 hours</strong> to schedule your call.<br><br>
+                    We look forward to discussing your project!
+                </p>
+                <button onclick="document.getElementById('exitPopup').classList.remove('active'); document.body.style.overflow = '';" 
+                        class="btn btn-primary" style="margin-top: 2rem;">Close</button>
+            </div>
+        `;
+        
+        setTimeout(() => {
+            hideExitPopup();
+        }, 5000);
+    });
+}
+
+console.log('Conversion optimization features loaded');

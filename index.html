@@ -255,7 +255,7 @@
                         <p class="featured-hero-subtitle">Award-winning interior design that transforms houses into dream homes</p>
                         <div class="featured-hero-buttons">
                             <a href="#portfolio" class="btn btn-primary btn-large smooth-scroll">View Our Work</a>
-                            <a href="contact.html" class="btn btn-secondary-light btn-large">Start Your Project</a>
+                            <a href="contact.html" class="btn btn-secondary-light btn-large">Book Free Phone Consultation</a>
                         </div>
                     </div>
                 </div>
@@ -510,8 +510,8 @@
             <div class="cta-content">
                 <span class="section-label">Let's Work Together</span>
                 <h2>Ready to Transform Your Space?</h2>
-                <p>Whether you're starting a new project or need design guidance, the JAC Interiors team is here to help bring your vision to life.</p>
-                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+                <p>Schedule a FREE 30-minute phone consultation to discuss your vision and get expert design recommendations.</p>
+                <a href="contact.html" class="btn btn-primary btn-large">Schedule Free Consultation</a>
             </div>
         </div>
     </section>
@@ -577,6 +577,40 @@
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         ↑
     </button>
+
+    <!-- Sticky Consultation Button -->
+    <a href="contact.html" class="sticky-consultation-btn" id="stickyConsultBtn">
+        <span class="sticky-btn-icon">📞</span>
+        <span class="sticky-btn-text">Free 30-Min Design Call</span>
+    </a>
+
+    <!-- Exit-Intent Popup -->
+    <div class="exit-popup-overlay" id="exitPopup">
+        <div class="exit-popup">
+            <button class="exit-popup-close" id="exitPopupClose">&times;</button>
+            <div class="exit-popup-content">
+                <h2>Before You Go! 💡</h2>
+                <h3>Get Expert Design Advice - FREE</h3>
+                <p class="exit-popup-subtitle">30-Minute Phone Consultation • No Obligation</p>
+                
+                <div class="exit-popup-benefits">
+                    <div class="benefit-item">✓ Discuss your vision & goals</div>
+                    <div class="benefit-item">✓ Get expert recommendations</div>
+                    <div class="benefit-item">✓ Learn about our process</div>
+                    <div class="benefit-item">✓ No pressure, just great advice</div>
+                </div>
+
+                <form class="exit-popup-form" id="exitPopupForm">
+                    <input type="text" name="name" placeholder="Your Name *" required>
+                    <input type="email" name="email" placeholder="Your Email *" required>
+                    <input type="tel" name="phone" placeholder="Your Phone *" required>
+                    <button type="submit" class="btn btn-primary btn-large">Schedule My Free Call</button>
+                </form>
+
+                <p class="exit-popup-note">We'll contact you within 24 hours to schedule your consultation</p>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/js/main.js"></script>
 </body>
