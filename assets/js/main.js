@@ -216,3 +216,56 @@ document.querySelectorAll('.smooth-scroll').forEach(link => {
         }
     });
 });
+
+// ===================================
+// HERO IMAGE CAROUSEL - Auto Rotate
+// ===================================
+
+let currentSlide = 0;
+const carouselImages = document.querySelectorAll('.hero-carousel-img');
+
+function rotateHeroImages() {
+    if (carouselImages.length === 0) return;
+    
+    // Remove active class from current image
+    carouselImages[currentSlide].classList.remove('active');
+    
+    // Move to next image
+    currentSlide = (currentSlide + 1) % carouselImages.length;
+    
+    // Add active class to new image
+    carouselImages[currentSlide].classList.add('active');
+}
+
+// Rotate every 3 seconds
+if (carouselImages.length > 1) {
+    setInterval(rotateHeroImages, 3000);
+}
+
+// ===================================
+// SCROLL ANIMATIONS
+// ===================================
+
+const scrollAnimationObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+// Observe all elements with scroll animation classes
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll(
+        '.scroll-fade-in, .scroll-slide-left, .scroll-slide-right, .scroll-scale-in'
+    );
+    
+    animatedElements.forEach(element => {
+        scrollAnimationObserver.observe(element);
+    });
+});
+
+console.log('Hero carousel and scroll animations initialized');
