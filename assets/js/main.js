@@ -196,3 +196,23 @@ function expandReview(button) {
     reviewText.classList.add('expanded');
 }
 
+
+// ===================================
+// SMOOTH SCROLL FOR "VIEW OUR WORK" BUTTON
+// ===================================
+
+document.querySelectorAll('.smooth-scroll').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        
+        if (targetSection) {
+            const offsetTop = targetSection.offsetTop - 80; // Account for fixed navbar
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
