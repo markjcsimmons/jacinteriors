@@ -8,9 +8,12 @@ import re
 import html as html_lib
 from pathlib import Path
 from bs4 import BeautifulSoup
+import shutil
 
 BACKUP_DIR = Path('/Users/mark/Desktop/jacinteriors-backup/jacinteriors.com/pages')
 CITY_DIR = Path('/Users/mark/Desktop/JAC web design/jac-website-custom/cities')
+BACKUP_IMAGES_DIR = Path('/Users/mark/Desktop/jacinteriors-backup/jacinteriors.com/cdn/shop/files')
+CITY_IMAGES_DIR = Path('/Users/mark/Desktop/JAC web design/jac-website-custom/assets/images/cities')
 
 # Mapping of city slugs to backup filenames
 CITY_MAPPINGS = {
@@ -62,9 +65,56 @@ CITY_MAPPINGS = {
     'edgewater': 'wynwood-edgewater-interior-design-services',  # Edgewater is in Wynwood page
 }
 
+def extract_images_from_page(html_content, city_slug):
+    """Extract and copy all project images from city page"""
+    soup = BeautifulSoup(html_content, 'html.parser')
+    
+    copied_images = []
+    
+    # Find all img tags
+    for img in soup.find_all('img'):
+        src = img.get('src') or img.get('data-src')
+        if not src:
+            continue
+        
+        # Extract filename - look for 2000x high-res version
+        if '_2000x' in src and ('.jpg' in src or '.png' in src):
+            filename = src.split('/')[-1].split('?')[0]  # Remove query params
+            
+            # Source and destination paths
+            src_file = BACKUP_IMAGES_DIR / filename
+            dst_file = CITY_IMAGES_DIR / filename
+            
+            if src_file.exists() and not dst_file.exists():
+                try:
+                    shutil.copy2(src_file, dst_file)
+                    copied_images.append(filename)
+                except Exception as e:
+                    pass
+    
+    return copied_images
+
 def extract_city_content_beautifulsoup(html_content):
     """Extract content using BeautifulSoup for better parsing"""
     soup = BeautifulSoup(html_content, 'html.parser')
+    
+    # First check for description div (contains detailed city content)
+    description_div = soup.find('div', class_='description')
+    if description_div:
+        # Extract all paragraphs from description
+        description_paragraphs = []
+        for p in description_div.find_all('p'):
+            text = p.get_text(strip=True)
+            if text and not text.startswith('Contact'):
+                description_paragraphs.append(text)
+        
+        if description_paragraphs:
+            # Return as a single rich content section
+            return [{
+                'title': '',  # No title for description section
+                'paragraphs': description_paragraphs,
+                'lists': []
+            }]
     
     # Find the main content div
     main_content = soup.find('div', class_='one-whole column')
@@ -114,6 +164,27 @@ def extract_city_content_beautifulsoup(html_content):
         content_sections.append(current_section)
     
     return content_sections[:4]  # Return first 4 major sections
+
+def generate_image_gallery_html(images):
+    """Generate HTML for image gallery"""
+    if not images:
+        return ""
+    
+    gallery_html = '''
+    <section class="section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem;">'''
+    
+    for img in images:
+        gallery_html += f'''
+                <img src="../assets/images/cities/{img}" alt="Interior Design" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" loading="lazy">'''
+    
+    gallery_html += '''
+            </div>
+        </div>
+    </section>'''
+    
+    return gallery_html
 
 def generate_html_from_sections(sections, city_name):
     """Generate clean HTML from extracted sections"""
@@ -185,6 +256,9 @@ def update_city_page_with_authentic_content(city_slug, backup_slug):
     if not sections:
         return False, "No content extracted"
     
+    # Extract and copy images
+    images = extract_images_from_page(backup_content, city_slug)
+    
     # Read current city page
     with open(city_file, 'r', encoding='utf-8') as f:
         city_content = f.read()
@@ -199,6 +273,9 @@ def update_city_page_with_authentic_content(city_slug, backup_slug):
     # Generate HTML for sections
     sections_html = generate_html_from_sections(sections, city_name)
     
+    # Generate HTML for image gallery
+    gallery_html = generate_image_gallery_html(images)
+    
     # Get image path
     image_path = get_city_image_path(city_slug)
     
@@ -206,7 +283,7 @@ def update_city_page_with_authentic_content(city_slug, backup_slug):
     # Find and replace all content sections between intro and CTA
     pattern = r'(<section class="section" style="padding-top: 2rem;">.*?</section>)\s*(<section class="section".*?</section>)*\s*(<section class="section cta-section">)'
     
-    replacement = f'\\1\n{sections_html}\n\n\\3'
+    replacement = f'\\1\n{sections_html}\n{gallery_html}\n\n\\3'
     
     city_content = re.sub(pattern, replacement, city_content, flags=re.DOTALL)
     
@@ -227,7 +304,12 @@ def main():
         try:
             success, message = update_city_page_with_authentic_content(city_slug, backup_slug)
             if success:
-                print(f"✅ {city_slug:25} - {message}")
+                # Count images
+                city_file = CITY_DIR / f"{city_slug}.html"
+                with open(city_file, 'r') as f:
+                    content = f.read()
+                img_count = content.count('assets/images/cities/')
+                print(f"✅ {city_slug:25} - {message}, {img_count} images")
                 updated_count += 1
             else:
                 print(f"⚠️  {city_slug:25} - {message}")
