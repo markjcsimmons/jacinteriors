@@ -1,0 +1,64 @@
+PROJECT IMAGE MAPPING - jacinteriors.com to New Website
+==========================================================
+
+Based on live jacinteriors.com inspection:
+
+1. Toscana Country Club
+   - Hero Image: Pool with palm trees and lake/golf course view
+   - URL: /pages/toscana-country-club
+   
+2. Venice Boho House
+   - Hero Image: 
+   - URL: /pages/venice-boho-house
+   
+3. Santa Monica Modern Spanish
+   - Hero Image:
+   - URL: /pages/santa-monica-modern-spanish
+   
+4. Beverly Hills (Alpine)
+   - Hero Image:
+   - URL: /pages/beverly-hills-alpine
+   
+5. Yellowstone Club
+   - Hero Image:
+   - URL: /pages/yellowstone-club
+   
+6. Madison Club
+   - Hero Image:
+   - URL: /pages/madison-club
+   
+7. Mulholland
+   - Hero Image:
+   - URL: /pages/mulholland
+   
+8. Madison Club II
+   - Hero Image:
+   - URL: /pages/madison-club-ii
+   
+9. Beverly Hills II
+   - Hero Image:
+   - URL: /pages/beverly-hills-project
+   
+10. Venice Beach House
+    - Hero Image:
+    - URL: /pages/venice-beach-house
+    
+11. Calabasas
+    - Hero Image:
+    - URL: /pages/calabasas-project
+    
+12. Eclectic Sunnyside
+    - Hero Image:
+    - URL: /pages/eclectic-sunnyside
+    
+13. Rhonda (Palm Desert Oasis)
+    - Hero Image:
+    - URL: /pages/rhonda
+
+Additional Projects (not on original site):
+14. Panorama Views - will assign appropriate image
+15. Brentwood Estate - will assign appropriate image
+16. Malibu Beach House - will assign appropriate image
+17. Studio City Modern - will assign appropriate image
+18. Pacific Palisades Villa - will assign appropriate image
+

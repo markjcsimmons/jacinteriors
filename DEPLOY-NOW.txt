@@ -1,0 +1,142 @@
+🚀 DEPLOY YOUR WEBSITE TO VERCEL NOW - STEP BY STEP
+=========================================================
+
+YOUR WEBSITE IS READY! Here's how to get it live in 10 minutes:
+
+FASTEST METHOD: DRAG & DROP (5 MINUTES)
+----------------------------------------
+
+1. Open your browser and go to: https://vercel.com
+
+2. Click "Sign Up" (top right)
+   - Use your GitHub, GitLab, or email
+   - It's 100% FREE
+
+3. After signing in, you'll see the Vercel dashboard
+
+4. Look for "Add New..." or "Import Project" button
+
+5. You'll see a drag-and-drop area that says:
+   "Drop your project folder here"
+
+6. Open Finder and go to:
+   Desktop → JAC web design → jac-website-custom
+
+7. DRAG the entire "jac-website-custom" folder into Vercel
+
+8. Vercel will upload and deploy automatically (takes 1-2 minutes)
+
+9. When done, you'll see: "Congratulations! Your project is live!"
+
+10. Click "Visit" to see your site at:
+    https://jac-website-custom.vercel.app (or similar)
+
+DONE! Your site is LIVE on the internet! ✅
+
+
+CONNECT YOUR DOMAIN (jacinteriors.com)
+---------------------------------------
+
+Once your site is deployed:
+
+1. In Vercel dashboard, click your project name
+
+2. Click "Settings" (top menu)
+
+3. Click "Domains" (left sidebar)
+
+4. Type: jacinteriors.com
+
+5. Click "Add"
+
+6. Vercel will show you instructions like:
+   "Add these DNS records to your domain:"
+
+7. Go to your domain registrar (where you bought jacinteriors.com)
+   - This might be GoDaddy, Namecheap, Google Domains, etc.
+
+8. Find "DNS Settings" or "Manage DNS"
+
+9. Add the records Vercel showed you:
+   - A Record: @ → 76.76.21.21
+   - CNAME: www → cname.vercel-dns.com
+
+10. Save DNS changes
+
+11. Wait 24-48 hours for DNS to update
+
+12. Your site will be live at jacinteriors.com!
+
+
+ALTERNATIVE: GITHUB METHOD
+---------------------------
+
+If drag-and-drop doesn't work:
+
+1. Create free account at: https://github.com
+
+2. Click "New Repository" (green button)
+
+3. Name it: jac-interiors-website
+
+4. Click "Create Repository"
+
+5. Click "uploading an existing file"
+
+6. Drag ALL files from jac-website-custom folder
+
+7. Click "Commit changes"
+
+8. Go back to Vercel
+
+9. Click "Import Project"
+
+10. Select "Import Git Repository"
+
+11. Choose your GitHub repo
+
+12. Click "Deploy"
+
+DONE!
+
+
+WHAT YOU HAVE:
+--------------
+✅ Beautiful modern website
+✅ Homepage with hero and services
+✅ Portfolio with 8+ projects
+✅ About page
+✅ Services page
+✅ Contact form
+✅ Mobile responsive
+✅ Your branding and content
+✅ FREE hosting forever
+
+
+COSTS:
+------
+Vercel Hosting: FREE
+Domain (jacinteriors.com): $15/year (you already have this)
+Total per year: $15
+
+Compare to:
+- Shopify: $348/year
+- Webflow: $276/year
+
+YOU SAVE: $260-330 PER YEAR! 💰
+
+
+NEED HELP?
+----------
+- Read README.md for detailed instructions
+- Check Vercel documentation: vercel.com/docs
+- Contact Vercel support (they're very helpful!)
+
+
+🎉 YOUR SITE IS READY TO GO LIVE! 🎉
+
+Just drag-and-drop to Vercel and you're done!
+
+
+
+
