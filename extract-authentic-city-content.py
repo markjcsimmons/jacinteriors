@@ -45,6 +45,21 @@ CITY_MAPPINGS = {
     'key-biscayne': 'key-biscayne-interior-design-services',
     'plantation': 'plantation-interior-design-services',
     'wynwood': 'wynwood-edgewater-interior-design-services',
+    # Additional cities from backup
+    'beverly-hills': 'beverly-hills-project',
+    'culver-city': 'culver-city',
+    'pasadena': 'pasadena',
+    'manhattan-beach': 'manhattan-beach',
+    'studio-city': 'studio-city',
+    'west-hollywood': 'west-hollywood',
+    'calabasas': 'calabasas',
+    'doral': 'doral-interior-design-services-nbsp-nbsp',
+    'deerfield-beach': 'deerfield-beach',
+    'fort-lauderdale': 'fort-lauderdale',
+    'boca-raton': 'interior-designer-boca-raton',
+    'palos-verdes': 'palos-verdes',
+    'pompano-beach': 'pompano-beach-interior',
+    'edgewater': 'wynwood-edgewater-interior-design-services',  # Edgewater is in Wynwood page
 }
 
 def extract_city_content_beautifulsoup(html_content):
