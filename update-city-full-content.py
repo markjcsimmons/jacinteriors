@@ -11,18 +11,37 @@ from pathlib import Path
 
 # Cities that have dedicated interior design services pages in backup
 CITY_SERVICE_PAGES = {
-    'santa-monica': 'our-signature-interior-design-services-in-santa-monica',
+    'aventura': 'aventura-golden-isles-interior-design-services',
+    'bal-harbour': 'bal-harbour-bay-harbor-islands-interior-design-services',
     'bel-air': 'bel-air-interior-design-services',
     'brentwood': 'brentwood-interior-design-services',
+    'brickell': 'brickell-downtown-miami-interior-design-services',
     'burbank': 'burbank-interior-design-services',
+    'coconut-grove': 'coconut-grove-interior-design-services',
+    'coral-gables': 'coral-gables-interior-design-services',
+    'doral': 'doral-interior-design-services',
+    'el-segundo': 'el-segundo-interior-design-services-nbsp-nbsp',
     'encino': 'encino-interior-design-services',
     'hermosa-beach': 'hermosa-beach-interior-design-services',
+    'hialeah': 'hialeah-interior-design-services',
     'hollywood': 'hollywood-interior-design-services',
+    'key-biscayne': 'key-biscayne-interior-design-services',
     'marina-del-rey': 'marina-del-rey-interior-design-services',
     'north-hollywood': 'north-hollywood-interior-design-services',
+    'santa-monica': 'our-signature-interior-design-services-in-santa-monica',
     'pacific-palisades': 'pacific-palisades-interior-design-services',
+    'plantation': 'plantation-interior-design-services',
     'playa-del-rey': 'playa-del-rey-interior-design-services',
+    'playa-vista': 'playa-vista-interior-design-services',
+    'redondo-beach': 'redondo-beach-interior-design-services',
+    'sherman-oaks': 'sherman-oaks-interior-design-services',
     'tarzana': 'tarzana-interior-design-services',
+    'topanga': 'topanga-interior-design-services',
+    'universal-city': 'universal-city-interior-design-services',
+    'valley-village': 'valley-village-interior-design-services',
+    'van-nuys': 'van-nuys-interior-design-services',
+    'venice': 'venice-interior-design-services',
+    'wynwood': 'wynwood-edgewater-interior-design-services',
 }
 
 BACKUP_DIR = Path('/Users/mark/Desktop/jacinteriors-backup/jacinteriors.com/pages')
@@ -43,24 +62,39 @@ def extract_full_content(html_content):
     if h1_match:
         h1_text = clean_text(re.sub(r'<[^>]+>', '', h1_match.group(1)))
     
-    # Extract intro paragraph
+    # Extract intro paragraph - try both formats
     intro_match = re.search(r'<p data-start[^>]*>(.*?)</p>', html_content, re.DOTALL)
+    if not intro_match:
+        intro_match = re.search(r'<p[^>]*dir="ltr"[^>]*>(.*?)</p>', html_content, re.DOTALL)
+    if not intro_match:
+        intro_match = re.search(r'</h1>.*?<p[^>]*>(.*?)</p>', html_content, re.DOTALL)
     intro_text = ""
     if intro_match:
         intro_text = clean_text(re.sub(r'<[^>]+>', '', intro_match.group(1)))
     
-    # Extract service list
+    # Extract service list - try both formats
     services = []
     ul_match = re.search(r'<ul data-start[^>]*>(.*?)</ul>', html_content, re.DOTALL)
+    if not ul_match:
+        ul_match = re.search(r'<ul[^>]*>(.*?)</ul>', html_content, re.DOTALL)
+    
     if ul_match:
+        # Try data-start format first
         li_items = re.findall(r'<p data-start[^>]*>(.*?)</p>', ul_match.group(1), re.DOTALL)
-        services = [clean_text(re.sub(r'<[^>]+>', '', item)) for item in li_items if item.strip()]
+        if not li_items:
+            # Try regular li format
+            li_items = re.findall(r'<li[^>]*>.*?<p[^>]*>(.*?)</p>', ul_match.group(1), re.DOTALL)
+        if not li_items:
+            # Try simple li format
+            li_items = re.findall(r'<li[^>]*>(.*?)</li>', ul_match.group(1), re.DOTALL)
+        services = [clean_text(re.sub(r'<[^>]+>', '', item)) for item in li_items if item.strip() and len(item.strip()) > 5]
     
     # Extract all H2 sections with their content
     sections = []
     
-    # Find all H2 headings
-    h2_matches = list(re.finditer(r'<h2[^>]*>(.*?)</h2>', html_content, re.DOTALL))
+    # Find all H2 headings - handle both with and without spans
+    h2_pattern = r'<h2[^>]*>(?:<span[^>]*>)?(.*?)(?:</span>)?</h2>'
+    h2_matches = list(re.finditer(h2_pattern, html_content, re.DOTALL))
     
     for i, h2_match in enumerate(h2_matches):
         h2_title = clean_text(re.sub(r'<[^>]+>', '', h2_match.group(1)))
