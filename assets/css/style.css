@@ -1643,3 +1643,33 @@ img[loading="lazy"] {
         font-size: 1.25rem;
     }
 }
+
+/* ===================================
+   FIX BUTTON POSITIONING - No Overlap
+   =================================== */
+
+/* Move sticky consultation button to left side */
+.sticky-consultation-btn {
+    right: auto !important;
+    left: 30px !important;
+}
+
+/* Keep back-to-top on right side */
+.back-to-top {
+    right: 30px;
+    bottom: 30px;
+}
+
+/* Mobile: Stack buttons vertically on right */
+@media (max-width: 768px) {
+    .sticky-consultation-btn {
+        left: auto !important;
+        right: 20px !important;
+        bottom: 90px !important; /* Above back-to-top button */
+    }
+    
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+    }
+}
