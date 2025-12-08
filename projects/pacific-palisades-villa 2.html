@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pacific Palisades Villa - Mediterranean interior design by JAC Interiors in Pacific Palisades, CA">
+    <title>Pacific Palisades Villa | JAC Interiors Projects</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .project-hero {
+            height: 60vh;
+            min-height: 500px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            margin-top: 80px;
+        }
+        .project-hero-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+            width: 100%;
+            padding: 4rem 0 3rem;
+        }
+        .project-hero h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-hero .project-type {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+        .project-details-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .detail-item h4 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-light);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .detail-item p {
+            font-size: 1.125rem;
+            color: var(--color-secondary);
+            font-weight: 500;
+        }
+        .project-description {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        .gallery-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .gallery-image.full-width {
+            grid-column: 1 / -1;
+            height: 600px;
+        }
+        .project-content-section {
+            margin: 4rem 0;
+        }
+        .project-content-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-secondary);
+        }
+        .project-content-section p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+        .related-projects {
+            margin-top: 6rem;
+            padding-top: 4rem;
+            border-top: 2px solid var(--color-border);
+        }
+        .related-projects h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        @media (max-width: 768px) {
+            .project-gallery {
+                grid-template-columns: 1fr;
+            }
+            .project-details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .project-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/jac-logo.png" alt="JAC Interiors" class="logo-img">
+                </a>
+                <div class="nav-menu" id="navMenu">
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../portfolio.html" class="nav-link active">Portfolio</a>
+                    <a href="../about.html" class="nav-link">About</a>
+                    <a href="../services.html" class="nav-link">Services</a>
+                    <a href="../cities-we-serve.html" class="nav-link">Cities</a>
+                    <a href="../contact.html" class="nav-link">Contact</a>
+                    <div class="nav-contact">
+                        <a href="tel:213-397-0206" class="phone-link">213-397-0206</a>
+                    </div>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <div class="project-hero" style="background-image: url('../assets/images/projects/pacific-palisades-villa/hero.jpg');">
+        <div class="project-hero-overlay">
+            <div class="container">
+                <h1>Pacific Palisades Villa</h1>
+                <p class="project-type">Mediterranean • Pacific Palisades, CA</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Content -->
+    <section class="section">
+        <div class="container">
+            <!-- Project Details -->
+            <div class="project-details-grid">
+                <div class="detail-item">
+                    <h4>Location</h4>
+                    <p>Pacific Palisades, CA</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Style</h4>
+                    <p>Mediterranean Revival</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Size</h4>
+                    <p>7,200 sq ft</p>
+                </div>
+                <div class="detail-item">
+                    <h4>Year</h4>
+                    <p>2022</p>
+                </div>
+            </div>
+
+            <!-- Project Description -->
+            <div class="project-description">
+                <p>This Pacific Palisades villa transports you to the Mediterranean coast with its warm color palette, handcrafted tiles, and romantic architectural details. The design creates an atmosphere of Old World charm while incorporating all the luxuries of modern living.</p>
+            </div>
+
+            <!-- Project Gallery -->
+                        <div class="project-gallery">
+                <img src="../assets/images/projects/pacific-palisades-villa/hero.jpg" alt="Pacific Palisades Villa Main" class="gallery-image full-width">
+                <img src="../assets/images/projects/pacific-palisades-villa/1.jpg" alt="Pacific Palisades Villa Detail 1" class="gallery-image">
+                <img src="../assets/images/projects/pacific-palisades-villa/2.jpg" alt="Pacific Palisades Villa Detail 2" class="gallery-image">
+                <img src="../assets/images/projects/pacific-palisades-villa/3.jpg" alt="Pacific Palisades Villa Detail 3" class="gallery-image">
+                <img src="../assets/images/projects/pacific-palisades-villa/4.jpg" alt="Pacific Palisades Villa Detail 4" class="gallery-image">
+                <img src="../assets/images/projects/pacific-palisades-villa/5.jpg" alt="Pacific Palisades Villa Detail 5" class="gallery-image">
+                <img src="../assets/images/projects/pacific-palisades-villa/6.jpg" alt="Pacific Palisades Villa Detail 6" class="gallery-image">
+            </div>
+
+            <!-- Design Concept -->
+            <div class="project-content-section">
+                <h2>Design Concept</h2>
+                <p>Our design concept for this Mediterranean Revival project centered on creating a space that perfectly balances aesthetic beauty with functional living. Every element was carefully considered to create a cohesive environment that reflects our clients' lifestyle and personal style.</p>
+                <p>From the initial concept through final installation, we worked closely with our clients to ensure every detail aligned with their vision. The result is a space that not only looks stunning but also enhances daily living through thoughtful design and quality craftsmanship.</p>
+            </div>
+
+            <!-- Materials & Finishes -->
+            <div class="project-content-section">
+                <h2>Materials & Finishes</h2>
+                <p>We carefully curated premium materials and finishes that would stand the test of time while providing the luxurious feel our clients desired. Each selection was made with both aesthetics and durability in mind, ensuring the space remains beautiful for years to come.</p>
+                <p>The carefully chosen color palette and material selections work together to create depth and visual interest throughout the space, while maintaining a cohesive design that flows seamlessly from room to room.</p>
+            </div>
+
+            <!-- CTA -->
+            <div style="text-align: center; margin: 4rem 0;">
+                <a href="../contact.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2.5rem;">Start Your Project</a>
+            </div>
+
+                        <!-- Related Projects -->
+            <div class="related-projects">
+                <h2>More Projects</h2>
+                <div class="portfolio-grid">
+                    <a href="beverly-hills-alpine.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/beverly-hills-alpine/hero.jpg" alt="Beverly Hills Alpine" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Beverly Hills Alpine</h3>
+                        </div>
+                    </a>
+                    <a href="venice-beach-house.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/venice-beach-house/hero.jpg" alt="Venice Beach House" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Venice Beach House</h3>
+                        </div>
+                    </a>
+                    <a href="toscana-country-club.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/toscana-country-club/hero.jpg" alt="Toscana Country Club" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Toscana Country Club</h3>
+                        </div>
+                    </a>
+                    <a href="madison-club.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/madison-club/hero.jpg" alt="Madison Club" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Madison Club</h3>
+                        </div>
+                    </a>
+                    <a href="yellowstone-club.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/yellowstone-club/hero.jpg" alt="Yellowstone Club" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Yellowstone Club</h3>
+                        </div>
+                    </a>
+                    <a href="santa-monica-modern-spanish.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/santa-monica-modern-spanish/hero.jpg" alt="Santa Monica Modern Spanish" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Santa Monica Modern Spanish</h3>
+                        </div>
+                    </a>
+                    <a href="mulholland-estate.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/mulholland-estate/hero.jpg" alt="Mulholland Estate" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Mulholland Estate</h3>
+                        </div>
+                    </a>
+                    <a href="venice-boho-house.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/venice-boho-house/hero.jpg" alt="Venice Boho House" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Venice Boho House</h3>
+                        </div>
+                    </a>
+                    <a href="calabasas-residence.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/calabasas-residence/hero.jpg" alt="Calabasas Residence" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Calabasas Residence</h3>
+                        </div>
+                    </a>
+                    <a href="palm-desert-oasis.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/palm-desert-oasis/hero.jpg" alt="Palm Desert Oasis" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Palm Desert Oasis</h3>
+                        </div>
+                    </a>
+                    <a href="panorama-views.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/panorama-views/hero.jpg" alt="Panorama Views" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Panorama Views</h3>
+                        </div>
+                    </a>
+                    <a href="eclectic-sunnyside.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/eclectic-sunnyside/hero.jpg" alt="Eclectic Sunnyside" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Eclectic Sunnyside</h3>
+                        </div>
+                    </a>
+                    <a href="brentwood-estate.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/brentwood-estate/hero.jpg" alt="Brentwood Estate" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Brentwood Estate</h3>
+                        </div>
+                    </a>
+                    <a href="malibu-beach-house.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/malibu-beach-house/hero.jpg" alt="Malibu Beach House" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Malibu Beach House</h3>
+                        </div>
+                    </a>
+                    <a href="studio-city-modern.html" class="portfolio-item">
+                        <div class="portfolio-image">
+                            <img src="../assets/images/projects/studio-city-modern/hero.jpg" alt="Studio City Modern" loading="lazy">
+                        </div>
+                        <div class="portfolio-info">
+                            <h3>Studio City Modern</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>JAC Interiors</h3>
+                    <p>Creating beautiful, functional spaces that elevate everyday living.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../services.html">Interior Design</a></li>
+                        <li><a href="../services.html">Space Planning</a></li>
+                        <li><a href="../services.html">Residential Design</a></li>
+                        <li><a href="../services.html">Commercial Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../portfolio.html">Portfolio</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p>Los Angeles, California</p>
+                    <p>Phone: <a href="tel:213-397-0206">213-397-0206</a></p>
+                    <p>Email: <a href="mailto:info@jacinteriors.com">info@jacinteriors.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 JAC Interiors. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
