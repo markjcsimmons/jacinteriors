@@ -377,7 +377,8 @@ img {
 
 /* Invero Portfolio List Item */
 .project-list-item {
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important;
     border-top: 1px solid #e4e4e4;
     padding: 3rem 0;
     text-decoration: none;
@@ -393,7 +394,7 @@ img {
 }
 
 .project-list-image {
-    flex: 0 0 40%;
+    flex: 0 0 40% !important;
     aspect-ratio: 4/3;
     overflow: hidden;
 }
@@ -404,8 +405,8 @@ img {
 }
 
 .project-list-content {
-    flex: 1;
-    padding-left: 20px;
+    flex: 1 !important;
+    padding-left: 20px !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
