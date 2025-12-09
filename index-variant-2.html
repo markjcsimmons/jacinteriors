@@ -6,8 +6,8 @@
     <title>JAC Interiors | Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Manrope + Playfair for the exact Invero typographic feel -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Syne (Headings) + Inter (Body) for the true Invero look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,14 +17,14 @@
             --text-main: #1a1a1a;
             --text-light: #666666;
             --accent: #c9a961;
-            --font-sans: 'Manrope', sans-serif;
-            --font-serif: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Syne', sans-serif; /* The signature Invero font */
             --container-width: 1320px;
             --section-spacing: 8rem;
         }
 
         body {
-            font-family: var(--font-sans);
+            font-family: var(--font-body);
             color: var(--text-main);
             background: var(--bg-body);
             line-height: 1.6;
@@ -42,35 +42,39 @@
         img, video { width: 100%; display: block; object-fit: cover; }
         
         /* TYPOGRAPHY */
-        h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(3rem, 6vw, 5rem);
-            line-height: 1.1;
-            font-weight: 400;
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
             color: var(--text-main);
+            font-weight: 600; /* Syne looks best at 600/700 */
+        }
+
+        h1 {
+            font-size: clamp(3.5rem, 6vw, 5.5rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
         }
 
         h2 {
-            font-family: var(--font-serif);
             font-size: clamp(2.5rem, 4vw, 3.5rem);
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
         }
 
         h3 {
-            font-family: var(--font-serif);
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         p {
             color: var(--text-light);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
 
-        /* 1. NAVBAR (White Background, unlike previous versions) */
+        /* 1. NAVBAR */
         .navbar {
             padding: 1.5rem 0;
             background: white;
@@ -86,31 +90,31 @@
             align-items: center;
         }
 
-        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+        .logo { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
         
         .nav-links { display: flex; gap: 2.5rem; }
         .nav-link { 
             font-size: 0.9rem; 
             font-weight: 500; 
             text-transform: uppercase; 
-            letter-spacing: 1px; 
+            letter-spacing: 0.5px; 
             color: var(--text-main);
         }
         .nav-link:hover { color: var(--accent); }
 
-        /* 2. TOP HEADLINE AREA (Text First) */
+        /* 2. TOP HEADLINE AREA */
         .top-headline-section {
-            padding: 8rem 0 4rem; /* Top padding for breathing room */
+            padding: 8rem 0 4rem;
         }
 
         .top-headline-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr; /* Left wider */
-            gap: 4rem;
-            align-items: end; /* Align bottom */
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 5rem;
+            align-items: end;
         }
 
-        /* 3. HERO IMAGE (Below Text) */
+        /* 3. HERO IMAGE */
         .hero-image-section {
             padding: 0 2rem 6rem;
             max-width: var(--container-width);
@@ -122,14 +126,14 @@
             height: 80vh;
             overflow: hidden;
             position: relative;
-            border-radius: 4px; /* Invero Rounded Corners */
+            border-radius: 4px;
         }
 
         .hero-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transform: scale(1); /* Animated by JS */
+            transform: scale(1);
             transition: transform 0.1s linear;
         }
 
@@ -167,20 +171,30 @@
         }
 
         .process-num {
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            color: var(--text-light);
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--text-main); /* Invero numbers are often dark */
+            font-weight: 600;
         }
 
+        /* Adjusted Aspect Ratio to show more image content */
         .process-media {
             width: 100%;
-            aspect-ratio: 16/9;
+            aspect-ratio: 4/3; /* Taller ratio prevents extreme cropping */
             background: #f5f5f5;
             margin-bottom: 2rem;
             overflow: hidden;
+            border-radius: 4px;
         }
 
-        /* 5. SERVICES GRID (4 Cols) */
+        .process-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center; /* Ensure center focus */
+        }
+
+        /* 5. SERVICES GRID */
         .services-section {
             padding: var(--section-spacing) 0;
             background: #f9f9f9;
@@ -198,6 +212,7 @@
             padding: 2rem;
             border: 1px solid #eee;
             transition: transform 0.3s;
+            height: 100%;
         }
         .service-card:hover { transform: translateY(-5px); border-color: var(--accent); }
 
@@ -223,10 +238,10 @@
         }
 
         .stat-item h4 {
-            font-family: var(--font-serif);
             font-size: 3rem;
             line-height: 1;
             margin-bottom: 0.5rem;
+            color: var(--text-main);
         }
 
         .stat-item span {
@@ -234,9 +249,10 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-light);
+            font-weight: 500;
         }
 
-        /* 7. PROJECTS (Alternating) */
+        /* 7. PROJECTS */
         .projects-section {
             padding: var(--section-spacing) 0;
         }
@@ -254,22 +270,36 @@
         .project-media {
             aspect-ratio: 4/3;
             overflow: hidden;
+            border-radius: 4px;
         }
-        .project-media img { transition: transform 0.6s; }
-        .project-row:hover .project-media img { transform: scale(1.05); }
+        .project-media img { transition: transform 0.6s; width: 100%; height: 100%; object-fit: cover; }
+        .project-row:hover .project-media img { transform: scale(1.03); }
 
         /* BUTTONS */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 1rem 2rem;
             background: var(--text-main);
             color: white;
             text-transform: uppercase;
             font-size: 0.8rem;
             letter-spacing: 1px;
-            font-weight: 500;
+            font-weight: 600;
+            border-radius: 2px;
         }
         .btn:hover { background: var(--accent); }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #ddd;
+            color: var(--text-main);
+        }
+        .btn-outline:hover {
+            border-color: var(--text-main);
+            background: transparent;
+        }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
@@ -285,7 +315,7 @@
 </head>
 <body>
 
-    <!-- 1. NAVBAR (White bg) -->
+    <!-- 1. NAVBAR -->
     <nav class="navbar">
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">JAC INTERIORS</a>
@@ -298,7 +328,7 @@
         </div>
     </nav>
 
-    <!-- 2. TOP HEADLINE (Text First) -->
+    <!-- 2. TOP HEADLINE (Syne Font) -->
     <section class="top-headline-section">
         <div class="container top-headline-grid">
             <div>
@@ -311,22 +341,22 @@
         </div>
     </section>
 
-    <!-- 3. HERO IMAGE (Below Text) -->
+    <!-- 3. HERO IMAGE -->
     <div class="hero-image-section">
         <div class="hero-img-wrapper">
             <img src="assets/images/projects/venice-beach-house.jpg" alt="Hero" class="hero-img" id="heroZoomImg">
         </div>
     </div>
 
-    <!-- 4. STICKY NUMBERS SECTION -->
+    <!-- 4. STICKY PROCESS SECTION -->
     <section class="sticky-process-section">
         <div class="container sticky-grid">
             <!-- Left Sticky -->
             <div class="sticky-left">
-                <span style="display:block; color:var(--accent); font-size:0.8rem; margin-bottom:1rem; text-transform:uppercase; letter-spacing:2px;">Design Philosophy</span>
+                <span style="display:block; color:var(--accent); font-size:0.8rem; margin-bottom:1rem; text-transform:uppercase; letter-spacing:2px; font-weight:600;">Design Philosophy</span>
                 <h2>Designing spaces that<br>feel as good as they look.</h2>
                 <p>We create immersive interiors that reflect your personality, enhance your lifestyle, and bring a sense of calm.</p>
-                <a href="about.html" style="border-bottom:1px solid #ccc; padding-bottom:2px;">Learn more about us</a>
+                <a href="about.html" style="border-bottom:1px solid #ccc; padding-bottom:2px; font-weight:500;">Learn more about us</a>
             </div>
 
             <!-- Right Scroll -->
@@ -346,7 +376,7 @@
                     <p>We believe every element in a space should serve a purpose — whether it’s to inspire, to comfort, or to function beautifully.</p>
                 </div>
 
-                <!-- 02: Image -->
+                <!-- 02: Image (Fixed Scaling) -->
                 <div class="process-item">
                     <div class="process-item-header">
                         <span class="process-num">02</span>
@@ -358,7 +388,7 @@
                     <p>We see every project as a partnership. By listening closely, sharing ideas openly, and respecting your vision, we turn your goals into reality.</p>
                 </div>
 
-                <!-- 03: Image -->
+                <!-- 03: Image (Fixed Scaling) -->
                 <div class="process-item">
                     <div class="process-item-header">
                         <span class="process-num">03</span>
@@ -374,12 +404,11 @@
         </div>
     </section>
 
-    <!-- 5. SERVICES GRID (4 Cols) -->
+    <!-- 5. SERVICES GRID -->
     <section class="services-section">
         <div class="container">
-            <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom:2rem;">
+            <div style="margin-bottom:2rem;">
                 <h2>Our Expertise</h2>
-                <a href="services.html" style="border-bottom:1px solid #ccc;">View all services</a>
             </div>
             
             <div class="services-grid">
@@ -447,10 +476,10 @@
                     <img src="assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills">
                 </div>
                 <div>
-                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999;">Residential</span>
+                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999; display:block; margin-bottom:1rem;">Residential</span>
                     <h3>Beverly Hills Alpine</h3>
                     <p>Luxury Residence • Beverly Hills, CA</p>
-                    <span style="border-bottom:1px solid #ccc; font-size:0.9rem;">View Project</span>
+                    <span style="border-bottom:1px solid #ccc; font-size:0.9rem; font-weight:500;">View Project</span>
                 </div>
             </a>
 
@@ -460,10 +489,10 @@
                     <img src="assets/images/projects/venice-beach-house.jpg" alt="Venice Beach">
                 </div>
                 <div>
-                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999;">Coastal</span>
+                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999; display:block; margin-bottom:1rem;">Coastal</span>
                     <h3>Venice Beach House</h3>
                     <p>Coastal Contemporary • Venice, CA</p>
-                    <span style="border-bottom:1px solid #ccc; font-size:0.9rem;">View Project</span>
+                    <span style="border-bottom:1px solid #ccc; font-size:0.9rem; font-weight:500;">View Project</span>
                 </div>
             </a>
 
@@ -473,12 +502,17 @@
                     <img src="assets/images/projects/toscana-country-club.jpg" alt="Toscana">
                 </div>
                 <div>
-                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999;">Retreat</span>
+                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999; display:block; margin-bottom:1rem;">Retreat</span>
                     <h3>Toscana Country Club</h3>
                     <p>Mediterranean • Indian Wells, CA</p>
-                    <span style="border-bottom:1px solid #ccc; font-size:0.9rem;">View Project</span>
+                    <span style="border-bottom:1px solid #ccc; font-size:0.9rem; font-weight:500;">View Project</span>
                 </div>
             </a>
+
+            <!-- View More Button -->
+            <div style="text-align:center; margin-top:6rem;">
+                <a href="portfolio.html" class="btn btn-outline">View More Projects</a>
+            </div>
 
         </div>
     </section>
@@ -487,17 +521,17 @@
     <footer style="background:#111; color:white; padding:8rem 0;">
         <div class="container">
             <div style="margin-bottom:4rem;">
-                <h2 style="font-size:4rem; margin-bottom:2rem;">Ready to transform<br>your space?</h2>
-                <a href="contact.html" style="background:white; color:#111; padding:1rem 2rem; display:inline-block; font-weight:500;">Let's get in touch</a>
+                <h2 style="font-size:4rem; margin-bottom:2rem; color:white;">Ready to transform<br>your space?</h2>
+                <a href="contact.html" style="background:white; color:#111; padding:1rem 2rem; display:inline-block; font-weight:600; text-transform:uppercase; letter-spacing:1px; border-radius:2px;">Let's get in touch</a>
             </div>
             
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; border-top:1px solid #333; padding-top:4rem;">
                 <div>
-                    <h4 style="margin-bottom:1rem;">Contact</h4>
+                    <h4 style="margin-bottom:1rem; color:white;">Contact</h4>
                     <p style="color:#999;">info@jacinteriors.com<br>213-397-0206</p>
                 </div>
                 <div>
-                    <h4 style="margin-bottom:1rem;">Social</h4>
+                    <h4 style="margin-bottom:1rem; color:white;">Social</h4>
                     <div style="display:flex; gap:1rem; color:#999;">
                         <a href="#">Instagram</a>
                         <a href="#">Houzz</a>
