@@ -143,7 +143,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transform: scale(1);
+            object-position: center;
+            transform: scale(1.05);
             transition: transform 0.1s linear;
         }
 
@@ -892,7 +893,7 @@
                 window.addEventListener('scroll', () => {
                     const scrollPos = window.scrollY;
                     if (scrollPos < window.innerHeight) {
-                        const scale = 1 + (scrollPos * 0.0001);
+                        const scale = 1.05 + (scrollPos * 0.0005);
                         heroImg.style.transform = `scale(${scale})`;
                     }
                 });
