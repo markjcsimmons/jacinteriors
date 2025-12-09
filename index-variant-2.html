@@ -898,20 +898,64 @@
                 });
             }
 
-            // Testimonial Carousel Auto-Rotation
+            // Testimonial Carousel Auto-Rotation with Read More
             const slides = document.querySelectorAll('.testimonial-slide');
             const dots = document.querySelectorAll('.carousel-dot');
             let currentSlide = 0;
             let autoRotateInterval;
 
+            // Add "read more" buttons to slides that overflow
+            slides.forEach(slide => {
+                const textElement = slide.querySelector('.testimonial-text');
+                if (textElement && textElement.scrollHeight > 40) {
+                    const readMoreBtn = document.createElement('span');
+                    readMoreBtn.className = 'read-more-btn';
+                    readMoreBtn.textContent = '...read more';
+                    readMoreBtn.style.display = 'none'; // Hidden by default
+                    
+                    readMoreBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (textElement.classList.contains('expanded')) {
+                            textElement.classList.remove('expanded');
+                            readMoreBtn.textContent = '...read more';
+                        } else {
+                            textElement.classList.add('expanded');
+                            readMoreBtn.textContent = 'show less';
+                        }
+                    });
+                    
+                    slide.appendChild(readMoreBtn);
+                }
+            });
+
             function showSlide(index) {
-                // Remove active class from all slides and dots
-                slides.forEach(slide => slide.classList.remove('active'));
+                // Remove active class and collapse all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                    const textElement = slide.querySelector('.testimonial-text');
+                    const readMoreBtn = slide.querySelector('.read-more-btn');
+                    if (textElement) {
+                        textElement.classList.remove('expanded');
+                    }
+                    if (readMoreBtn) {
+                        readMoreBtn.textContent = '...read more';
+                        readMoreBtn.style.display = 'none';
+                    }
+                });
                 dots.forEach(dot => dot.classList.remove('active'));
                 
                 // Add active class to current slide and dot
                 slides[index].classList.add('active');
                 dots[index].classList.add('active');
+                
+                // Show read more button if needed
+                const activeSlide = slides[index];
+                const activeText = activeSlide.querySelector('.testimonial-text');
+                const activeReadMore = activeSlide.querySelector('.read-more-btn');
+                if (activeText && activeReadMore && activeText.scrollHeight > 40) {
+                    activeReadMore.style.display = 'inline-block';
+                }
+                
                 currentSlide = index;
             }
 
@@ -937,8 +981,9 @@
                 });
             });
 
-            // Start auto-rotation
+            // Initialize first slide
             if (slides.length > 0) {
+                showSlide(0);
                 startAutoRotate();
             }
         });
