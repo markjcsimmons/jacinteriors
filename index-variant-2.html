@@ -353,9 +353,9 @@
 
         .testimonial-carousel {
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             min-height: 52px;
-            height: 52px;
+            transition: min-height 0.3s ease;
         }
 
         .testimonial-slide {
@@ -381,6 +381,27 @@
             margin-bottom: 0.3rem;
             font-weight: 400;
             letter-spacing: -0.3px;
+            max-height: 40px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .testimonial-text.expanded {
+            max-height: 500px;
+        }
+
+        .read-more-btn {
+            color: var(--text-main);
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 0.75rem;
+            display: inline-block;
+            margin-top: 0.2rem;
+            font-weight: 500;
+        }
+
+        .read-more-btn:hover {
+            opacity: 0.7;
         }
 
         .testimonial-author {
@@ -900,7 +921,7 @@
             }
 
             function startAutoRotate() {
-                autoRotateInterval = setInterval(nextSlide, 5000); // Change every 5 seconds
+                autoRotateInterval = setInterval(nextSlide, 3000); // Change every 3 seconds
             }
 
             function stopAutoRotate() {
