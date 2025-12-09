@@ -1,0 +1,230 @@
+/* Invero V2 Variant Specific Styles */
+
+/* 1. Typography Overhaul (Invero Style) */
+.invero-v2-body {
+    font-family: 'Inter', sans-serif;
+    color: #1a1a1a;
+    line-height: 1.5;
+}
+
+.invero-heading-xl {
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+}
+
+.invero-heading-lg {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.invero-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #c9a961;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+/* 2. Hero Section (Invero Replica) */
+.hero-v2 {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-v2-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+}
+
+.hero-v2-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.1s linear;
+    will-change: transform;
+}
+
+.hero-v2-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.hero-v2-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 900px;
+    color: white;
+    padding: 0 2rem;
+}
+
+.hero-v2-title {
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+}
+
+/* 3. Sticky Side Layout (About Section) */
+.sticky-split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    padding: 8rem 0;
+    align-items: start;
+    border-bottom: 1px solid #eee;
+}
+
+.sticky-side {
+    position: sticky;
+    top: 150px;
+    height: fit-content;
+}
+
+.scroll-side {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.invero-video-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #f5f5f5;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.invero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 4. Minimalist Grid (Services) */
+.minimal-grid-section {
+    padding: 8rem 0;
+    background: #fff;
+}
+
+.minimal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    margin-top: 4rem;
+}
+
+.minimal-card {
+    border-top: 1px solid #ddd;
+    padding-top: 2rem;
+    transition: border-color 0.3s ease;
+}
+
+.minimal-card:hover {
+    border-color: #c9a961;
+}
+
+.minimal-num {
+    font-size: 0.9rem;
+    color: #c9a961;
+    margin-bottom: 1rem;
+    display: block;
+    font-weight: 600;
+}
+
+/* 5. Alternating Projects (Editorial Style) */
+.editorial-projects {
+    padding: 8rem 0;
+    background: #f9f9f9;
+}
+
+.project-editorial-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-bottom: 8rem;
+}
+
+.project-editorial-row.reverse {
+    grid-template-columns: 1fr 1.2fr;
+}
+
+.project-editorial-row:last-child {
+    margin-bottom: 0;
+}
+
+.editorial-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+}
+
+.editorial-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-editorial-row:hover .editorial-img {
+    transform: scale(1.05);
+}
+
+/* 6. Mega Footer (Dark) */
+.footer-v2 {
+    background: #111;
+    color: white;
+    padding: 8rem 0 4rem;
+}
+
+.footer-v2-cta {
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sticky-split-section {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+    .sticky-side {
+        position: static;
+        margin-bottom: 2rem;
+    }
+    .minimal-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .project-editorial-row, 
+    .project-editorial-row.reverse {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-bottom: 5rem;
+    }
+    .project-editorial-row.reverse .editorial-img-wrapper {
+        order: -1;
+    }
+}
+
