@@ -377,9 +377,7 @@ img {
 
 /* Invero Portfolio List Item */
 .project-list-item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    display: flex;
     border-top: 1px solid #e4e4e4;
     padding: 3rem 0;
     text-decoration: none;
@@ -395,7 +393,7 @@ img {
 }
 
 .project-list-image {
-    width: 100%;
+    flex: 0 0 40%;
     aspect-ratio: 4/3;
     overflow: hidden;
 }
@@ -406,10 +404,12 @@ img {
 }
 
 .project-list-content {
-    padding: 0 0 0 4rem;
+    flex: 1;
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 550px;
 }
 
 .project-date {
@@ -647,11 +647,16 @@ img {
     .sticky-content { position: static; }
     
     .project-list-item {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        flex-direction: column;
+    }
+    .project-list-image {
+        flex: 0 0 auto;
+        width: 100%;
     }
     .project-list-content {
-        padding: 0;
+        padding-left: 0;
+        padding-top: 2rem;
+        min-height: auto;
     }
     
     .services-dark-grid { grid-template-columns: 1fr; gap: 3rem; }
