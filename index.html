@@ -1,618 +1,566 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JAC Interiors - Full-service interior design studio in Los Angeles and Florida. Creating beautiful, functional spaces.">
-    <title>Interior Designer in Los Angeles | JAC Interiors</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="JAC Interiors - Full-service interior design studio in Los Angeles and Florida. Creating beautiful, functional spaces." name="description"/>
+<title>Interior Designer in Los Angeles | JAC Interiors</title>
+<link href="assets/css/style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="index.html" class="logo">
-                    <img src="assets/images/jac-logo.png" alt="JAC Interiors" class="logo-img">
-                </a>
-                
-                <div class="nav-menu" id="navMenu">
-                    <a href="index.html" class="nav-link active">Home</a>
-                    <a href="portfolio.html" class="nav-link">Portfolio</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="services.html" class="nav-link">Services</a>
-                    <a href="cities-we-serve.html" class="nav-link">Cities</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                    <div class="nav-contact">
-                        <a href="tel:213-397-0206" class="phone-link">213-397-0206</a>
-                    </div>
-                </div>
-                
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </nav>
+<!-- Navigation -->
+<nav class="navbar">
+<div class="container">
+<div class="nav-wrapper">
+<a class="logo" href="index.html">
+<img alt="JAC Interiors" class="logo-img" src="assets/images/jac-logo.png"/>
+</a>
+<div class="nav-menu" id="navMenu">
+<a class="nav-link active" href="index.html">Home</a>
+<a class="nav-link" href="portfolio.html">Portfolio</a>
+<a class="nav-link" href="about.html">About</a>
+<a class="nav-link" href="services.html">Services</a>
+<a class="nav-link" href="cities-we-serve.html">Cities</a>
+<a class="nav-link" href="contact.html">Contact</a>
+<div class="nav-contact">
+<a class="phone-link" href="tel:213-397-0206">213-397-0206</a>
+</div>
+</div>
+<button class="mobile-menu-toggle" id="mobileMenuToggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Announcement Bar -->
+<a class="announcement-bar" href="cities-we-serve.html#florida">
+<p>Now Open in Florida Gold Coast - Click to Learn More</p>
+</a>
+<!-- Hero Section - Redesigned -->
+<section class="hero-redesign">
+<div class="container">
+<!-- Title -->
+<h1 class="hero-title-main">Los Angeles Interior Designers</h1>
+<!-- Trust Badges -->
+<div class="trust-badges">
+<div class="trust-badge">
+<span class="badge-icon">⭐</span>
+<span class="badge-text">4.9 Google Rating (25 Reviews)</span>
+</div>
+<div class="trust-badge">
+<span class="badge-icon">⭐</span>
+<span class="badge-text">4.9 Yelp Rating (27 Reviews)</span>
+</div>
+<div class="trust-badge">
+<span class="badge-icon">⭐</span>
+<span class="badge-text">5.0 Houzz Rating (45 Reviews)</span>
+</div>
+<div class="trust-badge">
+<span class="badge-icon">🏆</span>
+<span class="badge-text">20x Best of Houzz</span>
+</div>
+</div>
+<!-- Three Column Layout -->
+<div class="hero-three-column">
+<!-- Column 1: Intro Text -->
+<div class="hero-column-text">
+<p class="hero-intro">JAC Interiors is a full-service interior design studio with offices in Los Angeles and Florida with the vision and organizational skills to make beautiful transformations happen for any home.</p>
+</div>
+<!-- Column 2: Review Carousel Box -->
+<div class="testimonial-carousel-box">
+<div class="testimonial-slide active">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"From concept to completion..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"From concept to completion, JAC Interiors exceeded every expectation. Highly recommend!"</span></p>
+</div>
+<div class="review-source">
+<span style="color: #4285f4; font-weight: bold;">Google</span>
+<span>•</span>
+<span>David Thompson</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"I'm so grateful I hired this team..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"I'm so grateful I hired this team and trusted them to create this space. They worked within my budget and were enormously gracious about it."</span></p>
+</div>
+<div class="review-source">
+<span style="color: #d32323; font-weight: bold;">Yelp</span>
+<span>•</span>
+<span>Miriam B.</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"Meticulous project management..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Meticulous project management and uncommon responsiveness. They truly elevate the everyday."</span></p>
+</div>
+<div class="review-source">
+<span style="color: #7ac142; font-weight: bold;">Houzz</span>
+<span>•</span>
+<span>Jennifer K.</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"Outstanding service and impeccable design..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Outstanding service and impeccable design sense. Every room is now a work of art!"</span></p>
+</div>
+<div class="review-source">
+<span style="color: #4285f4; font-weight: bold;">Google</span>
+<span>•</span>
+<span>Lisa Garcia</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"JAC interiors helped us create the home of our dreams..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"JAC interiors helped us create the home of our dreams, the team were so insightful and truly understood our vision."</span></p>
+</div>
+<div class="review-source">
+<span style="color: #d32323; font-weight: bold;">Yelp</span>
+<span>•</span>
+<span>Chaya S.</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"JAC Interiors transformed our home..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"JAC Interiors transformed our home beyond our wildest dreams. Absolutely stunning results!"</span></p>
+</div>
+<div class="review-source">
+<span style="color: #7ac142; font-weight: bold;">Houzz</span>
+<span>•</span>
+<span>Sarah Mitchell</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"Incredible attention to detail..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Incredible attention to detail and stunning final results. Could not be happier!"</span></p>
+</div>
+<div class="review-source">
+<span style="color: #4285f4; font-weight: bold;">Google</span>
+<span>•</span>
+<span>Emily Martinez</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"Great people with a team ready to jump in..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Great people with a team ready to jump in and help! Our home is beautiful and I couldn't have done it without them."</span></p>
+</div>
+<div class="review-source">
+<span style="color: #d32323; font-weight: bold;">Yelp</span>
+<span>•</span>
+<span>Stancy T.</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"The team listened to our vision..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"The team listened to our vision and brought it to life perfectly. Luxurious yet comfortable."</span></p>
+</div>
+<div class="review-source">
+<span style="color: #7ac142; font-weight: bold;">Houzz</span>
+<span>•</span>
+<span>Amanda Peterson</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"Best decision we made for our home..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Best decision we made for our home renovation. JAC Interiors is simply exceptional."</span></p>
+</div>
+<div class="review-source">
+<span style="color: #4285f4; font-weight: bold;">Google</span>
+<span>•</span>
+<span>Robert Chen</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"Andrea is a genius of interior design..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Andrea is a genius of interior design. She came to our house and knew exactly what we would need for every single corner."</span></p>
+</div>
+<div class="review-source">
+<span style="color: #d32323; font-weight: bold;">Yelp</span>
+<span>•</span>
+<span>Carolina C.</span>
+</div>
+</div>
+<div class="testimonial-slide">
+<div class="stars">★★★★★</div>
+<div class="review-text">
+<p><span class="short-text">"Professional, creative, and a pleasure to work with..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Professional, creative, and a pleasure to work with. Our living space is now magazine-worthy."</span></p>
+</div>
+<div class="review-source">
+<span style="color: #7ac142; font-weight: bold;">Houzz</span>
+<span>•</span>
+<span>Michael Richardson</span>
+</div>
+</div>
+</div>
+<!-- CTA Buttons -->
+<div class="hero-cta-redesign">
+<a class="btn btn-primary" href="contact.html">Get in Touch</a>
+<a class="btn btn-secondary" href="portfolio.html">View Portfolio</a>
+</div>
+</div>
+<!-- Column 3: Hero Image -->
+<div class="hero-image-single">
+<img alt="Luxury interior design by JAC Interiors" class="hero-single-img" src="assets/images/projects/venice-beach-house.jpg"/>
+</div>
+</div>
 
-    <!-- Announcement Bar -->
-    <a href="cities-we-serve.html#florida" class="announcement-bar">
-        <p>Now Open in Florida Gold Coast - Click to Learn More</p>
-    </a>
+</section>
+<!-- Featured Project Hero - Visual Impact -->
+<section class="featured-hero">
+<div class="featured-hero-image">
+<!-- Rotating carousel images - 15 projects -->
+<img alt="Toscana Country Club" class="hero-carousel-img active" src="assets/images/projects/toscana-country-club.jpg"/>
+<img alt="Venice Beach House" class="hero-carousel-img" src="assets/images/projects/venice-beach-house.jpg"/>
+<img alt="Brentwood Estate" class="hero-carousel-img" src="assets/images/projects/brentwood-estate.jpg"/>
+<img alt="Malibu Beach House" class="hero-carousel-img" src="assets/images/projects/malibu-beach-house.jpg"/>
+<img alt="Mulholland Estate" class="hero-carousel-img" src="assets/images/projects/mulholland-estate.jpg"/>
+<img alt="Beverly Hills Alpine" class="hero-carousel-img" src="assets/images/projects/beverly-hills-alpine.jpg"/>
+<img alt="Madison Club" class="hero-carousel-img" src="assets/images/projects/madison-club.jpg"/>
+<img alt="Yellowstone Club" class="hero-carousel-img" src="assets/images/projects/yellowstone-club.jpg"/>
+<img alt="Santa Monica Modern Spanish" class="hero-carousel-img" src="assets/images/projects/santa-monica-modern-spanish.jpg"/>
+<img alt="Venice Boho House" class="hero-carousel-img" src="assets/images/projects/venice-boho-house.jpg"/>
+<img alt="Calabasas Residence" class="hero-carousel-img" src="assets/images/projects/calabasas-residence.jpg"/>
+<img alt="Palm Desert Oasis" class="hero-carousel-img" src="assets/images/projects/palm-desert-oasis.jpg"/>
+<img alt="Panorama Views" class="hero-carousel-img" src="assets/images/projects/panorama-views.jpg"/>
+<img alt="Eclectic Sunnyside" class="hero-carousel-img" src="assets/images/projects/eclectic-sunnyside.jpg"/>
+<img alt="Pacific Palisades Villa" class="hero-carousel-img" src="assets/images/projects/pacific-palisades-villa.jpg"/>
+<div class="featured-hero-overlay">
+<div class="container">
+<div class="featured-hero-content">
+<h2 class="featured-hero-title">Creating Spaces You'll Love to Live In</h2>
+<p class="featured-hero-subtitle">Award-winning interior design that transforms houses into dream homes</p>
+<div class="featured-hero-buttons">
+<a class="btn btn-primary btn-large smooth-scroll" href="#portfolio">View Our Work</a>
+<a class="btn btn-secondary-light btn-large" href="contact.html">Book Free Phone Consultation</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Statistics Bar -->
+<section class="stats-bar">
+<div class="container">
+<div class="stats-grid-inline">
+<div class="stat-item-inline">
+<h3 class="stat-number">50+</h3>
+<p class="stat-label">Homes Transformed</p>
+</div>
+<div class="stat-item-inline">
+<h3 class="stat-number">20+</h3>
+<p class="stat-label">Commercial Spaces</p>
+</div>
+<div class="stat-item-inline">
+<h3 class="stat-number">12</h3>
+<p class="stat-label">Years Experience</p>
+</div>
+<div class="stat-item-inline">
+<h3 class="stat-number">98%</h3>
+<p class="stat-label">Client Satisfaction</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ReBuild LA Alert -->
+<section class="section" style="padding: 1.5rem 0; background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);">
+<div class="container">
+<div style="text-align: center; color: white;">
+<h2 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem;">Rebuild LA Wildfire Recovery Program</h2>
+<p style="color: white; font-size: 1rem; max-width: 800px; margin: 0 auto 1rem;">Transparent per-sq-ft pricing for LA wildfire rebuilds. Helping homeowners, builders, and architects rebuild faster, within budget, and more beautifully.</p>
+<a class="btn btn-primary" href="rebuild-la.html" style="background-color: white; color: #d35400; border-color: white; font-weight: 600; padding: 0.5rem 1.5rem; font-size: 0.9rem;">Learn More About Rebuild LA →</a>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="section about-intro">
+<div class="container">
+<div class="about-grid">
+<div class="about-image parallax-container" data-speed="0.08" style="aspect-ratio: 4/5;">
+<img alt="JAC Interiors Team - Andrea &amp; Tim" class="parallax-image" loading="lazy" src="assets/images/andrea+time1.jpg"/>
+</div>
+<div class="about-content">
+<span class="section-label">About JAC Interiors</span>
+<h2>We craft aesthetic and functional spaces that reflect your style and elevate everyday comfort</h2>
+<p>Whether you have just moved into your home and don't know how to make it your own, or you've been there for years and need an update, we can help. We take your spaces and make them the kind of places you want to spend all of your time, improve the function of rooms like kitchens and bathrooms, and add that wow factor to give you your ultimate dream home.</p>
+<a class="text-link" href="about.html">Learn more about us →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Overview -->
+<section class="section services-overview">
+<div class="container">
+<div class="section-header">
+<span class="section-label">Our Services</span>
+<h2>How Interior Design Elevates Your Home</h2>
+<p>At JAC Interiors in Los Angeles and Florida, our design firm is known for its innate ability to combine functionality, safety, and awe-inspiring design.</p>
+</div>
+<div class="services-grid">
+<div class="service-card">
+<div class="service-icon">
+<svg fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3>Residential Design</h3>
+<p>Full-service interior design for homes of all sizes. From cozy apartments to luxury estates, we create spaces that reflect your lifestyle.</p>
+<a class="text-link" href="services.html">Learn more →</a>
+</div>
+<div class="service-card">
+<div class="service-icon">
+<svg fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3>Commercial Spaces</h3>
+<p>Professional interior design for offices, retail spaces, and hospitality. Thoughtfully designed environments that align with your brand.</p>
+<a class="text-link" href="services.html">Learn more →</a>
+</div>
+<div class="service-card">
+<div class="service-icon">
+<svg fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3>Interior Styling</h3>
+<p>Refine the details with expert styling. We layer in textures and select decor that feels elevated yet effortless.</p>
+<a class="text-link" href="services.html">Learn more →</a>
+</div>
+<div class="service-card">
+<div class="service-icon">
+<svg fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3>Space Planning</h3>
+<p>Optimize your layout for better flow and functionality. Smart space planning that maximizes every square foot.</p>
+<a class="text-link" href="services.html">Learn more →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="section stats-section">
+<div class="container">
+<div class="stats-grid">
+<div class="stat-item">
+<h3 class="stat-number">150+</h3>
+<p class="stat-label">Homes Transformed</p>
+</div>
+<div class="stat-item">
+<h3 class="stat-number">40+</h3>
+<p class="stat-label">Commercial Spaces</p>
+</div>
+<div class="stat-item">
+<h3 class="stat-number">98%</h3>
+<p class="stat-label">Client Satisfaction</p>
+</div>
+<div class="stat-item">
+<h3 class="stat-number">15</h3>
+<p class="stat-label">Years Experience</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Portfolio Preview -->
+<section class="section portfolio-preview" id="portfolio">
+<div class="container">
+<div class="section-header">
+<span class="section-label">Our Work</span>
+<h2>Recent Projects</h2>
+<p>Explore our portfolio of beautifully designed spaces across Los Angeles, Florida, and beyond.</p>
+</div>
+<div class="portfolio-grid">
+<a class="portfolio-item scroll-fade-in" href="projects/beverly-hills-alpine.html">
+<div class="portfolio-image">
+<img alt="Beverly Hills Alpine" loading="lazy" src="assets/images/projects/beverly-hills-alpine.jpg"/>
+</div>
+<div class="portfolio-info">
+<h3>Beverly Hills Alpine</h3>
+<p>Luxury Residence • Beverly Hills, CA</p>
+</div>
+</a>
+<a class="portfolio-item scroll-fade-in" href="projects/venice-beach-house.html">
+<div class="portfolio-image">
+<img alt="Venice Beach House" loading="lazy" src="assets/images/projects/venice-beach-house.jpg"/>
+</div>
+<div class="portfolio-info">
+<h3>Venice Beach House</h3>
+<p>Coastal Contemporary • Venice, CA</p>
+</div>
+</a>
+<a class="portfolio-item scroll-fade-in" href="projects/toscana-country-club.html">
+<div class="portfolio-image">
+<img alt="Toscana Country Club" loading="lazy" src="assets/images/projects/toscana-country-club.jpg"/>
+</div>
+<div class="portfolio-info">
+<h3>Toscana Country Club</h3>
+<p>Mediterranean • Indian Wells, CA</p>
+</div>
+</a>
+<a class="portfolio-item scroll-fade-in" href="projects/madison-club.html">
+<div class="portfolio-image">
+<img alt="Madison Club" loading="lazy" src="assets/images/projects/madison-club.jpg"/>
+</div>
+<div class="portfolio-info">
+<h3>Madison Club</h3>
+<p>Desert Luxury • La Quinta, CA</p>
+</div>
+</a>
+<a class="portfolio-item scroll-fade-in" href="projects/yellowstone-club.html">
+<div class="portfolio-image">
+<img alt="Yellowstone Club" loading="lazy" src="assets/images/projects/yellowstone-club.jpg"/>
+</div>
+<div class="portfolio-info">
+<h3>Yellowstone Club</h3>
+<p>Mountain Retreat • Montana</p>
+</div>
+</a>
+<a class="portfolio-item scroll-fade-in" href="projects/santa-monica-modern-spanish.html">
+<div class="portfolio-image">
+<img alt="Santa Monica Modern Spanish" loading="lazy" src="assets/images/projects/santa-monica-modern-spanish.jpg"/>
+</div>
+<div class="portfolio-info">
+<h3>Santa Monica Modern Spanish</h3>
+<p>Modern Spanish • Santa Monica, CA</p>
+</div>
+</a>
+<a class="portfolio-item scroll-fade-in" href="projects/mulholland-estate.html">
+<div class="portfolio-image">
+<img alt="Mulholland Estate" loading="lazy" src="assets/images/projects/mulholland-estate.jpg"/>
+</div>
+<div class="portfolio-info">
+<h3>Mulholland Estate</h3>
+<p>Modern Luxury • Los Angeles, CA</p>
+</div>
+</a>
+<a class="portfolio-item scroll-fade-in" href="projects/brentwood-estate.html">
+<div class="portfolio-image">
+<img alt="Brentwood Estate" loading="lazy" src="assets/images/projects/brentwood-estate.jpg"/>
+</div>
+<div class="portfolio-info">
+<h3>Brentwood Estate</h3>
+<p>Traditional Elegance • Brentwood, CA</p>
+</div>
+</a>
+<a class="portfolio-item scroll-fade-in" href="projects/malibu-beach-house.html">
+<div class="portfolio-image">
+<img alt="Malibu Beach House" loading="lazy" src="assets/images/projects/malibu-beach-house.jpg"/>
+</div>
+<div class="portfolio-info">
+<h3>Malibu Beach House</h3>
+<p>Coastal Contemporary • Malibu, CA</p>
+</div>
+</a>
+</div>
+<!-- View All Projects Button -->
+<div class="portfolio-cta" style="text-align: center; margin-top: 3rem;">
+<a class="btn btn-secondary" href="portfolio.html">View All Projects</a>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="section cta-section">
+<div class="container">
+<div class="cta-content">
+<span class="section-label">Let's Work Together</span>
+<h2>Ready to Transform Your Space?</h2>
+<p>Schedule a FREE 30-minute phone consultation to discuss your vision and get expert design recommendations.</p>
+<a class="btn btn-primary btn-large" href="contact.html">Schedule Free Consultation</a>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-col">
+<h4>JAC Interiors</h4>
+<p>We are a full-service design studio with the vision and organizational skills to make beautiful transformations happen.</p>
+<div class="social-links">
+<a href="https://www.facebook.com/JacInteriors" rel="noopener" target="_blank">Facebook</a>
+<a href="https://www.instagram.com/jacinteriorsdesign/" rel="noopener" target="_blank">Instagram</a>
+<a href="https://www.houzz.com/pro/jacinteriors/jac-interiors" rel="noopener" target="_blank">Houzz</a>
+</div>
+</div>
 
-    <!-- Hero Section - Redesigned -->
-    <section class="hero-redesign">
-        <div class="container">
-            <!-- Title -->
-            <h1 class="hero-title-main">Los Angeles Interior Designers</h1>
-            
-            <!-- Trust Badges -->
-            <div class="trust-badges">
-                <div class="trust-badge">
-                    <span class="badge-icon">⭐</span>
-                    <span class="badge-text">4.9 Google Rating (25 Reviews)</span>
-                </div>
-                <div class="trust-badge">
-                    <span class="badge-icon">⭐</span>
-                    <span class="badge-text">4.9 Yelp Rating (27 Reviews)</span>
-                </div>
-                <div class="trust-badge">
-                    <span class="badge-icon">⭐</span>
-                    <span class="badge-text">5.0 Houzz Rating (45 Reviews)</span>
-                </div>
-                <div class="trust-badge">
-                    <span class="badge-icon">🏆</span>
-                    <span class="badge-text">20x Best of Houzz</span>
-                </div>
-            </div>
-            
-            <!-- Three Column Layout -->
-            <div class="hero-three-column">
-                <!-- Column 1: Intro Text -->
-                <div class="hero-column-text">
-                    <p class="hero-intro">JAC Interiors is a full-service interior design studio with offices in Los Angeles and Florida with the vision and organizational skills to make beautiful transformations happen for any home.</p>
-                </div>
-                
-                <!-- Column 2: Review Carousel Box -->
-                <div class="testimonial-carousel-box">
-                <div class="testimonial-slide active">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"From concept to completion..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"From concept to completion, JAC Interiors exceeded every expectation. Highly recommend!"</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #4285f4; font-weight: bold;">Google</span>
-                        <span>•</span>
-                        <span>David Thompson</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"I'm so grateful I hired this team..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"I'm so grateful I hired this team and trusted them to create this space. They worked within my budget and were enormously gracious about it."</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #d32323; font-weight: bold;">Yelp</span>
-                        <span>•</span>
-                        <span>Miriam B.</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"Meticulous project management..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Meticulous project management and uncommon responsiveness. They truly elevate the everyday."</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #7ac142; font-weight: bold;">Houzz</span>
-                        <span>•</span>
-                        <span>Jennifer K.</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"Outstanding service and impeccable design..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Outstanding service and impeccable design sense. Every room is now a work of art!"</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #4285f4; font-weight: bold;">Google</span>
-                        <span>•</span>
-                        <span>Lisa Garcia</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"JAC interiors helped us create the home of our dreams..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"JAC interiors helped us create the home of our dreams, the team were so insightful and truly understood our vision."</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #d32323; font-weight: bold;">Yelp</span>
-                        <span>•</span>
-                        <span>Chaya S.</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"JAC Interiors transformed our home..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"JAC Interiors transformed our home beyond our wildest dreams. Absolutely stunning results!"</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #7ac142; font-weight: bold;">Houzz</span>
-                        <span>•</span>
-                        <span>Sarah Mitchell</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"Incredible attention to detail..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Incredible attention to detail and stunning final results. Could not be happier!"</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #4285f4; font-weight: bold;">Google</span>
-                        <span>•</span>
-                        <span>Emily Martinez</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"Great people with a team ready to jump in..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Great people with a team ready to jump in and help! Our home is beautiful and I couldn't have done it without them."</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #d32323; font-weight: bold;">Yelp</span>
-                        <span>•</span>
-                        <span>Stancy T.</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"The team listened to our vision..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"The team listened to our vision and brought it to life perfectly. Luxurious yet comfortable."</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #7ac142; font-weight: bold;">Houzz</span>
-                        <span>•</span>
-                        <span>Amanda Peterson</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"Best decision we made for our home..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Best decision we made for our home renovation. JAC Interiors is simply exceptional."</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #4285f4; font-weight: bold;">Google</span>
-                        <span>•</span>
-                        <span>Robert Chen</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"Andrea is a genius of interior design..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Andrea is a genius of interior design. She came to our house and knew exactly what we would need for every single corner."</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #d32323; font-weight: bold;">Yelp</span>
-                        <span>•</span>
-                        <span>Carolina C.</span>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="stars">★★★★★</div>
-                    <div class="review-text">
-                        <p><span class="short-text">"Professional, creative, and a pleasure to work with..."<button class="expand-review-btn" onclick="expandReview(this)">more</button></span><span class="full-text">"Professional, creative, and a pleasure to work with. Our living space is now magazine-worthy."</span></p>
-                    </div>
-                    <div class="review-source">
-                        <span style="color: #7ac142; font-weight: bold;">Houzz</span>
-                        <span>•</span>
-                        <span>Michael Richardson</span>
-                    </div>
-                </div>
-                </div>
-                
-                <!-- CTA Buttons -->
-                <div class="hero-cta-redesign">
-                    <a href="contact.html" class="btn btn-primary">Get in Touch</a>
-                    <a href="portfolio.html" class="btn btn-secondary">View Portfolio</a>
-                </div>
-                </div>
-                
-                <!-- Column 3: Hero Image -->
-                <div class="hero-image-single">
-                    <img src="assets/images/projects/venice-beach-house.jpg" alt="Luxury interior design by JAC Interiors" class="hero-single-img">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Project Hero - Visual Impact -->
-    <section class="featured-hero">
-        <div class="featured-hero-image">
-            <!-- Rotating carousel images - 15 projects -->
-            <img src="assets/images/projects/toscana-country-club.jpg" alt="Toscana Country Club" class="hero-carousel-img active">
-            <img src="assets/images/projects/venice-beach-house.jpg" alt="Venice Beach House" class="hero-carousel-img">
-            <img src="assets/images/projects/brentwood-estate.jpg" alt="Brentwood Estate" class="hero-carousel-img">
-            <img src="assets/images/projects/malibu-beach-house.jpg" alt="Malibu Beach House" class="hero-carousel-img">
-            <img src="assets/images/projects/mulholland-estate.jpg" alt="Mulholland Estate" class="hero-carousel-img">
-            <img src="assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills Alpine" class="hero-carousel-img">
-            <img src="assets/images/projects/madison-club.jpg" alt="Madison Club" class="hero-carousel-img">
-            <img src="assets/images/projects/yellowstone-club.jpg" alt="Yellowstone Club" class="hero-carousel-img">
-            <img src="assets/images/projects/santa-monica-modern-spanish.jpg" alt="Santa Monica Modern Spanish" class="hero-carousel-img">
-            <img src="assets/images/projects/venice-boho-house.jpg" alt="Venice Boho House" class="hero-carousel-img">
-            <img src="assets/images/projects/calabasas-residence.jpg" alt="Calabasas Residence" class="hero-carousel-img">
-            <img src="assets/images/projects/palm-desert-oasis.jpg" alt="Palm Desert Oasis" class="hero-carousel-img">
-            <img src="assets/images/projects/panorama-views.jpg" alt="Panorama Views" class="hero-carousel-img">
-            <img src="assets/images/projects/eclectic-sunnyside.jpg" alt="Eclectic Sunnyside" class="hero-carousel-img">
-            <img src="assets/images/projects/pacific-palisades-villa.jpg" alt="Pacific Palisades Villa" class="hero-carousel-img">
-            <div class="featured-hero-overlay">
-                <div class="container">
-                    <div class="featured-hero-content">
-                        <h2 class="featured-hero-title">Creating Spaces You'll Love to Live In</h2>
-                        <p class="featured-hero-subtitle">Award-winning interior design that transforms houses into dream homes</p>
-                        <div class="featured-hero-buttons">
-                            <a href="#portfolio" class="btn btn-primary btn-large smooth-scroll">View Our Work</a>
-                            <a href="contact.html" class="btn btn-secondary-light btn-large">Book Free Phone Consultation</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics Bar -->
-    <section class="stats-bar">
-        <div class="container">
-            <div class="stats-grid-inline">
-                <div class="stat-item-inline">
-                    <h3 class="stat-number">150+</h3>
-                    <p class="stat-label">Projects Completed</p>
-                </div>
-                <div class="stat-item-inline">
-                    <h3 class="stat-number">15</h3>
-                    <p class="stat-label">Years Experience</p>
-                </div>
-                <div class="stat-item-inline">
-                    <h3 class="stat-number">98%</h3>
-                    <p class="stat-label">Client Satisfaction</p>
-                </div>
-                <div class="stat-item-inline">
-                    <h3 class="stat-number">5.0</h3>
-                    <p class="stat-label">Average Rating</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ReBuild LA Alert -->
-    <section class="section" style="padding: 1.5rem 0; background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);">
-        <div class="container">
-            <div style="text-align: center; color: white;">
-                <h2 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem;">Rebuild LA Wildfire Recovery Program</h2>
-                <p style="color: white; font-size: 1rem; max-width: 800px; margin: 0 auto 1rem;">Transparent per-sq-ft pricing for LA wildfire rebuilds. Helping homeowners, builders, and architects rebuild faster, within budget, and more beautifully.</p>
-                <a href="rebuild-la.html" class="btn btn-primary" style="background-color: white; color: #d35400; border-color: white; font-weight: 600; padding: 0.5rem 1.5rem; font-size: 0.9rem;">Learn More About Rebuild LA →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section about-intro">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="assets/images/andrea+time1.jpg" alt="JAC Interiors Team - Andrea & Tim" loading="lazy">
-                </div>
-                <div class="about-content">
-                    <span class="section-label">About JAC Interiors</span>
-                    <h2>We craft aesthetic and functional spaces that reflect your style and elevate everyday comfort</h2>
-                    <p>Whether you have just moved into your home and don't know how to make it your own, or you've been there for years and need an update, we can help. We take your spaces and make them the kind of places you want to spend all of your time, improve the function of rooms like kitchens and bathrooms, and add that wow factor to give you your ultimate dream home.</p>
-                    <a href="about.html" class="text-link">Learn more about us →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Overview -->
-    <section class="section services-overview">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Our Services</span>
-                <h2>How Interior Design Elevates Your Home</h2>
-                <p>At JAC Interiors in Los Angeles and Florida, our design firm is known for its innate ability to combine functionality, safety, and awe-inspiring design.</p>
-            </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                    </div>
-                    <h3>Residential Design</h3>
-                    <p>Full-service interior design for homes of all sizes. From cozy apartments to luxury estates, we create spaces that reflect your lifestyle.</p>
-                    <a href="services.html" class="text-link">Learn more →</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                    </div>
-                    <h3>Commercial Spaces</h3>
-                    <p>Professional interior design for offices, retail spaces, and hospitality. Thoughtfully designed environments that align with your brand.</p>
-                    <a href="services.html" class="text-link">Learn more →</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                        </svg>
-                    </div>
-                    <h3>Interior Styling</h3>
-                    <p>Refine the details with expert styling. We layer in textures and select decor that feels elevated yet effortless.</p>
-                    <a href="services.html" class="text-link">Learn more →</a>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                        </svg>
-                    </div>
-                    <h3>Space Planning</h3>
-                    <p>Optimize your layout for better flow and functionality. Smart space planning that maximizes every square foot.</p>
-                    <a href="services.html" class="text-link">Learn more →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="section stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3 class="stat-number">150+</h3>
-                    <p class="stat-label">Homes Transformed</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number">40+</h3>
-                    <p class="stat-label">Commercial Spaces</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number">98%</h3>
-                    <p class="stat-label">Client Satisfaction</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number">15</h3>
-                    <p class="stat-label">Years Experience</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Preview -->
-    <section id="portfolio" class="section portfolio-preview">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Our Work</span>
-                <h2>Recent Projects</h2>
-                <p>Explore our portfolio of beautifully designed spaces across Los Angeles, Florida, and beyond.</p>
-            </div>
-
-            <div class="portfolio-grid">
-                <a href="projects/beverly-hills-alpine.html" class="portfolio-item scroll-fade-in">
-                    <div class="portfolio-image">
-                        <img src="assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills Alpine" loading="lazy">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Beverly Hills Alpine</h3>
-                        <p>Luxury Residence • Beverly Hills, CA</p>
-                    </div>
-                </a>
-
-                <a href="projects/venice-beach-house.html" class="portfolio-item scroll-fade-in">
-                    <div class="portfolio-image">
-                        <img src="assets/images/projects/venice-beach-house.jpg" alt="Venice Beach House" loading="lazy">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Venice Beach House</h3>
-                        <p>Coastal Contemporary • Venice, CA</p>
-                    </div>
-                </a>
-
-                <a href="projects/toscana-country-club.html" class="portfolio-item scroll-fade-in">
-                    <div class="portfolio-image">
-                        <img src="assets/images/projects/toscana-country-club.jpg" alt="Toscana Country Club" loading="lazy">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Toscana Country Club</h3>
-                        <p>Mediterranean • Indian Wells, CA</p>
-                    </div>
-                </a>
-
-                <a href="projects/madison-club.html" class="portfolio-item scroll-fade-in">
-                    <div class="portfolio-image">
-                        <img src="assets/images/projects/madison-club.jpg" alt="Madison Club" loading="lazy">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Madison Club</h3>
-                        <p>Desert Luxury • La Quinta, CA</p>
-                    </div>
-                </a>
-
-                <a href="projects/yellowstone-club.html" class="portfolio-item scroll-fade-in">
-                    <div class="portfolio-image">
-                        <img src="assets/images/projects/yellowstone-club.jpg" alt="Yellowstone Club" loading="lazy">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Yellowstone Club</h3>
-                        <p>Mountain Retreat • Montana</p>
-                    </div>
-                </a>
-
-                <a href="projects/santa-monica-modern-spanish.html" class="portfolio-item scroll-fade-in">
-                    <div class="portfolio-image">
-                        <img src="assets/images/projects/santa-monica-modern-spanish.jpg" alt="Santa Monica Modern Spanish" loading="lazy">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Santa Monica Modern Spanish</h3>
-                        <p>Modern Spanish • Santa Monica, CA</p>
-                    </div>
-                </a>
-
-                <a href="projects/mulholland-estate.html" class="portfolio-item scroll-fade-in">
-                    <div class="portfolio-image">
-                        <img src="assets/images/projects/mulholland-estate.jpg" alt="Mulholland Estate" loading="lazy">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Mulholland Estate</h3>
-                        <p>Modern Luxury • Los Angeles, CA</p>
-                    </div>
-                </a>
-
-                <a href="projects/brentwood-estate.html" class="portfolio-item scroll-fade-in">
-                    <div class="portfolio-image">
-                        <img src="assets/images/projects/brentwood-estate.jpg" alt="Brentwood Estate" loading="lazy">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Brentwood Estate</h3>
-                        <p>Traditional Elegance • Brentwood, CA</p>
-                    </div>
-                </a>
-
-                <a href="projects/malibu-beach-house.html" class="portfolio-item scroll-fade-in">
-                    <div class="portfolio-image">
-                        <img src="assets/images/projects/malibu-beach-house.jpg" alt="Malibu Beach House" loading="lazy">
-                    </div>
-                    <div class="portfolio-info">
-                        <h3>Malibu Beach House</h3>
-                        <p>Coastal Contemporary • Malibu, CA</p>
-                    </div>
-                </a>
-            </div>
-
-            <!-- View All Projects Button -->
-            <div class="portfolio-cta" style="text-align: center; margin-top: 3rem;">
-                <a href="portfolio.html" class="btn btn-secondary">View All Projects</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <span class="section-label">Let's Work Together</span>
-                <h2>Ready to Transform Your Space?</h2>
-                <p>Schedule a FREE 30-minute phone consultation to discuss your vision and get expert design recommendations.</p>
-                <a href="contact.html" class="btn btn-primary btn-large">Schedule Free Consultation</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>JAC Interiors</h4>
-                    <p>We are a full-service design studio with the vision and organizational skills to make beautiful transformations happen.</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/JacInteriors" target="_blank" rel="noopener">Facebook</a>
-                        <a href="https://www.instagram.com/jacinteriorsdesign/" target="_blank" rel="noopener">Instagram</a>
-                        <a href="https://www.houzz.com/pro/jacinteriors/jac-interiors" target="_blank" rel="noopener">Houzz</a>
-                    </div>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="services.html">Residential Design</a></li>
-                        <li><a href="services.html">Commercial Design</a></li>
-                        <li><a href="services.html">Interior Styling</a></li>
-                        <li><a href="services.html">Space Planning</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Quick Contact</h4>
-                    <form class="footer-contact-form" id="footerContactForm">
-                        <input type="text" name="name" placeholder="Your Name" required>
-                        <input type="email" name="email" placeholder="Your Email" required>
-                        <input type="tel" name="phone" placeholder="Phone Number">
-                        <textarea name="message" placeholder="Brief message..." rows="3" required></textarea>
-                        <button type="submit" class="btn btn-primary btn-small">Send Message</button>
-                    </form>
-                </div>
-            </div>
-
-            <div class="footer-contact-info">
-                <p><strong>Los Angeles Office:</strong> 10401 Venice Blvd Suite 257, Los Angeles, CA 90034</p>
-                <p><a href="tel:213-397-0206">213-397-0206</a> | <a href="mailto:info@jacinteriors.com">info@jacinteriors.com</a></p>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 JAC Interiors, LLC. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+<div class="footer-col">
+<h4>Company</h4>
+<ul>
+<li><a href="about.html">About Us</a></li>
+<li><a href="portfolio.html">Portfolio</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Quick Contact</h4>
+<form class="footer-contact-form" id="footerContactForm">
+<input name="name" placeholder="Your Name" required="" type="text"/>
+<input name="email" placeholder="Your Email" required="" type="email"/>
+<input name="phone" placeholder="Phone Number" type="tel"/>
+<textarea name="message" placeholder="Brief message..." required="" rows="3"></textarea>
+<button class="btn btn-primary btn-small" type="submit">Send Message</button>
+</form>
+</div>
+</div>
+<div class="footer-contact-info">
+<p><strong>Los Angeles Office:</strong> 10401 Venice Blvd Suite 257, Los Angeles, CA 90034</p>
+<p><a href="tel:213-397-0206">213-397-0206</a> | <a href="mailto:info@jacinteriors.com">info@jacinteriors.com</a></p>
+</div>
+<div class="footer-bottom">
+<p>© 2025 JAC Interiors, LLC. All Rights Reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Back to Top Button -->
+<button aria-label="Back to top" class="back-to-top" id="backToTop">
         ↑
     </button>
-
-    <!-- Sticky Consultation Button -->
-    <a href="contact.html" class="sticky-consultation-btn" id="stickyConsultBtn">
-        <span class="sticky-btn-icon">📞</span>
-        <span class="sticky-btn-text">Free 30-Min Design Call</span>
-    </a>
-
-    <!-- Exit-Intent Popup -->
-    <div class="exit-popup-overlay" id="exitPopup">
-        <div class="exit-popup">
-            <button class="exit-popup-close" id="exitPopupClose">&times;</button>
-            <div class="exit-popup-content">
-                <h2>Before You Go! 💡</h2>
-                <h3>Get Expert Design Advice - FREE</h3>
-                <p class="exit-popup-subtitle">30-Minute Phone Consultation • No Obligation</p>
-                
-                <div class="exit-popup-benefits">
-                    <div class="benefit-item">✓ Discuss your vision & goals</div>
-                    <div class="benefit-item">✓ Get expert recommendations</div>
-                    <div class="benefit-item">✓ Learn about our process</div>
-                    <div class="benefit-item">✓ No pressure, just great advice</div>
-                </div>
-
-                <form class="exit-popup-form" id="exitPopupForm">
-                    <input type="text" name="name" placeholder="Your Name *" required>
-                    <input type="email" name="email" placeholder="Your Email *" required>
-                    <input type="tel" name="phone" placeholder="Your Phone *" required>
-                    <button type="submit" class="btn btn-primary btn-large">Schedule My Free Call</button>
-                </form>
-
-                <p class="exit-popup-note">We'll contact you within 24 hours to schedule your consultation</p>
-            </div>
-        </div>
-    </div>
-
-    <script src="assets/js/main.js"></script>
+<!-- Sticky Consultation Button -->
+<a class="sticky-consultation-btn" href="contact.html" id="stickyConsultBtn">
+<span class="sticky-btn-icon">📞</span>
+<span class="sticky-btn-text">Free 30-Min Design Call</span>
+</a>
+<!-- Exit-Intent Popup -->
+<div class="exit-popup-overlay" id="exitPopup">
+<div class="exit-popup">
+<button class="exit-popup-close" id="exitPopupClose">×</button>
+<div class="exit-popup-content">
+<h2>Before You Go! 💡</h2>
+<h3>Get Expert Design Advice - FREE</h3>
+<p class="exit-popup-subtitle">30-Minute Phone Consultation • No Obligation</p>
+<div class="exit-popup-benefits">
+<div class="benefit-item">✓ Discuss your vision &amp; goals</div>
+<div class="benefit-item">✓ Get expert recommendations</div>
+<div class="benefit-item">✓ Learn about our process</div>
+<div class="benefit-item">✓ No pressure, just great advice</div>
+</div>
+<form class="exit-popup-form" id="exitPopupForm">
+<input name="name" placeholder="Your Name *" required="" type="text"/>
+<input name="email" placeholder="Your Email *" required="" type="email"/>
+<input name="phone" placeholder="Your Phone *" required="" type="tel"/>
+<button class="btn btn-primary btn-large" type="submit">Schedule My Free Call</button>
+</form>
+<p class="exit-popup-note">We'll contact you within 24 hours to schedule your consultation</p>
+</div>
+</div>
+</div>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
-

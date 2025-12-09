@@ -1,289 +1,163 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Venice Boho House - Bohemian Chic interior design by JAC Interiors in Venice, CA">
-    <title>Venice Boho House | JAC Interiors Projects</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .project-hero {
-            height: 60vh;
-            min-height: 500px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            margin-top: 80px;
-        }
-        .project-hero-overlay {
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
-            width: 100%;
-            padding: 4rem 0 3rem;
-        }
-        .project-hero h1 {
-            color: white;
-            font-size: 3.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .project-hero .project-type {
-            color: rgba(255,255,255,0.9);
-            font-size: 1.25rem;
-            font-weight: 300;
-        }
-        .project-details-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-            padding: 2rem 0;
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-        }
-        .detail-item h4 {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--color-text-light);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        .detail-item p {
-            font-size: 1.125rem;
-            color: var(--color-secondary);
-            font-weight: 500;
-        }
-        .project-description {
-            max-width: 900px;
-            margin: 0 auto 4rem;
-            font-size: 1.125rem;
-            line-height: 1.8;
-            color: var(--color-text);
-        }
-        .project-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-        .gallery-image {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .gallery-image.full-width {
-            grid-column: 1 / -1;
-            height: 600px;
-        }
-        .project-content-section {
-            margin: 4rem 0;
-        }
-        .project-content-section h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--color-secondary);
-        }
-        .project-content-section p {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            color: var(--color-text);
-            margin-bottom: 1rem;
-        }
-        .related-projects {
-            margin-top: 6rem;
-            padding-top: 4rem;
-            border-top: 2px solid var(--color-border);
-        }
-        .related-projects h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-        }
-        @media (max-width: 768px) {
-            .project-gallery {
-                grid-template-columns: 1fr;
-            }
-            .project-details-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .project-hero h1 {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Venice Boho House - Bohemian Chic in Venice, CA by JAC Interiors" name="description"/>
+<title>Venice Boho House | JAC Interiors Projects</title>
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="../index.html" class="logo">
-                    <img src="../assets/images/jac-logo.png" alt="JAC Interiors" class="logo-img">
-                </a>
-                <div class="nav-menu" id="navMenu">
-                    <a href="../index.html" class="nav-link">Home</a>
-                    <a href="../portfolio.html" class="nav-link active">Portfolio</a>
-                    <a href="../about.html" class="nav-link">About</a>
-                    <a href="../services.html" class="nav-link">Services</a>
-                    <a href="../cities-we-serve.html" class="nav-link">Cities</a>
-                    <a href="../contact.html" class="nav-link">Contact</a>
-                    <div class="nav-contact">
-                        <a href="tel:213-397-0206" class="phone-link">213-397-0206</a>
-                    </div>
-                </div>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar">
+<div class="container">
+<div class="nav-wrapper">
+<a class="logo" href="../index.html">
+<img alt="JAC Interiors" class="logo-img" src="../assets/images/jac-logo.png"/>
+</a>
+<div class="nav-menu" id="navMenu">
+<a class="nav-link" href="../index.html">Home</a>
+<a class="nav-link active" href="../portfolio.html">Portfolio</a>
+<a class="nav-link" href="../about.html">About</a>
+<a class="nav-link" href="../services.html">Services</a>
+<a class="nav-link" href="../cities-we-serve.html">Cities</a>
+<a class="nav-link" href="../contact.html">Contact</a>
+<div class="nav-contact">
+<a class="phone-link" href="tel:213-397-0206">213-397-0206</a>
+</div>
+</div>
+<button class="mobile-menu-toggle" id="mobileMenuToggle">
+<span></span><span></span><span></span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Project Header -->
+<section class="section project-detail-header">
+<div class="container">
+<h1 class="project-detail-title scroll-slide-left">Venice Boho House</h1>
+<p class="project-detail-subtitle scroll-fade-in">Bohemian Chic in Venice, CA blending refined textures with modern simplicity.</p>
+<a class="scroll-indicator scroll-fade-in" href="#details">
+                Read about
+                <svg fill="none" height="14" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 5V19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M19 12L12 19L5 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</section>
+<!-- Metadata Grid -->
+<div class="container">
+<div class="project-meta-grid scroll-fade-in" id="details">
+<div class="meta-item">
+<span class="meta-label">Client</span>
+<span class="meta-value">Private Client</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Location</span>
+<span class="meta-value">Venice, CA</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Style</span>
+<span class="meta-value">Bohemian Chic</span>
+</div>
+<div class="meta-item">
+<span class="meta-label">Year</span>
+<span class="meta-value">2023</span>
+</div>
+</div>
+</div>
+<!-- Content Sections -->
+<section class="section" style="padding-top: 0;">
+<div class="container">
+<!-- Brief / Vision -->
+<div class="content-grid-section">
+<div class="content-label scroll-slide-left">Brief</div>
+<div class="content-body scroll-fade-in"><h2>Client Vision</h2><p style="margin-bottom: 1rem;">This custom made home sits atop a hill in Venice, CA  affording ocean views and breezes throughout. We worked with the developer and the homeowner to create a boho chic style modern farmhouse home that really tells the unique story of the small family living there. It is loaded with bespoke touches like the hand-selected matte fireplace slab, one-off lighting statement pieces, and wall treatments and papers that truly fill this home with textures and a sense of the organic to really bring the beachy southern California vibe to life. With every inch of space accounted for, this home boasts a pool, pool house and outdoor spaces complete with a cozy firepit and outdoor kitchen that really packs a punch to knock out any entertainment experience. The pajama room is one of our favorites, for those moments when you wanna watch some tv or read but no other space in the house will do, especially when you’re just lounging in your pajamas!</p>
+</div>
+</div>
+<!-- Solution / Design -->
+<div class="content-grid-section">
+<div class="content-label scroll-slide-left">Solution</div>
+<div class="content-body scroll-fade-in"><h2>Creative Direction</h2><p>Full project details coming soon.</p></div>
+</div>
+</div>
+</section>
+<!-- Gallery -->
+<section class="section" style="padding-top: 0;">
+<div class="container">
+<div class="project-gallery-grid">
+<div class="project-gallery-item scroll-scale-in wide">
+<img alt="Venice Boho House Main" class="project-gallery-image" loading="lazy" src="../assets/images/projects/venice-beach-house.jpg"/>
+</div>
+<div class="project-gallery-item scroll-scale-in">
+<img alt="Venice Boho House Detail 1" class="project-gallery-image" loading="lazy" src="../assets/images/hero-main.jpg"/>
+</div>
+<div class="project-gallery-item scroll-scale-in">
+<img alt="Venice Boho House Detail 2" class="project-gallery-image" loading="lazy" src="../assets/images/about-preview.jpg"/>
+</div>
+<div class="project-gallery-item scroll-scale-in wide">
+<img alt="Venice Boho House Detail 3" class="project-gallery-image" loading="lazy" src="../assets/images/projects/madison-club.jpg"/>
+</div>
+<div class="project-gallery-item scroll-scale-in">
+<img alt="Venice Boho House Detail 4" class="project-gallery-image" loading="lazy" src="../assets/images/projects/venice-beach-house.jpg"/>
+</div>
+<div class="project-gallery-item scroll-scale-in">
+<img alt="Venice Boho House Detail 5" class="project-gallery-image" loading="lazy" src="../assets/images/projects/beverly-hills-alpine.jpg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Related / Next Project CTA -->
+<section class="section cta-section">
+<div class="container">
+<div class="cta-content">
+<span class="section-label">Next Project</span>
+<h2>Ready to Start Your Vision?</h2>
+<p>Let's discuss how we can transform your space.</p>
+<a class="btn btn-primary" href="../contact.html">Get in Touch</a>
+<br/><br/>
+<a class="text-link" href="../portfolio.html" style="color: white; opacity: 0.8;">View All Projects</a>
+</div>
+</div>
+</section>
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-col">
+<h4>JAC Interiors</h4>
+<p>We are a full-service design studio with the vision and organizational skills to make beautiful transformations happen.</p>
+<div class="social-links">
+<a href="https://www.facebook.com/JacInteriors" rel="noopener" target="_blank">Facebook</a>
+<a href="https://www.instagram.com/jacinteriorsdesign/" rel="noopener" target="_blank">Instagram</a>
+<a href="https://www.houzz.com/pro/jacinteriors/jac-interiors" rel="noopener" target="_blank">Houzz</a>
+</div>
+</div>
 
-    <!-- Project Hero -->
-    <div class="project-hero" style="background-image: url('../assets/images/projects/venice-beach-house.jpg');">
-        <div class="project-hero-overlay">
-            <div class="container">
-                <h1>Venice Boho House</h1>
-                <p class="project-type">Bohemian Chic • Venice, CA</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Project Content -->
-    <section class="section">
-        <div class="container">
-            <!-- Project Details -->
-            <div class="project-details-grid">
-                <div class="detail-item">
-                    <h4>Location</h4>
-                    <p>Venice, CA</p>
-                </div>
-                <div class="detail-item">
-                    <h4>Style</h4>
-                    <p>Eclectic Bohemian</p>
-                </div>
-                <div class="detail-item">
-                    <h4>Size</h4>
-                    <p>3,200 sq ft</p>
-                </div>
-                <div class="detail-item">
-                    <h4>Year</h4>
-                    <p>2023</p>
-                </div>
-            </div>
-
-            <!-- Project Description -->
-            <div class="project-description">
-                <p>This custom made home sits atop a hill in Venice, CA  affording ocean views and breezes throughout. We worked with the developer and the homeowner to create a boho chic style modern farmhouse home that really tells the unique story of the small family living there. It is loaded with bespoke touches like the hand-selected matte fireplace slab, one-off lighting statement pieces, and wall treatments and papers that truly fill this home with textures and a sense of the organic to really bring the beachy southern California vibe to life. With every inch of space accounted for, this home boasts a pool, pool house and outdoor spaces complete with a cozy firepit and outdoor kitchen that really packs a punch to knock out any entertainment experience. The pajama room is one of our favorites, for those moments when you wanna watch some tv or read but no other space in the house will do, especially when you’re just lounging in your pajamas!</p>
-            </div>
-
-            <!-- Project Gallery -->
-            <div class="project-gallery">
-                <img src="../assets/images/projects/venice-beach-house.jpg" alt="Venice Boho House Main" class="gallery-image full-width">
-                <img src="../assets/images/hero-main.jpg" alt="Venice Boho House Detail 1" class="gallery-image">
-                <img src="../assets/images/about-preview.jpg" alt="Venice Boho House Detail 2" class="gallery-image">
-                <img src="../assets/images/projects/madison-club.jpg" alt="Venice Boho House Detail 3" class="gallery-image">
-                <img src="../assets/images/projects/venice-beach-house.jpg" alt="Venice Boho House Detail 4" class="gallery-image">
-                <img src="../assets/images/projects/beverly-hills-alpine.jpg" alt="Venice Boho House Detail 5" class="gallery-image full-width">
-            </div>
-
-            <!-- Design Concept -->
-            <div class="project-content-section">
-                <h2>Design Concept</h2>
-                <p>Our design concept for this Eclectic Bohemian project centered on creating a space that perfectly balances aesthetic beauty with functional living. Every element was carefully considered to create a cohesive environment that reflects our clients' lifestyle and personal style.</p>
-                <p>From the initial concept through final installation, we worked closely with our clients to ensure every detail aligned with their vision. The result is a space that not only looks stunning but also enhances daily living through thoughtful design and quality craftsmanship.</p>
-            </div>
-
-            <!-- Materials & Finishes -->
-            <div class="project-content-section">
-                <h2>Materials & Finishes</h2>
-                <p>We carefully curated premium materials and finishes that would stand the test of time while providing the luxurious feel our clients desired. Each selection was made with both aesthetics and durability in mind, ensuring the space remains beautiful for years to come.</p>
-                <p>The carefully chosen color palette and material selections work together to create depth and visual interest throughout the space, while maintaining a cohesive design that flows seamlessly from room to room.</p>
-            </div>
-
-            <!-- CTA -->
-            <div style="text-align: center; margin: 4rem 0;">
-                <a href="../contact.html" class="btn btn-primary" style="font-size: 1.125rem; padding: 1rem 2.5rem;">Start Your Project</a>
-            </div>
-
-            <!-- Related Projects -->
-            <div class="related-projects">
-                <h2>More Projects</h2>
-                <div class="portfolio-grid">
-                    <a href="beverly-hills-alpine.html" class="portfolio-item">
-                        <div class="portfolio-image">
-                            <img src="../assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills Alpine" loading="lazy">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3>Beverly Hills Alpine</h3>
-                            <p>Luxury Residence • Beverly Hills, CA</p>
-                        </div>
-                    </a>
-                    <a href="venice-beach-house.html" class="portfolio-item">
-                        <div class="portfolio-image">
-                            <img src="../assets/images/projects/venice-beach-house.jpg" alt="Venice Beach House" loading="lazy">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3>Venice Beach House</h3>
-                            <p>Coastal Contemporary • Venice, CA</p>
-                        </div>
-                    </a>
-                    <a href="madison-club.html" class="portfolio-item">
-                        <div class="portfolio-image">
-                            <img src="../assets/images/projects/madison-club.jpg" alt="Madison Club" loading="lazy">
-                        </div>
-                        <div class="portfolio-info">
-                            <h3>Madison Club</h3>
-                            <p>Desert Luxury • La Quinta, CA</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>JAC Interiors</h3>
-                    <p>Creating beautiful, functional spaces that elevate everyday living.</p>
-                </div>
-                <div class="footer-column">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="../services.html">Interior Design</a></li>
-                        <li><a href="../services.html">Space Planning</a></li>
-                        <li><a href="../services.html">Residential Design</a></li>
-                        <li><a href="../services.html">Commercial Design</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="../about.html">About Us</a></li>
-                        <li><a href="../portfolio.html">Portfolio</a></li>
-                        <li><a href="../blog.html">Blog</a></li>
-                        <li><a href="../contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Contact</h4>
-                    <p>Los Angeles, California</p>
-                    <p>Phone: <a href="tel:213-397-0206">213-397-0206</a></p>
-                    <p>Email: <a href="mailto:info@jacinteriors.com">info@jacinteriors.com</a></p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 JAC Interiors. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="../assets/js/main.js"></script>
+<div class="footer-col">
+<h4>Company</h4>
+<ul>
+<li><a href="../about.html">About Us</a></li>
+<li><a href="../portfolio.html">Portfolio</a></li>
+<li><a href="../contact.html">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Contact</h4>
+<div class="contact-info">
+<p>10401 Venice Blvd Suite 257<br/>
+                        Los Angeles, CA 90034<br/>
+<a href="tel:213-397-0206">213-397-0206</a><br/>
+<a href="mailto:info@jacinteriors.com">info@jacinteriors.com</a></p>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2025 JAC Interiors, LLC. All Rights Reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../assets/js/main.js"></script>
 </body>
 </html>
