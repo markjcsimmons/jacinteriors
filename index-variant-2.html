@@ -266,9 +266,40 @@
             color: var(--text-light);
         }
 
+        /* FULL-WIDTH IMAGE */
+        .fullwidth-image-section {
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .fullwidth-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
         /* 7. PROJECTS */
         .projects-section {
             padding: var(--section-spacing) 0;
+        }
+        
+        .projects-section.bg-dark {
+            background: #111;
+        }
+        
+        .projects-section.bg-dark h2,
+        .projects-section.bg-dark h3,
+        .projects-section.bg-dark p,
+        .projects-section.bg-dark span {
+            color: white !important;
+        }
+        
+        .projects-section.bg-dark .project-meta {
+            color: rgba(255,255,255,0.6) !important;
         }
 
         .project-row {
@@ -287,6 +318,15 @@
         }
         .project-media img { transition: transform 0.6s; width: 100%; height: 100%; object-fit: cover; }
         .project-row:hover .project-media img { transform: scale(1.03); }
+
+        .project-meta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            display: block;
+            margin-bottom: 1rem;
+        }
 
         .project-info h3 {
             font-size: 2.5rem;
@@ -809,8 +849,13 @@
         </div>
     </section>
 
+    <!-- FULL-WIDTH IMAGE -->
+    <section class="fullwidth-image-section">
+        <img src="assets/images/projects/toscana-country-club.jpg" alt="Our Design Work" class="fullwidth-img">
+    </section>
+
     <!-- 7. PROJECTS -->
-    <section class="projects-section">
+    <section class="projects-section bg-dark text-white">
         <div class="container">
             <div style="text-align:center; margin-bottom:6rem;">
                 <h2>Our work speaks<br>through spaces.</h2>
@@ -822,7 +867,7 @@
                     <img src="assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills">
                 </div>
                 <div class="project-info">
-                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:#666; display:block; margin-bottom:1rem;">Residential</span>
+                    <span class="project-meta">Residential</span>
                     <h3>Beverly Hills Alpine</h3>
                     <p>Luxury Residence • Beverly Hills, CA</p>
                     <span style="text-decoration:underline; font-weight:600;">View Project</span>
@@ -835,7 +880,7 @@
                     <img src="assets/images/projects/venice-beach-house.jpg" alt="Venice Beach">
                 </div>
                 <div class="project-info">
-                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:#666; display:block; margin-bottom:1rem;">Coastal</span>
+                    <span class="project-meta">Coastal</span>
                     <h3>Venice Beach House</h3>
                     <p>Coastal Contemporary • Venice, CA</p>
                     <span style="text-decoration:underline; font-weight:600;">View Project</span>
@@ -848,7 +893,7 @@
                     <img src="assets/images/projects/toscana-country-club.jpg" alt="Toscana">
                 </div>
                 <div class="project-info">
-                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:#666; display:block; margin-bottom:1rem;">Retreat</span>
+                    <span class="project-meta">Retreat</span>
                     <h3>Toscana Country Club</h3>
                     <p>Mediterranean • Indian Wells, CA</p>
                     <span style="text-decoration:underline; font-weight:600;">View Project</span>
