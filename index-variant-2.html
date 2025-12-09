@@ -3,231 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JAC Interiors - Full-service interior design studio in Los Angeles and Florida. Creating beautiful, functional spaces.">
-    <title>JAC Interiors | Invero Architecture Edition</title>
-    <!-- Use the new specialized CSS for true V2 replication -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/invero-v2.css">
+    <title>JAC Interiors | Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-</head>
-<body class="invero-v2-body">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #1a1a1a;
+            --text-light: #666666;
+            --accent: #c9a961;
+            --font-sans: 'Manrope', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
 
-    <!-- Transparent Navigation -->
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            line-height: 1.6;
+            background: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        /* UTILITIES */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        img, video { width: 100%; display: block; object-fit: cover; }
+
+        /* NAVIGATION - Transparent initially */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 2rem 0;
+            z-index: 100;
+            transition: all 0.4s ease;
+            mix-blend-mode: difference;
+            color: white;
+        }
+        
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+        
+        .nav-links { display: flex; gap: 3rem; }
+        .nav-link { font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* HERO - CLEAN (No Text) */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-wrapper {
+            width: 100%; height: 100%;
+            position: absolute;
+            top: 0; left: 0;
+        }
+
+        .hero-bg {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transform: scale(1); /* Will be animated by JS */
+            transition: transform 0.1s linear;
+        }
+
+        /* INTRO SECTION (Text Below Hero) */
+        .intro-section {
+            padding: 10rem 0 6rem; /* Large top padding */
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .intro-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .intro-title {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: var(--text-main);
+        }
+
+        .intro-desc {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* STICKY LIST SECTION */
+        .sticky-section {
+            padding: 6rem 0 10rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sticky-wrapper {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .sticky-col {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sticky-heading {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        /* SCROLLING LIST */
+        .scroll-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8rem;
+        }
+
+        .scroll-item {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .item-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-num {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .item-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 400;
+        }
+
+        .item-media {
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 0px; /* Sharp corners */
+            background: #f0f0f0;
+            margin-bottom: 1.5rem;
+        }
+
+        .item-media img, .item-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .scroll-item:hover .item-media img {
+            transform: scale(1.03);
+        }
+
+        /* FEATURED PROJECTS */
+        .projects-section {
+            padding: 8rem 0;
+            background: #f9f9f9;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .project-card {
+            display: block;
+        }
+
+        .project-img {
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-img img {
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.05);
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 8rem 0 4rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .sticky-wrapper { grid-template-columns: 1fr; }
+            .sticky-col { position: relative; top: 0; margin-bottom: 4rem; }
+            .scroll-list { gap: 4rem; }
+            .project-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="index.html" class="logo">
-                    <img src="assets/images/jac-logo.png" alt="JAC Interiors" class="logo-img">
-                </a>
-                <div class="nav-menu" id="navMenu">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="portfolio.html" class="nav-link">Portfolio</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="services.html" class="nav-link">Services</a>
-                    <a href="cities-we-serve.html" class="nav-link">Cities</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </div>
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <span></span><span></span><span></span>
-                </button>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">JAC INTERIORS</a>
+            <div class="nav-links">
+                <a href="portfolio.html" class="nav-link">Work</a>
+                <a href="about.html" class="nav-link">Studio</a>
+                <a href="contact.html" class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- 1. Hero Section: Static Image with Scroll Zoom -->
-    <header class="hero-v2">
-        <div class="hero-v2-bg">
-            <img src="assets/images/projects/venice-beach-house.jpg" alt="Luxury Interior" class="hero-v2-img" id="heroZoomImg">
+    <!-- HERO (CLEAN - No Text) -->
+    <header class="hero">
+        <div class="hero-bg-wrapper">
+            <img src="assets/images/projects/venice-beach-house.jpg" alt="Hero" class="hero-bg" id="heroZoomImg">
         </div>
-        <div class="hero-v2-overlay"></div>
-        <div class="hero-v2-content fade-up">
-            <h1 class="hero-v2-title">Los Angeles Interior Designers</h1>
-            <p class="hero-subtitle text-white">Creating Luxury Spaces That Elevate Everyday Living</p>
-            <div class="hero-cta-group">
-                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
-                <a href="portfolio.html" class="btn btn-outline-white">View Portfolio</a>
-            </div>
-        </div>
+        <!-- No overlay, no text -->
     </header>
 
-    <!-- 2. Trust Strip -->
-    <div class="trust-strip">
+    <!-- INTRO SECTION (Text Below Fold) -->
+    <section class="intro-section">
         <div class="container">
-            <div class="trust-grid">
-                <div class="trust-item"><span class="badge-icon">★</span> 4.9 Google Rating</div>
-                <div class="trust-item"><span class="badge-icon">★</span> 4.9 Yelp Rating</div>
-                <div class="trust-item"><span class="badge-icon">★</span> 5.0 Houzz Rating</div>
-                <div class="trust-item"><span class="badge-icon">🏆</span> 20x Best of Houzz</div>
-            </div>
+            <span class="intro-label">About JAC Interiors</span>
+            <h1 class="intro-title">We craft aesthetic and functional spaces that reflect your style and elevate everyday comfort.</h1>
+            <p class="intro-desc">Whether you have just moved into your home and don't know how to make it your own, or you've been there for years and need an update, we can help.</p>
         </div>
-    </div>
+    </section>
 
-    <!-- 3. Sticky Split Section: About + Video Embed -->
-    <section class="section">
-        <div class="container">
-            <div class="sticky-split-section">
-                <!-- Left: Sticky Content -->
-                <div class="sticky-side">
-                    <span class="invero-label">About JAC Interiors</span>
-                    <h2 class="invero-heading-lg">We craft aesthetic and functional spaces.</h2>
-                    <p class="mb-2">Whether you have just moved into your home and don't know how to make it your own, or you've been there for years and need an update, we can help.</p>
-                    <a href="about.html" class="text-link">Learn more about us →</a>
-                </div>
+    <!-- STICKY LIST SECTION -->
+    <section class="sticky-section">
+        <div class="container sticky-wrapper">
+            <!-- Left: Sticky Heading -->
+            <div class="sticky-col">
+                <span class="intro-label">Our Approach</span>
+                <h2 class="sticky-heading">Designing spaces that<br>feel as good as they look.</h2>
+                <a href="about.html" class="nav-link" style="color: var(--text-main); border-bottom: 1px solid var(--text-main); display: inline-block; margin-top: 2rem;">Learn More</a>
+            </div>
+
+            <!-- Right: Scrolling List -->
+            <div class="scroll-list">
                 
-                <!-- Right: Scrolling Media (Video + Image) -->
-                <div class="scroll-side">
-                    <!-- Video Embed (Invero Style) -->
-                    <div class="invero-video-wrapper">
-                        <video autoplay loop muted playsinline class="invero-video">
+                <!-- 01: Video Card -->
+                <div class="scroll-item">
+                    <div class="item-header">
+                        <span class="item-num">01</span>
+                        <h3 class="item-title">Intentional Design</h3>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #666;">We believe every element in a space should serve a purpose — whether it’s to inspire, to comfort, or to function beautifully.</p>
+                    <div class="item-media">
+                        <video autoplay loop muted playsinline>
                             <source src="assets/images/14225281_3840_2160_60fps.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <!-- Additional Image -->
-                    <img src="assets/images/andrea+time1.jpg" alt="JAC Team" style="width: 100%; border-radius: 4px;">
                 </div>
+
+                <!-- 02: Image Card -->
+                <div class="scroll-item">
+                    <div class="item-header">
+                        <span class="item-num">02</span>
+                        <h3 class="item-title">Collaboration First</h3>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #666;">We see every project as a partnership. By listening closely and sharing ideas openly, we turn your goals into reality.</p>
+                    <div class="item-media">
+                        <img src="assets/images/andrea+time1.jpg" alt="Collaboration">
+                    </div>
+                </div>
+
+                <!-- 03: Image Card -->
+                <div class="scroll-item">
+                    <div class="item-header">
+                        <span class="item-num">03</span>
+                        <h3 class="item-title">Timeless Aesthetics</h3>
+                    </div>
+                    <p style="margin-bottom: 1.5rem; color: #666;">We create interiors that remain stylish, functional, and meaningful — spaces that age gracefully.</p>
+                    <div class="item-media">
+                        <img src="assets/images/projects/toscana-country-club.jpg" alt="Timeless">
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- 4. Minimalist Services Grid -->
-    <section class="minimal-grid-section">
+    <!-- SELECTED WORKS -->
+    <section class="projects-section">
         <div class="container">
-            <div class="section-header">
-                <span class="invero-label">Our Expertise</span>
-                <h2 class="invero-heading-lg">Designing spaces that feel<br>as good as they look</h2>
-            </div>
+            <h2 class="sticky-heading" style="text-align: center; margin-bottom: 1rem;">Selected Works</h2>
             
-            <div class="minimal-grid">
-                <div class="minimal-card">
-                    <span class="minimal-num">01</span>
-                    <h3>Residential Design</h3>
-                    <p>Full-service interior design for homes of all sizes. From cozy apartments to luxury estates.</p>
-                    <a href="services.html" class="text-link">View Details</a>
-                </div>
-                <div class="minimal-card">
-                    <span class="minimal-num">02</span>
-                    <h3>Commercial Spaces</h3>
-                    <p>Professional interior design for offices, retail spaces, and hospitality.</p>
-                    <a href="services.html" class="text-link">View Details</a>
-                </div>
-                <div class="minimal-card">
-                    <span class="minimal-num">03</span>
-                    <h3>Space Planning</h3>
-                    <p>Optimize your layout for better flow and functionality. Smart space planning.</p>
-                    <a href="services.html" class="text-link">View Details</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. Editorial Project List -->
-    <section class="editorial-projects" id="portfolio">
-        <div class="container">
-            <div class="section-header text-center">
-                <span class="invero-label">Selected Works</span>
-                <h2 class="invero-heading-lg">Recent Projects</h2>
-            </div>
-
-            <div class="project-list">
+            <div class="project-grid">
                 <!-- Project 1 -->
-                <a href="projects/beverly-hills-alpine.html" class="project-editorial-row">
-                    <div class="editorial-img-wrapper">
-                        <img src="assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills Alpine" class="editorial-img" loading="lazy">
+                <a href="projects/beverly-hills-alpine.html" class="project-card">
+                    <div class="project-img">
+                        <img src="assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills">
                     </div>
-                    <div class="editorial-content">
-                        <span class="invero-label">Residential</span>
-                        <h3>Beverly Hills Alpine</h3>
-                        <p>Luxury Residence • Beverly Hills, CA</p>
-                        <span class="text-link">View Project</span>
+                    <div class="project-info">
+                        <h3 class="item-title" style="font-size: 1.5rem;">Alpine Estate</h3>
+                        <span class="intro-label" style="margin: 0; font-size: 0.7rem;">Beverly Hills</span>
                     </div>
                 </a>
 
-                <!-- Project 2 (Reverse) -->
-                <a href="projects/venice-beach-house.html" class="project-editorial-row reverse">
-                    <div class="editorial-img-wrapper">
-                        <img src="assets/images/projects/venice-beach-house.jpg" alt="Venice Beach House" class="editorial-img" loading="lazy">
+                <!-- Project 2 -->
+                <a href="projects/venice-beach-house.html" class="project-card" style="margin-top: 6rem;">
+                    <div class="project-img">
+                        <img src="assets/images/projects/venice-beach-house.jpg" alt="Venice Beach">
                     </div>
-                    <div class="editorial-content">
-                        <span class="invero-label">Coastal</span>
-                        <h3>Venice Beach House</h3>
-                        <p>Coastal Contemporary • Venice, CA</p>
-                        <span class="text-link">View Project</span>
-                    </div>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="projects/toscana-country-club.html" class="project-editorial-row">
-                    <div class="editorial-img-wrapper">
-                        <img src="assets/images/projects/toscana-country-club.jpg" alt="Toscana Country Club" class="editorial-img" loading="lazy">
-                    </div>
-                    <div class="editorial-content">
-                        <span class="invero-label">Retreat</span>
-                        <h3>Toscana Country Club</h3>
-                        <p>Mediterranean • Indian Wells, CA</p>
-                        <span class="text-link">View Project</span>
+                    <div class="project-info">
+                        <h3 class="item-title" style="font-size: 1.5rem;">Venice Beach House</h3>
+                        <span class="intro-label" style="margin: 0; font-size: 0.7rem;">Coastal Modern</span>
                     </div>
                 </a>
             </div>
             
-            <div class="text-center mt-3">
-                <a href="portfolio.html" class="btn btn-secondary">View All Projects</a>
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="portfolio.html" class="nav-link" style="border: 1px solid #ddd; padding: 1rem 2rem;">View All Projects</a>
             </div>
         </div>
     </section>
 
-    <!-- 6. Mega Footer -->
-    <footer class="footer-v2">
+    <!-- FOOTER -->
+    <footer class="footer">
         <div class="container">
-            <h2 class="footer-v2-cta">Ready to transform<br>your space?</h2>
-            <a href="contact.html" class="btn btn-outline-white">Start a Conversation</a>
+            <h2 class="sticky-heading" style="color: white; margin-bottom: 3rem;">Ready to transform<br>your space?</h2>
+            <a href="contact.html" class="nav-link" style="color: white; border-bottom: 1px solid white; display: inline-block;">Get in Touch</a>
             
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>JAC Interiors</h4>
-                    <p style="opacity: 0.6;">Los Angeles & Florida</p>
+            <div style="margin-top: 8rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; color: rgba(255,255,255,0.5); font-size: 0.9rem;">
+                <p>&copy; 2025 JAC Interiors</p>
+                <div class="nav-links" style="gap: 1.5rem;">
+                    <a href="#">Instagram</a>
+                    <a href="#">Houzz</a>
                 </div>
-                <div class="footer-col">
-                    <h4>Menu</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Social</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Houzz</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <p style="opacity: 0.6;">info@jacinteriors.com</p>
-                    <p style="opacity: 0.6;">213-397-0206</p>
-                </div>
-            </div>
-            
-            <div style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 4rem; padding-top: 2rem; opacity: 0.4; font-size: 0.8rem;">
-                &copy; 2025 JAC Interiors. All Rights Reserved.
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
     <script>
-        // Hero Zoom Effect Script
+        // Hero Zoom Script
         document.addEventListener('DOMContentLoaded', () => {
             const heroImg = document.getElementById('heroZoomImg');
             if(heroImg) {
                 window.addEventListener('scroll', () => {
                     const scrollPos = window.scrollY;
                     if (scrollPos < window.innerHeight) {
-                        // Zoom from 1.0 to 1.15 over the first screen height
-                        const scale = 1 + (scrollPos * 0.00015);
+                        const scale = 1 + (scrollPos * 0.0001);
                         heroImg.style.transform = `scale(${scale})`;
                     }
                 });
