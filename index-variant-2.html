@@ -317,58 +317,42 @@
             color: white;
         }
 
-        /* REVIEWS CAROUSEL */
-        .reviews-carousel-section {
-            padding: 3rem 0;
-            border-bottom: 1px solid var(--stroke);
-        }
-
-        .reviews-box {
-            max-width: 900px;
-            margin: 0 auto;
+        /* REVIEWS CAROUSEL - Compact */
+        .reviews-compact-box {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--stroke);
+            border-radius: 2px;
+            background: #fafafa;
             text-align: center;
         }
 
-        .trust-badges {
+        .trust-badges-inline {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 3rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-light);
         }
 
-        .trust-badge {
+        .trust-badge-inline {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
         }
 
         .trust-badge-stars {
             color: #FFB800;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-        }
-
-        .trust-badge-text {
             font-size: 0.85rem;
-            color: var(--text-light);
-            font-weight: 500;
-            letter-spacing: -0.2px;
-        }
-
-        .trust-badge-source {
-            font-size: 0.75rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .testimonial-carousel {
             position: relative;
             overflow: hidden;
-            min-height: 180px;
+            min-height: 60px;
         }
 
         .testimonial-slide {
@@ -388,16 +372,16 @@
         }
 
         .testimonial-text {
-            font-size: 1.3rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            line-height: 1.5;
             color: var(--text-main);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             font-weight: 400;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
 
         .testimonial-author {
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             color: var(--text-light);
             font-weight: 500;
         }
@@ -405,13 +389,13 @@
         .carousel-dots {
             display: flex;
             justify-content: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
+            gap: 0.4rem;
+            margin-top: 1rem;
         }
 
         .carousel-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--stroke);
             cursor: pointer;
@@ -420,8 +404,8 @@
 
         .carousel-dot.active {
             background: var(--text-main);
-            width: 24px;
-            border-radius: 4px;
+            width: 18px;
+            border-radius: 3px;
         }
 
         /* RESPONSIVE */
@@ -435,8 +419,9 @@
             .project-row.reverse .project-media { order: 0; }
             .stats-flex { grid-template-columns: 1fr 1fr; gap: 3rem; }
             .hero-img-wrapper { height: 50vh; }
-            .trust-badges { gap: 2rem; }
-            .testimonial-text { font-size: 1.1rem; }
+            .trust-badges-inline { gap: 1rem; flex-wrap: wrap; }
+            .testimonial-text { font-size: 0.9rem; }
+            .reviews-compact-box { padding: 1rem 1.5rem; }
         }
     </style>
 </head>
@@ -455,84 +440,70 @@
         </div>
     </nav>
 
-    <!-- REVIEWS CAROUSEL -->
-    <section class="reviews-carousel-section">
+    <!-- 2. TOP HEADLINE -->
+    <section class="top-headline-section">
         <div class="container">
-            <div class="reviews-box">
-                <!-- Trust Badges -->
-                <div class="trust-badges">
-                    <div class="trust-badge">
-                        <div class="trust-badge-stars">★★★★★</div>
-                        <div class="trust-badge-text">4.9 / 5.0</div>
-                        <div class="trust-badge-source">Google</div>
+            <!-- Compact Reviews Box -->
+            <div class="reviews-compact-box">
+                <div class="trust-badges-inline">
+                    <div class="trust-badge-inline">
+                        <span class="trust-badge-stars">★★★★★</span>
+                        <span>4.9 Google</span>
                     </div>
-                    <div class="trust-badge">
-                        <div class="trust-badge-stars">★★★★★</div>
-                        <div class="trust-badge-text">4.9 / 5.0</div>
-                        <div class="trust-badge-source">Yelp</div>
+                    <div class="trust-badge-inline">
+                        <span class="trust-badge-stars">★★★★★</span>
+                        <span>4.9 Yelp</span>
                     </div>
-                    <div class="trust-badge">
-                        <div class="trust-badge-stars">★★★★★</div>
-                        <div class="trust-badge-text">5.0 / 5.0</div>
-                        <div class="trust-badge-source">Houzz</div>
+                    <div class="trust-badge-inline">
+                        <span class="trust-badge-stars">★★★★★</span>
+                        <span>5.0 Houzz</span>
                     </div>
-                    <div class="trust-badge">
-                        <div class="trust-badge-stars">🏆</div>
-                        <div class="trust-badge-text">20x Winner</div>
-                        <div class="trust-badge-source">Best of Houzz</div>
+                    <div class="trust-badge-inline">
+                        <span>🏆 20x Best of Houzz</span>
                     </div>
                 </div>
-
-                <!-- Testimonial Carousel -->
+                
                 <div class="testimonial-carousel">
                     <div class="testimonial-slide active">
-                        <p class="testimonial-text">"From concept to completion, JAC Interiors exceeded every expectation. They truly elevated our space and made it feel like home."</p>
-                        <div class="testimonial-author">David Thompson — Google Reviews</div>
+                        <p class="testimonial-text">"From concept to completion, JAC Interiors exceeded every expectation."</p>
+                        <div class="testimonial-author">David Thompson — Google</div>
                     </div>
                     <div class="testimonial-slide">
-                        <p class="testimonial-text">"Andrea and her team transformed our home beyond what we imagined. Professional, creative, and absolutely worth it."</p>
+                        <p class="testimonial-text">"Andrea and her team transformed our home beyond what we imagined."</p>
                         <div class="testimonial-author">Sarah M. — Yelp</div>
                     </div>
                     <div class="testimonial-slide">
-                        <p class="testimonial-text">"Incredible attention to detail and a true understanding of luxury design. JAC Interiors is the best in Los Angeles."</p>
-                        <div class="testimonial-author">Michael R. — Google Reviews</div>
+                        <p class="testimonial-text">"Incredible attention to detail and a true understanding of luxury design."</p>
+                        <div class="testimonial-author">Michael R. — Google</div>
                     </div>
                     <div class="testimonial-slide">
-                        <p class="testimonial-text">"Working with JAC was seamless from start to finish. They listened to our vision and brought it to life beautifully."</p>
+                        <p class="testimonial-text">"Working with JAC was seamless from start to finish."</p>
                         <div class="testimonial-author">Jennifer K. — Houzz</div>
                     </div>
                     <div class="testimonial-slide">
-                        <p class="testimonial-text">"Their design expertise and professionalism are unmatched. Our commercial space looks stunning and functions perfectly."</p>
+                        <p class="testimonial-text">"Their design expertise and professionalism are unmatched."</p>
                         <div class="testimonial-author">Robert P. — Yelp</div>
                     </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"From concept to completion, Andrea guided us through every decision with expertise and patience. The result is a home we absolutely love."</p>
-                        <div class="testimonial-author">Lisa C. — Google Reviews</div>
-                    </div>
                 </div>
-
-                <!-- Carousel Dots -->
+                
                 <div class="carousel-dots">
                     <span class="carousel-dot active" data-slide="0"></span>
                     <span class="carousel-dot" data-slide="1"></span>
                     <span class="carousel-dot" data-slide="2"></span>
                     <span class="carousel-dot" data-slide="3"></span>
                     <span class="carousel-dot" data-slide="4"></span>
-                    <span class="carousel-dot" data-slide="5"></span>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- 2. TOP HEADLINE -->
-    <section class="top-headline-section">
-        <div class="container top-headline-grid">
-            <div>
-                <h1>Crafting spaces that<br>feel like home.</h1>
-            </div>
-            <div>
-                <p>We design interiors that reflect your lifestyle and values, ensuring they stand the test of time. From Los Angeles to Florida, we create luxury spaces that elevate everyday living.</p>
-                <a href="contact.html" class="btn">Get in Touch</a>
+            <!-- Headline Grid -->
+            <div class="top-headline-grid">
+                <div>
+                    <h1>Crafting spaces that<br>feel like home.</h1>
+                </div>
+                <div>
+                    <p>We design interiors that reflect your lifestyle and values, ensuring they stand the test of time. From Los Angeles to Florida, we create luxury spaces that elevate everyday living.</p>
+                    <a href="contact.html" class="btn">Get in Touch</a>
+                </div>
             </div>
         </div>
     </section>
