@@ -379,14 +379,14 @@
 
         /* REVIEWS CAROUSEL - Compact */
         .reviews-compact-box {
-            max-width: 800px;
+            max-width: 100%;
             margin: 0 auto 0;
-            padding: 0.5rem 1.5rem;
+            padding: 0.75rem 2rem;
             border: 1px solid var(--stroke);
             border-radius: 2px;
             background: #fafafa;
             text-align: center;
-            min-height: 110px;
+            min-height: 60px;
         }
 
         .trust-badges-inline {
@@ -443,12 +443,14 @@
             font-size: 0.85rem;
             line-height: 1.5;
             color: var(--text-main);
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             font-weight: 400;
             letter-spacing: -0.3px;
-            max-height: 42px;
+            max-height: 1.5rem;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            transition: max-height 0.3s ease, white-space 0.3s ease;
             display: block;
         }
 
