@@ -136,7 +136,10 @@
             height: 85vh;
             overflow: hidden;
             position: relative;
-            border-radius: 0px; /* Invero often uses sharp or very subtle radius */
+            border-radius: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero-img {
@@ -144,7 +147,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            transform: scale(1.05);
+            transform: scale(1.15);
             transition: transform 0.1s linear;
         }
 
@@ -893,7 +896,7 @@
                 window.addEventListener('scroll', () => {
                     const scrollPos = window.scrollY;
                     if (scrollPos < window.innerHeight) {
-                        const scale = 1.05 + (scrollPos * 0.0005);
+                        const scale = 1.15 + (scrollPos * 0.0005);
                         heroImg.style.transform = `scale(${scale})`;
                     }
                 });
