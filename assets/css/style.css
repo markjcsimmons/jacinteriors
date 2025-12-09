@@ -626,7 +626,7 @@ img {
 }
 
 /* Responsive */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .navbar .logo-img { filter: none; }
     .nav-menu {
         position: fixed;
