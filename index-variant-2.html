@@ -6,29 +6,32 @@
     <title>JAC Interiors | Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Syne (Headings) + Inter (Body) for the true Invero look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Geist / Plus Jakarta Sans for the exact Invero "Geist" look -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --bg-body: #ffffff;
-            --text-main: #1a1a1a;
-            --text-light: #666666;
-            --accent: #c9a961;
-            --font-body: 'Inter', sans-serif;
-            --font-heading: 'Syne', sans-serif; /* The signature Invero font */
+            --text-main: #222a26; /* Invero Primary */
+            --text-light: #555555;
+            --stroke: #e4e4e4; /* Invero Stroke */
+            --accent: #222a26; /* Invero uses dark for interactions mostly */
+            --font-main: 'Plus Jakarta Sans', sans-serif; /* Closest Google Font to Geist */
             --container-width: 1320px;
-            --section-spacing: 8rem;
+            --section-spacing: 120px;
         }
 
         body {
-            font-family: var(--font-body);
+            font-family: var(--font-main);
             color: var(--text-main);
             background: var(--bg-body);
-            line-height: 1.6;
+            line-height: 1.5;
             overflow-x: hidden;
+            /* Invero Specific Body Styles from Inspector */
+            letter-spacing: -0.5px; 
+            font-size: 16px;
         }
 
         /* UTILS */
@@ -43,35 +46,37 @@
         
         /* TYPOGRAPHY */
         h1, h2, h3, h4 {
-            font-family: var(--font-heading);
+            font-family: var(--font-main);
             color: var(--text-main);
-            font-weight: 600; /* Syne looks best at 600/700 */
+            font-weight: 600;
+            letter-spacing: -1.5px; /* Tighter headings */
         }
 
         h1 {
-            font-size: clamp(3.5rem, 6vw, 5.5rem);
+            font-size: clamp(3.5rem, 6vw, 6rem);
             line-height: 1.05;
-            letter-spacing: -0.02em;
+            letter-spacing: -2px;
         }
 
         h2 {
             font-size: clamp(2.5rem, 4vw, 3.5rem);
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            letter-spacing: -0.01em;
         }
 
         h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             font-weight: 500;
+            letter-spacing: -0.5px;
         }
 
         p {
             color: var(--text-light);
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             margin-bottom: 1.5rem;
-            line-height: 1.7;
+            line-height: 1.6;
+            letter-spacing: -0.3px;
         }
 
         /* 1. NAVBAR */
@@ -81,7 +86,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--stroke);
         }
 
         .nav-wrapper {
@@ -90,21 +95,25 @@
             align-items: center;
         }
 
-        .logo { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; }
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            letter-spacing: -1px; 
+            text-transform: uppercase;
+        }
         
         .nav-links { display: flex; gap: 2.5rem; }
         .nav-link { 
-            font-size: 0.9rem; 
+            font-size: 0.95rem; 
             font-weight: 500; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
             color: var(--text-main);
+            letter-spacing: -0.2px;
         }
-        .nav-link:hover { color: var(--accent); }
+        .nav-link:hover { opacity: 0.7; }
 
         /* 2. TOP HEADLINE AREA */
         .top-headline-section {
-            padding: 8rem 0 4rem;
+            padding: 8rem 0 5rem;
         }
 
         .top-headline-grid {
@@ -123,10 +132,10 @@
 
         .hero-img-wrapper {
             width: 100%;
-            height: 80vh;
+            height: 85vh;
             overflow: hidden;
             position: relative;
-            border-radius: 4px;
+            border-radius: 0px; /* Invero often uses sharp or very subtle radius */
         }
 
         .hero-img {
@@ -140,7 +149,7 @@
         /* 4. STICKY "PROCESS" SECTION */
         .sticky-process-section {
             padding: var(--section-spacing) 0;
-            border-top: 1px solid #f0f0f0;
+            border-top: 1px solid var(--stroke);
         }
 
         .sticky-grid {
@@ -164,92 +173,93 @@
         .process-item-header {
             display: flex;
             align-items: baseline;
-            gap: 1rem;
-            border-bottom: 1px solid #eee;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--stroke);
             padding-bottom: 1rem;
             margin-bottom: 1.5rem;
         }
 
         .process-num {
-            font-family: var(--font-heading);
             font-size: 1.1rem;
-            color: var(--text-main); /* Invero numbers are often dark */
+            color: var(--text-main);
             font-weight: 600;
         }
 
-        /* Adjusted Aspect Ratio to show more image content */
         .process-media {
             width: 100%;
-            aspect-ratio: 4/3; /* Taller ratio prevents extreme cropping */
+            aspect-ratio: 4/3;
             background: #f5f5f5;
             margin-bottom: 2rem;
             overflow: hidden;
-            border-radius: 4px;
         }
 
         .process-media img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center; /* Ensure center focus */
         }
 
         /* 5. SERVICES GRID */
         .services-section {
             padding: var(--section-spacing) 0;
-            background: #f9f9f9;
+            background: white; /* Invero Home 1 often keeps it white */
+            border-top: 1px solid var(--stroke);
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr); /* 4 Columns */
+            gap: 0; /* Border separation */
             margin-top: 4rem;
+            border-left: 1px solid var(--stroke);
+            border-top: 1px solid var(--stroke);
         }
 
         .service-card {
             background: white;
-            padding: 2rem;
-            border: 1px solid #eee;
-            transition: transform 0.3s;
+            padding: 3rem 2rem;
+            border-right: 1px solid var(--stroke);
+            border-bottom: 1px solid var(--stroke);
+            transition: background 0.3s;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .service-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .service-card:hover { background: #f9f9f9; }
 
         .service-icon {
             font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
             display: block;
         }
 
         /* 6. STATS STRIP */
         .stats-section {
             padding: 6rem 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--stroke);
+            border-top: 1px solid var(--stroke);
         }
         
         .stats-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 4rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
         }
 
         .stat-item h4 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             line-height: 1;
             margin-bottom: 0.5rem;
             color: var(--text-main);
+            letter-spacing: -2px;
         }
 
         .stat-item span {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-light);
+            font-size: 0.9rem;
             font-weight: 500;
+            color: var(--text-light);
         }
 
         /* 7. PROJECTS */
@@ -270,35 +280,148 @@
         .project-media {
             aspect-ratio: 4/3;
             overflow: hidden;
-            border-radius: 4px;
         }
         .project-media img { transition: transform 0.6s; width: 100%; height: 100%; object-fit: cover; }
         .project-row:hover .project-media img { transform: scale(1.03); }
+
+        .project-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
 
         /* BUTTONS */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             background: var(--text-main);
             color: white;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
+            font-size: 0.9rem;
             font-weight: 600;
-            border-radius: 2px;
+            border-radius: 0px; /* Sharp corners */
+            letter-spacing: -0.2px;
         }
-        .btn:hover { background: var(--accent); }
+        .btn:hover { opacity: 0.9; }
 
         .btn-outline {
             background: transparent;
-            border: 1px solid #ddd;
+            border: 1px solid var(--text-main);
             color: var(--text-main);
+            padding: 1rem 2rem;
+            font-weight: 600;
         }
         .btn-outline:hover {
-            border-color: var(--text-main);
-            background: transparent;
+            background: var(--text-main);
+            color: white;
+        }
+
+        /* REVIEWS CAROUSEL */
+        .reviews-carousel-section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--stroke);
+        }
+
+        .reviews-box {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .trust-badge-stars {
+            color: #FFB800;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .trust-badge-text {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 500;
+            letter-spacing: -0.2px;
+        }
+
+        .trust-badge-source {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .testimonial-carousel {
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+        }
+
+        .testimonial-slide {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        .testimonial-author {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--stroke);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: var(--text-main);
+            width: 24px;
+            border-radius: 4px;
         }
 
         /* RESPONSIVE */
@@ -306,10 +429,14 @@
             .top-headline-grid { grid-template-columns: 1fr; gap: 2rem; }
             .sticky-grid { grid-template-columns: 1fr; }
             .sticky-left { position: static; margin-bottom: 3rem; }
-            .services-grid { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; border-left: none; }
+            .service-card { border-left: 1px solid var(--stroke); }
             .project-row, .project-row.reverse { grid-template-columns: 1fr; gap: 2rem; }
             .project-row.reverse .project-media { order: 0; }
+            .stats-flex { grid-template-columns: 1fr 1fr; gap: 3rem; }
             .hero-img-wrapper { height: 50vh; }
+            .trust-badges { gap: 2rem; }
+            .testimonial-text { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -328,7 +455,76 @@
         </div>
     </nav>
 
-    <!-- 2. TOP HEADLINE (Syne Font) -->
+    <!-- REVIEWS CAROUSEL -->
+    <section class="reviews-carousel-section">
+        <div class="container">
+            <div class="reviews-box">
+                <!-- Trust Badges -->
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <div class="trust-badge-stars">★★★★★</div>
+                        <div class="trust-badge-text">4.9 / 5.0</div>
+                        <div class="trust-badge-source">Google</div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-stars">★★★★★</div>
+                        <div class="trust-badge-text">4.9 / 5.0</div>
+                        <div class="trust-badge-source">Yelp</div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-stars">★★★★★</div>
+                        <div class="trust-badge-text">5.0 / 5.0</div>
+                        <div class="trust-badge-source">Houzz</div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-stars">🏆</div>
+                        <div class="trust-badge-text">20x Winner</div>
+                        <div class="trust-badge-source">Best of Houzz</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial Carousel -->
+                <div class="testimonial-carousel">
+                    <div class="testimonial-slide active">
+                        <p class="testimonial-text">"From concept to completion, JAC Interiors exceeded every expectation. They truly elevated our space and made it feel like home."</p>
+                        <div class="testimonial-author">David Thompson — Google Reviews</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Andrea and her team transformed our home beyond what we imagined. Professional, creative, and absolutely worth it."</p>
+                        <div class="testimonial-author">Sarah M. — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Incredible attention to detail and a true understanding of luxury design. JAC Interiors is the best in Los Angeles."</p>
+                        <div class="testimonial-author">Michael R. — Google Reviews</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Working with JAC was seamless from start to finish. They listened to our vision and brought it to life beautifully."</p>
+                        <div class="testimonial-author">Jennifer K. — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Their design expertise and professionalism are unmatched. Our commercial space looks stunning and functions perfectly."</p>
+                        <div class="testimonial-author">Robert P. — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"From concept to completion, Andrea guided us through every decision with expertise and patience. The result is a home we absolutely love."</p>
+                        <div class="testimonial-author">Lisa C. — Google Reviews</div>
+                    </div>
+                </div>
+
+                <!-- Carousel Dots -->
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" data-slide="0"></span>
+                    <span class="carousel-dot" data-slide="1"></span>
+                    <span class="carousel-dot" data-slide="2"></span>
+                    <span class="carousel-dot" data-slide="3"></span>
+                    <span class="carousel-dot" data-slide="4"></span>
+                    <span class="carousel-dot" data-slide="5"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. TOP HEADLINE -->
     <section class="top-headline-section">
         <div class="container top-headline-grid">
             <div>
@@ -353,10 +549,10 @@
         <div class="container sticky-grid">
             <!-- Left Sticky -->
             <div class="sticky-left">
-                <span style="display:block; color:var(--accent); font-size:0.8rem; margin-bottom:1rem; text-transform:uppercase; letter-spacing:2px; font-weight:600;">Design Philosophy</span>
+                <span style="display:block; color:var(--text-main); font-size:0.8rem; margin-bottom:1rem; text-transform:uppercase; letter-spacing:1px; font-weight:600;">Design Philosophy</span>
                 <h2>Designing spaces that<br>feel as good as they look.</h2>
                 <p>We create immersive interiors that reflect your personality, enhance your lifestyle, and bring a sense of calm.</p>
-                <a href="about.html" style="border-bottom:1px solid #ccc; padding-bottom:2px; font-weight:500;">Learn more about us</a>
+                <a href="about.html" style="text-decoration:underline; font-weight:600;">Learn more about us</a>
             </div>
 
             <!-- Right Scroll -->
@@ -376,7 +572,7 @@
                     <p>We believe every element in a space should serve a purpose — whether it’s to inspire, to comfort, or to function beautifully.</p>
                 </div>
 
-                <!-- 02: Image (Fixed Scaling) -->
+                <!-- 02: Image -->
                 <div class="process-item">
                     <div class="process-item-header">
                         <span class="process-num">02</span>
@@ -388,7 +584,7 @@
                     <p>We see every project as a partnership. By listening closely, sharing ideas openly, and respecting your vision, we turn your goals into reality.</p>
                 </div>
 
-                <!-- 03: Image (Fixed Scaling) -->
+                <!-- 03: Image -->
                 <div class="process-item">
                     <div class="process-item-header">
                         <span class="process-num">03</span>
@@ -413,24 +609,32 @@
             
             <div class="services-grid">
                 <div class="service-card">
-                    <span class="service-icon">✦</span>
-                    <h3>Residential Design</h3>
-                    <p>Full-service interior design for homes of all sizes. From cozy apartments to luxury estates.</p>
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Residential Design</h3>
+                        <p style="font-size:0.95rem;">Full-service interior design for homes of all sizes. From cozy apartments to luxury estates.</p>
+                    </div>
                 </div>
                 <div class="service-card">
-                    <span class="service-icon">✦</span>
-                    <h3>Commercial Spaces</h3>
-                    <p>Thoughtful commercial spaces that align with your brand and support your goals.</p>
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Commercial Spaces</h3>
+                        <p style="font-size:0.95rem;">Thoughtful commercial spaces that align with your brand and support your goals.</p>
+                    </div>
                 </div>
                 <div class="service-card">
-                    <span class="service-icon">✦</span>
-                    <h3>Interior Styling</h3>
-                    <p>We refine the details, layer in textures, and select decor that feels just right.</p>
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Interior Styling</h3>
+                        <p style="font-size:0.95rem;">We refine the details, layer in textures, and select decor that feels just right.</p>
+                    </div>
                 </div>
                 <div class="service-card">
-                    <span class="service-icon">✦</span>
-                    <h3>Space Planning</h3>
-                    <p>Our concept design process explores layouts and moods through compelling visuals.</p>
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Space Planning</h3>
+                        <p style="font-size:0.95rem;">Our concept design process explores layouts and moods through compelling visuals.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -439,7 +643,7 @@
     <!-- 6. STATS STRIP -->
     <section class="stats-section">
         <div class="container">
-            <div style="margin-bottom:3rem;">
+            <div style="margin-bottom:4rem;">
                 <h2>Numbers that speak<br>for themselves.</h2>
             </div>
             <div class="stats-flex">
@@ -475,11 +679,11 @@
                 <div class="project-media">
                     <img src="assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills">
                 </div>
-                <div>
-                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999; display:block; margin-bottom:1rem;">Residential</span>
+                <div class="project-info">
+                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:#666; display:block; margin-bottom:1rem;">Residential</span>
                     <h3>Beverly Hills Alpine</h3>
                     <p>Luxury Residence • Beverly Hills, CA</p>
-                    <span style="border-bottom:1px solid #ccc; font-size:0.9rem; font-weight:500;">View Project</span>
+                    <span style="text-decoration:underline; font-weight:600;">View Project</span>
                 </div>
             </a>
 
@@ -488,11 +692,11 @@
                 <div class="project-media">
                     <img src="assets/images/projects/venice-beach-house.jpg" alt="Venice Beach">
                 </div>
-                <div>
-                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999; display:block; margin-bottom:1rem;">Coastal</span>
+                <div class="project-info">
+                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:#666; display:block; margin-bottom:1rem;">Coastal</span>
                     <h3>Venice Beach House</h3>
                     <p>Coastal Contemporary • Venice, CA</p>
-                    <span style="border-bottom:1px solid #ccc; font-size:0.9rem; font-weight:500;">View Project</span>
+                    <span style="text-decoration:underline; font-weight:600;">View Project</span>
                 </div>
             </a>
 
@@ -501,17 +705,17 @@
                 <div class="project-media">
                     <img src="assets/images/projects/toscana-country-club.jpg" alt="Toscana">
                 </div>
-                <div>
-                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999; display:block; margin-bottom:1rem;">Retreat</span>
+                <div class="project-info">
+                    <span style="font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; color:#666; display:block; margin-bottom:1rem;">Retreat</span>
                     <h3>Toscana Country Club</h3>
                     <p>Mediterranean • Indian Wells, CA</p>
-                    <span style="border-bottom:1px solid #ccc; font-size:0.9rem; font-weight:500;">View Project</span>
+                    <span style="text-decoration:underline; font-weight:600;">View Project</span>
                 </div>
             </a>
 
             <!-- View More Button -->
             <div style="text-align:center; margin-top:6rem;">
-                <a href="portfolio.html" class="btn btn-outline">View More Projects</a>
+                <a href="portfolio.html" class="btn-outline">View More Projects</a>
             </div>
 
         </div>
@@ -522,16 +726,16 @@
         <div class="container">
             <div style="margin-bottom:4rem;">
                 <h2 style="font-size:4rem; margin-bottom:2rem; color:white;">Ready to transform<br>your space?</h2>
-                <a href="contact.html" style="background:white; color:#111; padding:1rem 2rem; display:inline-block; font-weight:600; text-transform:uppercase; letter-spacing:1px; border-radius:2px;">Let's get in touch</a>
+                <a href="contact.html" style="background:white; color:#111; padding:1rem 2rem; display:inline-block; font-weight:600; text-transform:uppercase; letter-spacing:1px; border-radius:0px;">Let's get in touch</a>
             </div>
             
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; border-top:1px solid #333; padding-top:4rem;">
                 <div>
-                    <h4 style="margin-bottom:1rem; color:white;">Contact</h4>
+                    <h4 style="margin-bottom:1rem; color:white; font-size:1.2rem;">Contact</h4>
                     <p style="color:#999;">info@jacinteriors.com<br>213-397-0206</p>
                 </div>
                 <div>
-                    <h4 style="margin-bottom:1rem; color:white;">Social</h4>
+                    <h4 style="margin-bottom:1rem; color:white; font-size:1.2rem;">Social</h4>
                     <div style="display:flex; gap:1rem; color:#999;">
                         <a href="#">Instagram</a>
                         <a href="#">Houzz</a>
@@ -542,8 +746,8 @@
     </footer>
 
     <script>
-        // Hero Zoom Script
         document.addEventListener('DOMContentLoaded', () => {
+            // Hero Zoom Script
             const heroImg = document.getElementById('heroZoomImg');
             if(heroImg) {
                 window.addEventListener('scroll', () => {
@@ -553,6 +757,50 @@
                         heroImg.style.transform = `scale(${scale})`;
                     }
                 });
+            }
+
+            // Testimonial Carousel Auto-Rotation
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            let currentSlide = 0;
+            let autoRotateInterval;
+
+            function showSlide(index) {
+                // Remove active class from all slides and dots
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // Add active class to current slide and dot
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                const next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            }
+
+            function startAutoRotate() {
+                autoRotateInterval = setInterval(nextSlide, 5000); // Change every 5 seconds
+            }
+
+            function stopAutoRotate() {
+                clearInterval(autoRotateInterval);
+            }
+
+            // Dot click handlers
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    stopAutoRotate();
+                    startAutoRotate(); // Restart auto-rotation after manual click
+                });
+            });
+
+            // Start auto-rotation
+            if (slides.length > 0) {
+                startAutoRotate();
             }
         });
     </script>
