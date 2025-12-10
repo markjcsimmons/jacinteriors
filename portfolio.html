@@ -8,6 +8,65 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Dynamic animations */
+        .project-item {
+            will-change: opacity, transform;
+        }
+
+        .project-image {
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        .project-image img {
+            will-change: transform;
+        }
+
+        /* Hover zoom effect on images */
+        .project-item:hover .project-image img {
+            transform: scale(1.08) !important;
+            transition: transform 0.6s ease;
+        }
+
+        /* Smooth transitions for all interactive elements */
+        .project-content h3,
+        .project-content span,
+        .tag-gray {
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover .project-content h3 {
+            color: rgb(34, 42, 38);
+            transform: translateX(5px);
+        }
+
+        /* Fade in animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Pulse animation for button */
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(34, 42, 38, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(34, 42, 38, 0);
+            }
+        }
+
+        .view-project-btn:hover {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -377,6 +436,58 @@
                 btn.style.background = 'transparent';
                 btn.style.color = 'rgb(34, 42, 38)';
             });
+        });
+
+        // Dynamic scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Animate project items on scroll
+        document.querySelectorAll('.project-item').forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(50px)';
+            item.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            item.style.transitionDelay = `${index * 0.1}s`;
+            observer.observe(item);
+        });
+
+        // Parallax effect on images
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.project-image').forEach((img, index) => {
+                const speed = 0.1;
+                const yPos = -(scrolled * speed);
+                img.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Scale effect on images as they appear
+        document.querySelectorAll('.project-image img').forEach(img => {
+            img.style.transform = 'scale(1.05)';
+            img.style.transition = 'transform 0.6s ease';
+        });
+
+        const imgObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transform = 'scale(1)';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.project-image img').forEach(img => {
+            imgObserver.observe(img);
         });
     </script>
 </body>
