@@ -123,12 +123,14 @@ def generate_project_html(project_info, project_slug):
     description = project_info['description']
     images = project_info['images']
     
-    # If we don't have enough images, duplicate some
-    while len(images) < 6:
-        images.append(images[0] if images else f"../assets/images/projects/{project_slug}.jpg")
+    # Use the properly labeled images (1-6) from project folders
+    labeled_images = []
+    for i in range(1, 7):
+        img_path = f"../assets/images/projects/{project_slug}/{project_slug}-{i}.jpg"
+        labeled_images.append(img_path)
     
-    # Take first 6 images
-    images = images[:6]
+    # Use labeled images
+    images = labeled_images
     
     # Split description into 6 sections
     if description:
