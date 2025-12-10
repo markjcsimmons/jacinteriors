@@ -24,9 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     const isPortfolioPage = window.location.pathname.includes('portfolio.html');
+    const isProjectPage = window.location.pathname.includes('/projects/');
+    const isCityPage = window.location.pathname.includes('/cities/');
     
-    // On portfolio page, always keep navbar visible
-    if (isPortfolioPage) {
+    // On portfolio, project, or city pages, always keep navbar visible
+    if (isPortfolioPage || isProjectPage || isCityPage) {
         navbar.classList.add('scrolled');
     }
     
@@ -34,8 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
-            // Don't remove scrolled class on portfolio page
-            if (!isPortfolioPage) {
+            // Don't remove scrolled class on portfolio, project, or city pages
+            if (!isPortfolioPage && !isProjectPage && !isCityPage) {
                 navbar.classList.remove('scrolled');
             }
         }
@@ -409,11 +411,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         // Parallax factor (adjust for intensity)
                         // Negative factor moves image opposite to scroll (standard parallax feel)
-                        const speed = container.dataset.speed || 0.15;
+                        const speed = container.dataset.speed || 0.2;
                         
                         const yPos = distFromCenter * speed;
                         
-                        img.style.transform = `translateY(${yPos}px) scale(1.1)`;
+                        img.style.transform = `translateY(${yPos}px) scale(1.15)`;
                     }
                 });
             });
