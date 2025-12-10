@@ -476,8 +476,6 @@ img {
     flex-shrink: 0;
     overflow: hidden;
     border-radius: 4px;
-    background: red;
-    border: 5px solid blue;
 }
 
 .project-secondary-image img {
