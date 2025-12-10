@@ -48,5 +48,20 @@
     "primary": "1st_photo-min_2000xb9b1.jpg",
     "hover": "2nd_Photo-min_2000xb9b1.jpg",
     "secondary": "3rd_Photo-min_2000xb9b1.jpg"
+  },
+  "mulholland-estate": {
+    "primary": "mul-cover_2000xb86e.jpg",
+    "hover": "Mulholland-2-792x562_2000x7e40.jpg",
+    "secondary": "3_b35f4849-d942-476d-8bee-b2585bc82c9f_2000xb86e.jpg"
+  },
+  "calabasas-residence": {
+    "primary": "20221025_JAC_CALABASAS_0-min_2000x91fc.jpg",
+    "hover": "20221025_JAC_CALABASAS_1-min_2000xb0c6.jpg",
+    "secondary": "20221025_JAC_CALABASAS_9-min_2000x9dfe.jpg"
+  },
+  "malibu-beach-house": {
+    "primary": "malibu-design_2000xea9f.jpg",
+    "hover": "malibu-design1_2000x87a2.jpg",
+    "secondary": "malibu-design2_2000x36f6.jpg"
   }
 }
