@@ -491,7 +491,7 @@ img {
 .project-bottom-row {
     display: flex;
     gap: 1.5rem;
-    align-items: flex-start;
+    align-items: flex-end; /* Align to bottom! */
     justify-content: space-between;
     width: 100%;
     margin-top: auto;
