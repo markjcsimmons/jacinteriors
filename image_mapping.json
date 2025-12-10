@@ -1,0 +1,52 @@
+{
+  "beverly-hills-alpine": {
+    "primary": "Annie_Meisel_Photography_-10_8707a092-ee7e-4e77-b31f-bbd66c9e88fa_2000x8484.jpg",
+    "hover": "Annie_Meisel_Photography_-5_230668c3-6239-4178-91bc-5be4913a88b9_2000x8484.jpg",
+    "secondary": "Annie_Meisel_Photography_-6_91a27987-26fd-4e20-8dce-ec5108bf120b_2000x8484.jpg"
+  },
+  "venice-beach-house": {
+    "primary": "vb-cover_2000x4513.jpg",
+    "hover": "Sherbourne03_800x_600x_fcc338ee-1163-4d03-9694-ccc97461a6f8_2000x562a.jpg",
+    "secondary": "Annie_Meisel_Photography_-18_600x_b404917e-ca13-4d5b-b4e1-96bfab96a771_2000x562a.jpg"
+  },
+  "toscana-country-club": {
+    "primary": "lead_2000xf56e.jpg",
+    "hover": "Annie_Meisel_Photography-6_2000x62dd.jpg",
+    "secondary": "Annie_Meisel_Photography-7_2000xc6df.jpg"
+  },
+  "madison-club": {
+    "primary": "mad-cover_2000x6620.jpg",
+    "hover": "3-hall-e1526661822632-1_2000xb842.jpg",
+    "secondary": "3_3b613ef5-24c9-4acf-b954-be01139fb3e7_2000xc943.jpg"
+  },
+  "yellowstone-club": {
+    "primary": "yellowstone-header_2000xf022.jpg",
+    "hover": "3_1_2000x6b6d.jpg",
+    "secondary": "12_2000xadfc.jpg"
+  },
+  "palm-desert-oasis": {
+    "primary": "rhonda-5_2000xff0e.jpg",
+    "hover": "rhonda_2000xff0e.jpg",
+    "secondary": "rhonda-2_2000xff0e.jpg"
+  },
+  "panorama-views": {
+    "primary": "panorama-views-2-min_2000x781a.jpg",
+    "hover": "panorama-views-min_2000x781a.jpg",
+    "secondary": "panorama-views-3-min_2000x781a.jpg"
+  },
+  "santa-monica-modern-spanish": {
+    "primary": "sm-header_2000x8012.jpg",
+    "hover": "Annie_Meisel_Photography_-6_2000xbe9f.jpg",
+    "secondary": "Annie_Meisel_Photography_-2_2000xbe9f.jpg"
+  },
+  "venice-boho-house": {
+    "primary": "Annie_Meisel_Photography-29_2000xfa98.jpg",
+    "hover": "Annie_Meisel_Photography_-6_11bd6e3b-6457-40ec-9ad7-1e7c08b3e78a_2000xfa98.jpg",
+    "secondary": "Annie_Meisel_Photography_-1_3f4fa9b8-c354-4054-870b-88a50b269fea_2000xfa98.jpg"
+  },
+  "eclectic-sunnyside": {
+    "primary": "1st_photo-min_2000xb9b1.jpg",
+    "hover": "2nd_Photo-min_2000xb9b1.jpg",
+    "secondary": "3rd_Photo-min_2000xb9b1.jpg"
+  }
+}
