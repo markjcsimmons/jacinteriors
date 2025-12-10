@@ -86,6 +86,36 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.service-card').forEach(card => {
         observer.observe(card);
     });
+    
+    // Enhanced animation observer for new effects
+    const enhancedObserverOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const enhancedObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Keep observing in case element leaves and re-enters
+            }
+        });
+    }, enhancedObserverOptions);
+    
+    // Observe scroll-fade-in elements
+    document.querySelectorAll('.scroll-fade-in').forEach(el => {
+        enhancedObserver.observe(el);
+    });
+    
+    // Observe slide-in elements
+    document.querySelectorAll('.slide-in-left, .slide-in-right').forEach(el => {
+        enhancedObserver.observe(el);
+    });
+    
+    // Observe scale-in images
+    document.querySelectorAll('.scale-in-image').forEach(el => {
+        enhancedObserver.observe(el);
+    });
 });
 
 // Form handling (for contact form)
