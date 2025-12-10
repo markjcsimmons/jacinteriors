@@ -23,11 +23,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
+    const isPortfolioPage = window.location.pathname.includes('portfolio.html');
+    
+    // On portfolio page, always keep navbar visible
+    if (isPortfolioPage) {
+        navbar.classList.add('scrolled');
+    }
+    
     window.addEventListener('scroll', function() {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
-            navbar.classList.remove('scrolled');
+            // Don't remove scrolled class on portfolio page
+            if (!isPortfolioPage) {
+                navbar.classList.remove('scrolled');
+            }
         }
     });
     
