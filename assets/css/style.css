@@ -395,8 +395,10 @@ img {
 
 .project-list-image {
     flex: 0 0 40% !important;
-    aspect-ratio: 4/3;
+    aspect-ratio: 1/1; /* Square images */
     overflow: hidden;
+    border-radius: 4px;
+    position: relative;
 }
 .project-list-image img {
     width: 100%;
@@ -410,14 +412,15 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 550px;
 }
 
 .project-date {
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 500;
-    color: #666;
-    letter-spacing: -0.48px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    font-family: 'IBM Plex Mono', monospace;
     display: block;
     margin-bottom: 0.5rem;
 }
@@ -425,19 +428,20 @@ img {
 .view-project-btn {
     display: inline-flex;
     align-items: center;
-    font-size: 12px;
+    justify-content: center;
+    font-size: 18px; /* From your inspector screenshot */
     font-weight: 500;
-    letter-spacing: -0.48px;
-    text-transform: uppercase;
-    padding: 6px 10px;
-    border: 1.5px solid #222a26;
+    letter-spacing: -0.8px;
+    padding: 10px 20px; /* From box model in screenshot */
+    border: 1px solid rgb(34, 42, 38);
     border-radius: 3px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     background: transparent;
-    color: #222a26;
+    color: rgb(34, 42, 38);
+    text-decoration: none;
 }
 .view-project-btn:hover {
-    background: #222a26;
+    background: rgb(34, 42, 38);
     color: white;
 }
 

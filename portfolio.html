@@ -4,177 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | JAC Interiors</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        /* Invero-exact Portfolio Styling */
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: white;
-        }
-
-        .project-list-item {
-            margin-bottom: 6rem;
-            border-bottom: 1px solid #e5e5e5;
-            padding-bottom: 6rem;
-        }
-
-        .project-list-item:last-child {
-            border-bottom: none;
-        }
-
-        .project-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .project-grid {
-            display: flex;
-            gap: 3rem;
-            align-items: flex-start;
-        }
-
-        /* Left: Square Image */
-        .project-image-wrapper {
-            flex: 0 0 40%;
-            position: relative;
-            overflow: hidden;
-            border-radius: 4px;
-            aspect-ratio: 1/1;
-        }
-
-        .project-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .hover-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-link:hover .hover-img {
-            opacity: 1;
-        }
-
-        /* Right: Content */
-        .project-content-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding-left: 20px;
-            min-height: 550px;
-        }
-
-        .project-top {
-            flex: 0;
-        }
-
-        .project-date {
-            display: block;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #999;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-title {
-            font-size: 2.5rem;
-            font-weight: 500;
-            margin: 0.5rem 0 1rem 0;
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }
-
-        .view-project-link {
-            display: inline-block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: rgb(34, 42, 38);
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        /* Bottom: Tags + Secondary Image */
-        .project-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 2rem;
-            width: 100%;
-            margin-top: auto;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            max-width: 400px;
-        }
-
-        .project-tag {
-            padding: 8px 12px;
-            background: #f5f5f5;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #666;
-            font-family: 'IBM Plex Mono', monospace;
-        }
-
-        .project-secondary-image {
-            flex: 0 0 280px;
-            width: 280px;
-            height: 200px;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .project-secondary-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .project-grid {
-                flex-direction: column;
-            }
-            
-            .project-image-wrapper {
-                flex: 0 0 100%;
-            }
-            
-            .project-content-wrapper {
-                padding-left: 0;
-                padding-top: 2rem;
-            }
-            
-            .project-bottom {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .project-secondary-image {
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -209,446 +42,369 @@
     <!-- Projects List -->
     <section style="padding: 6rem 0;">
         <div class="container" style="max-width: 1340px;">
+            
             <!-- Beverly Hills Alpine -->
             <div class="project-list-item">
-                <a href="projects/beverly-hills-alpine.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-primary.jpg" alt="Beverly Hills Alpine" class="primary-img">
-                            <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-hover.jpg" alt="Beverly Hills Alpine Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-primary.jpg" alt="Beverly Hills Alpine" class="primary-img">
+                        <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-hover.jpg" alt="Beverly Hills Alpine" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Beverly Hills Alpine</h3>
+                            <a href="projects/beverly-hills-alpine.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Beverly Hills Alpine</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Modern Spanish</span>
+                                <span class="tag-gray">Beverly Hills</span>
+                                <span class="tag-gray">Luxury Living</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Modern Spanish</span>
-                            <span class="project-tag">Beverly Hills</span>
-                            <span class="project-tag">Luxury Living</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-secondary.jpg" alt="Beverly Hills Alpine Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-secondary.jpg" alt="Beverly Hills Alpine Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Venice Beach House -->
             <div class="project-list-item">
-                <a href="projects/venice-beach-house.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/venice-beach-house/venice-beach-house-primary.jpg" alt="Venice Beach House" class="primary-img">
-                            <img src="assets/images/projects/venice-beach-house/venice-beach-house-hover.jpg" alt="Venice Beach House Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-primary.jpg" alt="Venice Beach House" class="primary-img">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-hover.jpg" alt="Venice Beach House" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Venice Beach House</h3>
+                            <a href="projects/venice-beach-house.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Venice Beach House</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Coastal</span>
+                                <span class="tag-gray">Venice</span>
+                                <span class="tag-gray">Contemporary</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Coastal</span>
-                            <span class="project-tag">Venice</span>
-                            <span class="project-tag">Contemporary</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/venice-beach-house/venice-beach-house-secondary.jpg" alt="Venice Beach House Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/venice-beach-house/venice-beach-house-secondary.jpg" alt="Venice Beach House Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Toscana Country Club -->
             <div class="project-list-item">
-                <a href="projects/toscana-country-club.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/toscana-country-club/toscana-country-club-primary.jpg" alt="Toscana Country Club" class="primary-img">
-                            <img src="assets/images/projects/toscana-country-club/toscana-country-club-hover.jpg" alt="Toscana Country Club Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/toscana-country-club/toscana-country-club-primary.jpg" alt="Toscana Country Club" class="primary-img">
+                        <img src="assets/images/projects/toscana-country-club/toscana-country-club-hover.jpg" alt="Toscana Country Club" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Toscana Country Club</h3>
+                            <a href="projects/toscana-country-club.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Toscana Country Club</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Mediterranean</span>
+                                <span class="tag-gray">Indian Wells</span>
+                                <span class="tag-gray">Luxury Living</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Mediterranean</span>
-                            <span class="project-tag">Indian Wells</span>
-                            <span class="project-tag">Luxury Living</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/toscana-country-club/toscana-country-club-secondary.jpg" alt="Toscana Country Club Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/toscana-country-club/toscana-country-club-secondary.jpg" alt="Toscana Country Club Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Madison Club -->
             <div class="project-list-item">
-                <a href="projects/madison-club.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/madison-club/madison-club-primary.jpg" alt="Madison Club" class="primary-img">
-                            <img src="assets/images/projects/madison-club/madison-club-hover.jpg" alt="Madison Club Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/madison-club/madison-club-primary.jpg" alt="Madison Club" class="primary-img">
+                        <img src="assets/images/projects/madison-club/madison-club-hover.jpg" alt="Madison Club" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Madison Club</h3>
+                            <a href="projects/madison-club.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Madison Club</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Desert Luxury</span>
+                                <span class="tag-gray">La Quinta</span>
+                                <span class="tag-gray">Custom Design</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Desert Luxury</span>
-                            <span class="project-tag">La Quinta</span>
-                            <span class="project-tag">Custom Design</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/madison-club/madison-club-secondary.jpg" alt="Madison Club Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/madison-club/madison-club-secondary.jpg" alt="Madison Club Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Yellowstone Club -->
             <div class="project-list-item">
-                <a href="projects/yellowstone-club.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/yellowstone-club/yellowstone-club-primary.jpg" alt="Yellowstone Club" class="primary-img">
-                            <img src="assets/images/projects/yellowstone-club/yellowstone-club-hover.jpg" alt="Yellowstone Club Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/yellowstone-club/yellowstone-club-primary.jpg" alt="Yellowstone Club" class="primary-img">
+                        <img src="assets/images/projects/yellowstone-club/yellowstone-club-hover.jpg" alt="Yellowstone Club" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Yellowstone Club</h3>
+                            <a href="projects/yellowstone-club.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Yellowstone Club</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Mountain Retreat</span>
+                                <span class="tag-gray">Montana</span>
+                                <span class="tag-gray">Luxury Living</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Mountain Retreat</span>
-                            <span class="project-tag">Montana</span>
-                            <span class="project-tag">Luxury Living</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/yellowstone-club/yellowstone-club-secondary.jpg" alt="Yellowstone Club Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/yellowstone-club/yellowstone-club-secondary.jpg" alt="Yellowstone Club Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Malibu Beach House -->
             <div class="project-list-item">
-                <a href="projects/malibu-beach-house.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/malibu-beach-house/malibu-beach-house-primary.jpg" alt="Malibu Beach House" class="primary-img">
-                            <img src="assets/images/projects/malibu-beach-house/malibu-beach-house-hover.jpg" alt="Malibu Beach House Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/malibu-beach-house/malibu-beach-house-primary.jpg" alt="Malibu Beach House" class="primary-img">
+                        <img src="assets/images/projects/malibu-beach-house/malibu-beach-house-hover.jpg" alt="Malibu Beach House" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Malibu Beach House</h3>
+                            <a href="projects/malibu-beach-house.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Malibu Beach House</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Coastal</span>
+                                <span class="tag-gray">Malibu</span>
+                                <span class="tag-gray">Beach House</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Coastal</span>
-                            <span class="project-tag">Malibu</span>
-                            <span class="project-tag">Beach House</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/malibu-beach-house/malibu-beach-house-secondary.jpg" alt="Malibu Beach House Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/malibu-beach-house/malibu-beach-house-secondary.jpg" alt="Malibu Beach House Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Mulholland Estate -->
             <div class="project-list-item">
-                <a href="projects/mulholland-estate.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/mulholland-estate/mulholland-estate-primary.jpg" alt="Mulholland Estate" class="primary-img">
-                            <img src="assets/images/projects/mulholland-estate/mulholland-estate-hover.jpg" alt="Mulholland Estate Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-primary.jpg" alt="Mulholland Estate" class="primary-img">
+                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-hover.jpg" alt="Mulholland Estate" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Mulholland Estate</h3>
+                            <a href="projects/mulholland-estate.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Mulholland Estate</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Modern Luxury</span>
+                                <span class="tag-gray">Hollywood Hills</span>
+                                <span class="tag-gray">Estate</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Modern Luxury</span>
-                            <span class="project-tag">Hollywood Hills</span>
-                            <span class="project-tag">Estate</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/mulholland-estate/mulholland-estate-secondary.jpg" alt="Mulholland Estate Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/mulholland-estate/mulholland-estate-secondary.jpg" alt="Mulholland Estate Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Calabasas Residence -->
             <div class="project-list-item">
-                <a href="projects/calabasas-residence.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/calabasas-residence/calabasas-residence-primary.jpg" alt="Calabasas Residence" class="primary-img">
-                            <img src="assets/images/projects/calabasas-residence/calabasas-residence-hover.jpg" alt="Calabasas Residence Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-primary.jpg" alt="Calabasas Residence" class="primary-img">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-hover.jpg" alt="Calabasas Residence" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Calabasas Residence</h3>
+                            <a href="projects/calabasas-residence.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Calabasas Residence</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Contemporary</span>
+                                <span class="tag-gray">Calabasas</span>
+                                <span class="tag-gray">Family Home</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Contemporary</span>
-                            <span class="project-tag">Calabasas</span>
-                            <span class="project-tag">Family Home</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/calabasas-residence/calabasas-residence-secondary.jpg" alt="Calabasas Residence Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/calabasas-residence/calabasas-residence-secondary.jpg" alt="Calabasas Residence Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Eclectic Sunnyside -->
             <div class="project-list-item">
-                <a href="projects/eclectic-sunnyside.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-primary.jpg" alt="Eclectic Sunnyside" class="primary-img">
-                            <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-hover.jpg" alt="Eclectic Sunnyside Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-primary.jpg" alt="Eclectic Sunnyside" class="primary-img">
+                        <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-hover.jpg" alt="Eclectic Sunnyside" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Eclectic Sunnyside</h3>
+                            <a href="projects/eclectic-sunnyside.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Eclectic Sunnyside</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Eclectic</span>
+                                <span class="tag-gray">Los Angeles</span>
+                                <span class="tag-gray">Modern</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Eclectic</span>
-                            <span class="project-tag">Los Angeles</span>
-                            <span class="project-tag">Modern</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-secondary.jpg" alt="Eclectic Sunnyside Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-secondary.jpg" alt="Eclectic Sunnyside Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Palm Desert Oasis -->
             <div class="project-list-item">
-                <a href="projects/palm-desert-oasis.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-primary.jpg" alt="Palm Desert Oasis" class="primary-img">
-                            <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-hover.jpg" alt="Palm Desert Oasis Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-primary.jpg" alt="Palm Desert Oasis" class="primary-img">
+                        <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-hover.jpg" alt="Palm Desert Oasis" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Palm Desert Oasis</h3>
+                            <a href="projects/palm-desert-oasis.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Palm Desert Oasis</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Desert Modern</span>
+                                <span class="tag-gray">Palm Desert</span>
+                                <span class="tag-gray">Golf Course</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Desert Modern</span>
-                            <span class="project-tag">Palm Desert</span>
-                            <span class="project-tag">Golf Course</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-secondary.jpg" alt="Palm Desert Oasis Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-secondary.jpg" alt="Palm Desert Oasis Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Panorama Views -->
             <div class="project-list-item">
-                <a href="projects/panorama-views.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/panorama-views/panorama-views-primary.jpg" alt="Panorama Views" class="primary-img">
-                            <img src="assets/images/projects/panorama-views/panorama-views-hover.jpg" alt="Panorama Views Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/panorama-views/panorama-views-primary.jpg" alt="Panorama Views" class="primary-img">
+                        <img src="assets/images/projects/panorama-views/panorama-views-hover.jpg" alt="Panorama Views" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Panorama Views</h3>
+                            <a href="projects/panorama-views.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Panorama Views</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Mountain Modern</span>
+                                <span class="tag-gray">Colorado</span>
+                                <span class="tag-gray">Retreat</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Mountain Modern</span>
-                            <span class="project-tag">Colorado</span>
-                            <span class="project-tag">Retreat</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/panorama-views/panorama-views-secondary.jpg" alt="Panorama Views Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/panorama-views/panorama-views-secondary.jpg" alt="Panorama Views Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Santa Monica Modern Spanish -->
             <div class="project-list-item">
-                <a href="projects/santa-monica-modern-spanish.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-primary.jpg" alt="Santa Monica Modern Spanish" class="primary-img">
-                            <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-hover.jpg" alt="Santa Monica Modern Spanish Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-primary.jpg" alt="Santa Monica Modern Spanish" class="primary-img">
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-hover.jpg" alt="Santa Monica Modern Spanish" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Santa Monica Modern Spanish</h3>
+                            <a href="projects/santa-monica-modern-spanish.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Santa Monica Modern Spanish</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Spanish Revival</span>
+                                <span class="tag-gray">Santa Monica</span>
+                                <span class="tag-gray">Mediterranean</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Spanish Revival</span>
-                            <span class="project-tag">Santa Monica</span>
-                            <span class="project-tag">Mediterranean</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-secondary.jpg" alt="Santa Monica Modern Spanish Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-secondary.jpg" alt="Santa Monica Modern Spanish Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- Venice Boho House -->
             <div class="project-list-item">
-                <a href="projects/venice-boho-house.html" class="project-link">
-                    <div class="project-grid">
-                        <!-- Left: Image -->
-                        <div class="project-image-wrapper">
-                            <img src="assets/images/projects/venice-boho-house/venice-boho-house-primary.jpg" alt="Venice Boho House" class="primary-img">
-                            <img src="assets/images/projects/venice-boho-house/venice-boho-house-hover.jpg" alt="Venice Boho House Detail" class="hover-img">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/venice-boho-house/venice-boho-house-primary.jpg" alt="Venice Boho House" class="primary-img">
+                        <img src="assets/images/projects/venice-boho-house/venice-boho-house-hover.jpg" alt="Venice Boho House" class="hover-img" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
+                    </div>
+                    <div class="project-list-content">
+                        <div>
+                            <span class="project-date">May 6, 2025</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Venice Boho House</h3>
+                            <a href="projects/venice-boho-house.html" class="view-project-btn">VIEW PROJECT</a>
                         </div>
-                        
-                        <!-- Right: Content -->
-                        <div class="project-content-wrapper">
-                            <div class="project-top">
-                                <span class="project-date">May 6, 2025</span>
-                                <h3 class="project-title">Venice Boho House</h3>
-                                <span class="view-project-link">View project</span>
+                        <div class="project-bottom-row">
+                            <div class="project-tags-vertical">
+                                <span class="tag-gray">Bohemian</span>
+                                <span class="tag-gray">Venice</span>
+                                <span class="tag-gray">Ocean Views</span>
+                                <span class="tag-gray">Residential</span>
                             </div>
-                            
-                            <div class="project-bottom">
-                                <div class="project-tags">
-                                    <span class="project-tag">Bohemian</span>
-                            <span class="project-tag">Venice</span>
-                            <span class="project-tag">Ocean Views</span>
-                            <span class="project-tag">Residential</span>
-                                </div>
-                                <div class="project-secondary-image">
-                                    <img src="assets/images/projects/venice-boho-house/venice-boho-house-secondary.jpg" alt="Venice Boho House Detail">
-                                </div>
+                            <div class="project-secondary-image">
+                                <img src="assets/images/projects/venice-boho-house/venice-boho-house-secondary.jpg" alt="Venice Boho House Detail">
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
         </div>
@@ -686,5 +442,18 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        // Hover effect for images
+        document.querySelectorAll('.project-list-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const hoverImg = item.querySelector('.hover-img');
+                if (hoverImg) hoverImg.style.opacity = '1';
+            });
+            item.addEventListener('mouseleave', () => {
+                const hoverImg = item.querySelector('.hover-img');
+                if (hoverImg) hoverImg.style.opacity = '0';
+            });
+        });
+    </script>
 </body>
 </html>
