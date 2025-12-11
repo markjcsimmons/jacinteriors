@@ -327,3 +327,4 @@ print("   - Secondary image in bottom-right")
 print("   - Proper button placement")
 print("   - Correct spacing and borders")
 
+

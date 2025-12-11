@@ -169,3 +169,4 @@ with open('portfolio.html', 'w', encoding='utf-8') as f:
 print("✅ Complete portfolio.html generated with all 13 projects!")
 print("Each VIEW PROJECT button correctly links to its project page.")
 
+
