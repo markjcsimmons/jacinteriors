@@ -3,62 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JAC Interiors serves Los Angeles and Florida with professional interior design services. View all cities we serve.">
     <title>Cities We Serve | JAC Interiors</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css?v=6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        .city-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: var(--spacing-md);
-        }
-        .city-link {
-            padding: 1.5rem;
-            background: white;
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius);
-            transition: var(--transition);
+        .city-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #f5f5f5;
+            border-radius: 4px;
             text-decoration: none;
-            color: var(--color-text);
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0.25rem;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
         }
-        .city-link:hover {
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transform: translateY(-3px);
-            border-color: var(--color-primary);
+        .city-tag:hover {
+            background: #222;
+            color: white;
+            border-color: #222;
         }
-        .city-link h3 {
-            color: var(--color-secondary);
-            margin-bottom: 0.5rem;
-            font-size: 1.25rem;
-        }
-        .city-link p {
-            font-size: 0.875rem;
-            margin: 0;
-        }
-        .region-section {
-            margin-bottom: var(--spacing-lg);
+        .city-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="index.html" class="logo">
+                <a href="index-variant-2.html" class="logo">
                     <img src="assets/images/jac-logo.png" alt="JAC Interiors" class="logo-img">
                 </a>
                 <div class="nav-menu" id="navMenu">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="portfolio.html" class="nav-link">Portfolio</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="services.html" class="nav-link">Services</a>
-                    <a href="cities-we-serve.html" class="nav-link active">Cities</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                    <div class="nav-contact">
-                        <a href="tel:213-397-0206" class="phone-link">213-397-0206</a>
-                    </div>
+                    <a href="index-variant-2.html" class="nav-link">HOME</a>
+                    <a href="portfolio.html" class="nav-link">PORTFOLIO</a>
+                    <a href="cities-we-serve.html" class="nav-link active">CITIES</a>
+                    <a href="services.html" class="nav-link">SERVICES</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="contact.html" class="nav-link">CONTACT</a>
                 </div>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">
                     <span></span><span></span><span></span>
@@ -67,191 +57,286 @@
         </div>
     </nav>
 
-    <section class="section" style="padding-top: 100px; padding-bottom: 2rem;">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Service Areas</span>
-                <h1>Cities We Serve</h1>
-                <p>JAC Interiors provides expert interior design services throughout Los Angeles and Florida. Click any city below to learn more about our services in your area.</p>
-            </div>
+    <!-- Header -->
+    <section style="padding: 3rem 0; background: #1a1a1a; color: white; margin-top: 5rem;">
+        <div class="container" style="max-width: 1340px;">
+            <h1 style="font-size: 3.5rem; font-weight: 500; margin: 0 0 1rem 0; letter-spacing: -1.5px; line-height: 1.1; color: white;">Cities We Serve</h1>
+            <p style="font-size: 16px; color: #ccc; line-height: 1.6; font-weight: 400; max-width: 700px;">JAC Interiors provides expert interior design services throughout Los Angeles and South Florida. Explore our service areas by region.</p>
         </div>
     </section>
 
-    <!-- ReBuild LA Program -->
-    <section class="section" style="padding-top: 2rem; padding-bottom: 2rem;">
-        <div class="container">
-            <div class="service-card" style="background: linear-gradient(135deg, #d35400 0%, #e67e22 100%); color: white; border: none; padding: 2rem; text-align: center;">
-                <h2 style="color: white; margin-bottom: 0.75rem; font-size: 1.75rem;">Rebuild LA Wildfire Recovery Program</h2>
-                <p style="color: white; font-size: 1.125rem; margin-bottom: 1.25rem;">Transparent per-sq-ft pricing for LA wildfire rebuilds. We help homeowners, builders, and architects rebuild faster, within budget, and more beautifully.</p>
-                <a href="rebuild-la.html" class="btn btn-primary" style="background-color: white; color: #d35400; border-color: white; padding: 0.65rem 1.75rem;">Learn About Rebuild LA →</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" style="padding-top: 0;">
-        <div class="container">
-            <!-- Los Angeles Westside -->
-            <div class="region-section">
-                <h2>Los Angeles Westside & Beverly Hills</h2>
-                <div class="city-links">
-                    <a href="cities/bel-air.html" class="city-link"><h3>Bel Air</h3></a>
-                    <a href="cities/beverly-hills.html" class="city-link"><h3>Beverly Hills</h3></a>
-                    <a href="cities/brentwood.html" class="city-link"><h3>Brentwood</h3></a>
-                    <a href="cities/culver-city.html" class="city-link"><h3>Culver City</h3></a>
-                    <a href="cities/westwood.html" class="city-link"><h3>Westwood</h3></a>
-                    <a href="cities/west-hollywood.html" class="city-link"><h3>West Hollywood</h3></a>
-                    <a href="cities/pacific-palisades.html" class="city-link"><h3>Pacific Palisades</h3></a>
-                    <a href="cities/playa-del-rey.html" class="city-link"><h3>Playa del Rey</h3></a>
-                    <a href="cities/playa-vista.html" class="city-link"><h3>Playa Vista</h3></a>
-                    <a href="cities/el-segundo.html" class="city-link"><h3>El Segundo</h3></a>
+    <!-- Regions List -->
+    <section style="padding: 6rem 0;">
+        <div class="container" style="max-width: 1340px;">
+            
+            <!-- Beverly Hills & Westside -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-1.jpg" alt="Beverly Hills & Westside" class="region-img active">
+                        <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-2.jpg" alt="Beverly Hills & Westside" class="region-img">
+                        <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-3.jpg" alt="Beverly Hills & Westside" class="region-img">
+                        <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-4.jpg" alt="Beverly Hills & Westside" class="region-img">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Los Angeles</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Beverly Hills & Westside</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/bel-air.html" class="city-tag">Bel Air</a>
+                            <a href="cities/beverly-hills.html" class="city-tag">Beverly Hills</a>
+                            <a href="cities/brentwood.html" class="city-tag">Brentwood</a>
+                            <a href="cities/culver-city.html" class="city-tag">Culver City</a>
+                            <a href="cities/west-hollywood.html" class="city-tag">West Hollywood</a>
+                            <a href="cities/pacific-palisades.html" class="city-tag">Pacific Palisades</a>
+                            <a href="cities/playa-del-rey.html" class="city-tag">Playa del Rey</a>
+                            <a href="cities/playa-vista.html" class="city-tag">Playa Vista</a>
+                            <a href="cities/el-segundo.html" class="city-tag">El Segundo</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Beach Cities -->
-            <div class="region-section">
-                <h2>Beach Cities</h2>
-                <div class="city-links">
-                    <a href="cities/santa-monica.html" class="city-link"><h3>Santa Monica</h3></a>
-                    <a href="cities/venice.html" class="city-link"><h3>Venice</h3></a>
-                    <a href="cities/marina-del-rey.html" class="city-link"><h3>Marina del Rey</h3></a>
-                    <a href="cities/manhattan-beach.html" class="city-link"><h3>Manhattan Beach</h3></a>
-                    <a href="cities/hermosa-beach.html" class="city-link"><h3>Hermosa Beach</h3></a>
-                    <a href="cities/redondo-beach.html" class="city-link"><h3>Redondo Beach</h3></a>
-                    <a href="cities/palos-verdes.html" class="city-link"><h3>Palos Verdes</h3></a>
-                </div>
-            </div>
-
-            <!-- Valley -->
-            <div class="region-section">
-                <h2>San Fernando Valley</h2>
-                <div class="city-links">
-                    <a href="cities/calabasas.html" class="city-link"><h3>Calabasas</h3></a>
-                    <a href="cities/woodland-hills.html" class="city-link"><h3>Woodland Hills</h3></a>
-                    <a href="cities/encino.html" class="city-link"><h3>Encino</h3></a>
-                    <a href="cities/sherman-oaks.html" class="city-link"><h3>Sherman Oaks</h3></a>
-                    <a href="cities/studio-city.html" class="city-link"><h3>Studio City</h3></a>
-                    <a href="cities/burbank.html" class="city-link"><h3>Burbank</h3></a>
-                    <a href="cities/north-hollywood.html" class="city-link"><h3>North Hollywood</h3></a>
-                    <a href="cities/valley-village.html" class="city-link"><h3>Valley Village</h3></a>
-                    <a href="cities/van-nuys.html" class="city-link"><h3>Van Nuys</h3></a>
-                    <a href="cities/tarzana.html" class="city-link"><h3>Tarzana</h3></a>
-                    <a href="cities/topanga.html" class="city-link"><h3>Topanga</h3></a>
-                    <a href="cities/universal-city.html" class="city-link"><h3>Universal City</h3></a>
-                </div>
-            </div>
-
-            <!-- Central LA -->
-            <div class="region-section">
-                <h2>Central Los Angeles</h2>
-                <div class="city-links">
-                    <a href="cities/los-feliz.html" class="city-link"><h3>Los Feliz</h3></a>
-                    <a href="cities/silverlake.html" class="city-link"><h3>Silver Lake</h3></a>
-                    <a href="cities/hollywood.html" class="city-link"><h3>Hollywood</h3></a>
-                    <a href="cities/hollywood-hills.html" class="city-link"><h3>Hollywood Hills</h3></a>
-                    <a href="cities/downtown-la.html" class="city-link"><h3>Downtown LA</h3></a>
-                </div>
-            </div>
-
-            <!-- Pasadena Area -->
-            <div class="region-section">
-                <h2>Pasadena & San Gabriel Valley</h2>
-                <div class="city-links">
-                    <a href="cities/pasadena.html" class="city-link"><h3>Pasadena</h3></a>
-                    <a href="cities/san-marino.html" class="city-link"><h3>San Marino</h3></a>
-                    <a href="cities/torrance.html" class="city-link"><h3>Torrance</h3></a>
-                </div>
-            </div>
-
-            <!-- Florida Miami -->
-            <div class="region-section" id="florida">
-                <h2>Miami & South Florida</h2>
-                <div class="city-links">
-                    <a href="cities/miami.html" class="city-link"><h3>Miami</h3></a>
-                    <a href="cities/miami-beach.html" class="city-link"><h3>Miami Beach</h3></a>
-                    <a href="cities/coral-gables.html" class="city-link"><h3>Coral Gables</h3></a>
-                    <a href="cities/coconut-grove.html" class="city-link"><h3>Coconut Grove</h3></a>
-                    <a href="cities/brickell.html" class="city-link"><h3>Brickell</h3></a>
-                    <a href="cities/wynwood.html" class="city-link"><h3>Wynwood</h3></a>
-                    <a href="cities/edgewater.html" class="city-link"><h3>Edgewater</h3></a>
-                    <a href="cities/key-biscayne.html" class="city-link"><h3>Key Biscayne</h3></a>
-                    <a href="cities/hialeah.html" class="city-link"><h3>Hialeah</h3></a>
-                    <a href="cities/doral.html" class="city-link"><h3>Doral</h3></a>
-                </div>
-            </div>
-
-            <!-- Florida Fort Lauderdale -->
-            <div class="region-section">
-                <h2>Fort Lauderdale & Broward County</h2>
-                <div class="city-links">
-                    <a href="cities/aventura.html" class="city-link"><h3>Aventura</h3></a>
-                    <a href="cities/bal-harbour.html" class="city-link"><h3>Bal Harbour</h3></a>
-                    <a href="cities/fort-lauderdale.html" class="city-link"><h3>Fort Lauderdale</h3></a>
-                    <a href="cities/boca-raton.html" class="city-link"><h3>Boca Raton</h3></a>
-                    <a href="cities/pompano-beach.html" class="city-link"><h3>Pompano Beach</h3></a>
-                    <a href="cities/deerfield-beach.html" class="city-link"><h3>Deerfield Beach</h3></a>
-                    <a href="cities/plantation.html" class="city-link"><h3>Plantation</h3></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <span class="section-label">Let's Work Together</span>
-                <h2>Ready to Transform Your Space?</h2>
-                <p>Contact JAC Interiors today to discuss your interior design project.</p>
-                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>JAC Interiors</h4>
-                    <p>We are a full-service design studio with the vision and organizational skills to make beautiful transformations happen.</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/JacInteriors" target="_blank" rel="noopener">Facebook</a>
-                        <a href="https://www.instagram.com/jacinteriorsdesign/" target="_blank" rel="noopener">Instagram</a>
-                        <a href="https://www.houzz.com/pro/jacinteriors/jac-interiors" target="_blank" rel="noopener">Houzz</a>
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-1.jpg" alt="Beach Cities" class="region-img active">
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-1.jpg" alt="Beach Cities" class="region-img">
+                        <img src="assets/images/projects/venice-boho-house/venice-boho-house-1.jpg" alt="Beach Cities" class="region-img">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-2.jpg" alt="Beach Cities" class="region-img">
                     </div>
-                </div>
-                <div class="footer-col">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="services.html">Residential Design</a></li>
-                        <li><a href="services.html">Commercial Design</a></li>
-                        <li><a href="services.html">Interior Styling</a></li>
-                        <li><a href="cities-we-serve.html">Cities We Serve</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <div class="contact-info">
-                        <p>10401 Venice Blvd Suite 257<br>
-                        Los Angeles, CA 90034<br>
-                        <a href="tel:213-397-0206">213-397-0206</a><br>
-                        <a href="mailto:info@jacinteriors.com">info@jacinteriors.com</a></p>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Los Angeles</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Beach Cities</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/santa-monica.html" class="city-tag">Santa Monica</a>
+                            <a href="cities/venice.html" class="city-tag">Venice</a>
+                            <a href="cities/marina-del-rey.html" class="city-tag">Marina del Rey</a>
+                            <a href="cities/manhattan-beach.html" class="city-tag">Manhattan Beach</a>
+                            <a href="cities/hermosa-beach.html" class="city-tag">Hermosa Beach</a>
+                            <a href="cities/redondo-beach.html" class="city-tag">Redondo Beach</a>
+                            <a href="cities/palos-verdes.html" class="city-tag">Palos Verdes</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 JAC Interiors, LLC. All Rights Reserved.</p>
+
+            <!-- San Fernando Valley -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-1.jpg" alt="San Fernando Valley" class="region-img active">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-2.jpg" alt="San Fernando Valley" class="region-img">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-3.jpg" alt="San Fernando Valley" class="region-img">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-4.jpg" alt="San Fernando Valley" class="region-img">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Los Angeles</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">San Fernando Valley</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/calabasas.html" class="city-tag">Calabasas</a>
+                            <a href="cities/encino.html" class="city-tag">Encino</a>
+                            <a href="cities/sherman-oaks.html" class="city-tag">Sherman Oaks</a>
+                            <a href="cities/studio-city.html" class="city-tag">Studio City</a>
+                            <a href="cities/burbank.html" class="city-tag">Burbank</a>
+                            <a href="cities/north-hollywood.html" class="city-tag">North Hollywood</a>
+                            <a href="cities/valley-village.html" class="city-tag">Valley Village</a>
+                            <a href="cities/van-nuys.html" class="city-tag">Van Nuys</a>
+                            <a href="cities/tarzana.html" class="city-tag">Tarzana</a>
+                            <a href="cities/topanga.html" class="city-tag">Topanga</a>
+                            <a href="cities/universal-city.html" class="city-tag">Universal City</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Central Los Angeles -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-1.jpg" alt="Central Los Angeles" class="region-img active">
+                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-2.jpg" alt="Central Los Angeles" class="region-img">
+                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-3.jpg" alt="Central Los Angeles" class="region-img">
+                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-4.jpg" alt="Central Los Angeles" class="region-img">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Los Angeles</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Central Los Angeles</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/hollywood.html" class="city-tag">Hollywood</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pasadena & San Gabriel Valley -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-1.jpg" alt="Pasadena Area" class="region-img active">
+                        <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-2.jpg" alt="Pasadena Area" class="region-img">
+                        <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-3.jpg" alt="Pasadena Area" class="region-img">
+                        <img src="assets/images/projects/eclectic-sunnyside/eclectic-sunnyside-4.jpg" alt="Pasadena Area" class="region-img">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Los Angeles</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Pasadena & San Gabriel Valley</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/pasadena.html" class="city-tag">Pasadena</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Miami & South Florida -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/beverly-hills-ii/beverly-hills-ii-1.jpg" alt="Miami & South Florida" class="region-img active">
+                        <img src="assets/images/projects/beverly-hills-ii/beverly-hills-ii-2.jpg" alt="Miami & South Florida" class="region-img">
+                        <img src="assets/images/projects/beverly-hills-ii/beverly-hills-ii-3.jpg" alt="Miami & South Florida" class="region-img">
+                        <img src="assets/images/projects/beverly-hills-ii/beverly-hills-ii-4.jpg" alt="Miami & South Florida" class="region-img">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Florida</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Miami & South Florida</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/coral-gables.html" class="city-tag">Coral Gables</a>
+                            <a href="cities/coconut-grove.html" class="city-tag">Coconut Grove</a>
+                            <a href="cities/brickell.html" class="city-tag">Brickell</a>
+                            <a href="cities/wynwood.html" class="city-tag">Wynwood</a>
+                            <a href="cities/key-biscayne.html" class="city-tag">Key Biscayne</a>
+                            <a href="cities/hialeah.html" class="city-tag">Hialeah</a>
+                            <a href="cities/doral.html" class="city-tag">Doral</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fort Lauderdale & Broward County -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-1.jpg" alt="Fort Lauderdale Area" class="region-img active">
+                        <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-2.jpg" alt="Fort Lauderdale Area" class="region-img">
+                        <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-3.jpg" alt="Fort Lauderdale Area" class="region-img">
+                        <img src="assets/images/projects/palm-desert-oasis/palm-desert-oasis-4.jpg" alt="Fort Lauderdale Area" class="region-img">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Florida</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Fort Lauderdale & Broward County</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/aventura.html" class="city-tag">Aventura</a>
+                            <a href="cities/bal-harbour.html" class="city-tag">Bal Harbour</a>
+                            <a href="cities/fort-lauderdale.html" class="city-tag">Fort Lauderdale</a>
+                            <a href="cities/boca-raton.html" class="city-tag">Boca Raton</a>
+                            <a href="cities/pompano-beach.html" class="city-tag">Pompano Beach</a>
+                            <a href="cities/deerfield-beach.html" class="city-tag">Deerfield Beach</a>
+                            <a href="cities/plantation.html" class="city-tag">Plantation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #1a1a1a; color: white; padding: 3rem 0 1.5rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 5rem; margin-bottom: 3rem;">
+                <div>
+                    <img src="assets/images/jac-logo.png" alt="JAC Interiors" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
+                    <p style="color: #999; line-height: 1.6;">Creating luxury spaces that elevate everyday living.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; font-weight: 500;">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem;"><a href="portfolio.html" style="color: #999; text-decoration: none;">Portfolio</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="about.html" style="color: #999; text-decoration: none;">About</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="contact.html" style="color: #999; text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; font-weight: 500;">Contact</h4>
+                    <p style="color: #999; line-height: 1.6;">
+                        Los Angeles, CA<br>
+                        Phone: (213) 397-0206<br>
+                        Email: info@jacinteriors.com
+                    </p>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #666;">
+                <p>&copy; 2024 JAC Interiors. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        // Image carousel for regions - cycles through 4 images automatically on hover
+        document.querySelectorAll('.project-list-item').forEach(item => {
+            const images = item.querySelectorAll('.region-img');
+            let currentIndex = 0;
+            let intervalId = null;
+
+            function showNextImage() {
+                images[currentIndex].classList.remove('active');
+                images[currentIndex].style.opacity = '0';
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+                images[currentIndex].style.opacity = '1';
+            }
+
+            item.addEventListener('mouseenter', () => {
+                intervalId = setInterval(showNextImage, 800); // Change image every 800ms
+            });
+
+            item.addEventListener('mouseleave', () => {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+                // Reset to first image
+                images.forEach((img, idx) => {
+                    img.classList.remove('active');
+                    img.style.opacity = '0';
+                });
+                images[0].classList.add('active');
+                images[0].style.opacity = '1';
+                currentIndex = 0;
+            });
+
+            // Set up initial state
+            images.forEach((img, idx) => {
+                img.style.position = 'absolute';
+                img.style.top = '0';
+                img.style.left = '0';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                img.style.transition = 'opacity 0.5s ease';
+                if (idx === 0) {
+                    img.style.opacity = '1';
+                } else {
+                    img.style.opacity = '0';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
