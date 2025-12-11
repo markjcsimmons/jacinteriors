@@ -32,6 +32,15 @@
             gap: 0.5rem;
             margin-top: 1rem;
         }
+        .placeholder-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
@@ -73,14 +82,17 @@
             <div class="project-list-item">
                 <div style="display: flex; width: 100%;">
                     <div class="project-list-image">
-                        <img src="assets/images/cities/bel-air-1.jpg" alt="Bel Air" class="region-img active">
-                        <img src="assets/images/cities/beverly-hills-1.jpg" alt="Beverly Hills" class="region-img">
-                        <img src="assets/images/cities/brentwood-1.jpg" alt="Brentwood" class="region-img">
-                        <img src="assets/images/cities/west-hollywood-extra-1.jpg" alt="West Hollywood" class="region-img">
-                        <img src="assets/images/cities/pacific-palisades-1.jpg" alt="Pacific Palisades" class="region-img">
-                        <img src="assets/images/cities/playa-del-rey-1.jpg" alt="Playa del Rey" class="region-img">
-                        <img src="assets/images/cities/playa-vista-1.jpg" alt="Playa Vista" class="region-img">
-                        <img src="assets/images/cities/el-segundo-1.jpg" alt="El Segundo" class="region-img">
+                        <!-- Beverly Hills - has projects -->
+                        <img src="assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-1.jpg" alt="Beverly Hills" class="region-img active">
+                        <!-- Other cities - placeholders -->
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Bel Air</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Brentwood</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Culver City</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">West Hollywood</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Pacific Palisades</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Playa del Rey</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Playa Vista</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">El Segundo</div>
                     </div>
                     <div class="project-list-content">
                         <div style="margin-bottom: 2rem;">
@@ -91,6 +103,7 @@
                             <a href="cities/bel-air.html" class="city-tag">Bel Air</a>
                             <a href="cities/beverly-hills.html" class="city-tag">Beverly Hills</a>
                             <a href="cities/brentwood.html" class="city-tag">Brentwood</a>
+                            <a href="cities/culver-city.html" class="city-tag">Culver City</a>
                             <a href="cities/west-hollywood.html" class="city-tag">West Hollywood</a>
                             <a href="cities/pacific-palisades.html" class="city-tag">Pacific Palisades</a>
                             <a href="cities/playa-del-rey.html" class="city-tag">Playa del Rey</a>
@@ -105,12 +118,16 @@
             <div class="project-list-item">
                 <div style="display: flex; width: 100%;">
                     <div class="project-list-image">
-                        <img src="assets/images/cities/santa-monica-1.jpg" alt="Santa Monica" class="region-img active">
-                        <img src="assets/images/cities/venice-1.jpg" alt="Venice" class="region-img">
-                        <img src="assets/images/cities/marina-del-rey-1.jpg" alt="Marina del Rey" class="region-img">
-                        <img src="assets/images/cities/manhattan-beach-1-1000x999_2000x7394.jpg" alt="Manhattan Beach" class="region-img">
-                        <img src="assets/images/cities/hermosa-beach-1.jpg" alt="Hermosa Beach" class="region-img">
-                        <img src="assets/images/cities/redondo-beach-1.jpg" alt="Redondo Beach" class="region-img">
+                        <!-- Santa Monica - has project -->
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-1.jpg" alt="Santa Monica" class="region-img active">
+                        <!-- Venice - has projects -->
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-1.jpg" alt="Venice" class="region-img">
+                        <!-- Other cities - placeholders -->
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Marina del Rey</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Manhattan Beach</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Hermosa Beach</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Redondo Beach</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Palos Verdes</div>
                     </div>
                     <div class="project-list-content">
                         <div style="margin-bottom: 2rem;">
@@ -134,17 +151,19 @@
             <div class="project-list-item">
                 <div style="display: flex; width: 100%;">
                     <div class="project-list-image">
-                        <img src="assets/images/cities/calabasas-7_2000x2343.jpg" alt="Calabasas" class="region-img active">
-                        <img src="assets/images/cities/encino-1.jpg" alt="Encino" class="region-img">
-                        <img src="assets/images/cities/sherman-oaks-1.jpg" alt="Sherman Oaks" class="region-img">
-                        <img src="assets/images/cities/studio-city-extra-1.jpg" alt="Studio City" class="region-img">
-                        <img src="assets/images/cities/burbank-1.jpg" alt="Burbank" class="region-img">
-                        <img src="assets/images/cities/north-hollywood-1.jpg" alt="North Hollywood" class="region-img">
-                        <img src="assets/images/cities/valley-village-1.jpg" alt="Valley Village" class="region-img">
-                        <img src="assets/images/cities/van-nuys-1.jpg" alt="Van Nuys" class="region-img">
-                        <img src="assets/images/cities/tarzana-1.jpg" alt="Tarzana" class="region-img">
-                        <img src="assets/images/cities/topanga-1.jpg" alt="Topanga" class="region-img">
-                        <img src="assets/images/cities/universal-city-1.jpg" alt="Universal City" class="region-img">
+                        <!-- Calabasas - has project -->
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-1.jpg" alt="Calabasas" class="region-img active">
+                        <!-- Other cities - placeholders -->
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Encino</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Sherman Oaks</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Studio City</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Burbank</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">North Hollywood</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Valley Village</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Van Nuys</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Tarzana</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Topanga</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Universal City</div>
                     </div>
                     <div class="project-list-content">
                         <div style="margin-bottom: 2rem;">
@@ -172,7 +191,8 @@
             <div class="project-list-item">
                 <div style="display: flex; width: 100%;">
                     <div class="project-list-image">
-                        <img src="assets/images/cities/hollywood-1.jpg" alt="Hollywood" class="region-img active">
+                        <!-- Hollywood - has project (Mulholland Estate) -->
+                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-1.jpg" alt="Hollywood" class="region-img active">
                     </div>
                     <div class="project-list-content">
                         <div style="margin-bottom: 2rem;">
@@ -190,7 +210,8 @@
             <div class="project-list-item">
                 <div style="display: flex; width: 100%;">
                     <div class="project-list-image">
-                        <img src="assets/images/cities/pasadena-1.jpg" alt="Pasadena" class="region-img active">
+                        <!-- Pasadena - placeholder -->
+                        <div class="region-img placeholder-image active" style="position: relative; width: 100%; height: 100%;">Pasadena</div>
                     </div>
                     <div class="project-list-content">
                         <div style="margin-bottom: 2rem;">
@@ -208,13 +229,14 @@
             <div class="project-list-item">
                 <div style="display: flex; width: 100%;">
                     <div class="project-list-image">
-                        <img src="assets/images/cities/coral-gables-1.jpg" alt="Coral Gables" class="region-img active">
-                        <img src="assets/images/cities/coconut-grove-1.jpg" alt="Coconut Grove" class="region-img">
-                        <img src="assets/images/cities/brickell-1.jpg" alt="Brickell" class="region-img">
-                        <img src="assets/images/cities/wynwood-1.jpg" alt="Wynwood" class="region-img">
-                        <img src="assets/images/cities/key-biscayne-1.jpg" alt="Key Biscayne" class="region-img">
-                        <img src="assets/images/cities/hialeah-1.jpg" alt="Hialeah" class="region-img">
-                        <img src="assets/images/cities/doral-1.jpg" alt="Doral" class="region-img">
+                        <!-- All Florida cities - placeholders -->
+                        <div class="region-img placeholder-image active" style="position: relative; width: 100%; height: 100%;">Coral Gables</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Coconut Grove</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Brickell</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Wynwood</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Key Biscayne</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Hialeah</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Doral</div>
                     </div>
                     <div class="project-list-content">
                         <div style="margin-bottom: 2rem;">
@@ -238,13 +260,14 @@
             <div class="project-list-item">
                 <div style="display: flex; width: 100%;">
                     <div class="project-list-image">
-                        <img src="assets/images/cities/aventura-1.jpg" alt="Aventura" class="region-img active">
-                        <img src="assets/images/cities/bal-harbour-1.jpg" alt="Bal Harbour" class="region-img">
-                        <img src="assets/images/cities/fort-lauderdale-1.jpg" alt="Fort Lauderdale" class="region-img">
-                        <img src="assets/images/cities/boca-raton-1.jpg" alt="Boca Raton" class="region-img">
-                        <img src="assets/images/cities/pompano-beach-1.jpg" alt="Pompano Beach" class="region-img">
-                        <img src="assets/images/cities/deerfield-beach-1.jpg" alt="Deerfield Beach" class="region-img">
-                        <img src="assets/images/cities/plantation-1.jpg" alt="Plantation" class="region-img">
+                        <!-- All Florida cities - placeholders -->
+                        <div class="region-img placeholder-image active" style="position: relative; width: 100%; height: 100%;">Aventura</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Bal Harbour</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Fort Lauderdale</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Boca Raton</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Pompano Beach</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Deerfield Beach</div>
+                        <div class="region-img placeholder-image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;">Plantation</div>
                     </div>
                     <div class="project-list-content">
                         <div style="margin-bottom: 2rem;">
@@ -315,7 +338,7 @@
             }
 
             item.addEventListener('mouseenter', () => {
-                intervalId = setInterval(showNextImage, 800); // Change image every 800ms
+                intervalId = setInterval(showNextImage, 800);
             });
 
             item.addEventListener('mouseleave', () => {
@@ -335,17 +358,24 @@
 
             // Set up initial state
             images.forEach((img, idx) => {
-                img.style.position = 'absolute';
-                img.style.top = '0';
-                img.style.left = '0';
-                img.style.width = '100%';
-                img.style.height = '100%';
-                img.style.objectFit = 'cover';
-                img.style.transition = 'opacity 0.5s ease';
-                if (idx === 0) {
-                    img.style.opacity = '1';
+                if (img.tagName === 'DIV') {
+                    // Already has inline styles
+                    if (idx !== 0) {
+                        img.style.opacity = '0';
+                    }
                 } else {
-                    img.style.opacity = '0';
+                    img.style.position = 'absolute';
+                    img.style.top = '0';
+                    img.style.left = '0';
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    img.style.transition = 'opacity 0.5s ease';
+                    if (idx === 0) {
+                        img.style.opacity = '1';
+                    } else {
+                        img.style.opacity = '0';
+                    }
                 }
             });
         });
