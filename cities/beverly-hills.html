@@ -3,28 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Interior design services in Beverly Hills. JAC Interiors creates beautiful spaces for Beverly Hills homes with expert design and attention to detail.">
     <title>Beverly Hills Interior Designer | JAC Interiors</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css?v=6">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
+    <!-- Navigation -->
+    <nav class="navbar scrolled">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="../index.html" class="logo">
+                <a href="../index-variant-2.html" class="logo">
                     <img src="../assets/images/jac-logo.png" alt="JAC Interiors" class="logo-img">
                 </a>
                 <div class="nav-menu" id="navMenu">
-                    <a href="../index.html" class="nav-link">Home</a>
-                    <a href="../portfolio.html" class="nav-link">Portfolio</a>
-                    <a href="../about.html" class="nav-link">About</a>
-                    <a href="../services.html" class="nav-link">Services</a>
-                    <a href="../cities-we-serve.html" class="nav-link">Cities</a>
-                    <a href="../contact.html" class="nav-link">Contact</a>
-                    <div class="nav-contact">
-                        <a href="tel:213-397-0206" class="phone-link">213-397-0206</a>
-                    </div>
+                    <a href="../index-variant-2.html" class="nav-link">HOME</a>
+                    <a href="../portfolio.html" class="nav-link">PORTFOLIO</a>
+                    <a href="../cities-we-serve.html" class="nav-link active">CITIES</a>
+                    <a href="../services.html" class="nav-link">SERVICES</a>
+                    <a href="../about.html" class="nav-link">ABOUT</a>
+                    <a href="../contact.html" class="nav-link">CONTACT</a>
                 </div>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">
                     <span></span><span></span><span></span>
@@ -33,112 +32,112 @@
         </div>
     </nav>
 
-    <section class="section" style="padding-top: 100px; padding-bottom: 2rem;">
+    <!-- City Header with Metadata -->
+    <section style="padding: 3rem 0; background: #1a1a1a; color: white; margin-top: 5rem;">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">Interior Design Services</span>
-                <h1>Beverly Hills Interior Designer</h1>
-                <p>Transform your Beverly Hills home with JAC Interiors' expert interior design services. Creating beautiful spaces that reflect the unique character of Beverly Hills.</p>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 4rem;">
+                <div style="flex: 1; max-width: 600px;">
+                    <h1 class="scroll-fade-in" style="font-size: 3.5rem; font-weight: 500; margin: 0 0 1rem 0; letter-spacing: -1.5px; line-height: 1.1; color: white;">Beverly Hills</h1>
+                    <p class="scroll-fade-in delay-1" style="font-size: 16px; color: #ccc; line-height: 1.6; font-weight: 400; margin-top: 0.5rem;">Expert interior design services in Beverly Hills, California</p>
+                </div>
+                <div style="display: flex; gap: 3rem; flex-shrink: 0;">
+                    <div class="scroll-fade-in delay-1">
+                        <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Region</div>
+                        <div style="font-weight: 400; font-size: 0.95rem; color: white;">Los Angeles</div>
+                    </div>
+                    <div class="scroll-fade-in delay-2">
+                        <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Service Area</div>
+                        <div style="font-weight: 400; font-size: 0.95rem; color: white;">Beverly Hills</div>
+                    </div>
+                    <div class="scroll-fade-in delay-3">
+                        <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Status</div>
+                        <div style="font-weight: 400; font-size: 0.95rem; color: white;">Accepting Projects</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="section" style="padding-top: 2rem;">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="../assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills Interior Design" loading="lazy">
-                </div>
-                <div class="about-content">
-                    <h2>Expert Interior Design in Beverly Hills</h2>
-                    <p>JAC Interiors brings expert interior design services to Beverly Hills. Whether you're renovating, remodeling, or building new, our team creates sophisticated luxury homes that reflect your lifestyle and the character of Beverly Hills.</p>
-                    <p>From concept to completion, we handle every detail of your Beverly Hills interior design project. Our full-service approach includes space planning, furniture selection, custom cabinetry, lighting design, and complete project management.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" style="background-color: var(--color-bg-alt);">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Beverly Hills Interior Design Services</h2>
-            </div>
+    <!-- Content Sections -->
+    <section style="padding: 4rem 0;">
+        <div class="container" style="max-width: 1200px;">
             
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Residential Interior Design</h3>
-                    <p>Complete interior design services for Beverly Hills homes. From full home renovations to single room makeovers.</p>
+            <!-- About Section -->
+            <div style="display: flex; gap: 3rem; margin-bottom: 3rem; align-items: center;">
+                <div class="parallax-image scale-in-image hover-zoom-image" style="flex: 0 0 48%;">
+                    <img src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-1.jpg" alt="Beverly Hills Interior Design" style="width: 100%; border-radius: 4px;">
                 </div>
-
-                <div class="service-card">
-                    <h3>Kitchen & Bathroom Remodels</h3>
-                    <p>Transform your kitchens and bathrooms with modern luxury and functional design tailored to Beverly Hills living.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Space Planning & Layout</h3>
-                    <p>Optimize your Beverly Hills home's layout for better flow, functionality, and style.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Furniture & Decor Selection</h3>
-                    <p>Curated furniture and decor that reflects your personal style and the character of Beverly Hills.</p>
+                <div style="flex: 1; padding-left: 2rem;">
+                    <h2 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px;">Interior Design Excellence in Beverly Hills</h2>
+                    <p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 10px;">JAC Interiors brings expert interior design services to Beverly Hills, one of the most prestigious neighborhoods in Los Angeles. Our team understands the unique character and sophistication that Beverly Hills homes require.</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="section cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Transform Your Beverly Hills Home?</h2>
-                <p>Contact JAC Interiors today for a consultation. Let's create a beautiful space you'll love.</p>
-                <a href="../contact.html" class="btn btn-primary">Get in Touch</a>
+            <!-- Services Section -->
+            <div style="display: flex; gap: 3rem; margin-bottom: 3rem; align-items: center;">
+                <div style="flex: 1; padding-right: 2rem;">
+                    <h2 class="slide-in-left" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px;">Beverly Hills Interior Design Services</h2>
+                    <p class="slide-in-left delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 10px;">From complete home renovations to single room makeovers, we provide full-service interior design including space planning, furniture selection, custom cabinetry, lighting design, and complete project management. Our work in Beverly Hills showcases refined luxury and timeless elegance.</p>
+                </div>
+                <div class="parallax-image scale-in-image hover-zoom-image" style="flex: 0 0 48%;">
+                    <img src="../assets/images/projects/beverly-hills-ii/beverly-hills-ii-1.jpg" alt="Beverly Hills Design Services" style="width: 100%; border-radius: 4px;">
+                </div>
             </div>
-        </div>
-    </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>JAC Interiors</h4>
-                    <p>We are a full-service design studio with the vision and organizational skills to make beautiful transformations happen.</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/JacInteriors" target="_blank" rel="noopener">Facebook</a>
-                        <a href="https://www.instagram.com/jacinteriorsdesign/" target="_blank" rel="noopener">Instagram</a>
-                        <a href="https://www.houzz.com/pro/jacinteriors/jac-interiors" target="_blank" rel="noopener">Houzz</a>
-                    </div>
+            <!-- Projects Section -->
+            <div style="display: flex; gap: 3rem; align-items: center;">
+                <div class="parallax-image scale-in-image hover-zoom-image" style="flex: 0 0 48%;">
+                    <img src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-3.jpg" alt="Beverly Hills Projects" style="width: 100%; border-radius: 4px;">
                 </div>
-                <div class="footer-col">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="../services.html">Residential Design</a></li>
-                        <li><a href="../services.html">Commercial Design</a></li>
-                        <li><a href="../services.html">Interior Styling</a></li>
-                        <li><a href="../services.html">Space Planning</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="../about.html">About Us</a></li>
-                        <li><a href="../portfolio.html">Portfolio</a></li>
-                        <li><a href="../contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <div class="contact-info">
-                        <p>10401 Venice Blvd Suite 257<br>
-                        Los Angeles, CA 90034<br>
-                        <a href="tel:213-397-0206">213-397-0206</a><br>
-                        <a href="mailto:info@jacinteriors.com">info@jacinteriors.com</a></p>
+                <div style="flex: 1; padding-left: 2rem;">
+                    <h2 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px;">Featured Beverly Hills Interior Design Projects</h2>
+                    <p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 10px;">Explore our portfolio of Beverly Hills interior design projects, including modern Spanish estates, contemporary residences, and luxury home renovations that showcase our commitment to excellence.</p>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="../projects/beverly-hills-alpine.html" class="view-project-btn" style="display: inline-block; margin-right: 1rem; margin-bottom: 0.5rem;">View Beverly Hills Alpine</a>
+                        <a href="../projects/beverly-hills-ii.html" class="view-project-btn" style="display: inline-block;">View Beverly Hills II</a>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 JAC Interiors, LLC. All Rights Reserved.</p>
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 6rem 0; background: #fafafa; text-align: center;">
+        <div class="container" style="max-width: 700px;">
+            <h2 class="scroll-fade-in" style="font-size: 2.5rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -1px;">Ready to Transform Your Beverly Hills Home?</h2>
+            <p class="scroll-fade-in delay-1" style="font-size: 1.1rem; color: #666; margin-bottom: 2rem; line-height: 1.6;">Let's create a design that reflects your unique style and elevates your everyday living.</p>
+            <a href="../contact.html" class="btn btn-primary scroll-fade-in delay-2" style="display: inline-block; padding: 1rem 2.5rem; background: var(--color-primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 500; transition: all 0.3s;">Start Your Project</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #1a1a1a; color: white; padding: 3rem 0 1.5rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 5rem; margin-bottom: 3rem;">
+                <div>
+                    <img src="../assets/images/jac-logo.png" alt="JAC Interiors" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);">
+                    <p style="color: #999; line-height: 1.6;">Creating luxury spaces that elevate everyday living.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; font-weight: 500;">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem;"><a href="../portfolio.html" style="color: #999; text-decoration: none;">Portfolio</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="../about.html" style="color: #999; text-decoration: none;">About</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="../contact.html" style="color: #999; text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; font-weight: 500;">Contact</h4>
+                    <p style="color: #999; line-height: 1.6;">
+                        Los Angeles, CA<br>
+                        Phone: (213) 397-0206<br>
+                        Email: info@jacinteriors.com
+                    </p>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #666;">
+                <p>&copy; 2024 JAC Interiors. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -146,6 +145,3 @@
     <script src="../assets/js/main.js"></script>
 </body>
 </html>
-
-
-
