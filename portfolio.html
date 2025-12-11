@@ -472,7 +472,7 @@
 
     <script src="assets/js/main.js"></script>
     <script>
-        // Hover effect for images
+        // Hover effect for images (desktop)
         document.querySelectorAll('.project-list-item').forEach(item => {
             item.addEventListener('mouseenter', () => {
                 const hoverImg = item.querySelector('.hover-img');
@@ -482,6 +482,48 @@
                 const hoverImg = item.querySelector('.hover-img');
                 if (hoverImg) hoverImg.style.opacity = '0';
             });
+        });
+
+        // Scroll-based image switching - only one card active at a time
+        const observerOptions = {
+            root: null,
+            rootMargin: '-40% 0px -40% 0px', // Only trigger when card is centered in viewport
+            threshold: 0.1
+        };
+
+        let currentActiveCard = null;
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.intersectionRatio > 0) {
+                    // Deactivate previous card
+                    if (currentActiveCard && currentActiveCard !== entry.target) {
+                        const prevHoverImg = currentActiveCard.querySelector('.hover-img');
+                        if (prevHoverImg) {
+                            prevHoverImg.style.opacity = '0';
+                        }
+                    }
+                    
+                    // Activate current card
+                    currentActiveCard = entry.target;
+                    const hoverImg = entry.target.querySelector('.hover-img');
+                    if (hoverImg) {
+                        hoverImg.style.opacity = '1';
+                    }
+                } else if (entry.target === currentActiveCard) {
+                    // Deactivate when card leaves the center zone
+                    const hoverImg = entry.target.querySelector('.hover-img');
+                    if (hoverImg) {
+                        hoverImg.style.opacity = '0';
+                    }
+                    currentActiveCard = null;
+                }
+            });
+        }, observerOptions);
+
+        // Observe all project cards
+        document.querySelectorAll('.project-list-item').forEach(card => {
+            cardObserver.observe(card);
         });
     </script>
 </body>
