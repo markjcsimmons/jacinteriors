@@ -950,19 +950,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Hero Zoom Script
-            const heroImg = document.getElementById('heroZoomImg');
-            if(heroImg) {
-                window.addEventListener('scroll', () => {
-                    const scrollPos = window.scrollY;
-                    if (scrollPos < window.innerHeight) {
-                        const scale = 1.2 + (scrollPos * 0.0006);
-                        heroImg.style.transform = `scale(${scale})`;
-                        heroImg.style.transformOrigin = 'center center';
-                    }
-                });
-            }
-
             // Testimonial Carousel Auto-Rotation with Click to Expand
             const slides = document.querySelectorAll('.testimonial-slide');
             const dots = document.querySelectorAll('.carousel-dot');
