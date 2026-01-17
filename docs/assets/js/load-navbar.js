@@ -113,7 +113,7 @@
         // Initialize dropdowns
         initDropdowns();
         
-        // Ensure navbar has correct fixed positioning
+        // Ensure navbar has correct fixed positioning and black text
         if (existingNav) {
             existingNav.style.position = 'fixed';
             existingNav.style.top = '0';
@@ -122,6 +122,24 @@
             existingNav.style.width = '100%';
             existingNav.style.zIndex = '10000';
             existingNav.style.background = 'white';
+            
+            // Force black text on all nav links
+            const navLinks = existingNav.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.style.setProperty('color', '#222a26', 'important');
+            });
+            
+            // Force black text on dropdown links
+            const dropdownLinks = existingNav.querySelectorAll('.nav-dropdown-content a');
+            dropdownLinks.forEach(link => {
+                link.style.setProperty('color', '#222a26', 'important');
+            });
+            
+            // Force black text on logo
+            const logo = existingNav.querySelector('.logo');
+            if (logo) {
+                logo.style.setProperty('color', '#222a26', 'important');
+            }
         }
     }
     
