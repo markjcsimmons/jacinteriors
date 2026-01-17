@@ -205,7 +205,7 @@ img {
 
 .nav-menu, .nav-links { display: flex; gap: 3rem; align-items: center; }
 .nav-link { 
-    color: white; 
+    color: var(--color-secondary); 
     font-size: 0.9rem; 
     font-weight: 500; 
     text-transform: uppercase; 
@@ -215,7 +215,7 @@ img {
 .navbar.scrolled .nav-link { color: var(--color-secondary); }
 .nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
 
-/* Dark navbar: white links */
+/* Dark navbar: white links (only when navbar-dark class is present) */
 .navbar.navbar-dark .nav-link {
     color: white;
 }
