@@ -177,8 +177,15 @@ img {
     background: transparent;
 }
 
+/* Dark navbar for pages with dark backgrounds */
+.navbar.navbar-dark,
+body:not(.home-page) .navbar {
+    background: #1a1a1a;
+}
+
+/* White navbar when scrolled on light pages */
 .navbar.scrolled {
-    background: white;
+    background: white !important;
     padding: 1rem 0;
     box-shadow: 0 5px 30px rgba(0,0,0,0.05);
 }
@@ -189,8 +196,24 @@ img {
     align-items: center;
 }
 
-.logo-img { height: 40px; width: auto; filter: brightness(0) invert(1); transition: var(--transition); }
-.navbar.scrolled .logo-img { filter: none; }
+.logo-img { 
+    height: 40px; 
+    width: auto; 
+    filter: brightness(0) invert(1); 
+    transition: var(--transition); 
+}
+
+/* Dark navbar: white logo */
+.navbar.navbar-dark .logo-img,
+body:not(.home-page) .navbar .logo-img {
+    filter: brightness(0) invert(1);
+}
+
+/* Light navbar (scrolled): dark logo */
+.navbar.scrolled .logo-img,
+.home-page .navbar:not(.scrolled) .logo-img {
+    filter: none;
+}
 
 .nav-menu, .nav-links { display: flex; gap: 3rem; align-items: center; }
 .nav-link { 
@@ -201,7 +224,27 @@ img {
     letter-spacing: 1px;
     opacity: 0.9;
 }
-.navbar.scrolled .nav-link { color: var(--color-secondary); }
+
+/* Dark navbar: white links */
+.navbar.navbar-dark .nav-link,
+body:not(.home-page) .navbar .nav-link {
+    color: white;
+}
+
+/* Light navbar (scrolled): dark links */
+.navbar.scrolled .nav-link {
+    color: var(--color-secondary);
+}
+
+/* Home page navbar: dark links (light background) */
+.home-page .navbar:not(.scrolled) .nav-link {
+    color: var(--color-secondary);
+}
+
+/* Home page navbar logo: dark (light background) */
+.home-page .navbar:not(.scrolled) .logo-img {
+    filter: none;
+}
 .nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
 
 /* Dropdown styles */

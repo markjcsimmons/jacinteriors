@@ -273,12 +273,13 @@ const SPANav = {
 };
 
 // Initialize SPA navigation after DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    // Small delay to ensure page is fully rendered
-    setTimeout(() => {
-        SPANav.init();
-    }, 100);
-});
+// TEMPORARILY DISABLED FOR DEBUGGING
+// document.addEventListener('DOMContentLoaded', () => {
+//     // Small delay to ensure page is fully rendered
+//     setTimeout(() => {
+//         SPANav.init();
+//     }, 100);
+// });
 
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
@@ -334,24 +335,48 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
-    const isPortfolioPage = window.location.pathname.includes('portfolio.html');
-    const isProjectPage = window.location.pathname.includes('/projects/');
-    const isCityPage = window.location.pathname.includes('/cities/');
+    if (!navbar) return;
     
-    // On portfolio, project, or city pages, always keep navbar visible
-    if (isPortfolioPage || isProjectPage || isCityPage) {
-        navbar.classList.add('scrolled');
+    // Detect page type
+    const path = window.location.pathname;
+    const isHomePage = path.includes('index-variant-2.html') || path === '/' || path.endsWith('index.html');
+    const isPortfolioPage = path.includes('portfolio.html');
+    const isProjectPage = path.includes('/projects/');
+    const isCityPage = path.includes('/cities/');
+    const isSpacePage = path.includes('bathrooms.html') || path.includes('bedrooms.html') || 
+                       path.includes('kitchens.html') || path.includes('dining-rooms.html') ||
+                       path.includes('living-spaces.html') || path.includes('office-spaces.html') ||
+                       path.includes('kids-bedrooms.html') || path.includes('entryways.html') ||
+                       path.includes('bar-area.html') || path.includes('laundry-rooms.html') ||
+                       path.includes('outdoor-spaces.html');
+    
+    // Add body class for CSS targeting
+    if (isHomePage) {
+        document.body.classList.add('home-page');
+    } else {
+        document.body.classList.remove('home-page');
+    }
+    
+    // Internal pages (not home): dark navbar with white text
+    if (!isHomePage) {
+        navbar.classList.add('navbar-dark');
+    }
+    
+    // On portfolio, project, city, or space pages, always keep navbar visible (dark)
+    if (isPortfolioPage || isProjectPage || isCityPage || isSpacePage) {
+        navbar.classList.add('navbar-dark');
     }
     
     window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            // Don't remove scrolled class on portfolio, project, or city pages
-            if (!isPortfolioPage && !isProjectPage && !isCityPage) {
+        if (isHomePage) {
+            // Home page: white navbar when scrolled
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
                 navbar.classList.remove('scrolled');
             }
         }
+        // Internal pages: navbar stays dark, no change on scroll
     });
     
     // Smooth scroll for anchor links
