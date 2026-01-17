@@ -1,5 +1,285 @@
 // JAC Interiors - Main JavaScript
 
+// ===================================
+// SPA-LIKE NAVIGATION (No page reload for navbar)
+// ===================================
+
+const SPANav = {
+    contentSelector: null,
+    isNavigating: false,
+    
+    init() {
+        // Find the main content area (everything after nav, before footer)
+        this.setupContentWrapper();
+        this.interceptLinks();
+        this.handlePopState();
+        console.log('SPA Navigation initialized');
+    },
+    
+    setupContentWrapper() {
+        // Wrap main content if not already wrapped
+        const navbar = document.querySelector('.navbar');
+        const footer = document.querySelector('footer');
+        
+        if (!document.getElementById('spa-content')) {
+            // Get all elements between navbar and footer
+            const content = [];
+            let current = navbar ? navbar.nextElementSibling : document.body.firstElementChild;
+            
+            while (current && current !== footer && current.tagName !== 'FOOTER') {
+                content.push(current);
+                current = current.nextElementSibling;
+            }
+            
+            // Create wrapper
+            const wrapper = document.createElement('div');
+            wrapper.id = 'spa-content';
+            wrapper.style.opacity = '1';
+            wrapper.style.transition = 'opacity 0.2s ease';
+            
+            // Insert wrapper after navbar
+            if (navbar && content.length > 0) {
+                navbar.after(wrapper);
+                content.forEach(el => wrapper.appendChild(el));
+            }
+        }
+        
+        this.contentSelector = '#spa-content';
+    },
+    
+    interceptLinks() {
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (!link) return;
+            
+            const href = link.getAttribute('href');
+            if (!href) return;
+            
+            // Skip external links, anchors, and special protocols
+            if (href.startsWith('http') || 
+                href.startsWith('#') || 
+                href.startsWith('mailto:') || 
+                href.startsWith('tel:') ||
+                link.target === '_blank' ||
+                e.ctrlKey || e.metaKey || e.shiftKey) {
+                return;
+            }
+            
+            // Skip if it's a dropdown trigger with href="#"
+            if (href === '#') return;
+            
+            e.preventDefault();
+            this.navigate(href);
+        });
+    },
+    
+    handlePopState() {
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.path) {
+                this.loadPage(e.state.path, false);
+            }
+        });
+    },
+    
+    async navigate(path) {
+        if (this.isNavigating) return;
+        
+        // Resolve relative paths
+        const fullPath = new URL(path, window.location.href).pathname;
+        
+        // Don't navigate to same page
+        if (fullPath === window.location.pathname) return;
+        
+        this.isNavigating = true;
+        
+        // Update URL
+        history.pushState({ path: fullPath }, '', fullPath);
+        
+        await this.loadPage(fullPath, true);
+        
+        this.isNavigating = false;
+    },
+    
+    async loadPage(path, animate = true) {
+        const contentArea = document.querySelector(this.contentSelector);
+        if (!contentArea) {
+            // Fallback to regular navigation
+            window.location.href = path;
+            return;
+        }
+        
+        try {
+            // Fade out current content
+            if (animate) {
+                contentArea.style.opacity = '0';
+                await this.sleep(200);
+            }
+            
+            // Fetch new page
+            const response = await fetch(path);
+            if (!response.ok) throw new Error('Page not found');
+            
+            const html = await response.text();
+            
+            // Parse the new page
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // Extract content (everything between navbar and footer)
+            const newNavbar = doc.querySelector('.navbar');
+            const newFooter = doc.querySelector('footer');
+            let newContent = [];
+            
+            if (newNavbar) {
+                let current = newNavbar.nextElementSibling;
+                while (current && current !== newFooter && current.tagName !== 'FOOTER') {
+                    newContent.push(current.outerHTML);
+                    current = current.nextElementSibling;
+                }
+            } else {
+                // No navbar in new page, get body content
+                const body = doc.body;
+                Array.from(body.children).forEach(child => {
+                    if (child.tagName !== 'NAV' && child.tagName !== 'FOOTER' && 
+                        !child.classList.contains('navbar') && child.tagName !== 'SCRIPT') {
+                        newContent.push(child.outerHTML);
+                    }
+                });
+            }
+            
+            // Update content
+            contentArea.innerHTML = newContent.join('');
+            
+            // Update page title
+            const newTitle = doc.querySelector('title');
+            if (newTitle) {
+                document.title = newTitle.textContent;
+            }
+            
+            // Update active nav state
+            this.updateActiveNav(path);
+            
+            // Re-run any inline scripts from the new content
+            this.executeScripts(contentArea);
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Fade in new content
+            if (animate) {
+                await this.sleep(50);
+                contentArea.style.opacity = '1';
+            }
+            
+            // Re-initialize animations and observers
+            this.reinitializeFeatures();
+            
+        } catch (error) {
+            console.error('SPA Navigation error:', error);
+            // Fallback to regular navigation
+            window.location.href = path;
+        }
+    },
+    
+    updateActiveNav(path) {
+        // Remove all active classes
+        document.querySelectorAll('.nav-link.active').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Determine which nav item should be active
+        const filename = path.split('/').pop() || 'index-variant-2.html';
+        
+        document.querySelectorAll('.nav-menu .nav-link, .nav-links .nav-link').forEach(link => {
+            const href = link.getAttribute('href');
+            if (!href || href === '#') return;
+            
+            const linkFilename = href.split('/').pop();
+            
+            // Check for exact match or index page
+            if (linkFilename === filename || 
+                (filename === '' && linkFilename === 'index-variant-2.html') ||
+                (filename === 'index-variant-2.html' && linkFilename === 'index-variant-2.html')) {
+                link.classList.add('active');
+            }
+            
+            // Check for section matches (spaces, services, etc.)
+            if (path.includes('bathrooms') || path.includes('bedrooms') || 
+                path.includes('kitchens') || path.includes('dining') ||
+                path.includes('living') || path.includes('office') ||
+                path.includes('kids') || path.includes('entryway') ||
+                path.includes('bar-area') || path.includes('laundry') ||
+                path.includes('outdoor')) {
+                if (link.textContent.trim() === 'SPACES') {
+                    link.classList.add('active');
+                }
+            }
+            
+            if (path.includes('cities') || path.includes('residential') ||
+                path.includes('commercial') || path.includes('interior-styling') ||
+                path.includes('space-planning') || path.includes('services')) {
+                if (link.textContent.trim() === 'SERVICES') {
+                    link.classList.add('active');
+                }
+            }
+            
+            if (path.includes('projects') || path.includes('portfolio')) {
+                if (link.textContent.trim() === 'PORTFOLIO') {
+                    link.classList.add('active');
+                }
+            }
+        });
+    },
+    
+    executeScripts(container) {
+        // Find and execute inline scripts
+        const scripts = container.querySelectorAll('script');
+        scripts.forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => {
+                newScript.setAttribute(attr.name, attr.value);
+            });
+            newScript.textContent = oldScript.textContent;
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+    },
+    
+    reinitializeFeatures() {
+        // Re-observe elements for animations
+        const animatedElements = document.querySelectorAll(
+            '.scroll-fade-in, .scroll-slide-left, .scroll-slide-right, .scroll-scale-in, ' +
+            '.slide-in-left, .slide-in-right, .scale-in-image, .parallax-image'
+        );
+        
+        animatedElements.forEach(element => {
+            element.classList.remove('visible');
+            if (typeof scrollAnimationObserver !== 'undefined') {
+                scrollAnimationObserver.observe(element);
+            }
+        });
+        
+        // Re-initialize masonry if present
+        if (typeof initMasonry === 'function') {
+            setTimeout(initMasonry, 100);
+        }
+        
+        // Trigger resize to recalculate layouts
+        window.dispatchEvent(new Event('resize'));
+    },
+    
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+};
+
+// Initialize SPA navigation after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Small delay to ensure page is fully rendered
+    setTimeout(() => {
+        SPANav.init();
+    }, 100);
+});
+
 // Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
