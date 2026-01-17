@@ -112,13 +112,18 @@
             }
         }
         
-        // Apply home page styling if needed
-        if (isHomePage) {
-            const nav = document.querySelector('nav.navbar');
-            if (nav) {
+        // Apply styling based on page type
+        const nav = document.querySelector('nav.navbar');
+        if (nav) {
+            if (isHomePage) {
+                // Home page: white background
                 nav.style.background = 'white';
                 nav.style.position = 'sticky';
                 nav.style.borderBottom = '1px solid var(--stroke)';
+            } else {
+                // Internal pages: dark background
+                nav.classList.add('navbar-dark');
+                nav.style.background = '#1a1a1a';
             }
         }
         
@@ -152,12 +157,20 @@
         }
     }
     
-    // Inject navbar when DOM is ready
+    // Inject navbar immediately - don't wait for DOMContentLoaded
+    // This ensures it runs before page renders
     if (document.readyState === 'loading') {
+        // If still loading, inject immediately (script runs synchronously)
+        injectNavbar();
+        // Also listen for DOMContentLoaded as backup
         document.addEventListener('DOMContentLoaded', injectNavbar);
     } else {
+        // DOM already loaded, inject immediately
         injectNavbar();
     }
+    
+    // Also inject after a tiny delay to catch any late-loading content
+    setTimeout(injectNavbar, 50);
     
     // Also inject on SPA navigation (if using SPA nav)
     if (window.SPANav) {
