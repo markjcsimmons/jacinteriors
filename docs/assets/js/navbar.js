@@ -49,45 +49,45 @@
         return 'assets/images/jac-logo.png';
     };
     
-    // Navbar HTML - single source of truth
+    // Navbar HTML - single source of truth with inline styles for white bg + black text
     const navbarHTML = `
-    <nav class="navbar">
+    <nav class="navbar" style="background: white !important; position: sticky !important; top: 0 !important; border-bottom: 1px solid #e4e4e4 !important; z-index: 1000 !important;">
         <div class="container">
             <div class="nav-wrapper">
                 <a href="${isHomePage ? 'index-variant-2.html' : (currentPath.includes('/') ? '../index-variant-2.html' : 'index-variant-2.html')}" class="logo">
-                    ${isHomePage ? 'JAC INTERIORS' : `<img src="${getLogoPath()}" alt="JAC Interiors" class="logo-img">`}
+                    ${isHomePage ? 'JAC INTERIORS' : `<img src="${getLogoPath()}" alt="JAC Interiors" class="logo-img" style="filter: none !important;">`}
                 </a>
                 <div class="nav-menu" id="navMenu">
-                    <a href="index-variant-2.html" class="nav-link${homeActive}">HOME</a>
-                    <a href="portfolio.html" class="nav-link${portfolioActive}">PORTFOLIO</a>
+                    <a href="index-variant-2.html" class="nav-link${homeActive}" style="color: #222a26 !important;">HOME</a>
+                    <a href="portfolio.html" class="nav-link${portfolioActive}" style="color: #222a26 !important;">PORTFOLIO</a>
                     <div class="nav-dropdown">
-                        <a href="#" class="nav-link${spacesActive}">SPACES</a>
+                        <a href="#" class="nav-link${spacesActive}" style="color: #222a26 !important;">SPACES</a>
                         <div class="nav-dropdown-content">
-                            <a href="bathrooms.html">Bathrooms</a>
-                            <a href="bedrooms.html">Bedrooms</a>
-                            <a href="kitchens.html">Kitchens</a>
-                            <a href="dining-rooms.html">Dining Rooms</a>
-                            <a href="living-spaces.html">Living Spaces</a>
-                            <a href="office-spaces.html">Office Spaces</a>
-                            <a href="kids-bedrooms.html">Kid's Bedrooms</a>
-                            <a href="entryways.html">Entryways</a>
-                            <a href="bar-area.html">Bar Area</a>
-                            <a href="laundry-rooms.html">Laundry Rooms</a>
-                            <a href="outdoor-spaces.html">Outdoor Spaces</a>
+                            <a href="bathrooms.html" style="color: #222a26 !important;">Bathrooms</a>
+                            <a href="bedrooms.html" style="color: #222a26 !important;">Bedrooms</a>
+                            <a href="kitchens.html" style="color: #222a26 !important;">Kitchens</a>
+                            <a href="dining-rooms.html" style="color: #222a26 !important;">Dining Rooms</a>
+                            <a href="living-spaces.html" style="color: #222a26 !important;">Living Spaces</a>
+                            <a href="office-spaces.html" style="color: #222a26 !important;">Office Spaces</a>
+                            <a href="kids-bedrooms.html" style="color: #222a26 !important;">Kid's Bedrooms</a>
+                            <a href="entryways.html" style="color: #222a26 !important;">Entryways</a>
+                            <a href="bar-area.html" style="color: #222a26 !important;">Bar Area</a>
+                            <a href="laundry-rooms.html" style="color: #222a26 !important;">Laundry Rooms</a>
+                            <a href="outdoor-spaces.html" style="color: #222a26 !important;">Outdoor Spaces</a>
                         </div>
                     </div>
                     <div class="nav-dropdown">
-                        <a href="services.html" class="nav-link${servicesActive}">SERVICES</a>
+                        <a href="services.html" class="nav-link${servicesActive}" style="color: #222a26 !important;">SERVICES</a>
                         <div class="nav-dropdown-content">
-                            <a href="residential-design.html">Residential Design</a>
-                            <a href="commercial-design.html">Commercial Design</a>
-                            <a href="interior-styling.html">Interior Styling</a>
-                            <a href="space-planning.html">Space Planning</a>
-                            <a href="cities-we-serve.html">Cities We Serve</a>
+                            <a href="residential-design.html" style="color: #222a26 !important;">Residential Design</a>
+                            <a href="commercial-design.html" style="color: #222a26 !important;">Commercial Design</a>
+                            <a href="interior-styling.html" style="color: #222a26 !important;">Interior Styling</a>
+                            <a href="space-planning.html" style="color: #222a26 !important;">Space Planning</a>
+                            <a href="cities-we-serve.html" style="color: #222a26 !important;">Cities We Serve</a>
                         </div>
                     </div>
-                    <a href="about.html" class="nav-link${aboutActive}">ABOUT</a>
-                    <a href="contact.html" class="nav-link${contactActive}">CONTACT</a>
+                    <a href="about.html" class="nav-link${aboutActive}" style="color: #222a26 !important;">ABOUT</a>
+                    <a href="contact.html" class="nav-link${contactActive}" style="color: #222a26 !important;">CONTACT</a>
                 </div>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">
                     <span></span><span></span><span></span>
