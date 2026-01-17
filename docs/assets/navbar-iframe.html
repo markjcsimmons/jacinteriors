@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { margin: 0; padding: 0; overflow: hidden; }
+        .navbar {
+            padding: 1.5rem 0;
+            background: white;
+            position: relative;
+            width: 100%;
+            border-bottom: 1px solid #e4e4e4;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            color: #222a26;
+            text-decoration: none;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .nav-link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #222a26;
+            letter-spacing: -0.2px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .nav-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem 0;
+            margin-top: 0;
+            z-index: 1000;
+            border-radius: 4px;
+            flex-direction: column;
+        }
+        .nav-dropdown:hover .nav-dropdown-content {
+            display: flex;
+        }
+        .nav-dropdown-content a {
+            color: #222a26;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            display: block;
+        }
+        .nav-dropdown-content a:hover {
+            background: #f5f5f5;
+        }
+    </style>
+    <script>
+        // Get current page from parent
+        const currentPath = window.parent.location.pathname;
+        const filename = currentPath.split('/').pop() || 'index-variant-2.html';
+        
+        // Set active state
+        function setActive() {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            if (filename === 'index-variant-2.html' || filename === '' || filename === 'index.html') {
+                const link = document.querySelector('a[href*="index-variant-2.html"]');
+                if (link) link.classList.add('active');
+            } else if (filename === 'portfolio.html') {
+                const link = document.querySelector('a[href*="portfolio.html"]');
+                if (link) link.classList.add('active');
+            } else if (filename.includes('bathrooms.html') || filename.includes('bedrooms.html') || 
+                       filename.includes('kitchens.html') || filename.includes('dining-rooms.html') ||
+                       filename.includes('living-spaces.html') || filename.includes('office-spaces.html') ||
+                       filename.includes('kids-bedrooms.html') || filename.includes('entryways.html') ||
+                       filename.includes('bar-area.html') || filename.includes('laundry-rooms.html') ||
+                       filename.includes('outdoor-spaces.html')) {
+                const link = document.querySelector('.nav-dropdown:first-of-type .nav-link');
+                if (link) link.classList.add('active');
+            } else if (filename === 'services.html' || filename.includes('residential-design.html') ||
+                       filename.includes('commercial-design.html') || filename.includes('interior-styling.html') ||
+                       filename.includes('space-planning.html') || filename.includes('cities-we-serve.html')) {
+                const link = document.querySelector('a[href*="services.html"]');
+                if (link) link.classList.add('active');
+            } else if (filename === 'about.html') {
+                const link = document.querySelector('a[href*="about.html"]');
+                if (link) link.classList.add('active');
+            } else if (filename === 'contact.html') {
+                const link = document.querySelector('a[href*="contact.html"]');
+                if (link) link.classList.add('active');
+            }
+        }
+        
+        // Fix relative paths
+        function fixPaths() {
+            const depth = currentPath.split('/').length - 2;
+            const prefix = depth > 0 ? '../'.repeat(depth) : '';
+            
+            document.querySelectorAll('a[href]').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('/')) {
+                    if (depth > 0 && !href.startsWith('../')) {
+                        link.setAttribute('href', prefix + href);
+                    }
+                }
+            });
+        }
+        
+        window.addEventListener('load', () => {
+            fixPaths();
+            setActive();
+        });
+        
+        // Update on parent navigation
+        window.parent.addEventListener('popstate', () => {
+            setTimeout(() => {
+                fixPaths();
+                setActive();
+            }, 10);
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index-variant-2.html" class="logo">JAC INTERIORS</a>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index-variant-2.html" class="nav-link">HOME</a>
+                    <a href="portfolio.html" class="nav-link">PORTFOLIO</a>
+                    <div class="nav-dropdown">
+                        <a href="#" class="nav-link">SPACES</a>
+                        <div class="nav-dropdown-content">
+                            <a href="bathrooms.html">Bathrooms</a>
+                            <a href="bedrooms.html">Bedrooms</a>
+                            <a href="kitchens.html">Kitchens</a>
+                            <a href="dining-rooms.html">Dining Rooms</a>
+                            <a href="living-spaces.html">Living Spaces</a>
+                            <a href="office-spaces.html">Office Spaces</a>
+                            <a href="kids-bedrooms.html">Kid's Bedrooms</a>
+                            <a href="entryways.html">Entryways</a>
+                            <a href="bar-area.html">Bar Area</a>
+                            <a href="laundry-rooms.html">Laundry Rooms</a>
+                            <a href="outdoor-spaces.html">Outdoor Spaces</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <a href="services.html" class="nav-link">SERVICES</a>
+                        <div class="nav-dropdown-content">
+                            <a href="residential-design.html">Residential Design</a>
+                            <a href="commercial-design.html">Commercial Design</a>
+                            <a href="interior-styling.html">Interior Styling</a>
+                            <a href="space-planning.html">Space Planning</a>
+                            <a href="cities-we-serve.html">Cities We Serve</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="contact.html" class="nav-link">CONTACT</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

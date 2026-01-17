@@ -1,14 +1,60 @@
-// Fixed Navbar Loader - Persistent navbar that never reloads
+// Fixed Navbar - Uses iframe for truly persistent navbar
 (function() {
     'use strict';
     
-    // Global navbar instance - only load once
-    if (window.navbarLoaded) {
-        // Navbar already loaded, just update active state
-        updateNavbarState();
-        return;
+    // Create iframe navbar that never reloads
+    function createIframeNavbar() {
+        // Remove any existing navbar
+        const existingNav = document.querySelector('nav.navbar');
+        if (existingNav) {
+            existingNav.remove();
+        }
+        
+        // Check if iframe already exists
+        let navbarIframe = document.getElementById('navbar-iframe');
+        
+        if (!navbarIframe) {
+            // Calculate path to navbar iframe
+            const currentPath = window.location.pathname;
+            const depth = currentPath.split('/').length - 2;
+            const iframePath = depth > 0 ? '../'.repeat(depth) + 'assets/navbar-iframe.html' : 'assets/navbar-iframe.html';
+            
+            // Create iframe
+            navbarIframe = document.createElement('iframe');
+            navbarIframe.id = 'navbar-iframe';
+            navbarIframe.src = iframePath;
+            navbarIframe.style.position = 'fixed';
+            navbarIframe.style.top = '0';
+            navbarIframe.style.left = '0';
+            navbarIframe.style.width = '100%';
+            navbarIframe.style.height = '80px';
+            navbarIframe.style.border = 'none';
+            navbarIframe.style.zIndex = '10000';
+            navbarIframe.style.background = 'white';
+            navbarIframe.scrolling = 'no';
+            
+            // Insert at very beginning of body
+            if (document.body) {
+                document.body.insertBefore(navbarIframe, document.body.firstChild);
+            } else {
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.body.insertBefore(navbarIframe, document.body.firstChild);
+                });
+            }
+            
+            // Add spacer for content
+            let spacer = document.getElementById('navbar-spacer');
+            if (!spacer) {
+                spacer = document.createElement('div');
+                spacer.id = 'navbar-spacer';
+                spacer.style.height = '80px';
+                spacer.style.width = '100%';
+                if (document.body) {
+                    document.body.insertBefore(spacer, navbarIframe.nextSibling);
+                }
+            }
+        }
     }
-    window.navbarLoaded = true;
     
     // Get current page to set active state
     const currentPath = window.location.pathname;
@@ -180,23 +226,20 @@
         initDropdowns();
     }
     
-    // Initialize persistent navbar
+    // Create iframe navbar immediately
     if (document.readyState === 'loading') {
         if (document.body) {
-            createPersistentNavbar();
+            createIframeNavbar();
         } else {
             const observer = new MutationObserver(function(mutations, obs) {
                 if (document.body) {
-                    createPersistentNavbar();
+                    createIframeNavbar();
                     obs.disconnect();
                 }
             });
             observer.observe(document.documentElement, { childList: true, subtree: true });
         }
     } else {
-        createPersistentNavbar();
+        createIframeNavbar();
     }
-    
-    // Expose update function for SPA navigation
-    window.updateNavbarState = updateNavbarState;
 })();
