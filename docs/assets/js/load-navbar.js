@@ -1,6 +1,14 @@
-// Fixed Navbar Loader - Loads navbar from separate HTML file
+// Fixed Navbar Loader - Persistent navbar that never reloads
 (function() {
     'use strict';
+    
+    // Global navbar instance - only load once
+    if (window.navbarLoaded) {
+        // Navbar already loaded, just update active state
+        updateNavbarState();
+        return;
+    }
+    window.navbarLoaded = true;
     
     // Get current page to set active state
     const currentPath = window.location.pathname;
@@ -82,12 +90,38 @@
         });
     }
     
-    // Update navbar in place - DON'T replace it to prevent shifting
-    function updateNavbar() {
-        const existingNav = document.querySelector('nav.navbar');
+    // Update only the active state - don't touch the navbar HTML
+    function updateNavbarState() {
+        setActiveNav();
+        fixRelativePaths();
+    }
+    
+    // Create persistent navbar container that never reloads
+    function createPersistentNavbar() {
+        // Check if persistent navbar container already exists
+        let navContainer = document.getElementById('persistent-navbar-container');
         
-        if (!existingNav) {
-            // Only load if navbar doesn't exist
+        if (!navContainer) {
+            // Create container that will hold the navbar
+            navContainer = document.createElement('div');
+            navContainer.id = 'persistent-navbar-container';
+            navContainer.style.position = 'fixed';
+            navContainer.style.top = '0';
+            navContainer.style.left = '0';
+            navContainer.style.right = '0';
+            navContainer.style.zIndex = '10000';
+            navContainer.style.width = '100%';
+            document.body.appendChild(navContainer);
+        }
+        
+        // Remove any existing navbar from page content (it will be in our container)
+        const existingNav = document.querySelector('nav.navbar');
+        if (existingNav && !existingNav.closest('#persistent-navbar-container')) {
+            existingNav.remove();
+        }
+        
+        // Load navbar HTML into container if not already there
+        if (!navContainer.querySelector('nav.navbar')) {
             const depth = currentPath.split('/').length - 2;
             const navbarPath = depth > 0 ? '../'.repeat(depth) + 'assets/navbar.html' : 'assets/navbar.html';
             
@@ -96,15 +130,47 @@
             xhr.send();
             
             if (xhr.status === 200) {
-                const html = xhr.responseText;
-                if (document.body) {
-                    document.body.insertAdjacentHTML('afterbegin', html);
-                }
+                navContainer.innerHTML = xhr.responseText;
             }
         }
         
-        // Just update the existing navbar - don't replace it
-        // Fix relative paths for subdirectories
+        // Get navbar and style it
+        const nav = navContainer.querySelector('nav.navbar');
+        if (!nav) return;
+        
+        // Ensure fixed positioning
+        nav.style.position = 'relative';
+        nav.style.background = 'white';
+        nav.style.width = '100%';
+        
+        // Replace logo image with text if needed
+        const logo = nav.querySelector('.logo');
+        if (logo) {
+            const logoImg = logo.querySelector('img.logo-img');
+            if (logoImg) {
+                logoImg.remove();
+                logo.textContent = 'JAC INTERIORS';
+            }
+            logo.style.setProperty('color', '#222a26', 'important');
+            logo.style.setProperty('font-size', '1.5rem', 'important');
+            logo.style.setProperty('font-weight', '500', 'important');
+            logo.style.setProperty('letter-spacing', '-1px', 'important');
+            logo.style.setProperty('text-transform', 'uppercase', 'important');
+            logo.style.setProperty('text-decoration', 'none', 'important');
+        }
+        
+        // Set nav link colors
+        const navLinks = nav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.style.setProperty('color', '#222a26', 'important');
+        });
+        
+        const dropdownLinks = nav.querySelectorAll('.nav-dropdown-content a');
+        dropdownLinks.forEach(link => {
+            link.style.setProperty('color', '#222a26', 'important');
+        });
+        
+        // Fix relative paths
         fixRelativePaths();
         
         // Set active nav state
@@ -112,68 +178,25 @@
         
         // Initialize dropdowns
         initDropdowns();
-        
-        // Ensure navbar has correct fixed positioning and black text
-        if (existingNav) {
-            existingNav.style.position = 'fixed';
-            existingNav.style.top = '0';
-            existingNav.style.left = '0';
-            existingNav.style.right = '0';
-            existingNav.style.width = '100%';
-            existingNav.style.zIndex = '10000';
-            existingNav.style.background = 'white';
-            
-            // Replace logo image with text if needed
-            const logo = existingNav.querySelector('.logo');
-            if (logo) {
-                const logoImg = logo.querySelector('img.logo-img');
-                if (logoImg) {
-                    // Remove image and replace with text
-                    logoImg.remove();
-                    logo.textContent = 'JAC INTERIORS';
-                }
-                // Force black text on logo
-                logo.style.setProperty('color', '#222a26', 'important');
-                logo.style.setProperty('font-size', '1.5rem', 'important');
-                logo.style.setProperty('font-weight', '500', 'important');
-                logo.style.setProperty('letter-spacing', '-1px', 'important');
-                logo.style.setProperty('text-transform', 'uppercase', 'important');
-                logo.style.setProperty('text-decoration', 'none', 'important');
-            }
-            
-            // Force black text on all nav links
-            const navLinks = existingNav.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.style.setProperty('color', '#222a26', 'important');
-            });
-            
-            // Force black text on dropdown links
-            const dropdownLinks = existingNav.querySelectorAll('.nav-dropdown-content a');
-            dropdownLinks.forEach(link => {
-                link.style.setProperty('color', '#222a26', 'important');
-            });
-        }
     }
     
-    // Update navbar IMMEDIATELY - don't wait, just update in place
+    // Initialize persistent navbar
     if (document.readyState === 'loading') {
-        // Script is in head - wait for body
         if (document.body) {
-            updateNavbar();
+            createPersistentNavbar();
         } else {
             const observer = new MutationObserver(function(mutations, obs) {
                 if (document.body) {
-                    updateNavbar();
+                    createPersistentNavbar();
                     obs.disconnect();
                 }
             });
             observer.observe(document.documentElement, { childList: true, subtree: true });
         }
     } else {
-        // DOM already loaded
-        updateNavbar();
+        createPersistentNavbar();
     }
     
-    // Also update after a tiny delay to catch any late changes
-    setTimeout(updateNavbar, 10);
+    // Expose update function for SPA navigation
+    window.updateNavbarState = updateNavbarState;
 })();
