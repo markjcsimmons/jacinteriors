@@ -26,13 +26,28 @@
   height: auto;
   display: block;
 }
-/* Gallery grid that intelligently arranges images */
+/* Masonry-style layout that minimizes gaps */
 .image-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-  grid-auto-rows: auto;
-  align-items: start;
+  column-count: 2;
+  column-gap: 2rem;
+  column-fill: balance;
+}
+.image-gallery-grid > div {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 2rem;
+  display: inline-block;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .image-gallery-grid {
+    column-count: 1;
+  }
+}
+@media (min-width: 1200px) {
+  .image-gallery-grid {
+    column-count: 3;
+  }
 }
 </style>
 </meta></head>
