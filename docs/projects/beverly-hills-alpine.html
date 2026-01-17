@@ -6,6 +6,16 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Beverly Hills Alpine | JAC Interiors</title>
 <link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+@media (max-width: 768px) {
+  .first-row-image { order: 2 !important; }
+  .first-row-text { order: 1 !important; }
+}
+@media (min-width: 769px) {
+  .first-row-image { order: 1 !important; }
+  .first-row-text { order: 2 !important; }
+}
+</style>
 </meta></head>
 <body>
 <nav class="navbar scrolled">
@@ -60,27 +70,34 @@
 <!-- Project Image Gallery -->
 <section style="padding: 4rem 0;">
 <div class="container" style="max-width: 1400px;">
+<!-- First Row: Image Left, Text Card Right (on mobile: text card first) -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+<div class="parallax-image scale-in-image hover-zoom-image first-row-image" style="width: 100%;">
+<img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-1.jpg" style="width: 100%; height: auto; border-radius: 4px; display: block;"/>
+</div>
+<div class="first-row-text" style="background: #fafafa; padding: 2.5rem; border-radius: 4px; display: flex; flex-direction: column; justify-content: center;">
+<h3 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px; color: #1a1a1a;">The Vision</h3>
+<p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 0;">Luxury Residence in Beverly Hills, CA blending refined textures with modern simplicity. Located in the heart of Beverly Hills, this spanish style home was ripe for a remodel.</p>
+</div>
+</div>
 <!-- Image Grid - Mostly images layout -->
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
 <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
-<img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-1.jpg" style="width: 100%; height: auto; border-radius: 4px; display: block;"/>
+<img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-2.jpg" style="width: 100%; height: auto; border-radius: 4px; display: block;"/>
 </div>
 <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
-<img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-2.jpg" style="width: 100%; height: auto; border-radius: 4px; display: block;"/>
+<img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-3.jpg" style="width: 100%; height: auto; border-radius: 4px; display: block;"/>
 </div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
 <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
-<img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-3.jpg" style="width: 100%; height: auto; border-radius: 4px; display: block;"/>
-</div>
-<div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
 <img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-4.jpg" style="width: 100%; height: auto; border-radius: 4px; display: block;"/>
 </div>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
 <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
 <img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-5.jpg" style="width: 100%; height: auto; border-radius: 4px; display: block;"/>
 </div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
 <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
 <img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-6.jpg" style="width: 100%; height: auto; border-radius: 4px; display: block;"/>
 </div>
