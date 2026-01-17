@@ -82,28 +82,38 @@
         });
     }
     
-    // Load navbar from HTML file
-    async function loadNavbar() {
+    // Load navbar from HTML file SYNCHRONOUSLY to prevent shifting
+    function loadNavbar() {
         // Calculate path to navbar.html based on current page location
         const depth = currentPath.split('/').length - 2;
         const navbarPath = depth > 0 ? '../'.repeat(depth) + 'assets/navbar.html' : 'assets/navbar.html';
         
-        try {
-            const response = await fetch(navbarPath);
-            if (!response.ok) {
-                console.error('Failed to load navbar:', response.status);
-                return;
-            }
-            
-            const html = await response.text();
+        // Use synchronous XMLHttpRequest to load immediately (no async delay)
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', navbarPath, false); // false = synchronous
+        xhr.send();
+        
+        if (xhr.status === 200) {
+            const html = xhr.responseText;
             
             // Find existing navbar and replace it
             const existingNav = document.querySelector('nav.navbar');
             if (existingNav) {
                 existingNav.outerHTML = html;
             } else {
-                // Insert at beginning of body
-                document.body.insertAdjacentHTML('afterbegin', html);
+                // Insert at beginning of body BEFORE any content
+                if (document.body) {
+                    document.body.insertAdjacentHTML('afterbegin', html);
+                } else {
+                    // If body doesn't exist yet, wait for it
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.body.insertAdjacentHTML('afterbegin', html);
+                        fixRelativePaths();
+                        setActiveNav();
+                        initDropdowns();
+                    });
+                    return;
+                }
             }
             
             // Fix relative paths for subdirectories
@@ -114,19 +124,27 @@
             
             // Initialize dropdowns
             initDropdowns();
-            
-        } catch (error) {
-            console.error('Error loading navbar:', error);
+        } else {
+            console.error('Failed to load navbar:', xhr.status);
         }
     }
     
-    // Load navbar immediately
+    // Load navbar IMMEDIATELY - before page renders
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadNavbar);
+        // Script is in head or early in body - wait for body
+        if (document.body) {
+            loadNavbar();
+        } else {
+            const observer = new MutationObserver(function(mutations, obs) {
+                if (document.body) {
+                    loadNavbar();
+                    obs.disconnect();
+                }
+            });
+            observer.observe(document.documentElement, { childList: true, subtree: true });
+        }
     } else {
+        // DOM already loaded
         loadNavbar();
     }
-    
-    // Also load after a short delay to catch any late-loading content
-    setTimeout(loadNavbar, 100);
 })();
