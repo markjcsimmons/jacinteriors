@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Bar Areas | JAC Interiors</title>
+    <link href="assets/css/style.css" rel="stylesheet"/>
+    <style>
+        @media (max-width: 768px) {
+            .first-row-image { order: 2 !important; }
+            .first-row-text { order: 1 !important; }
+            .first-row-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (min-width: 769px) {
+            .first-row-image { order: 1 !important; }
+            .first-row-text { order: 2 !important; }
+        }
+        .image-container {
+            width: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .image-gallery-grid {
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .image-gallery-grid > div {
+            position: absolute;
+            width: calc(50% - 1rem);
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        .image-gallery-grid .image-container {
+            margin: 0;
+        }
+        .image-gallery-grid .image-container img {
+            margin: 0;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .first-row-grid {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        @media (max-width: 768px) {
+            .image-gallery-grid > div {
+                width: 100%;
+            }
+        }
+        @media (min-width: 1200px) {
+            .image-gallery-grid > div {
+                width: calc(33.333% - 1.33rem);
+            }
+        }
+    </style>
+</meta></head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index-variant-2.html" class="logo">
+                    <img src="assets/images/jac-logo.png" alt="JAC Interiors" class="logo-img">
+                </a>
+                <div class="nav-menu" id="navMenu">
+                    <a href="index-variant-2.html" class="nav-link">HOME</a>
+                    <a href="portfolio.html" class="nav-link">PORTFOLIO</a>
+                    <div class="nav-dropdown">
+                        <a href="#" class="nav-link active">SPACES</a>
+                        <div class="nav-dropdown-content">
+                            <a href="bathrooms.html">Bathrooms</a>
+                            <a href="bedrooms.html">Bedrooms</a>
+                            <a href="kitchens.html">Kitchens</a>
+                            <a href="dining-rooms.html">Dining Rooms</a>
+                            <a href="living-spaces.html">Living Spaces</a>
+                            <a href="office-spaces.html">Office Spaces</a>
+                            <a href="kids-bedrooms.html">Kid's Bedrooms</a>
+                            <a href="entryways.html">Entryways</a>
+                            <a href="bar-area.html">Bar Area</a>
+                            <a href="laundry-rooms.html">Laundry Rooms</a>
+                            <a href="outdoor-spaces.html">Outdoor Spaces</a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <a href="services.html" class="nav-link">SERVICES</a>
+                        <div class="nav-dropdown-content">
+                            <a href="residential-design.html">Residential Design</a>
+                            <a href="commercial-design.html">Commercial Design</a>
+                            <a href="interior-styling.html">Interior Styling</a>
+                            <a href="space-planning.html">Space Planning</a>
+                            <a href="cities-we-serve.html">Cities We Serve</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="contact.html" class="nav-link">CONTACT</a>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header with Metadata -->
+    <section style="padding: 3rem 0; background: #1a1a1a; color: white; margin-top: 5rem;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 4rem; flex-wrap: wrap;">
+                <div style="flex: 1; max-width: 600px;">
+                    <h1 class="scroll-fade-in" style="font-size: 3.5rem; font-weight: 500; margin: 0 0 1rem 0; letter-spacing: -1.5px; line-height: 1.1; color: white;">Bar Area Design</h1>
+                    <p class="scroll-fade-in delay-1" style="font-size: 16px; color: #ccc; line-height: 1.6; font-weight: 400; margin-top: 0.5rem;">Sophisticated bar spaces for entertaining and relaxation</p>
+                </div>
+                <div style="display: flex; gap: 3rem; flex-shrink: 0;">
+                    <div class="scroll-fade-in delay-1">
+                        <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Category</div>
+                        <div style="font-weight: 400; font-size: 0.95rem; color: white;">Interior Design</div>
+                    </div>
+                    <div class="scroll-fade-in delay-2">
+                        <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Region</div>
+                        <div style="font-weight: 400; font-size: 0.95rem; color: white;">Los Angeles & Miami</div>
+                    </div>
+                    <div class="scroll-fade-in delay-3">
+                        <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Style</div>
+                        <div style="font-weight: 400; font-size: 0.95rem; color: white;">Luxury Residential</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section style="padding: 4rem 0;">
+        <div class="container" style="max-width: 1400px;">
+            <!-- First Row: Image Left, Text Card Right -->
+            <div class="first-row-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; width: 100%;">
+                <div class="parallax-image scale-in-image hover-zoom-image first-row-image" style="width: 100%;">
+                    <div class="image-container">
+                        <img alt="Bar Areas" src="assets/images/spaces/bar-area/bar-area-1.jpg"/>
+                    </div>
+                </div>
+                <div class="first-row-text" style="background: #fafafa; padding: 2.5rem; border-radius: 4px; display: flex; flex-direction: column; justify-content: center;">
+                    <h3 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px; color: #1a1a1a;">Entertaining Excellence</h3>
+                    <p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 0;">From wine cellars to cocktail bars, we design spaces that elevate entertaining. Custom millwork, specialty lighting, and curated accessories create the perfect backdrop for gathering.</p>
+                </div>
+            </div>
+
+            <!-- Image Grid - Masonry layout -->
+            <div class="image-gallery-grid" style="margin-bottom: 2rem;">
+                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+                    <div class="image-container">
+                        <img alt="Bar Areas" src="assets/images/spaces/bar-area/bar-area-2.jpg"/>
+                    </div>
+                </div>
+                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+                    <div class="image-container">
+                        <img alt="Bar Areas" src="assets/images/spaces/bar-area/bar-area-3.jpg"/>
+                    </div>
+                </div>
+                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+                    <div class="image-container">
+                        <img alt="Bar Areas" src="assets/images/spaces/bar-area/bar-area-4.jpg"/>
+                    </div>
+                </div>
+                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+                    <div class="image-container">
+                        <img alt="Bar Areas" src="assets/images/spaces/bar-area/bar-area-5.jpg"/>
+                    </div>
+                </div>
+                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+                    <div class="image-container">
+                        <img alt="Bar Areas" src="assets/images/spaces/bar-area/bar-area-6.jpg"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 6rem 0; background: #fafafa; text-align: center;">
+        <div class="container" style="max-width: 700px;">
+            <h2 class="scroll-fade-in" style="font-size: 2.5rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -1px;">Ready to Transform Your Bar Areas?</h2>
+            <p class="scroll-fade-in delay-1" style="font-size: 1.1rem; color: #666; margin-bottom: 2rem; line-height: 1.6;">Let's create a design that reflects your unique style and elevates your everyday living.</p>
+            <a class="btn btn-primary scroll-fade-in delay-2" href="contact.html" style="display: inline-block; padding: 1rem 2.5rem; background: var(--color-primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 500; transition: all 0.3s;">Start Your Project</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #1a1a1a; color: white; padding: 3rem 0 1.5rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 5rem; margin-bottom: 3rem;">
+                <div>
+                    <img alt="JAC Interiors" src="assets/images/jac-logo.png" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);"/>
+                    <p style="color: #999; line-height: 1.6;">Creating luxury spaces that elevate everyday living.</p>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; font-weight: 500;">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.5rem;"><a href="portfolio.html" style="color: #999; text-decoration: none;">Portfolio</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="about.html" style="color: #999; text-decoration: none;">About</a></li>
+                        <li style="margin-bottom: 0.5rem;"><a href="contact.html" style="color: #999; text-decoration: none;">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 1rem; font-weight: 500;">Contact</h4>
+                    <p style="color: #999; line-height: 1.6;">
+                        Los Angeles, CA<br/>
+                        Phone: (310) 555-0123<br/>
+                        Email: info@jacinteriors.com
+                    </p>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #666;">
+                <p>© 2024 JAC Interiors. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Masonry layout implementation
+        function initMasonry() {
+            const grid = document.querySelector('.image-gallery-grid');
+            if (!grid) return;
+            
+            const items = Array.from(grid.children);
+            if (items.length === 0) return;
+            
+            const gap = 16;
+            let columns = 2;
+            
+            if (window.innerWidth <= 768) {
+                columns = 1;
+            } else if (window.innerWidth >= 1200) {
+                columns = 3;
+            }
+            
+            const containerWidth = grid.offsetWidth;
+            const columnWidth = (containerWidth - (gap * (columns - 1))) / columns;
+            const columnHeights = new Array(columns).fill(0);
+            
+            items.forEach((item, index) => {
+                const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+                const left = shortestColumnIndex * (columnWidth + gap);
+                const top = columnHeights[shortestColumnIndex];
+                
+                item.style.left = left + 'px';
+                item.style.top = top + 'px';
+                item.style.width = columnWidth + 'px';
+                
+                const itemHeight = item.offsetHeight;
+                columnHeights[shortestColumnIndex] += itemHeight + gap;
+            });
+            
+            grid.style.height = Math.max(...columnHeights) + 'px';
+        }
+
+        window.addEventListener('load', () => {
+            const images = document.querySelectorAll('.image-gallery-grid img');
+            let loadedCount = 0;
+            
+            if (images.length === 0) {
+                initMasonry();
+                return;
+            }
+            
+            images.forEach(img => {
+                if (img.complete) {
+                    loadedCount++;
+                    if (loadedCount === images.length) {
+                        initMasonry();
+                    }
+                } else {
+                    img.addEventListener('load', () => {
+                        loadedCount++;
+                        if (loadedCount === images.length) {
+                            initMasonry();
+                        }
+                    });
+                }
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            initMasonry();
+        });
+    </script>
+</body>
+</html>
