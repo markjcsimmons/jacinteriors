@@ -37,57 +37,57 @@
         contactActive = ' active';
     }
     
-    // Determine if this is home page (for logo styling)
+    // Determine if this is home page (for active state only)
     const isHomePage = filename === 'index-variant-2.html' || filename === '' || filename === 'index.html';
     
-    // Determine correct logo path (handle subdirectories)
-    const getLogoPath = () => {
+    // Get correct path to home page
+    const getHomePath = () => {
         const depth = currentPath.split('/').length - 2; // -2 because path includes leading / and filename
         if (depth > 0) {
-            return '../'.repeat(depth) + 'assets/images/jac-logo.png';
+            return '../'.repeat(depth) + 'index-variant-2.html';
         }
-        return 'assets/images/jac-logo.png';
+        return 'index-variant-2.html';
     };
     
-    // Navbar HTML - single source of truth with inline styles for white bg + black text
+    // Navbar HTML - EXACTLY like home page: white bg, black text, "JAC INTERIORS" text logo
     const navbarHTML = `
-    <nav class="navbar" style="background: white !important; position: sticky !important; top: 0 !important; border-bottom: 1px solid #e4e4e4 !important; z-index: 1000 !important;">
+    <nav class="navbar" style="padding: 1.5rem 0 !important; background: white !important; position: sticky !important; top: 0 !important; z-index: 1000 !important; border-bottom: 1px solid var(--stroke) !important;">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="${isHomePage ? 'index-variant-2.html' : (currentPath.includes('/') ? '../index-variant-2.html' : 'index-variant-2.html')}" class="logo">
-                    ${isHomePage ? 'JAC INTERIORS' : `<img src="${getLogoPath()}" alt="JAC Interiors" class="logo-img" style="filter: none !important;">`}
+                <a href="${getHomePath()}" class="logo" style="font-size: 1.5rem !important; font-weight: 500 !important; letter-spacing: -1px !important; text-transform: uppercase !important; color: #222a26 !important; text-decoration: none !important;">
+                    JAC INTERIORS
                 </a>
-                <div class="nav-menu" id="navMenu">
-                    <a href="index-variant-2.html" class="nav-link${homeActive}" style="color: #222a26 !important;">HOME</a>
-                    <a href="portfolio.html" class="nav-link${portfolioActive}" style="color: #222a26 !important;">PORTFOLIO</a>
-                    <div class="nav-dropdown">
-                        <a href="#" class="nav-link${spacesActive}" style="color: #222a26 !important;">SPACES</a>
-                        <div class="nav-dropdown-content">
-                            <a href="bathrooms.html" style="color: #222a26 !important;">Bathrooms</a>
-                            <a href="bedrooms.html" style="color: #222a26 !important;">Bedrooms</a>
-                            <a href="kitchens.html" style="color: #222a26 !important;">Kitchens</a>
-                            <a href="dining-rooms.html" style="color: #222a26 !important;">Dining Rooms</a>
-                            <a href="living-spaces.html" style="color: #222a26 !important;">Living Spaces</a>
-                            <a href="office-spaces.html" style="color: #222a26 !important;">Office Spaces</a>
-                            <a href="kids-bedrooms.html" style="color: #222a26 !important;">Kid's Bedrooms</a>
-                            <a href="entryways.html" style="color: #222a26 !important;">Entryways</a>
-                            <a href="bar-area.html" style="color: #222a26 !important;">Bar Area</a>
-                            <a href="laundry-rooms.html" style="color: #222a26 !important;">Laundry Rooms</a>
-                            <a href="outdoor-spaces.html" style="color: #222a26 !important;">Outdoor Spaces</a>
+                <div class="nav-menu" id="navMenu" style="display: flex !important; gap: 2.5rem !important; align-items: center !important;">
+                    <a href="${getHomePath()}" class="nav-link${homeActive}" style="font-size: 0.95rem !important; font-weight: 500 !important; color: var(--text-main) !important; color: #222a26 !important; letter-spacing: -0.2px !important; text-decoration: none !important; text-transform: uppercase !important;">HOME</a>
+                    <a href="${currentPath.includes('/') ? '../portfolio.html' : 'portfolio.html'}" class="nav-link${portfolioActive}" style="font-size: 0.95rem !important; font-weight: 500 !important; color: var(--text-main) !important; color: #222a26 !important; letter-spacing: -0.2px !important; text-decoration: none !important; text-transform: uppercase !important;">PORTFOLIO</a>
+                    <div class="nav-dropdown" style="position: relative !important; display: inline-block !important;">
+                        <a href="#" class="nav-link${spacesActive}" style="font-size: 0.95rem !important; font-weight: 500 !important; color: var(--text-main) !important; color: #222a26 !important; letter-spacing: -0.2px !important; text-decoration: none !important; text-transform: uppercase !important;">SPACES</a>
+                        <div class="nav-dropdown-content" style="display: none !important; position: absolute !important; top: 100% !important; left: 0 !important; background: white !important; min-width: 200px !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; padding: 0.5rem 0 !important; margin-top: 0 !important; z-index: 1000 !important; border-radius: 4px !important; flex-direction: column !important;">
+                            <a href="${currentPath.includes('/') ? '../bathrooms.html' : 'bathrooms.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Bathrooms</a>
+                            <a href="${currentPath.includes('/') ? '../bedrooms.html' : 'bedrooms.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Bedrooms</a>
+                            <a href="${currentPath.includes('/') ? '../kitchens.html' : 'kitchens.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Kitchens</a>
+                            <a href="${currentPath.includes('/') ? '../dining-rooms.html' : 'dining-rooms.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Dining Rooms</a>
+                            <a href="${currentPath.includes('/') ? '../living-spaces.html' : 'living-spaces.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Living Spaces</a>
+                            <a href="${currentPath.includes('/') ? '../office-spaces.html' : 'office-spaces.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Office Spaces</a>
+                            <a href="${currentPath.includes('/') ? '../kids-bedrooms.html' : 'kids-bedrooms.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Kid's Bedrooms</a>
+                            <a href="${currentPath.includes('/') ? '../entryways.html' : 'entryways.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Entryways</a>
+                            <a href="${currentPath.includes('/') ? '../bar-area.html' : 'bar-area.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Bar Area</a>
+                            <a href="${currentPath.includes('/') ? '../laundry-rooms.html' : 'laundry-rooms.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Laundry Rooms</a>
+                            <a href="${currentPath.includes('/') ? '../outdoor-spaces.html' : 'outdoor-spaces.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Outdoor Spaces</a>
                         </div>
                     </div>
-                    <div class="nav-dropdown">
-                        <a href="services.html" class="nav-link${servicesActive}" style="color: #222a26 !important;">SERVICES</a>
-                        <div class="nav-dropdown-content">
-                            <a href="residential-design.html" style="color: #222a26 !important;">Residential Design</a>
-                            <a href="commercial-design.html" style="color: #222a26 !important;">Commercial Design</a>
-                            <a href="interior-styling.html" style="color: #222a26 !important;">Interior Styling</a>
-                            <a href="space-planning.html" style="color: #222a26 !important;">Space Planning</a>
-                            <a href="cities-we-serve.html" style="color: #222a26 !important;">Cities We Serve</a>
+                    <div class="nav-dropdown" style="position: relative !important; display: inline-block !important;">
+                        <a href="${currentPath.includes('/') ? '../services.html' : 'services.html'}" class="nav-link${servicesActive}" style="font-size: 0.95rem !important; font-weight: 500 !important; color: var(--text-main) !important; color: #222a26 !important; letter-spacing: -0.2px !important; text-decoration: none !important; text-transform: uppercase !important;">SERVICES</a>
+                        <div class="nav-dropdown-content" style="display: none !important; position: absolute !important; top: 100% !important; left: 0 !important; background: white !important; min-width: 200px !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; padding: 0.5rem 0 !important; margin-top: 0 !important; z-index: 1000 !important; border-radius: 4px !important; flex-direction: column !important;">
+                            <a href="${currentPath.includes('/') ? '../residential-design.html' : 'residential-design.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Residential Design</a>
+                            <a href="${currentPath.includes('/') ? '../commercial-design.html' : 'commercial-design.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Commercial Design</a>
+                            <a href="${currentPath.includes('/') ? '../interior-styling.html' : 'interior-styling.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Interior Styling</a>
+                            <a href="${currentPath.includes('/') ? '../space-planning.html' : 'space-planning.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Space Planning</a>
+                            <a href="${currentPath.includes('/') ? '../cities-we-serve.html' : 'cities-we-serve.html'}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Cities We Serve</a>
                         </div>
                     </div>
-                    <a href="about.html" class="nav-link${aboutActive}" style="color: #222a26 !important;">ABOUT</a>
-                    <a href="contact.html" class="nav-link${contactActive}" style="color: #222a26 !important;">CONTACT</a>
+                    <a href="${currentPath.includes('/') ? '../about.html' : 'about.html'}" class="nav-link${aboutActive}" style="font-size: 0.95rem !important; font-weight: 500 !important; color: var(--text-main) !important; color: #222a26 !important; letter-spacing: -0.2px !important; text-decoration: none !important; text-transform: uppercase !important;">ABOUT</a>
+                    <a href="${currentPath.includes('/') ? '../contact.html' : 'contact.html'}" class="nav-link${contactActive}" style="font-size: 0.95rem !important; font-weight: 500 !important; color: var(--text-main) !important; color: #222a26 !important; letter-spacing: -0.2px !important; text-decoration: none !important; text-transform: uppercase !important;">CONTACT</a>
                 </div>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">
                     <span></span><span></span><span></span>
@@ -112,37 +112,30 @@
             }
         }
         
-        // Apply styling - ALL pages get white background with black text (like home page)
+        // Add hover styles for dropdowns (matching home page)
         setTimeout(() => {
             const nav = document.querySelector('nav.navbar');
             if (nav) {
-                // All pages: white background with black text (like home page)
-                nav.style.background = 'white';
-                nav.style.position = 'sticky';
-                nav.style.borderBottom = '1px solid var(--stroke)';
-                
-                // Remove navbar-dark class if it exists
+                // Remove any conflicting classes
                 nav.classList.remove('navbar-dark');
-                nav.classList.remove('scrolled'); // Remove scrolled class that might affect colors
+                nav.classList.remove('scrolled');
                 
-                // Force black text for all nav links with !important
-                const navLinks = nav.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    link.style.setProperty('color', '#222a26', 'important');
-                    link.style.setProperty('opacity', '1', 'important');
+                // Add hover behavior for dropdowns (matching home page)
+                const dropdowns = nav.querySelectorAll('.nav-dropdown');
+                dropdowns.forEach(dropdown => {
+                    dropdown.addEventListener('mouseenter', function() {
+                        const content = this.querySelector('.nav-dropdown-content');
+                        if (content) {
+                            content.style.display = 'flex';
+                        }
+                    });
+                    dropdown.addEventListener('mouseleave', function() {
+                        const content = this.querySelector('.nav-dropdown-content');
+                        if (content) {
+                            content.style.display = 'none';
+                        }
+                    });
                 });
-                
-                // Force black text for dropdown links too
-                const dropdownLinks = nav.querySelectorAll('.nav-dropdown-content a');
-                dropdownLinks.forEach(link => {
-                    link.style.setProperty('color', '#222a26', 'important');
-                });
-                
-                // Ensure logo is dark (not inverted)
-                const logoImg = nav.querySelector('.logo-img');
-                if (logoImg) {
-                    logoImg.style.setProperty('filter', 'none', 'important');
-                }
             }
         }, 50);
         
