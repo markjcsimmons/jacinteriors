@@ -363,8 +363,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // On portfolio, project, city, or space pages, always keep navbar visible (dark)
-    if (isPortfolioPage || isProjectPage || isCityPage || isSpacePage) {
+    if (!isHomePage && (isPortfolioPage || isProjectPage || isCityPage || isSpacePage)) {
         navbar.classList.add('navbar-dark');
+    }
+    
+    // Home page: ensure navbar-dark is removed
+    if (isHomePage) {
+        navbar.classList.remove('navbar-dark');
     }
     
     window.addEventListener('scroll', function() {

@@ -177,14 +177,15 @@ img {
     transition: all 0.4s ease;
 }
 
-/* Home page keeps its inline styles (white bg, black text) - don't override */
-/* Only apply dark navbar to internal pages */
-body:not(.home-page) .navbar:not([style*="background: white"]) {
-    background: #1a1a1a;
+/* Home page: NEVER apply dark background - it has white background in inline styles */
+body.home-page .navbar,
+body.home-page .navbar.navbar-dark {
+    background: white !important;
 }
 
-/* Dark navbar for pages with dark backgrounds */
-.navbar.navbar-dark {
+/* Dark navbar for pages with dark backgrounds (only non-home pages) */
+body:not(.home-page) .navbar.navbar-dark,
+body:not(.home-page) .navbar:not([style*="background: white"]) {
     background: #1a1a1a;
 }
 
@@ -221,8 +222,8 @@ body:not(.home-page) .navbar:not([style*="background: white"]) .logo-img {
 }
 
 /* Home page navbar logo: dark (matches white background) */
-.home-page .navbar:not(.scrolled) .logo-img {
-    filter: none;
+body.home-page .navbar .logo-img {
+    filter: none !important;
 }
 
 .nav-menu, .nav-links { display: flex; gap: 3rem; align-items: center; }
@@ -246,7 +247,11 @@ body:not(.home-page) .navbar:not([style*="background: white"]) .nav-link {
     color: var(--color-secondary);
 }
 
-/* Home page navbar: respects inline styles - black text on white background */
+/* Home page navbar: black text on white background */
+body.home-page .navbar .nav-link {
+    color: var(--color-secondary) !important;
+}
+
 /* Don't override if navbar has white background inline style */
 .navbar[style*="background: white"] .nav-link {
     color: var(--color-secondary) !important;
