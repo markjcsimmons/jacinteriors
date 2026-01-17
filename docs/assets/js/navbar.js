@@ -112,6 +112,16 @@
             }
         }
         
+        // Apply home page styling if needed
+        if (isHomePage) {
+            const nav = document.querySelector('nav.navbar');
+            if (nav) {
+                nav.style.background = 'white';
+                nav.style.position = 'sticky';
+                nav.style.borderBottom = '1px solid var(--stroke)';
+            }
+        }
+        
         // Re-initialize mobile menu functionality
         initializeMobileMenu();
     }
