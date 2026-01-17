@@ -15,18 +15,24 @@
   .first-row-image { order: 1 !important; }
   .first-row-text { order: 2 !important; }
 }
-/* Uniform image container styling */
+/* Smart grid layout that adapts to image aspect ratios */
 .image-container {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
   border-radius: 4px;
+  overflow: hidden;
 }
 .image-container img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
+}
+/* Gallery grid that intelligently arranges images */
+.image-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  grid-auto-rows: auto;
+  align-items: start;
 }
 </style>
 </meta></head>
@@ -95,8 +101,8 @@
 <p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 0;">Luxury Residence in Beverly Hills, CA blending refined textures with modern simplicity. Located in the heart of Beverly Hills, this spanish style home was ripe for a remodel.</p>
 </div>
 </div>
-<!-- Image Grid - Mostly images layout -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+<!-- Image Grid - Mostly images layout (smart grid that adapts to aspect ratios) -->
+<div class="image-gallery-grid" style="margin-bottom: 2rem;">
 <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
 <div class="image-container">
 <img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-2.jpg"/>
@@ -107,8 +113,6 @@
 <img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-3.jpg"/>
 </div>
 </div>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
 <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
 <div class="image-container">
 <img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-4.jpg"/>
@@ -119,8 +123,6 @@
 <img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-5.jpg"/>
 </div>
 </div>
-</div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
 <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
 <div class="image-container">
 <img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-6.jpg"/>
