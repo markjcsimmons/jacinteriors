@@ -112,25 +112,30 @@
             }
         }
         
-        // Apply styling based on page type - use setTimeout to ensure DOM is ready
+        // Apply styling - ALL pages get white background with black text (like home page)
         setTimeout(() => {
             const nav = document.querySelector('nav.navbar');
             if (nav) {
-                if (isHomePage) {
-                    // Home page: white background
-                    nav.style.background = 'white';
-                    nav.style.position = 'sticky';
-                    nav.style.borderBottom = '1px solid var(--stroke)';
-                } else {
-                    // Internal pages: dark background with white text
-                    nav.classList.add('navbar-dark');
-                    nav.style.background = '#1a1a1a';
-                    nav.style.position = 'fixed';
-                    nav.style.top = '0';
-                    nav.style.left = '0';
-                    nav.style.width = '100%';
-                    nav.style.zIndex = '1000';
+                // All pages: white background with black text (like home page)
+                nav.style.background = 'white';
+                nav.style.position = 'sticky';
+                nav.style.borderBottom = '1px solid var(--stroke)';
+                
+                // Ensure black text for all nav links
+                const navLinks = nav.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.style.color = 'var(--text-main)';
+                    link.style.color = '#222a26';
+                });
+                
+                // Ensure logo is dark (not inverted)
+                const logoImg = nav.querySelector('.logo-img');
+                if (logoImg) {
+                    logoImg.style.filter = 'none';
                 }
+                
+                // Remove navbar-dark class if it exists
+                nav.classList.remove('navbar-dark');
             }
         }, 10);
         
