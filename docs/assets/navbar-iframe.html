@@ -9,8 +9,11 @@
         body { 
             margin: 0; 
             padding: 0; 
-            overflow: hidden;
+            overflow: visible !important;
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        html {
+            overflow: visible !important;
         }
         .navbar {
             padding: 1.5rem 0 !important;
@@ -70,11 +73,15 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
             padding: 0.5rem 0 !important;
             margin-top: 0 !important;
-            z-index: 1000 !important;
+            z-index: 10001 !important;
             border-radius: 4px !important;
             flex-direction: column !important;
         }
         .nav-dropdown:hover .nav-dropdown-content {
+            display: flex !important;
+        }
+        /* Keep dropdown visible when hovering over it */
+        .nav-dropdown-content:hover {
             display: flex !important;
         }
         .nav-dropdown-content a {

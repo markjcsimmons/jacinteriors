@@ -31,7 +31,11 @@
             navbarIframe.style.border = 'none';
             navbarIframe.style.zIndex = '10000';
             navbarIframe.style.background = 'white';
+            navbarIframe.style.overflow = 'visible';
             navbarIframe.scrolling = 'no';
+            
+            // Allow dropdowns to overflow iframe
+            navbarIframe.setAttribute('allowtransparency', 'true');
             
             // Insert at very beginning of body
             if (document.body) {
