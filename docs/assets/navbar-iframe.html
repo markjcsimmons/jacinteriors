@@ -6,13 +6,18 @@
     <title>Navbar</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { margin: 0; padding: 0; overflow: hidden; }
+        body { 
+            margin: 0; 
+            padding: 0; 
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
         .navbar {
-            padding: 1.5rem 0;
-            background: white;
+            padding: 1.5rem 0 !important;
+            background: white !important;
             position: relative;
             width: 100%;
-            border-bottom: 1px solid #e4e4e4;
+            border-bottom: 1px solid #e4e4e4 !important;
         }
         .container {
             max-width: 1400px;
@@ -20,63 +25,66 @@
             padding: 0 2rem;
         }
         .nav-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
         }
         .logo {
-            font-size: 1.5rem;
-            font-weight: 500;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-            color: #222a26;
-            text-decoration: none;
+            font-size: 1.5rem !important;
+            font-weight: 500 !important;
+            letter-spacing: -1px !important;
+            text-transform: uppercase !important;
+            color: #222a26 !important;
+            text-decoration: none !important;
         }
         .nav-menu {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
+            display: flex !important;
+            gap: 2.5rem !important;
+            align-items: center !important;
         }
         .nav-link {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #222a26;
-            letter-spacing: -0.2px;
-            text-decoration: none;
-            text-transform: uppercase;
+            font-size: 0.95rem !important;
+            font-weight: 500 !important;
+            color: #222a26 !important;
+            letter-spacing: -0.2px !important;
+            text-decoration: none !important;
+            text-transform: uppercase !important;
         }
         .nav-link:hover {
-            opacity: 0.7;
+            opacity: 0.7 !important;
+        }
+        .nav-link.active {
+            font-weight: 600 !important;
         }
         .nav-dropdown {
-            position: relative;
-            display: inline-block;
+            position: relative !important;
+            display: inline-block !important;
         }
         .nav-dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            min-width: 200px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            padding: 0.5rem 0;
-            margin-top: 0;
-            z-index: 1000;
-            border-radius: 4px;
-            flex-direction: column;
+            display: none !important;
+            position: absolute !important;
+            top: 100% !important;
+            left: 0 !important;
+            background: white !important;
+            min-width: 200px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            padding: 0.5rem 0 !important;
+            margin-top: 0 !important;
+            z-index: 1000 !important;
+            border-radius: 4px !important;
+            flex-direction: column !important;
         }
         .nav-dropdown:hover .nav-dropdown-content {
-            display: flex;
+            display: flex !important;
         }
         .nav-dropdown-content a {
-            color: #222a26;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            display: block;
+            color: #222a26 !important;
+            padding: 0.5rem 1rem !important;
+            text-decoration: none !important;
+            display: block !important;
         }
         .nav-dropdown-content a:hover {
-            background: #f5f5f5;
+            background: #f5f5f5 !important;
         }
     </style>
     <script>
@@ -118,7 +126,7 @@
             }
         }
         
-        // Fix relative paths
+        // Fix relative paths and make links navigate parent window
         function fixPaths() {
             const depth = currentPath.split('/').length - 2;
             const prefix = depth > 0 ? '../'.repeat(depth) : '';
@@ -130,6 +138,15 @@
                         link.setAttribute('href', prefix + href);
                     }
                 }
+                // Ensure all links navigate parent window
+                link.setAttribute('target', '_parent');
+                // Also add click handler as backup
+                link.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') && !this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        window.parent.location.href = this.getAttribute('href');
+                    }
+                });
             });
         }
         
