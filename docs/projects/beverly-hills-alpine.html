@@ -27,36 +27,39 @@
   height: auto;
   display: block;
 }
-/* Masonry-style layout that minimizes gaps */
+/* Masonry grid container */
 .image-gallery-grid {
-  column-count: 2;
-  column-width: calc(50% - 1rem);
-  column-gap: 2rem;
-  column-fill: balance;
+  position: relative;
   width: 100%;
   box-sizing: border-box;
 }
 .image-gallery-grid > div {
-  break-inside: avoid;
-  page-break-inside: avoid;
-  margin-bottom: 2rem;
-  display: inline-block;
-  width: 100%;
+  position: absolute;
+  width: calc(50% - 1rem);
   box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+.image-gallery-grid .image-container {
+  margin: 0;
+}
+.image-gallery-grid .image-container img {
+  margin: 0;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .first-row-grid {
   width: 100%;
   box-sizing: border-box;
 }
 @media (max-width: 768px) {
-  .image-gallery-grid {
-    column-count: 1;
+  .image-gallery-grid > div {
+    width: 100%;
   }
 }
 @media (min-width: 1200px) {
-  .image-gallery-grid {
-    column-count: 3;
-    column-width: calc(33.333% - 1.33rem);
+  .image-gallery-grid > div {
+    width: calc(33.333% - 1.33rem);
   }
 }
 </style>
@@ -102,10 +105,6 @@
 <div class="scroll-fade-in delay-3">
 <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Style</div>
 <div style="font-weight: 400; font-size: 0.95rem; color: white;">Modern</div>
-</div>
-<div class="scroll-fade-in delay-3">
-<div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Year</div>
-<div style="font-weight: 400; font-size: 0.95rem; color: white;">2023</div>
 </div>
 </div>
 </div>
@@ -195,5 +194,86 @@
 </div>
 </footer>
 <script src="../assets/js/main.js"></script>
+<script>
+// Masonry layout implementation
+function initMasonry() {
+  const grid = document.querySelector('.image-gallery-grid');
+  if (!grid) return;
+  
+  const items = Array.from(grid.children);
+  if (items.length === 0) return;
+  
+  const gap = 16; // 1rem = 16px
+  let columns = 2;
+  
+  // Determine number of columns based on screen width
+  if (window.innerWidth <= 768) {
+    columns = 1;
+  } else if (window.innerWidth >= 1200) {
+    columns = 3;
+  }
+  
+  // Calculate column width
+  const containerWidth = grid.offsetWidth;
+  const columnWidth = (containerWidth - (gap * (columns - 1))) / columns;
+  
+  // Initialize column heights
+  const columnHeights = new Array(columns).fill(0);
+  
+  // Position each item
+  items.forEach((item, index) => {
+    // Find the shortest column
+    const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+    
+    // Calculate position
+    const left = shortestColumnIndex * (columnWidth + gap);
+    const top = columnHeights[shortestColumnIndex];
+    
+    // Set position
+    item.style.left = left + 'px';
+    item.style.top = top + 'px';
+    item.style.width = columnWidth + 'px';
+    
+    // Update column height
+    const itemHeight = item.offsetHeight;
+    columnHeights[shortestColumnIndex] += itemHeight + gap;
+  });
+  
+  // Set container height
+  grid.style.height = Math.max(...columnHeights) + 'px';
+}
+
+// Initialize on load and resize
+window.addEventListener('load', () => {
+  // Wait for images to load
+  const images = document.querySelectorAll('.image-gallery-grid img');
+  let loadedCount = 0;
+  
+  if (images.length === 0) {
+    initMasonry();
+    return;
+  }
+  
+  images.forEach(img => {
+    if (img.complete) {
+      loadedCount++;
+      if (loadedCount === images.length) {
+        initMasonry();
+      }
+    } else {
+      img.addEventListener('load', () => {
+        loadedCount++;
+        if (loadedCount === images.length) {
+          initMasonry();
+        }
+      });
+    }
+  });
+});
+
+window.addEventListener('resize', () => {
+  initMasonry();
+});
+</script>
 </body>
 </html>

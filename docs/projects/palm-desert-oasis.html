@@ -6,6 +6,63 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Palm Desert Oasis | JAC Interiors</title>
 <link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+@media (max-width: 768px) {
+  .first-row-image { order: 2 !important; }
+  .first-row-text { order: 1 !important; }
+  .first-row-grid { grid-template-columns: 1fr !important; }
+}
+@media (min-width: 769px) {
+  .first-row-image { order: 1 !important; }
+  .first-row-text { order: 2 !important; }
+}
+/* Smart grid layout that adapts to image aspect ratios */
+.image-container {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+/* Masonry grid container */
+.image-gallery-grid {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+.image-gallery-grid > div {
+  position: absolute;
+  width: calc(50% - 1rem);
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+.image-gallery-grid .image-container {
+  margin: 0;
+}
+.image-gallery-grid .image-container img {
+  margin: 0;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.first-row-grid {
+  width: 100%;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  .image-gallery-grid > div {
+    width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  .image-gallery-grid > div {
+    width: calc(33.333% - 1.33rem);
+  }
+}
+</style>
 </meta></head>
 <body>
 <nav class="navbar scrolled">
@@ -49,75 +106,52 @@
 <div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Style</div>
 <div style="font-weight: 400; font-size: 0.95rem; color: white;">Modern</div>
 </div>
-<div class="scroll-fade-in delay-3">
-<div style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1.5px; color: #888; margin-bottom: 0.5rem;">Year</div>
-<div style="font-weight: 400; font-size: 0.95rem; color: white;">2023</div>
-</div>
+
 </div>
 </div>
 </div>
 </section>
-<!-- Project Story - Alternating Image/Text Rows -->
+<!-- Project Image Gallery -->
 <section style="padding: 4rem 0;">
-<div class="container" style="max-width: 1200px;">
-<!-- Row 1: Image Left, Text Right -->
-<div style="display: flex; gap: 3rem; margin-bottom: 3rem; align-items: center;">
-<div class="parallax-image scale-in-image hover-zoom-image" style="flex: 0 0 48%;">
-<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-1.jpg" style="width: 100%; border-radius: 4px;"/>
-</div>
-<div style="flex: 1; padding-left: 2rem;">
-<h3 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px;">The Vision</h3>
-<p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 10px;">Desert Modern in Palm Desert, CA blending refined textures with modern simplicity.</p>
+<div class="container" style="max-width: 1400px;">
+<!-- First Row: Image Left, Text Card Right (on mobile: text card first) -->
+<div class="first-row-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; width: 100%;">
+<div class="parallax-image scale-in-image hover-zoom-image first-row-image" style="width: 100%;">
+<div class="image-container">
+<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-1.jpg"/>
 </div>
 </div>
-<!-- Row 2: Text Left, Image Right -->
-<div style="display: flex; gap: 3rem; margin-bottom: 3rem; align-items: center;">
-<div style="flex: 1; padding-right: 2rem;">
-<h3 class="slide-in-left" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px;">Design Approach</h3>
-<p class="slide-in-left delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 10px;">In Palm Desert, JAC Interiors partnered with a family to bring their dream design build home to life.</p>
-</div>
-<div class="parallax-image scale-in-image hover-zoom-image" style="flex: 0 0 48%;">
-<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-2.jpg" style="width: 100%; border-radius: 4px;"/>
+<div class="first-row-text" style="background: #fafafa; padding: 2.5rem; border-radius: 4px; display: flex; flex-direction: column; justify-content: center;">
+<h3 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px; color: #1a1a1a;">The Vision</h3>
+<p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 0;">Desert Modern in Palm Desert, CA blending refined textures with modern simplicity.</p>
 </div>
 </div>
-<!-- Row 3: Image Left, Text Right -->
-<div style="display: flex; gap: 3rem; margin-bottom: 3rem; align-items: center;">
-<div class="parallax-image scale-in-image hover-zoom-image" style="flex: 0 0 48%;">
-<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-3.jpg" style="width: 100%; border-radius: 4px;"/>
-</div>
-<div style="flex: 1; padding-left: 2rem;">
-<h3 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px;">Key Features</h3>
-<p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 10px;">Set against the backdrop of the picturesque golf course and majestic mountains, this Mediterranean-style abode is a true testament to luxury living.</p>
+<!-- Image Grid - Mostly images layout (smart grid that adapts to aspect ratios) -->
+<div class="image-gallery-grid" style="margin-bottom: 2rem;">
+<div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+<div class="image-container">
+<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-2.jpg"/>
 </div>
 </div>
-<!-- Row 4: Text Left, Image Right -->
-<div style="display: flex; gap: 3rem; margin-bottom: 3rem; align-items: center;">
-<div style="flex: 1; padding-right: 2rem;">
-<h3 class="slide-in-left" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px;">Living Spaces</h3>
-<p class="slide-in-left delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 10px;">From the materials used in the bathroom and kitchen to furnishings, every element of the home was meticulously curated by our top interior design team.</p>
-</div>
-<div class="parallax-image scale-in-image hover-zoom-image" style="flex: 0 0 48%;">
-<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-4.jpg" style="width: 100%; border-radius: 4px;"/>
+<div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+<div class="image-container">
+<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-3.jpg"/>
 </div>
 </div>
-<!-- Row 5: Image Left, Text Right -->
-<div style="display: flex; gap: 3rem; margin-bottom: 3rem; align-items: center;">
-<div class="parallax-image scale-in-image hover-zoom-image" style="flex: 0 0 48%;">
-<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-5.jpg" style="width: 100%; border-radius: 4px;"/>
-</div>
-<div style="flex: 1; padding-left: 2rem;">
-<h3 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px;">Refined Details</h3>
-<p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 10px;">Working closely with the family's son, a talented lighting and furniture designer, we crafted bespoke pieces that elevate the home's aesthetic to new heights.</p>
+<div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+<div class="image-container">
+<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-4.jpg"/>
 </div>
 </div>
-<!-- Row 6: Text Left, Image Right -->
-<div style="display: flex; gap: 3rem; align-items: center;">
-<div style="flex: 1; padding-right: 2rem;">
-<h3 class="slide-in-left" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px;">The Result</h3>
-<p class="slide-in-left delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 10px;">With four bedrooms, a guest casita, and an array of indoor and outdoor living spaces, this home is designed for a lifetime of enjoyment. At JAC Interiors, we believe that every home should tell a story. Whether nestled in the mountains of Colorado or the deserts of California, our designs are tailored to reflect the unique personalities and lifestyles of our clients, creating spaces that are as beautiful as they are functional. Let's create a design that reflects your unique style and elevates your everyday living. Creating luxury spaces that elevate everyday living. Los Angeles, CAPhone: (310) 555-0123Email: info@jacinteriors.com</p>
+<div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+<div class="image-container">
+<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-5.jpg"/>
 </div>
-<div class="parallax-image scale-in-image hover-zoom-image" style="flex: 0 0 48%;">
-<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-6.jpg" style="width: 100%; border-radius: 4px;"/>
+</div>
+<div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
+<div class="image-container">
+<img alt="Palm Desert Oasis" src="../assets/images/projects/palm-desert-oasis/palm-desert-oasis-6.jpg"/>
+</div>
 </div>
 </div>
 </div>
@@ -161,5 +195,85 @@
 </div>
 </footer>
 <script src="../assets/js/main.js"></script>
+<script>
+// Masonry layout implementation
+function initMasonry() {
+  const grid = document.querySelector('.image-gallery-grid');
+  if (!grid) return;
+  
+  const items = Array.from(grid.children);
+  if (items.length === 0) return;
+  
+  const gap = 16; // 1rem = 16px
+  let columns = 2;
+  
+  // Determine number of columns based on screen width
+  if (window.innerWidth <= 768) {
+    columns = 1;
+  } else if (window.innerWidth >= 1200) {
+    columns = 3;
+  }
+  
+  // Calculate column width
+  const containerWidth = grid.offsetWidth;
+  const columnWidth = (containerWidth - (gap * (columns - 1))) / columns;
+  
+  // Initialize column heights
+  const columnHeights = new Array(columns).fill(0);
+  
+  // Position each item
+  items.forEach((item, index) => {
+    // Find the shortest column
+    const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
+    
+    // Calculate position
+    const left = shortestColumnIndex * (columnWidth + gap);
+    const top = columnHeights[shortestColumnIndex];
+    
+    // Set position
+    item.style.left = left + 'px';
+    item.style.top = top + 'px';
+    item.style.width = columnWidth + 'px';
+    
+    // Update column height
+    const itemHeight = item.offsetHeight;
+    columnHeights[shortestColumnIndex] += itemHeight + gap;
+  });
+  
+  // Set container height
+  grid.style.height = Math.max(...columnHeights) + 'px';
+}
+
+// Initialize on load and resize
+window.addEventListener('load', () => {
+  // Wait for images to load
+  const images = document.querySelectorAll('.image-gallery-grid img');
+  let loadedCount = 0;
+  
+  if (images.length === 0) {
+    initMasonry();
+    return;
+  }
+  
+  images.forEach(img => {
+    if (img.complete) {
+      loadedCount++;
+      if (loadedCount === images.length) {
+        initMasonry();
+      }
+    } else {
+      img.addEventListener('load', () => {
+        loadedCount++;
+        if (loadedCount === images.length) {
+          initMasonry();
+        }
+      });
+    }
+  });
+});
+
+window.addEventListener('resize', () => {
+  initMasonry();
+});
+</script>
 </body>
-</html>
