@@ -192,7 +192,7 @@ img {
 .logo-img { height: 40px; width: auto; filter: brightness(0) invert(1); transition: var(--transition); }
 .navbar.scrolled .logo-img { filter: none; }
 
-.nav-menu { display: flex; gap: 3rem; }
+.nav-menu, .nav-links { display: flex; gap: 3rem; align-items: center; }
 .nav-link { 
     color: white; 
     font-size: 0.9rem; 
@@ -203,6 +203,50 @@ img {
 }
 .navbar.scrolled .nav-link { color: var(--color-secondary); }
 .nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
+
+/* Dropdown styles */
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+.nav-dropdown-content {
+    display: none !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0;
+    margin-top: 0;
+    z-index: 1000;
+    border-radius: 4px;
+    flex-direction: column;
+}
+.nav-dropdown:hover .nav-dropdown-content {
+    display: flex !important;
+}
+.nav-dropdown-content a {
+    display: block;
+    padding: 0.5rem 1.5rem;
+    color: #333;
+    font-size: 0.85rem;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 1;
+    transition: all 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+.nav-dropdown-content a:last-child {
+    border-bottom: none;
+}
+.nav-dropdown-content a:hover {
+    background: #f5f5f5;
+    color: var(--color-primary);
+}
 
 .mobile-menu-toggle { display: none; }
 
@@ -780,6 +824,35 @@ img {
     .mobile-menu-toggle { display: flex; z-index: 1001; flex-direction: column; gap: 6px; }
     .mobile-menu-toggle span { display: block; width: 30px; height: 2px; background: white; }
     .navbar.scrolled .mobile-menu-toggle span { background: var(--color-secondary); }
+    
+    /* Mobile dropdown styles */
+    .nav-dropdown {
+        width: 100%;
+        text-align: center;
+    }
+    .nav-dropdown-content {
+        position: static;
+        display: none;
+        flex-direction: column;
+        background: transparent;
+        box-shadow: none;
+        padding: 0.5rem 0;
+        margin-top: 0.5rem;
+        width: 100%;
+    }
+    .nav-dropdown.active .nav-dropdown-content {
+        display: flex;
+    }
+    .nav-dropdown-content a {
+        color: white;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
+    }
+    .nav-dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
     
     .sticky-grid { grid-template-columns: 1fr; gap: 3rem; }
     .sticky-content { position: static; }
