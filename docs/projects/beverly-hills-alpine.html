@@ -30,9 +30,11 @@
 /* Masonry-style layout that minimizes gaps */
 .image-gallery-grid {
   column-count: 2;
+  column-width: calc(50% - 1rem);
   column-gap: 2rem;
   column-fill: balance;
   width: 100%;
+  box-sizing: border-box;
 }
 .image-gallery-grid > div {
   break-inside: avoid;
@@ -40,6 +42,11 @@
   margin-bottom: 2rem;
   display: inline-block;
   width: 100%;
+  box-sizing: border-box;
+}
+.first-row-grid {
+  width: 100%;
+  box-sizing: border-box;
 }
 @media (max-width: 768px) {
   .image-gallery-grid {
@@ -49,6 +56,7 @@
 @media (min-width: 1200px) {
   .image-gallery-grid {
     column-count: 3;
+    column-width: calc(33.333% - 1.33rem);
   }
 }
 </style>
