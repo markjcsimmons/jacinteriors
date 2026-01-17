@@ -129,25 +129,65 @@
             // Initialize dropdowns
             initDropdowns();
             
-            // CRITICAL: Force dark text colors with !important to override any CSS
-            const navLinks = nav.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.style.setProperty('color', '#222a26', 'important');
-            });
-            const logo = nav.querySelector('.logo');
-            if (logo) {
-                logo.style.setProperty('color', '#222a26', 'important');
+            // CRITICAL: Force all navbar styles with !important to override any CSS
+            // Do this immediately and also after a short delay to catch any late-loading CSS
+            function enforceNavbarStyles() {
+                const nav = document.querySelector('nav.navbar');
+                if (!nav) return;
+                
+                // Force navbar container styles
+                nav.style.setProperty('border-bottom', '1px solid #e4e4e4', 'important');
+                nav.style.setProperty('padding', '1.5rem 0', 'important');
+                nav.style.setProperty('background', 'white', 'important');
+                nav.style.setProperty('position', 'sticky', 'important');
+                nav.style.setProperty('top', '0', 'important');
+                nav.style.setProperty('z-index', '1000', 'important');
+                nav.style.setProperty('width', '100%', 'important');
+                nav.style.setProperty('box-sizing', 'border-box', 'important');
+                
+                // Force dark text colors on all links
+                const navLinks = nav.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.style.setProperty('color', '#222a26', 'important');
+                    link.style.setProperty('font-size', '0.95rem', 'important');
+                    link.style.setProperty('font-weight', '500', 'important');
+                    link.style.setProperty('letter-spacing', '-0.2px', 'important');
+                    link.style.setProperty('text-decoration', 'none', 'important');
+                    link.style.setProperty('text-transform', 'uppercase', 'important');
+                });
+                
+                // Force logo color
+                const logo = nav.querySelector('.logo');
+                if (logo) {
+                    logo.style.setProperty('color', '#222a26', 'important');
+                    logo.style.setProperty('font-size', '1.5rem', 'important');
+                    logo.style.setProperty('font-weight', '500', 'important');
+                    logo.style.setProperty('letter-spacing', '-1px', 'important');
+                    logo.style.setProperty('text-transform', 'uppercase', 'important');
+                }
+                
+                // CRITICAL: Remove navbar-dark class if it exists
+                nav.classList.remove('navbar-dark');
+                
+                // Also remove from body if it's there
+                if (document.body) {
+                    document.body.classList.remove('navbar-dark');
+                }
             }
             
-            // CRITICAL: Force border-bottom to match home page exactly
-            nav.style.setProperty('border-bottom', '1px solid #e4e4e4', 'important');
-            nav.style.setProperty('padding', '1.5rem 0', 'important');
-            nav.style.setProperty('background', 'white', 'important');
-            nav.style.setProperty('position', 'sticky', 'important');
-            nav.style.setProperty('top', '0', 'important');
+            // Apply styles immediately
+            enforceNavbarStyles();
             
-            // Ensure navbar does NOT have navbar-dark class
-            nav.classList.remove('navbar-dark');
+            // Also apply after a short delay to catch any late-loading CSS
+            setTimeout(enforceNavbarStyles, 10);
+            setTimeout(enforceNavbarStyles, 100);
+            setTimeout(enforceNavbarStyles, 500);
+            
+            // Use MutationObserver to re-apply if navbar is modified
+            const observer = new MutationObserver(function(mutations) {
+                enforceNavbarStyles();
+            });
+            observer.observe(nav, { attributes: true, attributeFilter: ['class', 'style'] });
         }
     }
     
