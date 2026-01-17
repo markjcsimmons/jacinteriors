@@ -10,6 +10,7 @@
 @media (max-width: 768px) {
   .first-row-image { order: 2 !important; }
   .first-row-text { order: 1 !important; }
+  .first-row-grid { grid-template-columns: 1fr !important; }
 }
 @media (min-width: 769px) {
   .first-row-image { order: 1 !important; }
@@ -31,6 +32,7 @@
   column-count: 2;
   column-gap: 2rem;
   column-fill: balance;
+  width: 100%;
 }
 .image-gallery-grid > div {
   break-inside: avoid;
@@ -105,7 +107,7 @@
 <section style="padding: 4rem 0;">
 <div class="container" style="max-width: 1400px;">
 <!-- First Row: Image Left, Text Card Right (on mobile: text card first) -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+<div class="first-row-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; width: 100%;">
 <div class="parallax-image scale-in-image hover-zoom-image first-row-image" style="width: 100%;">
 <div class="image-container">
 <img alt="Beverly Hills Alpine" src="../assets/images/projects/beverly-hills-alpine/beverly-hills-alpine-1.jpg"/>
