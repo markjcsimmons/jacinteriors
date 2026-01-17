@@ -121,23 +121,30 @@
                 nav.style.position = 'sticky';
                 nav.style.borderBottom = '1px solid var(--stroke)';
                 
-                // Ensure black text for all nav links
+                // Remove navbar-dark class if it exists
+                nav.classList.remove('navbar-dark');
+                nav.classList.remove('scrolled'); // Remove scrolled class that might affect colors
+                
+                // Force black text for all nav links with !important
                 const navLinks = nav.querySelectorAll('.nav-link');
                 navLinks.forEach(link => {
-                    link.style.color = 'var(--text-main)';
-                    link.style.color = '#222a26';
+                    link.style.setProperty('color', '#222a26', 'important');
+                    link.style.setProperty('opacity', '1', 'important');
+                });
+                
+                // Force black text for dropdown links too
+                const dropdownLinks = nav.querySelectorAll('.nav-dropdown-content a');
+                dropdownLinks.forEach(link => {
+                    link.style.setProperty('color', '#222a26', 'important');
                 });
                 
                 // Ensure logo is dark (not inverted)
                 const logoImg = nav.querySelector('.logo-img');
                 if (logoImg) {
-                    logoImg.style.filter = 'none';
+                    logoImg.style.setProperty('filter', 'none', 'important');
                 }
-                
-                // Remove navbar-dark class if it exists
-                nav.classList.remove('navbar-dark');
             }
-        }, 10);
+        }, 50);
         
         // Re-initialize mobile menu functionality
         initializeMobileMenu();
