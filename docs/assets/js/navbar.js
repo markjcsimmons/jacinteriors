@@ -112,20 +112,27 @@
             }
         }
         
-        // Apply styling based on page type
-        const nav = document.querySelector('nav.navbar');
-        if (nav) {
-            if (isHomePage) {
-                // Home page: white background
-                nav.style.background = 'white';
-                nav.style.position = 'sticky';
-                nav.style.borderBottom = '1px solid var(--stroke)';
-            } else {
-                // Internal pages: dark background
-                nav.classList.add('navbar-dark');
-                nav.style.background = '#1a1a1a';
+        // Apply styling based on page type - use setTimeout to ensure DOM is ready
+        setTimeout(() => {
+            const nav = document.querySelector('nav.navbar');
+            if (nav) {
+                if (isHomePage) {
+                    // Home page: white background
+                    nav.style.background = 'white';
+                    nav.style.position = 'sticky';
+                    nav.style.borderBottom = '1px solid var(--stroke)';
+                } else {
+                    // Internal pages: dark background with white text
+                    nav.classList.add('navbar-dark');
+                    nav.style.background = '#1a1a1a';
+                    nav.style.position = 'fixed';
+                    nav.style.top = '0';
+                    nav.style.left = '0';
+                    nav.style.width = '100%';
+                    nav.style.zIndex = '1000';
+                }
             }
-        }
+        }, 10);
         
         // Re-initialize mobile menu functionality
         initializeMobileMenu();
