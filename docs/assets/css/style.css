@@ -166,7 +166,7 @@ img {
 }
 
 /* Navigation - Transparent to Solid */
-/* Navbar defaults - can be overridden by inline styles or page-specific CSS */
+/* Navigation - Transparent to Solid */
 .navbar {
     position: fixed;
     top: 0;
@@ -175,25 +175,18 @@ img {
     z-index: 1000;
     padding: 1.5rem 0;
     transition: all 0.4s ease;
+    background: transparent;
 }
 
-/* Home page: NEVER apply dark background - it has white background in inline styles */
-body.home-page .navbar,
-body.home-page .navbar.navbar-dark {
-    background: white !important;
-}
-
-/* Dark navbar for pages with dark backgrounds (only non-home pages) */
-body:not(.home-page) .navbar.navbar-dark,
-body:not(.home-page) .navbar:not([style*="background: white"]) {
-    background: #1a1a1a;
-}
-
-/* White navbar when scrolled on light pages */
 .navbar.scrolled {
-    background: white !important;
+    background: white;
     padding: 1rem 0;
     box-shadow: 0 5px 30px rgba(0,0,0,0.05);
+}
+
+/* Dark navbar for internal pages */
+.navbar.navbar-dark {
+    background: #1a1a1a;
 }
 
 .nav-wrapper {
