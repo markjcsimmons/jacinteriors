@@ -82,15 +82,25 @@
         });
     }
     
-    // Load navbar from HTML file and replace existing one
+    // Load navbar from HTML file - this is the ONLY source of navbar HTML
     function loadNavbar() {
+        // Remove any existing navbar first (clean slate)
         const existingNav = document.querySelector('nav.navbar');
+        if (existingNav) {
+            existingNav.remove();
+        }
+        
+        // Remove any existing spacer
+        const existingSpacer = document.querySelector('.navbar-spacer');
+        if (existingSpacer) {
+            existingSpacer.remove();
+        }
         
         // Calculate path to navbar.html
         const depth = currentPath.split('/').length - 2;
         const navbarPath = depth > 0 ? '../'.repeat(depth) + 'assets/navbar.html' : 'assets/navbar.html';
         
-        // Use synchronous XMLHttpRequest for immediate load
+        // Use synchronous XMLHttpRequest for immediate load (no async delay)
         const xhr = new XMLHttpRequest();
         xhr.open('GET', navbarPath, false);
         xhr.send();
@@ -98,27 +108,19 @@
         if (xhr.status === 200) {
             const html = xhr.responseText;
             
-            if (existingNav) {
-                // Replace existing navbar
-                existingNav.outerHTML = html;
-            } else {
-                // Insert at beginning of body
-                if (document.body) {
-                    document.body.insertAdjacentHTML('afterbegin', html);
-                }
+            // Insert at very beginning of body
+            if (document.body) {
+                document.body.insertAdjacentHTML('afterbegin', html);
             }
             
             // Get the navbar after insertion
             const nav = document.querySelector('nav.navbar');
             if (!nav) return;
             
-            // Ensure sticky positioning (like home page)
-            nav.style.position = 'sticky';
-            nav.style.top = '0';
-            nav.style.zIndex = '1000';
-            nav.style.background = 'white';
+            // The navbar.html already has all inline styles, but ensure they're applied
+            // Don't override - the inline styles in navbar.html are the source of truth
             
-            // Fix relative paths
+            // Fix relative paths for subdirectories
             fixRelativePaths();
             
             // Set active nav state

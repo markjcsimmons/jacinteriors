@@ -221,7 +221,7 @@ img {
 }
 .nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
 
-/* Dropdown styles */
+/* Dropdown styles - ensure consistency */
 .nav-dropdown {
     position: relative;
     display: inline-block;
@@ -239,8 +239,13 @@ img {
     z-index: 1000;
     border-radius: 4px;
     flex-direction: column;
+    gap: 0;
 }
 .nav-dropdown:hover .nav-dropdown-content {
+    display: flex !important;
+}
+/* Keep dropdown visible when hovering over it */
+.nav-dropdown-content:hover {
     display: flex !important;
 }
 .nav-dropdown-content a {
