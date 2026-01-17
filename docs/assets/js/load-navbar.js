@@ -139,6 +139,13 @@
                 logo.style.setProperty('color', '#222a26', 'important');
             }
             
+            // CRITICAL: Force border-bottom to match home page exactly
+            nav.style.setProperty('border-bottom', '1px solid #e4e4e4', 'important');
+            nav.style.setProperty('padding', '1.5rem 0', 'important');
+            nav.style.setProperty('background', 'white', 'important');
+            nav.style.setProperty('position', 'sticky', 'important');
+            nav.style.setProperty('top', '0', 'important');
+            
             // Ensure navbar does NOT have navbar-dark class
             nav.classList.remove('navbar-dark');
         }
