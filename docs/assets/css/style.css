@@ -166,16 +166,17 @@ img {
 }
 
 /* Navigation - Transparent to Solid */
-/* Navigation - Transparent to Solid */
+/* Navigation - Ensure consistent styling from navbar.html */
+/* navbar.html has inline styles that take precedence, but these are fallbacks */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 1.5rem 0;
-    transition: all 0.4s ease;
-    background: transparent;
+    padding: 1.5rem 0 !important;
+    background: white !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    border-bottom: 1px solid var(--stroke) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .navbar.scrolled {
@@ -190,9 +191,19 @@ img {
 }
 
 .nav-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+/* Logo styling - navbar.html uses text logo, not image */
+.logo {
+    font-size: 1.5rem !important;
+    font-weight: 500 !important;
+    letter-spacing: -1px !important;
+    text-transform: uppercase !important;
+    color: #222a26 !important;
+    text-decoration: none !important;
 }
 
 .logo-img { height: 40px; width: auto; filter: brightness(0) invert(1); transition: var(--transition); }
@@ -203,21 +214,30 @@ img {
     filter: brightness(0) invert(1);
 }
 
-.nav-menu, .nav-links { display: flex; gap: 3rem; align-items: center; }
-.nav-link { 
-    color: var(--color-secondary); 
-    font-size: 0.9rem; 
-    font-weight: 500; 
-    text-transform: uppercase; 
-    letter-spacing: 1px;
-    opacity: 0.9;
+.nav-menu, .nav-links { 
+    display: flex !important; 
+    gap: 2.5rem !important; 
+    align-items: center !important; 
 }
-.navbar.scrolled .nav-link { color: var(--color-secondary); }
-.nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
+.nav-link { 
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    color: #222a26 !important;
+    letter-spacing: -0.2px !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    opacity: 1 !important;
+}
+.nav-link:hover { 
+    opacity: 0.7 !important; 
+}
+.nav-link.active {
+    font-weight: 600 !important;
+}
 
 /* Dark navbar: white links (only when navbar-dark class is present) */
 .navbar.navbar-dark .nav-link {
-    color: white;
+    color: white !important;
 }
 .nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
 
