@@ -202,28 +202,12 @@ body:not(.home-page) .navbar:not([style*="background: white"]) {
     align-items: center;
 }
 
-.logo-img { 
-    height: 40px; 
-    width: auto; 
-    filter: brightness(0) invert(1); 
-    transition: var(--transition); 
-}
+.logo-img { height: 40px; width: auto; filter: brightness(0) invert(1); transition: var(--transition); }
+.navbar.scrolled .logo-img { filter: none; }
 
-/* Dark navbar: white logo (for internal pages) */
-.navbar.navbar-dark .logo-img,
-body:not(.home-page) .navbar:not([style*="background: white"]) .logo-img {
+/* Dark navbar: white logo */
+.navbar.navbar-dark .logo-img {
     filter: brightness(0) invert(1);
-}
-
-/* Light navbar (scrolled or home page with white bg): dark logo */
-.navbar.scrolled .logo-img,
-.navbar[style*="background: white"] .logo-img {
-    filter: none;
-}
-
-/* Home page navbar logo: dark (matches white background) */
-body.home-page .navbar .logo-img {
-    filter: none !important;
 }
 
 .nav-menu, .nav-links { display: flex; gap: 3rem; align-items: center; }
@@ -235,26 +219,12 @@ body.home-page .navbar .logo-img {
     letter-spacing: 1px;
     opacity: 0.9;
 }
+.navbar.scrolled .nav-link { color: var(--color-secondary); }
+.nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
 
-/* Dark navbar: white links (for internal pages) */
-.navbar.navbar-dark .nav-link,
-body:not(.home-page) .navbar:not([style*="background: white"]) .nav-link {
+/* Dark navbar: white links */
+.navbar.navbar-dark .nav-link {
     color: white;
-}
-
-/* Light navbar (scrolled): dark links */
-.navbar.scrolled .nav-link {
-    color: var(--color-secondary);
-}
-
-/* Home page navbar: black text on white background */
-body.home-page .navbar .nav-link {
-    color: var(--color-secondary) !important;
-}
-
-/* Don't override if navbar has white background inline style */
-.navbar[style*="background: white"] .nav-link {
-    color: var(--color-secondary) !important;
 }
 .nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
 
