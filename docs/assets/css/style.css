@@ -166,6 +166,7 @@ img {
 }
 
 /* Navigation - Transparent to Solid */
+/* Navbar defaults - can be overridden by inline styles or page-specific CSS */
 .navbar {
     position: fixed;
     top: 0;
@@ -174,12 +175,16 @@ img {
     z-index: 1000;
     padding: 1.5rem 0;
     transition: all 0.4s ease;
-    background: transparent;
+}
+
+/* Home page keeps its inline styles (white bg, black text) - don't override */
+/* Only apply dark navbar to internal pages */
+body:not(.home-page) .navbar:not([style*="background: white"]) {
+    background: #1a1a1a;
 }
 
 /* Dark navbar for pages with dark backgrounds */
-.navbar.navbar-dark,
-body:not(.home-page) .navbar {
+.navbar.navbar-dark {
     background: #1a1a1a;
 }
 
@@ -203,14 +208,19 @@ body:not(.home-page) .navbar {
     transition: var(--transition); 
 }
 
-/* Dark navbar: white logo */
+/* Dark navbar: white logo (for internal pages) */
 .navbar.navbar-dark .logo-img,
-body:not(.home-page) .navbar .logo-img {
+body:not(.home-page) .navbar:not([style*="background: white"]) .logo-img {
     filter: brightness(0) invert(1);
 }
 
-/* Light navbar (scrolled): dark logo */
+/* Light navbar (scrolled or home page with white bg): dark logo */
 .navbar.scrolled .logo-img,
+.navbar[style*="background: white"] .logo-img {
+    filter: none;
+}
+
+/* Home page navbar logo: dark (matches white background) */
 .home-page .navbar:not(.scrolled) .logo-img {
     filter: none;
 }
@@ -225,9 +235,9 @@ body:not(.home-page) .navbar .logo-img {
     opacity: 0.9;
 }
 
-/* Dark navbar: white links */
+/* Dark navbar: white links (for internal pages) */
 .navbar.navbar-dark .nav-link,
-body:not(.home-page) .navbar .nav-link {
+body:not(.home-page) .navbar:not([style*="background: white"]) .nav-link {
     color: white;
 }
 
@@ -236,14 +246,10 @@ body:not(.home-page) .navbar .nav-link {
     color: var(--color-secondary);
 }
 
-/* Home page navbar: dark links (light background) */
-.home-page .navbar:not(.scrolled) .nav-link {
-    color: var(--color-secondary);
-}
-
-/* Home page navbar logo: dark (light background) */
-.home-page .navbar:not(.scrolled) .logo-img {
-    filter: none;
+/* Home page navbar: respects inline styles - black text on white background */
+/* Don't override if navbar has white background inline style */
+.navbar[style*="background: white"] .nav-link {
+    color: var(--color-secondary) !important;
 }
 .nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
 
