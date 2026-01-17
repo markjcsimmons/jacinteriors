@@ -123,6 +123,24 @@
             existingNav.style.zIndex = '10000';
             existingNav.style.background = 'white';
             
+            // Replace logo image with text if needed
+            const logo = existingNav.querySelector('.logo');
+            if (logo) {
+                const logoImg = logo.querySelector('img.logo-img');
+                if (logoImg) {
+                    // Remove image and replace with text
+                    logoImg.remove();
+                    logo.textContent = 'JAC INTERIORS';
+                }
+                // Force black text on logo
+                logo.style.setProperty('color', '#222a26', 'important');
+                logo.style.setProperty('font-size', '1.5rem', 'important');
+                logo.style.setProperty('font-weight', '500', 'important');
+                logo.style.setProperty('letter-spacing', '-1px', 'important');
+                logo.style.setProperty('text-transform', 'uppercase', 'important');
+                logo.style.setProperty('text-decoration', 'none', 'important');
+            }
+            
             // Force black text on all nav links
             const navLinks = existingNav.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
@@ -134,12 +152,6 @@
             dropdownLinks.forEach(link => {
                 link.style.setProperty('color', '#222a26', 'important');
             });
-            
-            // Force black text on logo
-            const logo = existingNav.querySelector('.logo');
-            if (logo) {
-                logo.style.setProperty('color', '#222a26', 'important');
-            }
         }
     }
     
