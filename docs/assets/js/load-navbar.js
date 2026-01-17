@@ -128,6 +128,19 @@
             
             // Initialize dropdowns
             initDropdowns();
+            
+            // CRITICAL: Force dark text colors with !important to override any CSS
+            const navLinks = nav.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.style.setProperty('color', '#222a26', 'important');
+            });
+            const logo = nav.querySelector('.logo');
+            if (logo) {
+                logo.style.setProperty('color', '#222a26', 'important');
+            }
+            
+            // Ensure navbar does NOT have navbar-dark class
+            nav.classList.remove('navbar-dark');
         }
     }
     
