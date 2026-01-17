@@ -82,62 +82,58 @@
         });
     }
     
-    // Load navbar from HTML file SYNCHRONOUSLY to prevent shifting
-    function loadNavbar() {
-        // Calculate path to navbar.html based on current page location
-        const depth = currentPath.split('/').length - 2;
-        const navbarPath = depth > 0 ? '../'.repeat(depth) + 'assets/navbar.html' : 'assets/navbar.html';
+    // Update navbar in place - DON'T replace it to prevent shifting
+    function updateNavbar() {
+        const existingNav = document.querySelector('nav.navbar');
         
-        // Use synchronous XMLHttpRequest to load immediately (no async delay)
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', navbarPath, false); // false = synchronous
-        xhr.send();
-        
-        if (xhr.status === 200) {
-            const html = xhr.responseText;
+        if (!existingNav) {
+            // Only load if navbar doesn't exist
+            const depth = currentPath.split('/').length - 2;
+            const navbarPath = depth > 0 ? '../'.repeat(depth) + 'assets/navbar.html' : 'assets/navbar.html';
             
-            // Find existing navbar and replace it
-            const existingNav = document.querySelector('nav.navbar');
-            if (existingNav) {
-                existingNav.outerHTML = html;
-            } else {
-                // Insert at beginning of body BEFORE any content
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', navbarPath, false);
+            xhr.send();
+            
+            if (xhr.status === 200) {
+                const html = xhr.responseText;
                 if (document.body) {
                     document.body.insertAdjacentHTML('afterbegin', html);
-                } else {
-                    // If body doesn't exist yet, wait for it
-                    document.addEventListener('DOMContentLoaded', function() {
-                        document.body.insertAdjacentHTML('afterbegin', html);
-                        fixRelativePaths();
-                        setActiveNav();
-                        initDropdowns();
-                    });
-                    return;
                 }
             }
-            
-            // Fix relative paths for subdirectories
-            fixRelativePaths();
-            
-            // Set active nav state
-            setActiveNav();
-            
-            // Initialize dropdowns
-            initDropdowns();
-        } else {
-            console.error('Failed to load navbar:', xhr.status);
+        }
+        
+        // Just update the existing navbar - don't replace it
+        // Fix relative paths for subdirectories
+        fixRelativePaths();
+        
+        // Set active nav state
+        setActiveNav();
+        
+        // Initialize dropdowns
+        initDropdowns();
+        
+        // Ensure navbar has correct fixed positioning
+        if (existingNav) {
+            existingNav.style.position = 'fixed';
+            existingNav.style.top = '0';
+            existingNav.style.left = '0';
+            existingNav.style.right = '0';
+            existingNav.style.width = '100%';
+            existingNav.style.zIndex = '10000';
+            existingNav.style.background = 'white';
         }
     }
     
-    // Load navbar IMMEDIATELY - before page renders
+    // Update navbar IMMEDIATELY - don't wait, just update in place
     if (document.readyState === 'loading') {
-        // Script is in head or early in body - wait for body
+        // Script is in head - wait for body
         if (document.body) {
-            loadNavbar();
+            updateNavbar();
         } else {
             const observer = new MutationObserver(function(mutations, obs) {
                 if (document.body) {
-                    loadNavbar();
+                    updateNavbar();
                     obs.disconnect();
                 }
             });
@@ -145,6 +141,9 @@
         }
     } else {
         // DOM already loaded
-        loadNavbar();
+        updateNavbar();
     }
+    
+    // Also update after a tiny delay to catch any late changes
+    setTimeout(updateNavbar, 10);
 })();
