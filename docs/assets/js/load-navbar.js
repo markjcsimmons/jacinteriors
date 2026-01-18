@@ -136,12 +136,16 @@
         // Use async XMLHttpRequest to prevent blocking (non-responsive pages)
         const xhr = new XMLHttpRequest();
         xhr.open('GET', navbarPath, true);
-        xhr.timeout = 2000;
+        xhr.timeout = 5000; // Increased timeout
         
         xhr.onload = function() {
             if (xhr.status === 200 && document.body) {
                 try {
                     const html = xhr.responseText;
+                    if (!html || html.trim().length === 0) {
+                        console.error('Navbar HTML is empty');
+                        return;
+                    }
                     document.body.insertAdjacentHTML('afterbegin', html);
                     
                     const nav = document.querySelector('nav.navbar');
@@ -154,22 +158,30 @@
                         // Re-apply styles after short delays to catch late CSS
                         setTimeout(function() { enforceNavbarStyles(nav); }, 10);
                         setTimeout(function() { enforceNavbarStyles(nav); }, 100);
+                    } else {
+                        console.error('Navbar element not found after insertion');
                     }
                 } catch (e) {
-                    console.warn('Navbar error:', e);
+                    console.error('Navbar insertion error:', e);
                 }
+            } else {
+                console.error('Navbar XHR failed: status=' + xhr.status + ', body=' + (document.body ? 'exists' : 'missing'));
             }
         };
         
         xhr.onerror = function() {
-            console.warn('Navbar load error');
+            console.error('Navbar load error - network failure');
         };
         
         xhr.ontimeout = function() {
-            console.warn('Navbar load timeout');
+            console.error('Navbar load timeout after 5s');
         };
         
-        xhr.send();
+        try {
+            xhr.send();
+        } catch (e) {
+            console.error('Navbar XHR send error:', e);
+        }
     }
     
     // Load navbar when DOM is ready
