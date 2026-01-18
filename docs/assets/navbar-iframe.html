@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            margin: 0; 
+            padding: 0; 
+            overflow: visible !important;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        html {
+            overflow: visible !important;
+        }
+        .navbar {
+            padding: 1.5rem 0 !important;
+            background: white !important;
+            position: relative;
+            width: 100%;
+            border-bottom: 1px solid #e4e4e4 !important;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .nav-wrapper {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+        .logo {
+            font-size: 1.5rem !important;
+            font-weight: 500 !important;
+            letter-spacing: -1px !important;
+            text-transform: uppercase !important;
+            color: #222a26 !important;
+            text-decoration: none !important;
+        }
+        .nav-menu {
+            display: flex !important;
+            gap: 2.5rem !important;
+            align-items: center !important;
+        }
+        .nav-link {
+            font-size: 0.95rem !important;
+            font-weight: 500 !important;
+            color: #222a26 !important;
+            letter-spacing: -0.2px !important;
+            text-decoration: none !important;
+            text-transform: uppercase !important;
+        }
+        .nav-link:hover {
+            opacity: 0.7 !important;
+        }
+        .nav-link.active {
+            font-weight: 600 !important;
+        }
+        .nav-dropdown {
+            position: relative !important;
+            display: inline-block !important;
+        }
+        .nav-dropdown-content {
+            display: none !important;
+            position: absolute !important;
+            top: 100% !important;
+            left: 0 !important;
+            background: white !important;
+            min-width: 200px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            padding: 0.5rem 0 !important;
+            margin-top: 0 !important;
+            z-index: 10001 !important;
+            border-radius: 4px !important;
+            flex-direction: column !important;
+        }
+        .nav-dropdown:hover .nav-dropdown-content {
+            display: flex !important;
+        }
+        /* Keep dropdown visible when hovering over it */
+        .nav-dropdown-content:hover {
+            display: flex !important;
+        }
+        .nav-dropdown-content a {
+            color: #222a26 !important;
+            padding: 0.5rem 1rem !important;
+            text-decoration: none !important;
+            display: block !important;
+        }
+        .nav-dropdown-content a:hover {
+            background: #f5f5f5 !important;
+        }
+    </style>
+    <script>
+        // Get current page from parent
+        const currentPath = window.parent.location.pathname;
+        const filename = currentPath.split('/').pop() || 'index-variant-2.html';
+        
+        // Set active state
+        function setActive() {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            if (filename === 'index-variant-2.html' || filename === '' || filename === 'index.html') {
+                const link = document.querySelector('a[href*="index-variant-2.html"]');
+                if (link) link.classList.add('active');
+            } else if (filename === 'portfolio.html') {
+                const link = document.querySelector('a[href*="portfolio.html"]');
+                if (link) link.classList.add('active');
+            } else if (filename.includes('bathrooms.html') || filename.includes('bedrooms.html') || 
+                       filename.includes('kitchens.html') || filename.includes('dining-rooms.html') ||
+                       filename.includes('living-spaces.html') || filename.includes('office-spaces.html') ||
+                       filename.includes('kids-bedrooms.html') || filename.includes('entryways.html') ||
+                       filename.includes('bar-area.html') || filename.includes('laundry-rooms.html') ||
+                       filename.includes('outdoor-spaces.html')) {
+                const link = document.querySelector('.nav-dropdown:first-of-type .nav-link');
+                if (link) link.classList.add('active');
+            } else if (filename === 'services.html' || filename.includes('residential-design.html') ||
+                       filename.includes('commercial-design.html') || filename.includes('interior-styling.html') ||
+                       filename.includes('space-planning.html') || filename.includes('cities-we-serve.html')) {
+                const link = document.querySelector('a[href*="services.html"]');
+                if (link) link.classList.add('active');
+            } else if (filename === 'about.html') {
+                const link = document.querySelector('a[href*="about.html"]');
+                if (link) link.classList.add('active');
+            } else if (filename === 'contact.html') {
+                const link = document.querySelector('a[href*="contact.html"]');
+                if (link) link.classList.add('active');
+            }
+        }
+        
+        // Fix relative paths and make links navigate parent window
+        function fixPaths() {
+            const depth = currentPath.split('/').length - 2;
+            const prefix = depth > 0 ? '../'.repeat(depth) : '';
+            
+            document.querySelectorAll('a[href]').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('/')) {
+                    if (depth > 0 && !href.startsWith('../')) {
+                        link.setAttribute('href', prefix + href);
+                    }
+                }
+                // Ensure all links navigate parent window
+                link.setAttribute('target', '_parent');
+                // Also add click handler as backup
+                link.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') && !this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        window.parent.location.href = this.getAttribute('href');
+                    }
+                });
+            });
+        }
+        
+        window.addEventListener('load', () => {
+            fixPaths();
+            setActive();
+        });
+        
+        // Update on parent navigation
+        window.parent.addEventListener('popstate', () => {
+            setTimeout(() => {
+                fixPaths();
+                setActive();
+            }, 10);
+        });
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
