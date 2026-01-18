@@ -24,12 +24,10 @@
         const nav = document.querySelector('nav.navbar');
         if (!nav) return;
         
-        // Remove all active classes
         nav.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('active');
         });
         
-        // Set active based on current page
         if (filename === 'index-variant-2.html' || filename === '' || filename === 'index.html') {
             const homeLink = nav.querySelector('a[href*="index-variant-2.html"]');
             if (homeLink) homeLink.classList.add('active');
@@ -174,26 +172,30 @@
         }
     }
     
-    // Initialize - with defer, DOM is ready
-    function init() {
+    // Try to load navbar - multiple attempts to ensure it works
+    function tryLoad() {
         if (document.body) {
             loadNavbar();
-        } else {
-            // Wait for body
-            const checkBody = setInterval(() => {
-                if (document.body) {
-                    loadNavbar();
-                    clearInterval(checkBody);
-                }
-            }, 10);
-            setTimeout(() => clearInterval(checkBody), 1000);
+            return true;
         }
+        return false;
     }
     
-    // Run immediately (defer ensures DOM is ready)
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
+    // Try immediately
+    if (!tryLoad()) {
+        // Try on DOMContentLoaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', tryLoad);
+        }
+        // Also try on window load
+        window.addEventListener('load', tryLoad);
+        // And try repeatedly until body exists
+        const interval = setInterval(() => {
+            if (tryLoad()) {
+                clearInterval(interval);
+            }
+        }, 50);
+        // Stop trying after 5 seconds
+        setTimeout(() => clearInterval(interval), 5000);
     }
 })();
