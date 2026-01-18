@@ -1,12 +1,23 @@
-// Fixed Navbar Loader - Loads navbar from separate HTML file
+// Fixed Navbar Loader - Inline navbar HTML for instant loading (no XHR blocking)
 (function() {
     'use strict';
     
-    console.log('Navbar script loaded');
-    
-    // Get current page to set active state
+    // Get current page to set active state and calculate paths
     const currentPath = window.location.pathname;
     const filename = currentPath.split('/').pop() || 'index-variant-2.html';
+    const depth = currentPath.split('/').length - 2;
+    const pathPrefix = depth > 0 ? '../'.repeat(depth) : '';
+    
+    // Helper to get correct path for links
+    function getPath(href) {
+        if (href.startsWith('http') || href.startsWith('#') || href.startsWith('/')) {
+            return href;
+        }
+        if (depth > 0 && !href.startsWith('../')) {
+            return pathPrefix + href;
+        }
+        return href;
+    }
     
     // Determine which nav item should be active
     function setActiveNav() {
@@ -47,25 +58,6 @@
         }
     }
     
-    // Fix relative paths based on current page location
-    function fixRelativePaths() {
-        const nav = document.querySelector('nav.navbar');
-        if (!nav) return;
-        
-        const depth = currentPath.split('/').length - 2; // Calculate directory depth
-        const prefix = depth > 0 ? '../'.repeat(depth) : '';
-        
-        // Fix all links
-        nav.querySelectorAll('a[href]').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('/')) {
-                if (depth > 0 && !href.startsWith('../')) {
-                    link.setAttribute('href', prefix + href);
-                }
-            }
-        });
-    }
-    
     // Initialize dropdown hover behavior
     function initDropdowns() {
         const dropdowns = document.querySelectorAll('.nav-dropdown');
@@ -84,147 +76,124 @@
         });
     }
     
-    // Load navbar from HTML file - this is the ONLY source of navbar HTML
-    function loadNavbar() {
-        console.log('loadNavbar() called');
+    // Force navbar styles
+    function enforceNavbarStyles(nav) {
+        if (!nav) return;
         
-        // Remove any existing navbar first (clean slate)
-        const existingNav = document.querySelector('nav.navbar');
-        if (existingNav) {
-            existingNav.remove();
+        nav.style.setProperty('border-bottom', '1px solid #e4e4e4', 'important');
+        nav.style.setProperty('padding', '1.5rem 0', 'important');
+        nav.style.setProperty('background', 'white', 'important');
+        nav.style.setProperty('position', 'sticky', 'important');
+        nav.style.setProperty('top', '0', 'important');
+        nav.style.setProperty('z-index', '1000', 'important');
+        nav.style.setProperty('width', '100%', 'important');
+        nav.style.setProperty('box-sizing', 'border-box', 'important');
+        
+        const navLinks = nav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.style.setProperty('color', '#222a26', 'important');
+        });
+        
+        const logo = nav.querySelector('.logo');
+        if (logo) {
+            logo.style.setProperty('color', '#222a26', 'important');
         }
         
-        // Remove any existing spacer
-        const existingSpacer = document.querySelector('.navbar-spacer');
-        if (existingSpacer) {
-            existingSpacer.remove();
-        }
-        
-        // Calculate path to navbar.html
-        const depth = currentPath.split('/').length - 2;
-        const navbarPath = depth > 0 ? '../'.repeat(depth) + 'assets/navbar.html' : 'assets/navbar.html';
-        console.log('Loading navbar from:', navbarPath);
-        
-        // CRITICAL: Force all navbar styles with !important to override any CSS
-        function enforceNavbarStyles(nav) {
-            if (!nav) return;
-            
-            // Force navbar container styles
-            nav.style.setProperty('border-bottom', '1px solid #e4e4e4', 'important');
-            nav.style.setProperty('padding', '1.5rem 0', 'important');
-            nav.style.setProperty('background', 'white', 'important');
-            nav.style.setProperty('position', 'sticky', 'important');
-            nav.style.setProperty('top', '0', 'important');
-            nav.style.setProperty('z-index', '1000', 'important');
-            nav.style.setProperty('width', '100%', 'important');
-            nav.style.setProperty('box-sizing', 'border-box', 'important');
-            
-            // Force dark text colors on all links
-            const navLinks = nav.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.style.setProperty('color', '#222a26', 'important');
-            });
-            
-            // Force logo color
-            const logo = nav.querySelector('.logo');
-            if (logo) {
-                logo.style.setProperty('color', '#222a26', 'important');
-            }
-            
-            // CRITICAL: Remove navbar-dark class if it exists
-            nav.classList.remove('navbar-dark');
-            if (document.body) {
-                document.body.classList.remove('navbar-dark');
-            }
-        }
-        
-        // Use async XMLHttpRequest to prevent blocking (non-responsive pages)
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', navbarPath, true);
-        xhr.timeout = 5000; // Increased timeout
-        
-        xhr.onload = function() {
-            console.log('Navbar XHR onload - status:', xhr.status, 'body exists:', !!document.body);
-            if (xhr.status === 200 && document.body) {
-                try {
-                    const html = xhr.responseText;
-                    if (!html || html.trim().length === 0) {
-                        console.error('Navbar HTML is empty');
-                        return;
-                    }
-                    console.log('Inserting navbar HTML (length:', html.length, ')');
-                    document.body.insertAdjacentHTML('afterbegin', html);
-                    
-                    const nav = document.querySelector('nav.navbar');
-                    if (nav) {
-                        console.log('Navbar successfully inserted and found');
-                        fixRelativePaths();
-                        setActiveNav();
-                        initDropdowns();
-                        enforceNavbarStyles(nav);
-                        
-                        // Re-apply styles after short delays to catch late CSS
-                        setTimeout(function() { enforceNavbarStyles(nav); }, 10);
-                        setTimeout(function() { enforceNavbarStyles(nav); }, 100);
-                    } else {
-                        console.error('Navbar element not found after insertion');
-                    }
-                } catch (e) {
-                    console.error('Navbar insertion error:', e);
-                }
-            } else {
-                console.error('Navbar XHR failed: status=' + xhr.status + ', body=' + (document.body ? 'exists' : 'missing'));
-            }
-        };
-        
-        xhr.onerror = function() {
-            console.error('Navbar load error - network failure');
-        };
-        
-        xhr.ontimeout = function() {
-            console.error('Navbar load timeout after 5s');
-        };
-        
-        try {
-            xhr.send();
-        } catch (e) {
-            console.error('Navbar XHR send error:', e);
+        nav.classList.remove('navbar-dark');
+        if (document.body) {
+            document.body.classList.remove('navbar-dark');
         }
     }
     
-    // With defer attribute, script runs after DOMContentLoaded, so body should exist
-    // But handle all cases to be safe
-    function init() {
-        console.log('init() called - readyState:', document.readyState, 'body exists:', !!document.body);
+    // Navbar HTML - inlined for instant loading (no XHR)
+    const navbarHTML = `
+<nav class="navbar" style="padding: 1.5rem 0; background: white; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e4e4e4; font-family: 'Plus Jakarta Sans', sans-serif;">
+    <div class="container" style="max-width: 1320px; margin: 0 auto; padding: 0 2rem;">
+        <div class="nav-wrapper" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="${getPath('index-variant-2.html')}" class="logo" style="font-size: 1.5rem; font-weight: 500; letter-spacing: -1px; text-transform: uppercase; text-decoration: none; color: #222a26; font-family: 'Plus Jakarta Sans', sans-serif;">
+                JAC INTERIORS
+            </a>
+            <div class="nav-menu" id="navMenu" style="display: flex; gap: 2.5rem; align-items: center;">
+                <a href="${getPath('index-variant-2.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">HOME</a>
+                <a href="${getPath('portfolio.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">PORTFOLIO</a>
+                <div class="nav-dropdown" style="position: relative; display: inline-block;">
+                    <a href="#" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">SPACES</a>
+                    <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column;">
+                        <a href="${getPath('bathrooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Bathrooms</a>
+                        <a href="${getPath('bedrooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Bedrooms</a>
+                        <a href="${getPath('kitchens.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Kitchens</a>
+                        <a href="${getPath('dining-rooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Dining Rooms</a>
+                        <a href="${getPath('living-spaces.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Living Spaces</a>
+                        <a href="${getPath('office-spaces.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Office Spaces</a>
+                        <a href="${getPath('kids-bedrooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Kid's Bedrooms</a>
+                        <a href="${getPath('entryways.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Entryways</a>
+                        <a href="${getPath('bar-area.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Bar Area</a>
+                        <a href="${getPath('laundry-rooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Laundry Rooms</a>
+                        <a href="${getPath('outdoor-spaces.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">Outdoor Spaces</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown" style="position: relative; display: inline-block;">
+                    <a href="${getPath('services.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">SERVICES</a>
+                    <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column;">
+                        <a href="${getPath('residential-design.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Residential Design</a>
+                        <a href="${getPath('commercial-design.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Commercial Design</a>
+                        <a href="${getPath('interior-styling.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Interior Styling</a>
+                        <a href="${getPath('space-planning.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Space Planning</a>
+                        <a href="${getPath('cities-we-serve.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">Cities We Serve</a>
+                    </div>
+                </div>
+                <a href="${getPath('about.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">ABOUT</a>
+                <a href="${getPath('contact.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">CONTACT</a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" style="display: none;">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+<div class="navbar-spacer" style="height: 80px; width: 100%;"></div>`;
+    
+    // Load navbar instantly (no XHR - completely non-blocking)
+    function loadNavbar() {
+        // Remove any existing navbar
+        const existingNav = document.querySelector('nav.navbar');
+        if (existingNav) existingNav.remove();
+        const existingSpacer = document.querySelector('.navbar-spacer');
+        if (existingSpacer) existingSpacer.remove();
         
+        // Insert navbar immediately
+        if (document.body) {
+            document.body.insertAdjacentHTML('afterbegin', navbarHTML);
+            const nav = document.querySelector('nav.navbar');
+            if (nav) {
+                setActiveNav();
+                initDropdowns();
+                enforceNavbarStyles(nav);
+                setTimeout(() => enforceNavbarStyles(nav), 10);
+            }
+        }
+    }
+    
+    // Initialize - with defer, DOM is ready
+    function init() {
         if (document.body) {
             loadNavbar();
         } else {
-            // Fallback: wait for body
-            const checkBody = setInterval(function() {
+            // Wait for body
+            const checkBody = setInterval(() => {
                 if (document.body) {
-                    console.log('Body found, loading navbar');
                     loadNavbar();
                     clearInterval(checkBody);
                 }
             }, 10);
-            
-            // Timeout after 1 second
-            setTimeout(function() {
-                clearInterval(checkBody);
-                if (!document.body) {
-                    console.error('Body not found after 1 second');
-                }
-            }, 1000);
+            setTimeout(() => clearInterval(checkBody), 1000);
         }
     }
     
-    // With defer, script runs after DOMContentLoaded, so readyState should be 'interactive' or 'complete'
-    // But handle all cases
+    // Run immediately (defer ensures DOM is ready)
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
-        // DOM already ready (interactive or complete) - run immediately
         init();
     }
 })();
