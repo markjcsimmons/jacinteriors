@@ -192,41 +192,39 @@
         }
     }
     
-    // Load navbar when DOM is ready
     // With defer attribute, script runs after DOMContentLoaded, so body should exist
+    // But handle all cases to be safe
     function init() {
         console.log('init() called - readyState:', document.readyState, 'body exists:', !!document.body);
-        // Ensure body exists (should always be true with defer, but check anyway)
+        
         if (document.body) {
             loadNavbar();
         } else {
-            // Fallback: wait for body if it doesn't exist yet
-            const observer = new MutationObserver(function(mutations, obs) {
+            // Fallback: wait for body
+            const checkBody = setInterval(function() {
                 if (document.body) {
+                    console.log('Body found, loading navbar');
                     loadNavbar();
-                    obs.disconnect();
+                    clearInterval(checkBody);
                 }
-            });
-            observer.observe(document.documentElement, { childList: true, subtree: true });
-            // Also try after a short delay
+            }, 10);
+            
+            // Timeout after 1 second
             setTimeout(function() {
-                if (document.body) {
-                    loadNavbar();
-                    observer.disconnect();
+                clearInterval(checkBody);
+                if (!document.body) {
+                    console.error('Body not found after 1 second');
                 }
-            }, 100);
+            }, 1000);
         }
     }
     
-    // With defer, script runs after DOMContentLoaded
-    // But also handle immediate execution if DOM is already ready
+    // With defer, script runs after DOMContentLoaded, so readyState should be 'interactive' or 'complete'
+    // But handle all cases
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
-    } else if (document.readyState === 'interactive' || document.readyState === 'complete') {
-        // DOM already ready - run immediately
-        init();
     } else {
-        // Fallback: try after a short delay
-        setTimeout(init, 0);
+        // DOM already ready (interactive or complete) - run immediately
+        init();
     }
 })();
