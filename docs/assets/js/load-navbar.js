@@ -209,13 +209,15 @@
         }
     }
     
-    // With defer, script runs after DOMContentLoaded, so readyState should be 'interactive' or 'complete'
-    // But handle all cases to be safe
+    // With defer, script runs after DOMContentLoaded
+    // But also handle immediate execution if DOM is already ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
+    } else if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        // DOM already ready - run immediately
+        init();
     } else {
-        // DOM already ready (interactive or complete)
-        // Use setTimeout to ensure body is fully available
+        // Fallback: try after a short delay
         setTimeout(init, 0);
     }
 })();
