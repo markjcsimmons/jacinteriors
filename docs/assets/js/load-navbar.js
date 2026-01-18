@@ -173,11 +173,13 @@
     }
     
     // Load navbar when DOM is ready
+    // With defer attribute, script runs after DOMContentLoaded, so body should exist
     function init() {
+        // Ensure body exists (should always be true with defer, but check anyway)
         if (document.body) {
             loadNavbar();
         } else {
-            // Wait for body to exist
+            // Fallback: wait for body if it doesn't exist yet
             const observer = new MutationObserver(function(mutations, obs) {
                 if (document.body) {
                     loadNavbar();
@@ -185,13 +187,23 @@
                 }
             });
             observer.observe(document.documentElement, { childList: true, subtree: true });
+            // Also try after a short delay
+            setTimeout(function() {
+                if (document.body) {
+                    loadNavbar();
+                    observer.disconnect();
+                }
+            }, 100);
         }
     }
     
+    // With defer, script runs after DOMContentLoaded, so readyState should be 'interactive' or 'complete'
+    // But handle all cases to be safe
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
-        // DOM already ready
-        init();
+        // DOM already ready (interactive or complete)
+        // Use setTimeout to ensure body is fully available
+        setTimeout(init, 0);
     }
 })();
