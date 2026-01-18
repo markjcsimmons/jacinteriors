@@ -899,6 +899,9 @@ img {
     .sticky-grid { grid-template-columns: 1fr; gap: 3rem; }
     .sticky-content { position: static; }
     
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr; gap: 2rem; }
+    
     .project-list-item {
         flex-direction: column;
     }
