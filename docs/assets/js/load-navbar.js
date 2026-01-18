@@ -133,7 +133,7 @@
             }
         }
         
-        // Use async XMLHttpRequest with immediate execution on body ready
+        // Use async XMLHttpRequest to prevent blocking (non-responsive pages)
         const xhr = new XMLHttpRequest();
         xhr.open('GET', navbarPath, true);
         xhr.timeout = 2000;
