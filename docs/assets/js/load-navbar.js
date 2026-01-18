@@ -2,6 +2,8 @@
 (function() {
     'use strict';
     
+    console.log('Navbar script loaded');
+    
     // Get current page to set active state
     const currentPath = window.location.pathname;
     const filename = currentPath.split('/').pop() || 'index-variant-2.html';
@@ -84,6 +86,8 @@
     
     // Load navbar from HTML file - this is the ONLY source of navbar HTML
     function loadNavbar() {
+        console.log('loadNavbar() called');
+        
         // Remove any existing navbar first (clean slate)
         const existingNav = document.querySelector('nav.navbar');
         if (existingNav) {
@@ -99,6 +103,7 @@
         // Calculate path to navbar.html
         const depth = currentPath.split('/').length - 2;
         const navbarPath = depth > 0 ? '../'.repeat(depth) + 'assets/navbar.html' : 'assets/navbar.html';
+        console.log('Loading navbar from:', navbarPath);
         
         // CRITICAL: Force all navbar styles with !important to override any CSS
         function enforceNavbarStyles(nav) {
@@ -139,6 +144,7 @@
         xhr.timeout = 5000; // Increased timeout
         
         xhr.onload = function() {
+            console.log('Navbar XHR onload - status:', xhr.status, 'body exists:', !!document.body);
             if (xhr.status === 200 && document.body) {
                 try {
                     const html = xhr.responseText;
@@ -146,10 +152,12 @@
                         console.error('Navbar HTML is empty');
                         return;
                     }
+                    console.log('Inserting navbar HTML (length:', html.length, ')');
                     document.body.insertAdjacentHTML('afterbegin', html);
                     
                     const nav = document.querySelector('nav.navbar');
                     if (nav) {
+                        console.log('Navbar successfully inserted and found');
                         fixRelativePaths();
                         setActiveNav();
                         initDropdowns();
@@ -187,6 +195,7 @@
     // Load navbar when DOM is ready
     // With defer attribute, script runs after DOMContentLoaded, so body should exist
     function init() {
+        console.log('init() called - readyState:', document.readyState, 'body exists:', !!document.body);
         // Ensure body exists (should always be true with defer, but check anyway)
         if (document.body) {
             loadNavbar();
