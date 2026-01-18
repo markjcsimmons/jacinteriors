@@ -643,7 +643,8 @@ const scrollAnimationObserver = new IntersectionObserver((entries) => {
 // Observe all elements with scroll animation classes
 document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll(
-        '.scroll-fade-in, .scroll-slide-left, .scroll-slide-right, .scroll-scale-in'
+        // Legacy + current page animation classes
+        '.scroll-fade-in, .scroll-slide-left, .scroll-slide-right, .scroll-scale-in, .scale-in-image, .slide-in-left, .slide-in-right'
     );
     
     animatedElements.forEach(element => {
@@ -660,6 +661,7 @@ console.log('Hero carousel and scroll animations initialized');
 const stickyBtn = document.getElementById('stickyConsultBtn');
 
 window.addEventListener('scroll', () => {
+    if (!stickyBtn) return;
     if (window.scrollY > 800) {
         stickyBtn.classList.add('visible');
     } else {
@@ -677,6 +679,11 @@ const exitPopupForm = document.getElementById('exitPopupForm');
 let exitPopupShown = sessionStorage.getItem('exitPopupShown');
 let isExitPopupActive = false;
 
+// If popup markup isn't on this page, skip exit-intent wiring
+if (!exitPopup) {
+    // Still allow the rest of main.js to run (scroll animations, etc.)
+    console.log('Exit-intent popup not present on this page; skipping.');
+} else {
 // Detect mouse leaving viewport (exit intent)
 document.addEventListener('mouseleave', (e) => {
     // Only trigger if mouse leaves from top of page (navigating away)
@@ -704,9 +711,7 @@ if (exitPopupClose) {
 
 // Close popup on overlay click
 exitPopup.addEventListener('click', (e) => {
-    if (e.target === exitPopup) {
-        hideExitPopup();
-    }
+    if (e.target === exitPopup) hideExitPopup();
 });
 
 // Close popup on ESC key
@@ -749,6 +754,7 @@ if (exitPopupForm) {
         }, 5000);
     });
 }
+} // end: exitPopup present guard
 
 console.log('Conversion optimization features loaded');
 

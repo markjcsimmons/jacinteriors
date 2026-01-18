@@ -1,239 +1,365 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Living Spaces | JAC Interiors</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        @media (max-width: 768px) {
-            .first-row-image { order: 2 !important; }
-            .first-row-text { order: 1 !important; }
-            .first-row-grid { grid-template-columns: 1fr !important; }
-        }
-        @media (min-width: 769px) {
-            .first-row-image { order: 1 !important; }
-            .first-row-text { order: 2 !important; }
-        }
-        .image-container {
-            width: 100%;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .image-gallery-grid {
-            position: relative;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .image-gallery-grid > div {
-            position: absolute;
-            width: calc(50% - 1rem);
-            box-sizing: border-box;
-            transition: transform 0.3s ease;
-        }
-        .image-gallery-grid .image-container {
-            margin: 0;
-        }
-        .image-gallery-grid .image-container img {
-            margin: 0;
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-        .first-row-grid {
-            width: 100%;
-            box-sizing: border-box;
-        }
-        @media (max-width: 768px) {
-            .image-gallery-grid > div {
-                width: 100%;
-            }
-        }
-        @media (min-width: 1200px) {
-            .image-gallery-grid > div {
-                width: calc(33.333% - 1.33rem);
-            }
-        }
-    </style>
-    <script src="assets/js/load-navbar.js" defer></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>
+   Living Spaces | JAC Interiors
+  </title>
+<link href="assets/css/style.css?v=20260118" rel="stylesheet"/>
+<link href="assets/css/spaces-masonry.css?v=20260118" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<script defer="" src="assets/js/load-navbar.js">
+</script>
+<script defer="" src="assets/js/spaces-masonry.js?v=20260118"></script>
 </head>
 <body>
-    
-    
+<!-- Page Header -->
+<section style="padding: 3rem 0; background: #1a1a1a; color: white; margin-top: 5rem;">
+<div class="container">
+<h1 class="scroll-fade-in" style="font-size: 3.5rem; font-weight: 500; margin: 0; letter-spacing: -1.5px; line-height: 1.1; color: white;">
+     Living Spaces
+    </h1>
+</div>
+</section>
+<!-- Image Gallery -->
+<section style="padding: 4rem 0;">
+<div class="container" style="max-width: 1400px;">
+<!-- First Row: Image Left, Text Card Right -->
+<div class="first-row-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; width: 100%;">
+<div class="parallax-image scale-in-image hover-zoom-image">
+<div class="image-container">
+<img alt="Living Spaces" src="assets/images/spaces/living-spaces/living-spaces-1.jpg"/>
+</div>
+</div>
+<div class="first-row-text" style="background: #fafafa; padding: 2.5rem; border-radius: 4px; display: flex; flex-direction: column; justify-content: center;">
+<h3 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px; color: #1a1a1a;">
+       Living Beautifully
+      </h3>
+<p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 0;">
+       Our living spaces invite you to relax, entertain, and live fully. We layer textures, curate art, and select furnishings that reflect your lifestyle while creating visual harmony.
+      </p>
+</div>
+</div>
+<!-- Image Grid - Masonry layout -->
+<div class="image-gallery-grid" style="margin-bottom: 2rem;">
 
-        <!-- Page Header -->
-    <section style="padding: 3rem 0; background: #1a1a1a; color: white; margin-top: 5rem;">
-        <div class="container">
-            <h1 class="scroll-fade-in" style="font-size: 3.5rem; font-weight: 500; margin: 0; letter-spacing: -1.5px; line-height: 1.1; color: white;">Living Spaces</h1>
-        </div>
-    </section>
 
-    <!-- Image Gallery -->
-    <section style="padding: 4rem 0;">
-        <div class="container" style="max-width: 1400px;">
-            <!-- First Row: Image Left, Text Card Right -->
-            <div class="first-row-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; width: 100%;">
-                <div class="parallax-image scale-in-image hover-zoom-image first-row-image" style="width: 100%;">
-                    <div class="image-container">
-                        <img alt="Living Spaces" src="assets/images/spaces/living-spaces/living-spaces-1.jpg"/>
-                    </div>
-                </div>
-                <div class="first-row-text" style="background: #fafafa; padding: 2.5rem; border-radius: 4px; display: flex; flex-direction: column; justify-content: center;">
-                    <h3 class="slide-in-right" style="font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -0.5px; color: #1a1a1a;">Living Beautifully</h3>
-                    <p class="slide-in-right delay-1" style="font-size: 16px; line-height: 24px; color: #444; margin-bottom: 0;">Our living spaces invite you to relax, entertain, and live fully. We layer textures, curate art, and select furnishings that reflect your lifestyle while creating visual harmony.</p>
-                </div>
-            </div>
 
-            <!-- Image Grid - Masonry layout -->
-            <div class="image-gallery-grid" style="margin-bottom: 2rem;">
-                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
-                    <div class="image-container">
-                        <img alt="Living Spaces" src="assets/images/spaces/living-spaces/living-spaces-2.jpg"/>
-                    </div>
-                </div>
-                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
-                    <div class="image-container">
-                        <img alt="Living Spaces" src="assets/images/spaces/living-spaces/living-spaces-3.jpg"/>
-                    </div>
-                </div>
-                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
-                    <div class="image-container">
-                        <img alt="Living Spaces" src="assets/images/spaces/living-spaces/living-spaces-4.jpg"/>
-                    </div>
-                </div>
-                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
-                    <div class="image-container">
-                        <img alt="Living Spaces" src="assets/images/spaces/living-spaces/living-spaces-5.jpg"/>
-                    </div>
-                </div>
-                <div class="parallax-image scale-in-image hover-zoom-image" style="width: 100%;">
-                    <div class="image-container">
-                        <img alt="Living Spaces" src="assets/images/spaces/living-spaces/living-spaces-6.jpg"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section style="padding: 6rem 0; background: #fafafa; text-align: center;">
-        <div class="container" style="max-width: 700px;">
-            <h2 class="scroll-fade-in" style="font-size: 2.5rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -1px;">Ready to Transform Your Living Spaces?</h2>
-            <p class="scroll-fade-in delay-1" style="font-size: 1.1rem; color: #666; margin-bottom: 2rem; line-height: 1.6;">Let's create a design that reflects your unique style and elevates your everyday living.</p>
-            <a class="btn btn-primary scroll-fade-in delay-2" href="contact.html" style="display: inline-block; padding: 1rem 2.5rem; background: var(--color-primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 500; transition: all 0.3s;">Start Your Project</a>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer style="background: #1a1a1a; color: white; padding: 3rem 0 1.5rem;">
-        <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 5rem; margin-bottom: 3rem;">
-                <div>
-                    <img alt="JAC Interiors" src="assets/images/jac-logo.png" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);"/>
-                    <p style="color: #999; line-height: 1.6;">Creating luxury spaces that elevate everyday living.</p>
-                </div>
-                <div>
-                    <h4 style="margin-bottom: 1rem; font-weight: 500;">Quick Links</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin-bottom: 0.5rem;"><a href="portfolio.html" style="color: #999; text-decoration: none;">Portfolio</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="about.html" style="color: #999; text-decoration: none;">About</a></li>
-                        <li style="margin-bottom: 0.5rem;"><a href="contact.html" style="color: #999; text-decoration: none;">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="margin-bottom: 1rem; font-weight: 500;">Contact</h4>
-                    <p style="color: #999; line-height: 1.6;">
-                        Los Angeles, CA<br/>
-                        Phone: (310) 555-0123<br/>
-                        Email: info@jacinteriors.com
-                    </p>
-                </div>
-            </div>
-            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #666;">
-                <p>© 2024 JAC Interiors. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
-    <script src="assets/js/main.js"></script>
-    <script>
-        // Masonry layout implementation
-        function initMasonry() {
-            const grid = document.querySelector('.image-gallery-grid');
-            if (!grid) return;
-            
-            const items = Array.from(grid.children);
-            if (items.length === 0) return;
-            
-            const gap = 16;
-            let columns = 2;
-            
-            if (window.innerWidth <= 768) {
-                columns = 1;
-            } else if (window.innerWidth >= 1200) {
-                columns = 3;
-            }
-            
-            const containerWidth = grid.offsetWidth;
-            const columnWidth = (containerWidth - (gap * (columns - 1))) / columns;
-            const columnHeights = new Array(columns).fill(0);
-            
-            items.forEach((item, index) => {
-                const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
-                const left = shortestColumnIndex * (columnWidth + gap);
-                const top = columnHeights[shortestColumnIndex];
-                
-                item.style.left = left + 'px';
-                item.style.top = top + 'px';
-                item.style.width = columnWidth + 'px';
-                
-                const itemHeight = item.offsetHeight;
-                columnHeights[shortestColumnIndex] += itemHeight + gap;
-            });
-            
-            grid.style.height = Math.max(...columnHeights) + 'px';
-        }
 
-        window.addEventListener('load', () => {
-            const images = document.querySelectorAll('.image-gallery-grid img');
-            let loadedCount = 0;
-            
-            if (images.length === 0) {
-                initMasonry();
-                return;
-            }
-            
-            images.forEach(img => {
-                if (img.complete) {
-                    loadedCount++;
-                    if (loadedCount === images.length) {
-                        initMasonry();
-                    }
-                } else {
-                    img.addEventListener('load', () => {
-                        loadedCount++;
-                        if (loadedCount === images.length) {
-                            initMasonry();
-                        }
-                    });
-                }
-            });
-        });
 
-        window.addEventListener('resize', () => {
-            initMasonry();
-        });
-    </script>
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-2.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-3.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-4.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-5.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-6.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-7.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-8.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-9.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-10.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-11.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-12.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-13.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-14.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-15.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-16.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-17.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-18.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-19.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-20.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-21.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-22.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-23.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-24.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-25.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-26.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-27.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-28.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-29.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-30.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-31.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-32.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-33.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-34.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-35.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-36.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-37.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-38.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-39.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-40.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-41.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-42.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-43.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-44.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-45.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-46.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-47.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-48.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-49.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-50.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-51.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-52.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-53.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-54.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-55.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-56.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-57.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-58.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-59.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-60.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-61.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-62.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-63.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-64.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-65.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-66.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-67.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-68.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-69.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-70.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-71.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-72.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-73.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-74.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-75.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-76.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-77.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-78.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-79.jpg"/></div></div><div class="parallax-image scale-in-image hover-zoom-image"><div class="image-container"><img alt="Living Spaces" loading="lazy" src="assets/images/spaces/living-spaces/living-spaces-80.jpg"/></div></div></div>
+</div>
+</section>
+<!-- CTA Section -->
+<section style="padding: 6rem 0; background: #fafafa; text-align: center;">
+<div class="container" style="max-width: 700px;">
+<h2 class="scroll-fade-in" style="font-size: 2.5rem; font-weight: 500; margin-bottom: 1.5rem; letter-spacing: -1px;">
+     Ready to Transform Your Living Spaces?
+    </h2>
+<p class="scroll-fade-in delay-1" style="font-size: 1.1rem; color: #666; margin-bottom: 2rem; line-height: 1.6;">
+     Let's create a design that reflects your unique style and elevates your everyday living.
+    </p>
+<a class="btn btn-primary scroll-fade-in delay-2" href="contact.html" style="display: inline-block; padding: 1rem 2.5rem; background: var(--color-primary); color: white; text-decoration: none; border-radius: 4px; font-weight: 500; transition: all 0.3s;">
+     Start Your Project
+    </a>
+</div>
+</section>
+<!-- Footer -->
+<footer style="background: #1a1a1a; color: white; padding: 3rem 0 1.5rem;">
+<div class="container">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 5rem; margin-bottom: 3rem;">
+<div>
+<img alt="JAC Interiors" src="assets/images/jac-logo.png" style="height: 40px; margin-bottom: 1rem; filter: brightness(0) invert(1);"/>
+<p style="color: #999; line-height: 1.6;">
+       Creating luxury spaces that elevate everyday living.
+      </p>
+</div>
+<div>
+<h4 style="margin-bottom: 1rem; font-weight: 500;">
+       Quick Links
+      </h4>
+<ul style="list-style: none; padding: 0;">
+<li style="margin-bottom: 0.5rem;">
+<a href="portfolio.html" style="color: #999; text-decoration: none;">
+         Portfolio
+        </a>
+</li>
+<li style="margin-bottom: 0.5rem;">
+<a href="about.html" style="color: #999; text-decoration: none;">
+         About
+        </a>
+</li>
+<li style="margin-bottom: 0.5rem;">
+<a href="contact.html" style="color: #999; text-decoration: none;">
+         Contact
+        </a>
+</li>
+</ul>
+</div>
+<div>
+<h4 style="margin-bottom: 1rem; font-weight: 500;">
+       Contact
+      </h4>
+<p style="color: #999; line-height: 1.6;">
+       Los Angeles, CA
+       <br/>
+       Phone: (310) 555-0123
+       <br/>
+       Email: info@jacinteriors.com
+      </p>
+</div>
+</div>
+<div style="text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #666;">
+<p>
+      © 2024 JAC Interiors. All rights reserved.
+     </p>
+</div>
+</div>
+</footer>
+<script src="assets/js/main.js?v=20260118">
+</script>
+
 </body>
 </html>

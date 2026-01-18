@@ -33,3 +33,6 @@ Temporary Items
 *.backup
 *.bak
 *.tmp
+
+# Local-only high-res assets (do not commit)
+docs/assets/images/spaces/

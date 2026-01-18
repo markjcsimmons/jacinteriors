@@ -1,0 +1,44 @@
+/* Shared masonry styles for all Spaces pages */
+
+.image-container {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image-gallery-grid {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.image-gallery-grid > div {
+  position: absolute;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+}
+
+.image-gallery-grid .image-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  display: block;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.image-gallery-grid .image-container img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: contain !important;
+  box-sizing: border-box !important;
+}
+
