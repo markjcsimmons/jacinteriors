@@ -70,20 +70,6 @@
     img.setAttribute("src", PLACEHOLDER_SRC);
   });
 
-  async function fetchManifest(space) {
-    const url = `${base}/spaces/${space}/manifest.json`;
-    try {
-      const res = await fetch(url, { cache: "no-store" });
-      if (!res.ok) return null;
-      const data = await res.json();
-      const files = Array.isArray(data) ? data : Array.isArray(data?.files) ? data.files : null;
-      if (!files) return null;
-      return files.filter((x) => typeof x === "string" && x.trim().length);
-    } catch {
-      return null;
-    }
-  }
-
   function numericIndexFromName(space, name) {
     // bedrooms-12.jpg OR bedrooms-12-anything.jpg etc.
     const re = new RegExp(`^${space}-(\\\\d+)`, "i");
@@ -116,8 +102,29 @@
     img.setAttribute("src", url);
   }
 
+  function shouldUseManifest(space, entries) {
+    // Only use manifest if the HTML filenames are NOT already in the simple numbered scheme.
+    // If you've renamed uploads to `space-1.jpg`, `space-2.jpg`, ... we can map directly
+    // and avoid any CORS requirements for `fetch()`.
+    return entries.some(({ originalName }) => numericIndexFromName(space, originalName) === null);
+  }
+
+  async function fetchManifest(space) {
+    const url = `${base}/spaces/${space}/manifest.json`;
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) return null;
+      const data = await res.json();
+      const files = Array.isArray(data) ? data : Array.isArray(data?.files) ? data.files : null;
+      if (!files) return null;
+      return files.filter((x) => typeof x === "string" && x.trim().length);
+    } catch {
+      return null;
+    }
+  }
+
   async function applyForSpace(space, entries) {
-    const manifestFiles = await fetchManifest(space);
+    const manifestFiles = shouldUseManifest(space, entries) ? await fetchManifest(space) : null;
 
     // Map existing images
     entries.forEach(({ img, originalName }) => {
@@ -132,7 +139,8 @@
       }
 
       const url = `${base}/spaces/${space}/${encodeName(targetName)}`;
-      setFinalSrc(img, url, Boolean(manifestFiles));
+      // Mark final once loaded. If manifest isn't used, mapping is direct.
+      setFinalSrc(img, url, true);
     });
 
     // If manifest has MORE images than the HTML, append the rest to the masonry grid.
