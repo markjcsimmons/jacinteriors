@@ -93,8 +93,17 @@
     return Number.isFinite(n) ? n : null;
   }
 
-  function setFinalSrc(img, url) {
+  function setFinalSrc(img, url, isFinalMapping) {
     if (!url) return;
+    // Only mark as final once we've successfully loaded.
+    // This prevents masonry from permanently hiding tiles while we're still iterating on mapping.
+    img.addEventListener(
+      "load",
+      () => {
+        if (isFinalMapping) img.dataset.r2Final = "1";
+      },
+      { once: true }
+    );
     img.addEventListener(
       "error",
       () => {
@@ -104,7 +113,6 @@
       },
       { once: true }
     );
-    img.dataset.r2Final = "1";
     img.setAttribute("src", url);
   }
 
@@ -124,7 +132,7 @@
       }
 
       const url = `${base}/spaces/${space}/${encodeName(targetName)}`;
-      setFinalSrc(img, url);
+      setFinalSrc(img, url, Boolean(manifestFiles));
     });
 
     // If manifest has MORE images than the HTML, append the rest to the masonry grid.
