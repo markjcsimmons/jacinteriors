@@ -111,6 +111,12 @@
       img.addEventListener(
         "error",
         () => {
+          // If R2 is managing this image and hasn't finalized the src yet,
+          // do NOT permanently hide the tile (we may swap src shortly).
+          if (img.dataset && img.dataset.r2Managed === "1" && img.dataset.r2Final !== "1") {
+            scheduleRelayout();
+            return;
+          }
           const tile = img.closest(".parallax-image") || img.parentElement;
           if (tile && tile.dataset) tile.dataset.masonryHidden = "1";
           if (tile && tile.style) tile.style.display = "none";
@@ -139,6 +145,9 @@
 
     scheduleRelayout();
   }
+
+  // Allow other scripts (like R2 manifest loaders) to trigger a rewire/relayout.
+  document.addEventListener("spaces:gallery-updated", init);
 
   // Init on DOM ready + on full load (fonts/layout might shift)
   if (document.readyState === "loading") {
