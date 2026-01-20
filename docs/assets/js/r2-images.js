@@ -93,7 +93,26 @@
     img.addEventListener(
       "error",
       () => {
-        // If R2 fails, fall back to local
+        // If R2 fails, optionally try one nested folder based on the page H1 (common when uploading a folder)
+        // e.g. spaces/bedrooms/Bedrooms/bedrooms-1.jpg
+        const space = img.dataset.r2Space || "";
+        const name = img.dataset.r2TargetName || img.dataset.r2OriginalName || "";
+        const triedNested = img.dataset.r2TriedNested === "1";
+
+        const h1Text = (document.querySelector("h1")?.textContent || "").trim();
+        const nestedFolder = h1Text ? encodeName(h1Text) : "";
+        const nestedUrl =
+          space && name && nestedFolder
+            ? `${base}/spaces/${space}/${nestedFolder}/${encodeName(name)}`
+            : "";
+
+        if (!triedNested && nestedUrl && img.getAttribute("src") !== nestedUrl) {
+          img.dataset.r2TriedNested = "1";
+          img.setAttribute("src", nestedUrl);
+          return;
+        }
+
+        // Otherwise fall back to local
         const localSrc = img.dataset.r2LocalSrc;
         if (localSrc) img.setAttribute("src", localSrc);
       },
@@ -139,6 +158,7 @@
       }
 
       const url = `${base}/spaces/${space}/${encodeName(targetName)}`;
+      img.dataset.r2TargetName = targetName;
       // Mark final once loaded. If manifest isn't used, mapping is direct.
       setFinalSrc(img, url, true);
     });
