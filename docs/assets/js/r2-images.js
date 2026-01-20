@@ -19,12 +19,14 @@
 
 (function () {
   const base = (window.R2_IMAGE_BASE || "").replace(/\/+$/, "");
-  if (!base) return;
-
   const PLACEHOLDER_SRC =
     "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
-  const selector = 'img[src^="assets/images/spaces/"]';
+  // Support both:
+  // - legacy: <img src="assets/images/spaces/...">
+  // - preferred: <img src="(placeholder)" data-r2-local-src="assets/images/spaces/...">
+  const selector =
+    'img[data-r2-local-src^="assets/images/spaces/"], img[src^="assets/images/spaces/"]';
   const imgs = Array.from(document.querySelectorAll(selector));
   if (!imgs.length) return;
 
@@ -44,7 +46,8 @@
   const bySpace = new Map(); // space -> [{ img, localSrc, originalName }]
 
   imgs.forEach((img) => {
-    const localSrc = img.getAttribute("src") || "";
+    const localSrc =
+      img.getAttribute("data-r2-local-src") || img.getAttribute("src") || "";
     const parsed = parseSpaceAndName(localSrc);
     if (!parsed) return;
 
@@ -53,6 +56,10 @@
     img.dataset.r2Wired = "1";
 
     img.dataset.r2LocalSrc = localSrc;
+    // Keep attribute for future loads / debugging
+    if (!img.getAttribute("data-r2-local-src")) {
+      img.setAttribute("data-r2-local-src", localSrc);
+    }
     img.dataset.r2Space = parsed.space;
     img.dataset.r2OriginalName = parsed.name;
     img.dataset.r2Managed = "1";
@@ -61,7 +68,13 @@
     if (!bySpace.has(parsed.space)) bySpace.set(parsed.space, []);
     bySpace.get(parsed.space).push({ img, localSrc, originalName: parsed.name });
 
-    // Prevent immediate GitHub Pages 404s by using a placeholder until we know the final URL.
+    // If R2 is not configured, fall back to local.
+    if (!base) {
+      img.setAttribute("src", localSrc);
+      return;
+    }
+
+    // Prevent immediate 404s by using a placeholder until we set the final URL.
     img.setAttribute("src", PLACEHOLDER_SRC);
   });
 
@@ -108,6 +121,7 @@
   }
 
   // Apply per space (direct mapping only)
+  if (!base) return;
   bySpace.forEach((entries, space) => {
     entries.forEach(({ img, originalName }) => {
       img.dataset.r2TargetName = originalName;
