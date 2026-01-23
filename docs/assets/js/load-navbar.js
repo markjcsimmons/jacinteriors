@@ -5,18 +5,34 @@
     // Get current page to set active state and calculate paths
     const currentPath = window.location.pathname;
     const filename = currentPath.split('/').pop() || 'index-variant-2.html';
-    const depth = currentPath.split('/').length - 2;
+    
+    // Extract base path for GitHub Pages project sites (e.g., '/jacinteriors')
+    const pathParts = currentPath.split('/').filter(p => p);
+    const basePath = pathParts.length > 0 ? '/' + pathParts[0] : '';
+    
+    // Calculate depth for subdirectories (e.g., cities/, projects/)
+    // For root-level pages: /jacinteriors/page.html -> depth = 0
+    // For subfolder pages: /jacinteriors/cities/page.html -> depth = 1
+    const depth = Math.max(0, pathParts.length - 2);
     const pathPrefix = depth > 0 ? '../'.repeat(depth) : '';
     
     // Helper to get correct path for links
+    // Use absolute paths with basePath for root-level pages to ensure correct resolution
     function getPath(href) {
-        if (href.startsWith('http') || href.startsWith('#') || href.startsWith('/')) {
+        if (href.startsWith('http') || href.startsWith('#')) {
             return href;
         }
+        // Don't modify absolute paths starting with /
+        if (href.startsWith('/')) {
+            return href;
+        }
+        // For relative paths in subdirectories, use relative paths
         if (depth > 0 && !href.startsWith('../')) {
             return pathPrefix + href;
         }
-        return href;
+        // For root-level relative paths, use absolute paths with basePath
+        // This ensures links work correctly on GitHub Pages project sites
+        return basePath + '/' + href;
     }
     
     // Determine which nav item should be active
