@@ -3,265 +3,1038 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JAC Interiors - Full-service interior design studio in Los Angeles and Florida. Creating beautiful, functional spaces.">
-    <title>JAC Interiors | Luxury Interior Design Los Angeles</title>
-    <link rel="stylesheet" href="assets/css/style.css?v=20260118">
+    <title>JAC Interiors | Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Geist / Plus Jakarta Sans for the exact Invero "Geist" look -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        /* RESET */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-body: #ffffff;
+            --text-main: #222a26; /* Invero Primary */
+            --text-light: #555555;
+            --stroke: #e4e4e4; /* Invero Stroke */
+            --accent: #222a26; /* Invero uses dark for interactions mostly */
+            --font-main: 'Plus Jakarta Sans', sans-serif; /* Closest Google Font to Geist */
+            --container-width: 1320px;
+            --section-spacing: 120px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-main);
+            background: var(--bg-body);
+            line-height: 1.5;
+            overflow-x: hidden;
+            /* Invero Specific Body Styles from Inspector */
+            letter-spacing: -0.5px; 
+            font-size: 16px;
+        }
+
+        /* UTILS */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        img, video { width: 100%; display: block; object-fit: cover; }
+        
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4 {
+            font-family: var(--font-main);
+            color: var(--text-main);
+            font-weight: 600;
+            letter-spacing: -1.5px; /* Tighter headings */
+        }
+
+        h1 {
+            font-size: 80px;
+            line-height: 1.1em;
+            letter-spacing: -4px;
+            font-weight: 500;
+        }
+
+        h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            color: var(--text-light);
+            font-size: 20px;
+            margin-bottom: 1rem;
+            line-height: 1.4em;
+            letter-spacing: -0.48px;
+            font-weight: 500;
+        }
+
+        /* 1. NAVBAR */
+        .navbar {
+            padding: 1.5rem 0;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--stroke);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 500; 
+            letter-spacing: -1px; 
+            text-transform: uppercase;
+        }
+        
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+        .nav-link { 
+            font-size: 0.95rem; 
+            font-weight: 500; 
+            color: var(--text-main);
+            letter-spacing: -0.2px;
+        }
+        .nav-link:hover { opacity: 0.7; }
+        
+        /* Dropdown styles */
+        .nav-dropdown { position: relative; display: inline-block; }
+        .nav-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem 0;
+            margin-top: 0;
+            z-index: 1000;
+            border-radius: 4px;
+            flex-direction: column;
+        }
+        .nav-dropdown:hover .nav-dropdown-content {
+            display: flex;
+        }
+        .nav-dropdown-content a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            color: #333;
+            font-size: 0.85rem;
+            text-transform: none;
+            letter-spacing: 0;
+            text-decoration: none;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .nav-dropdown-content a:last-child { border-bottom: none; }
+        .nav-dropdown-content a:hover { background: #f5f5f5; }
+
+        /* 2. TOP HEADLINE AREA */
+        .top-headline-section {
+            padding: 2rem 0 2rem;
+        }
+
+        .top-headline-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.6fr;
+            gap: 5rem;
+            align-items: end;
+            margin-top: 0;
+        }
+
+        /* 3. HERO IMAGE */
+        .hero-image-section {
+            padding: 0 2rem 0;
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .hero-img-wrapper {
+            width: 100%;
+            height: 75vh;
+            overflow: hidden;
+            position: relative;
+            border-radius: 4px;
+            background: #000;
+            margin: 0;
+            padding: 0;
+            display: block;
+            line-height: 0;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            transform: scale(1.2);
+            transform-origin: center center;
+            transition: transform 0.1s linear;
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 4. STICKY "PROCESS" SECTION */
+        .sticky-process-section {
+            padding: var(--section-spacing) 0;
+            border-top: 1px solid var(--stroke);
+            margin-top: 0;
+        }
+
+        .sticky-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .sticky-left {
+            position: sticky;
+            top: 100px;
+        }
+
+        .process-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+        }
+
+        .process-item-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+            border-bottom: 1px solid var(--stroke);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-num {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .process-media {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #f5f5f5;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .process-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 5. SERVICES GRID */
+        .services-section {
+            padding: var(--section-spacing) 0;
+            background: white; /* Invero Home 1 often keeps it white */
+            border-top: 1px solid var(--stroke);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 Columns */
+            gap: 0; /* Border separation */
+            margin-top: 4rem;
+            border-left: 1px solid var(--stroke);
+            border-top: 1px solid var(--stroke);
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-right: 1px solid var(--stroke);
+            border-bottom: 1px solid var(--stroke);
+            transition: background 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .service-card:hover { background: #f9f9f9; }
+
+        .service-icon {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        /* 6. STATS STRIP */
+        .stats-section {
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--stroke);
+            border-top: 1px solid var(--stroke);
+        }
+        
+        .stats-flex {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item h4 {
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            letter-spacing: -2px;
+        }
+
+        .stat-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        /* FULL-WIDTH IMAGE */
+        .fullwidth-image-section {
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .fullwidth-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* 7. PROJECTS */
+        .projects-section {
+            padding: var(--section-spacing) 0;
+        }
+        
+        .projects-section.bg-dark {
+            background: #111;
+        }
+        
+        .projects-section.bg-dark h2,
+        .projects-section.bg-dark h3,
+        .projects-section.bg-dark p,
+        .projects-section.bg-dark span {
+            color: white !important;
+        }
+        
+        .projects-section.bg-dark .project-meta {
+            color: rgba(255,255,255,0.6) !important;
+        }
+
+        .project-row {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 5rem;
+            margin-bottom: 8rem;
+            align-items: center;
+        }
+        .project-row.reverse { grid-template-columns: 1fr 1.5fr; }
+        .project-row.reverse .project-media { order: 2; }
+
+        .project-media {
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+        .project-media img { transition: transform 0.6s; width: 100%; height: 100%; object-fit: cover; }
+        .project-row:hover .project-media img { transform: scale(1.03); }
+
+        .project-meta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .project-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            background: transparent;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1.5px solid var(--text-main);
+            border-radius: 0px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .btn:hover { 
+            background: var(--text-main);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 1rem 2rem;
+            font-weight: 600;
+        }
+        .btn-outline:hover {
+            background: var(--text-main);
+            color: white;
+        }
+
+        /* REVIEWS CAROUSEL - Compact */
+        .reviews-compact-box {
+            max-width: 100%;
+            margin: 0 auto 0;
+            padding: 0.75rem 2rem;
+            border: 1px solid var(--stroke);
+            border-radius: 2px;
+            background: #fafafa;
+            text-align: center;
+            min-height: 60px;
+        }
+
+        .trust-badges-inline {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .trust-badge-inline {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .trust-badge-stars {
+            color: #FFB800;
+            font-size: 0.85rem;
+        }
+
+        .testimonial-carousel {
+            position: relative;
+            overflow: visible;
+            min-height: 60px;
+            transition: min-height 0.3s ease;
+        }
+
+        .testimonial-slide {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            position: relative;
+            pointer-events: auto;
+        }
+
+        .testimonial-slide.active:hover {
+            opacity: 0.9;
+        }
+
+        .testimonial-text {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            letter-spacing: -0.3px;
+            max-height: 1.5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            transition: max-height 0.3s ease, white-space 0.3s ease;
+            display: block;
+        }
+
+        .testimonial-text.expanded {
+            max-height: 500px;
+            white-space: normal;
+        }
+
+        .testimonial-author {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            font-weight: 500;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--stroke);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: var(--text-main);
+            width: 18px;
+            border-radius: 3px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .top-headline-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .sticky-grid { grid-template-columns: 1fr; }
+            .sticky-left { position: static; margin-bottom: 3rem; }
+            .services-grid { grid-template-columns: 1fr; border-left: none; }
+            .service-card { border-left: 1px solid var(--stroke); }
+            .project-row, .project-row.reverse { grid-template-columns: 1fr; gap: 2rem; }
+            .project-row.reverse .project-media { order: 0; }
+            .stats-flex { grid-template-columns: 1fr 1fr; gap: 3rem; }
+            .hero-img-wrapper { height: 50vh; }
+            .trust-badges-inline { gap: 1rem; flex-wrap: wrap; }
+            .testimonial-text { font-size: 0.9rem; }
+            .reviews-compact-box { padding: 1rem 1.5rem; }
+        }
+    </style>
     <script src="assets/js/load-navbar.js" defer></script>
 </head>
 <body>
+
+    <!-- 1. NAVBAR -->
     
     
 
-    <!-- Mega Hero with Video Background -->
-    <header class="hero-mega">
-        <video autoplay loop muted playsinline class="hero-bg">
-            <source src="assets/images/14225281_3840_2160_60fps.mp4" type="video/mp4">
-            <!-- Fallback image if video fails -->
-            <img src="assets/images/projects/venice-beach-house.jpg" alt="Luxury Interior Design">
-        </video>
-        
-        <div class="hero-overlay"></div>
-        
-        <div class="hero-content">
-            <h1 class="hero-title-mega">Los Angeles Interior Designers</h1>
-            <p class="hero-subtitle">Creating Luxury Spaces That Elevate Everyday Living</p>
-            
-            <div class="hero-cta-group">
-                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
-                <a href="portfolio.html" class="btn btn-outline-white">View Portfolio</a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Trust Strip (Authority) -->
-    <div class="trust-strip">
+    <!-- 2. TOP HEADLINE -->
+    <section class="top-headline-section">
         <div class="container">
-            <div class="trust-grid">
-                <div class="trust-item">
-                    <span class="badge-icon">★</span>
-                    <span>4.9 Google Rating</span>
+
+            <!-- Headline Grid -->
+            <div class="top-headline-grid">
+                <div>
+                    <h1>Crafting spaces that<br>feel like home.</h1>
                 </div>
-                <div class="trust-item">
-                    <span class="badge-icon">★</span>
-                    <span>4.9 Yelp Rating</span>
-                </div>
-                <div class="trust-item">
-                    <span class="badge-icon">★</span>
-                    <span>5.0 Houzz Rating</span>
-                </div>
-                <div class="trust-item">
-                    <span class="badge-icon">🏆</span>
-                    <span>20x Best of Houzz</span>
+                <div>
+                    <p>We design interiors that reflect your lifestyle and values, ensuring they stand the test of time. From Los Angeles to Florida, we create luxury spaces that elevate everyday living.</p>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- 3. HERO IMAGE -->
+    <div class="hero-image-section">
+        <div class="hero-img-wrapper">
+            <img src="assets/images/projects/madison-club-hero-highres.jpg" alt="Hero" class="hero-img" id="heroZoomImg">
+        </div>
+
+            <!-- Compact Reviews Box -->
+            <div class="reviews-compact-box">
+                <div class="trust-badges-inline">
+                    <div class="trust-badge-inline">
+                        <span class="trust-badge-stars">★★★★★</span>
+                        <span>4.9 Google</span>
+                    </div>
+                    <div class="trust-badge-inline">
+                        <span class="trust-badge-stars">★★★★★</span>
+                        <span>4.9 Yelp</span>
+                    </div>
+                    <div class="trust-badge-inline">
+                        <span class="trust-badge-stars">★★★★★</span>
+                        <span>5.0 Houzz</span>
+                    </div>
+                    <div class="trust-badge-inline">
+                        <span>🏆 20x Best of Houzz</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-carousel">
+                    <!-- Google Reviews -->
+                    <div class="testimonial-slide active">
+                        <p class="testimonial-text">"Andrea gave me instant direction and helped me make the changes my kitchen needed."</p>
+                        <div class="testimonial-author">Tina Staffon — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"JAC's knowledge, industry connections, and respect for budgets was a game-changer for our 1920's house renovation."</p>
+                        <div class="testimonial-author">Vincent Cullinan, Los Angeles — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"I've worked with JAC in both California and Colorado. They were meticulous with budgets for both properties."</p>
+                        <div class="testimonial-author">Emily Kopit — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Every piece of this house is custom designed from floors to walls. Even the books and plants were their choice."</p>
+                        <div class="testimonial-author">Stuart Gross — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Good people, great design, listens to your needs. They can do it all from remodels to fully furnishing your spaces."</p>
+                        <div class="testimonial-author">Stancy Tomlinson — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Impeccable taste down to every detail. Great communication throughout—we always knew what was going on."</p>
+                        <div class="testimonial-author">Holly Kurtz — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"They transformed my outdated living space into a fabulous modern place I love to entertain in."</p>
+                        <div class="testimonial-author">Madison Pollack — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"They listened closely and worked collaboratively. Documentation was clear, everything done on time."</p>
+                        <div class="testimonial-author">Les Hine — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Tim helped make my space a sanctuary—a place I could feel comfortable and at peace."</p>
+                        <div class="testimonial-author">Andrew Watman — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Andrea was super responsive, generous with her time and helpful. I really appreciate her kindness."</p>
+                        <div class="testimonial-author">Yael Saidoff — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Tim is amazing. He helped us take our very dated bathroom from drab to FAB!"</p>
+                        <div class="testimonial-author">KevDave Davison — Google</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Great designers in LA. I worked with the JAC team on my home design."</p>
+                        <div class="testimonial-author">Madison Houseworth-Skaggs — Google</div>
+                    </div>
+                    
+                    <!-- Yelp Reviews -->
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"They worked within my budget and were enormously gracious about it. My canyon home office is now my favorite room."</p>
+                        <div class="testimonial-author">Miriam B., Santa Monica — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Complete condo renovation from start to finish. Very collaborative, and brought great ideas we would have never thought of."</p>
+                        <div class="testimonial-author">Les H., Los Angeles — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"They worked on our vacation home. Made everything easy and polished. Super responsive—we especially loved their wallpaper selections."</p>
+                        <div class="testimonial-author">Daisy H., Pasadena — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"They created the home of our dreams. Truly understood our vision and nailed the wow factor in every room."</p>
+                        <div class="testimonial-author">Chaya S., Los Angeles — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Transformed our Hollywood Hills house. They tie everything together and make it look fabulous."</p>
+                        <div class="testimonial-author">Ray B., Los Angeles — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Excellent customer service, expertise and professionalism. Highly recommend for projects big and small."</p>
+                        <div class="testimonial-author">Suzsanna P., Los Angeles — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"They made over my daughter's bedroom from little girl to chic tween. Way beyond our expectations and within budget."</p>
+                        <div class="testimonial-author">Deborah S., Los Angeles — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"They listen and care about who you are. Your space reflects your lifestyle. Beautiful and unique items—not generic."</p>
+                        <div class="testimonial-author">Molly P., Santa Monica — Yelp</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Complete Marina del Rey remodel. Consultative approach, worked within budget, reasonable fees. Fun to work with!"</p>
+                        <div class="testimonial-author">Michael P., Venice — Yelp</div>
+                    </div>
+                    
+                    <!-- Houzz Reviews -->
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Working with them from initial design, product sourcing and installation was a dream."</p>
+                        <div class="testimonial-author">Client Review — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"They transformed my patio into an outdoor sanctuary and my family room into a contemporary yet kid-friendly space."</p>
+                        <div class="testimonial-author">Client Review — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Andrea has incredible taste and listened to my needs. Every decision that stretched my comfort zone turned out magnificent."</p>
+                        <div class="testimonial-author">kenneallyd — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"The most professional, helpful and organized team. They elevate your style into something magical and beautiful."</p>
+                        <div class="testimonial-author">Michelle — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Helped us navigate fixtures, tiles, vanities, and paint for all four bathrooms. Made them look like magazine features."</p>
+                        <div class="testimonial-author">monica78 — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Professional, prompt, beautiful work. Worked within budget and went out of their way to make our house ready for holidays."</p>
+                        <div class="testimonial-author">lululemom — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"They embraced my modern meets boho style and pulled it all together professionally. Fabulous eye and immaculate taste."</p>
+                        <div class="testimonial-author">Holly K. — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Serious professionals with excellent project management. No egos—always about a great end product and client satisfaction."</p>
+                        <div class="testimonial-author">kshamamehra — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Friendly team that understood exactly the look I wanted. All deadlines met and came in on budget."</p>
+                        <div class="testimonial-author">charleswalder — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Venice cottage remodel. Strong teamwork attitude, knowledgeable insight, and finishing touches on time and within budget."</p>
+                        <div class="testimonial-author">Dodd Holsapple, Dodd-Art Inc. — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Marina Del-Rey 3-story remodel. Very professional with attention to details and high aesthetic eye. Budget conscious with high customer service."</p>
+                        <div class="testimonial-author">Creative Builders — Houzz</div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <p class="testimonial-text">"Talented, creative, super fun to work with. Developed a color scheme that felt current and reflected us as individuals."</p>
+                        <div class="testimonial-author">shannie43 — Houzz</div>
+                    </div>
+                </div>
+                
+                <div class="carousel-dots">
+                    <span class="carousel-dot active" data-slide="0"></span>
+                    <span class="carousel-dot" data-slide="1"></span>
+                    <span class="carousel-dot" data-slide="2"></span>
+                    <span class="carousel-dot" data-slide="3"></span>
+                    <span class="carousel-dot" data-slide="4"></span>
+                    <span class="carousel-dot" data-slide="5"></span>
+                    <span class="carousel-dot" data-slide="6"></span>
+                    <span class="carousel-dot" data-slide="7"></span>
+                    <span class="carousel-dot" data-slide="8"></span>
+                    <span class="carousel-dot" data-slide="9"></span>
+                    <span class="carousel-dot" data-slide="10"></span>
+                    <span class="carousel-dot" data-slide="11"></span>
+                    <span class="carousel-dot" data-slide="12"></span>
+                    <span class="carousel-dot" data-slide="13"></span>
+                    <span class="carousel-dot" data-slide="14"></span>
+                    <span class="carousel-dot" data-slide="15"></span>
+                    <span class="carousel-dot" data-slide="16"></span>
+                    <span class="carousel-dot" data-slide="17"></span>
+                    <span class="carousel-dot" data-slide="18"></span>
+                    <span class="carousel-dot" data-slide="19"></span>
+                    <span class="carousel-dot" data-slide="20"></span>
+                    <span class="carousel-dot" data-slide="21"></span>
+                    <span class="carousel-dot" data-slide="22"></span>
+                    <span class="carousel-dot" data-slide="23"></span>
+                    <span class="carousel-dot" data-slide="24"></span>
+                    <span class="carousel-dot" data-slide="25"></span>
+                    <span class="carousel-dot" data-slide="26"></span>
+                    <span class="carousel-dot" data-slide="27"></span>
+                    <span class="carousel-dot" data-slide="28"></span>
+                    <span class="carousel-dot" data-slide="29"></span>
+                    <span class="carousel-dot" data-slide="30"></span>
+                    <span class="carousel-dot" data-slide="31"></span>
+                </div>
+            </div>
+
     </div>
 
-    <!-- Sticky Scroll Section (About) -->
-    <section class="section">
-        <div class="container">
-            <div class="sticky-grid">
-                <div class="sticky-content">
-                    <span class="section-label">About JAC Interiors</span>
-                    <h2 class="text-secondary" style="font-size: 3rem; margin-bottom: 2rem;">We craft aesthetic and functional spaces.</h2>
-                    <p>Whether you have just moved into your home and don't know how to make it your own, or you've been there for years and need an update, we can help.</p>
-                    <p>We take your spaces and make them the kind of places you want to spend all of your time, improve the function of rooms like kitchens and bathrooms, and add that wow factor to give you your ultimate dream home.</p>
-                    <br>
-                    <a href="about.html" class="btn btn-secondary">Learn more about us</a>
+    <!-- 4. STICKY PROCESS SECTION -->
+    <section class="sticky-process-section">
+        <div class="container sticky-grid">
+            <!-- Left Sticky -->
+            <div class="sticky-left">
+                <span style="display:block; color:var(--text-main); font-size:0.8rem; margin-bottom:1rem; text-transform:uppercase; letter-spacing:1px; font-weight:600;">Design Philosophy</span>
+                <h2>Designing spaces that<br>feel as good as they look.</h2>
+                <p>We create immersive interiors that reflect your personality, enhance your lifestyle, and bring a sense of calm.</p>
+                <a href="about.html" style="text-decoration:underline; font-weight:600;">Learn more about us</a>
+            </div>
+
+            <!-- Right Scroll -->
+            <div class="process-list">
+                
+                <!-- 01: Video -->
+                <div class="process-item">
+                    <div class="process-item-header">
+                        <span class="process-num">01</span>
+                        <h3>Intentional Design</h3>
+                    </div>
+                    <div class="process-media">
+                        <img src="assets/images/venice-boho-home.jpg" alt="Venice Boho Home">
+                    </div>
+                    <p>We believe every element in a space should serve a purpose — whether it’s to inspire, to comfort, or to function beautifully.</p>
                 </div>
-                <div class="sticky-media">
-                    <img src="assets/images/andrea+time1.jpg" alt="JAC Interiors Team" class="scroll-fade-in">
-                    <img src="assets/images/projects/toscana-country-club.jpg" alt="Luxury Interior" class="scroll-fade-in" style="margin-top: 2rem;">
+
+                <!-- 02: Image -->
+                <div class="process-item">
+                    <div class="process-item-header">
+                        <span class="process-num">02</span>
+                        <h3>Collaboration First</h3>
+                    </div>
+                    <div class="process-media">
+                        <img src="assets/images/galewood-13.jpg" alt="Team">
+                    </div>
+                    <p>We see every project as a partnership. By listening closely, sharing ideas openly, and respecting your vision, we turn your goals into reality.</p>
                 </div>
+
+                <!-- 03: Image -->
+                <div class="process-item">
+                    <div class="process-item-header">
+                        <span class="process-num">03</span>
+                        <h3>Timeless Aesthetics</h3>
+                    </div>
+                    <div class="process-media">
+                        <img src="assets/images/santa-monica-20.jpg" alt="Timeless">
+                    </div>
+                    <p>We design with longevity in mind. By blending classic elements with modern sensibility, we create interiors that remain stylish for years.</p>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Dark Services Section -->
-    <section class="section bg-dark text-white">
+    <!-- 5. SERVICES GRID -->
+    <section class="services-section" style="background: #111; color: white; padding: 6rem 0;">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label text-light">Our Expertise</span>
-                <h2 class="text-white" style="font-size: 3rem;">Designing spaces that feel as good as they look</h2>
+            <div style="margin-bottom:2rem;">
+                <h2 style="color: white;">Our Expertise</h2>
             </div>
             
-            <div class="services-dark-grid">
-                <div class="service-item-dark scroll-fade-in">
-                    <span class="service-num">01</span>
-                    <h3 class="service-title-dark">Residential Design</h3>
-                    <p class="service-desc-dark">Full-service interior design for homes of all sizes. From cozy apartments to luxury estates, we create spaces that reflect your lifestyle.</p>
-                    <a href="services.html" class="text-link-light">View Service →</a>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Residential Design</h3>
+                        <p style="font-size:0.95rem;">Full-service interior design for homes of all sizes. From cozy apartments to luxury estates.</p>
+                    </div>
                 </div>
-                <div class="service-item-dark scroll-fade-in" style="transition-delay: 0.1s;">
-                    <span class="service-num">02</span>
-                    <h3 class="service-title-dark">Commercial Spaces</h3>
-                    <p class="service-desc-dark">Professional interior design for offices, retail spaces, and hospitality. Thoughtfully designed environments that align with your brand.</p>
-                    <a href="services.html" class="text-link-light">View Service →</a>
+                <div class="service-card">
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Commercial Spaces</h3>
+                        <p style="font-size:0.95rem;">Thoughtful commercial spaces that align with your brand and support your goals.</p>
+                    </div>
                 </div>
-                <div class="service-item-dark scroll-fade-in" style="transition-delay: 0.2s;">
-                    <span class="service-num">03</span>
-                    <h3 class="service-title-dark">Space Planning</h3>
-                    <p class="service-desc-dark">Optimize your layout for better flow and functionality. Smart space planning that maximizes every square foot.</p>
-                    <a href="services.html" class="text-link-light">View Service →</a>
+                <div class="service-card">
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Interior Styling</h3>
+                        <p style="font-size:0.95rem;">We refine the details, layer in textures, and select decor that feels just right.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Space Planning</h3>
+                        <p style="font-size:0.95rem;">Our concept design process explores layouts and moods through compelling visuals.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Selected Works (Alternating List) -->
-    <section class="section-lg" id="portfolio">
+    <!-- 6. STATS STRIP -->
+    <section class="stats-section">
         <div class="container">
-            <div class="section-header text-center">
-                <span class="section-label">Selected Works</span>
-                <h2>Recent Projects</h2>
+            <div style="margin-bottom:4rem;">
+                <h2>Numbers that speak<br>for themselves.</h2>
             </div>
-
-            <div class="project-list">
-                <!-- Project 1 -->
-                <a href="projects/beverly-hills-alpine.html" class="project-row scroll-fade-in">
-                    <div class="project-img-wrapper">
-                        <img src="assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills Alpine" loading="lazy">
-                    </div>
-                    <div class="project-content-alt">
-                        <div class="project-meta">Residential • Beverly Hills</div>
-                        <h3 class="project-title-alt">Beverly Hills Alpine</h3>
-                        <div class="view-btn-simple">View Project →</div>
-                    </div>
-                </a>
-
-                <!-- Project 2 (Reverse) -->
-                <a href="projects/venice-beach-house.html" class="project-row reverse scroll-fade-in">
-                    <div class="project-img-wrapper">
-                        <img src="assets/images/projects/venice-beach-house.jpg" alt="Venice Beach House" loading="lazy">
-                    </div>
-                    <div class="project-content-alt">
-                        <div class="project-meta">Coastal • Venice Beach</div>
-                        <h3 class="project-title-alt">Venice Beach House</h3>
-                        <div class="view-btn-simple">View Project →</div>
-                    </div>
-                </a>
-
-                <!-- Project 3 -->
-                <a href="projects/toscana-country-club.html" class="project-row scroll-fade-in">
-                    <div class="project-img-wrapper">
-                        <img src="assets/images/projects/toscana-country-club.jpg" alt="Toscana Country Club" loading="lazy">
-                    </div>
-                    <div class="project-content-alt">
-                        <div class="project-meta">Retreat • Indian Wells</div>
-                        <h3 class="project-title-alt">Toscana Country Club</h3>
-                        <div class="view-btn-simple">View Project →</div>
-                    </div>
-                </a>
-                
-                 <!-- Project 4 (Reverse) -->
-                <a href="projects/madison-club.html" class="project-row reverse scroll-fade-in">
-                    <div class="project-img-wrapper">
-                        <img src="assets/images/projects/madison-club.jpg" alt="Madison Club" loading="lazy">
-                    </div>
-                    <div class="project-content-alt">
-                        <div class="project-meta">Desert Luxury • La Quinta</div>
-                        <h3 class="project-title-alt">Madison Club</h3>
-                        <div class="view-btn-simple">View Project →</div>
-                    </div>
-                </a>
-            </div>
-
-            <div class="text-center" style="margin-top: 6rem;">
-                <a href="portfolio.html" class="btn btn-secondary">View All Projects</a>
+            <div class="stats-flex">
+                <div class="stat-item">
+                    <h4>50+</h4>
+                    <span>Homes Transformed</span>
+                </div>
+                <div class="stat-item">
+                    <h4>15+</h4>
+                    <span>Commercial Spaces</span>
+                </div>
+                <div class="stat-item">
+                    <h4>98%</h4>
+                    <span>Client Satisfaction</span>
+                </div>
+                <div class="stat-item">
+                    <h4>12+</h4>
+                    <span>Years Experience</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Proof (Reviews) -->
-    <section class="section bg-light">
+    <!-- FULL-WIDTH IMAGE -->
+    <section class="fullwidth-image-section">
+        <img src="assets/images/toscana-20.jpg" alt="Our Design Work" class="fullwidth-img">
+    </section>
+
+    <!-- 7. PROJECTS -->
+    <section class="projects-section" style="background: white; color: #222;">
         <div class="container">
-            <div class="reviews-minimal scroll-fade-in">
-                <div class="review-quote">"From concept to completion, JAC Interiors exceeded every expectation. They truly elevate the everyday."</div>
-                <div class="review-author">David Thompson — Google Reviews</div>
+            <div style="text-align:center; margin-bottom:6rem;">
+                <h2>Our work speaks<br>through spaces.</h2>
             </div>
-             <!-- Carousel placeholder/functionality can be re-added here if multi-slide is needed, but keeping it minimal for Invero style -->
+
+            <!-- Project 1 -->
+            <a href="projects/beverly-hills-alpine.html" class="project-row">
+                <div class="project-media">
+                    <img src="assets/images/projects/beverly-hills-alpine.jpg" alt="Beverly Hills">
+                </div>
+                <div class="project-info">
+                    <span class="project-meta">Residential</span>
+                    <h3>Beverly Hills Alpine</h3>
+                    <p>Luxury Residence • Beverly Hills, CA</p>
+                    <span style="text-decoration:underline; font-weight:600;">View Project</span>
+                </div>
+            </a>
+
+            <!-- Project 2 -->
+            <a href="projects/venice-beach-house.html" class="project-row reverse">
+                <div class="project-media">
+                    <img src="assets/images/projects/venice-beach-house.jpg" alt="Venice Beach">
+                </div>
+                <div class="project-info">
+                    <span class="project-meta">Coastal</span>
+                    <h3>Venice Beach House</h3>
+                    <p>Coastal Contemporary • Venice, CA</p>
+                    <span style="text-decoration:underline; font-weight:600;">View Project</span>
+                </div>
+            </a>
+
+            <!-- Project 3 -->
+            <a href="projects/toscana-country-club.html" class="project-row">
+                <div class="project-media">
+                    <img src="assets/images/projects/toscana-country-club.jpg" alt="Toscana">
+                </div>
+                <div class="project-info">
+                    <span class="project-meta">Retreat</span>
+                    <h3>Toscana Country Club</h3>
+                    <p>Mediterranean • Indian Wells, CA</p>
+                    <span style="text-decoration:underline; font-weight:600;">View Project</span>
+                </div>
+            </a>
+
+            <!-- View More Button -->
+            <div style="text-align:center; margin-top:6rem;">
+                <a href="portfolio.html" class="btn-outline">View More Projects</a>
+            </div>
+
         </div>
     </section>
 
-    <!-- Mega Footer -->
-    <footer class="footer-mega">
+    <!-- FOOTER -->
+    <footer style="background:#111; color:white; padding:8rem 0;">
         <div class="container">
-            <div class="footer-cta">
-                <h2 class="footer-cta-title">Ready to transform<br>your space?</h2>
-                <a href="contact.html" class="btn btn-outline-white">Start a Conversation</a>
+            <div style="margin-bottom:4rem;">
+                <h2 style="font-size:4rem; margin-bottom:2rem; color:white;">Ready to transform<br>your space?</h2>
+                <a href="contact.html" style="background:white; color:#111; padding:1rem 2rem; display:inline-block; font-weight:600; text-transform:uppercase; letter-spacing:1px; border-radius:0px;">Let's get in touch</a>
             </div>
             
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <img src="assets/images/jac-logo.png" alt="JAC Interiors" style="height: 40px; filter: brightness(0) invert(1); margin-bottom: 2rem;">
-                    <p style="color: rgba(255,255,255,0.6);">Full-service interior design studio creating luxury spaces in Los Angeles, Florida, and beyond.</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; border-top:1px solid #333; padding-top:4rem;">
+                <div>
+                    <h4 style="margin-bottom:1rem; color:white; font-size:1.2rem;">Contact</h4>
+                    <p style="color:#999;">info@jacinteriors.com<br>213-397-0206</p>
                 </div>
-                
-                <div class="footer-col">
-                    <h4>Menu</h4>
-                    <ul class="footer-links">
-                        <li><a href="index-variant-2.html">Home</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="cities-we-serve.html">Cities</a></li>
-                    </ul>
+                <div>
+                    <h4 style="margin-bottom:1rem; color:white; font-size:1.2rem;">Social</h4>
+                    <div style="display:flex; gap:1rem; color:#999;">
+                        <a href="#">Instagram</a>
+                        <a href="#">Houzz</a>
+                    </div>
                 </div>
-                
-                <div class="footer-col">
-                    <h4>Social</h4>
-                    <ul class="footer-links">
-                        <li><a href="https://instagram.com/jacinteriorsdesign" target="_blank">Instagram</a></li>
-                        <li><a href="https://facebook.com/JacInteriors" target="_blank">Facebook</a></li>
-                        <li><a href="https://houzz.com/pro/jacinteriors" target="_blank">Houzz</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col footer-contact">
-                    <h4>Contact</h4>
-                    <p>10401 Venice Blvd Suite 257<br>Los Angeles, CA 90034</p>
-                    <p><a href="tel:213-397-0206" style="color: white;">213-397-0206</a></p>
-                    <p><a href="mailto:info@jacinteriors.com" style="color: white;">info@jacinteriors.com</a></p>
-                </div>
-            </div>
-            
-            <div style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 4rem; padding-top: 2rem; display: flex; justify-content: space-between; color: rgba(255,255,255,0.4); font-size: 0.8rem;">
-                <p>&copy; 2025 JAC Interiors. All Rights Reserved.</p>
-                <p>Designed by Mark Simmons</p>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Testimonial Carousel Auto-Rotation with Click to Expand
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            let currentSlide = 0;
+            let autoRotateInterval;
 
-    <!-- Sticky Consultation Button -->
-    <a href="contact.html" class="sticky-consultation-btn" id="stickyConsultBtn">
-        <span>Book Consultation</span>
-    </a>
+            // Make each slide clickable to expand/collapse
+            slides.forEach(slide => {
+                slide.addEventListener('click', (e) => {
+                    const textElement = slide.querySelector('.testimonial-text');
+                    if (textElement) {
+                        textElement.classList.toggle('expanded');
+                    }
+                });
+            });
 
-    <!-- Exit-Intent Popup -->
-    <div class="exit-popup-overlay" id="exitPopup">
-        <div class="exit-popup">
-            <button class="exit-popup-close" id="exitPopupClose">×</button>
-            <div class="exit-popup-content">
-                <h2>Before You Go!</h2>
-                <p>Get expert design advice with a free 30-minute phone consultation.</p>
-                <form id="exitPopupForm" style="margin-top: 2rem;">
-                    <input type="text" name="name" placeholder="Your Name" required style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ddd;">
-                    <input type="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ddd;">
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Get Free Advice</button>
-                </form>
-            </div>
-        </div>
-    </div>
+            function showSlide(index) {
+                // Remove active class and collapse all slides
+                slides.forEach(slide => {
+                    slide.classList.remove('active');
+                    const textElement = slide.querySelector('.testimonial-text');
+                    if (textElement) {
+                        textElement.classList.remove('expanded');
+                    }
+                });
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // Add active class to current slide and dot
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                
+                currentSlide = index;
+            }
 
-    <script src="assets/js/main.js"></script>
+            function nextSlide() {
+                const next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            }
+
+            function startAutoRotate() {
+                autoRotateInterval = setInterval(nextSlide, 4000); // Change every 4 seconds
+            }
+
+            function stopAutoRotate() {
+                clearInterval(autoRotateInterval);
+            }
+
+            // Dot click handlers
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    stopAutoRotate();
+                    startAutoRotate(); // Restart auto-rotation after manual click
+                });
+            });
+
+            // Initialize first slide
+            if (slides.length > 0) {
+                showSlide(0);
+                startAutoRotate();
+            }
+        });
+    </script>
     
 </body>
 </html>
