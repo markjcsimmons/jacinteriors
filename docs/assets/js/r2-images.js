@@ -95,7 +95,7 @@
     img.addEventListener(
       "error",
       () => {
-        // If R2 fails, optionally try one nested folder based on the page H1 (common when uploading a folder)
+        // If R2 fails, optionally try one nested folder based on the page H1 (Spaces only)
         // e.g. spaces/bedrooms/Bedrooms/bedrooms-1.jpg
         const space = img.dataset.r2Space || "";
         const name = img.dataset.r2TargetName || img.dataset.r2OriginalName || "";
@@ -114,7 +114,14 @@
           return;
         }
 
-        // Otherwise fall back to local
+        // Projects: no nested retry; local path would resolve wrong from /projects/.
+        // Mark final so masonry hides the tile; do not set a bad local src.
+        if (!space) {
+          img.dataset.r2Final = "1";
+          return;
+        }
+
+        // Spaces: fall back to local
         const localSrc = img.dataset.r2LocalSrc;
         if (localSrc) img.setAttribute("src", localSrc);
       },
