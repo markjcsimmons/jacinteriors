@@ -111,9 +111,9 @@
       img.addEventListener(
         "error",
         () => {
-          // If R2 is managing this image and hasn't finalized the src yet,
-          // do NOT permanently hide the tile (we may swap src shortly).
-          if (img.dataset && img.dataset.r2Managed === "1" && img.dataset.r2Final !== "1") {
+          // Spaces only: if R2 is managing and might retry (nested path), don't hide yet.
+          // Projects (no r2Space) have no retry; hide immediately.
+          if (img.dataset?.r2Managed === "1" && img.dataset.r2Final !== "1" && img.dataset.r2Space) {
             scheduleRelayout();
             return;
           }
