@@ -1,20 +1,18 @@
 /**
- * Load Spaces page images from Cloudflare R2.
+ * Load Spaces and Projects page images from Cloudflare R2.
  *
- * HTML uses local paths:
- *   assets/images/spaces/<space>/<filename>
+ * Spaces – HTML local paths: assets/images/spaces/<space>/<filename>
+ *   R2: spaces/<space>/<filename>
  *
- * R2 contains objects:
- *   spaces/<space>/<filename>
+ * Projects – HTML local paths: assets/images/projects/<project>/<filename>
+ *   R2: projects/<project>/<filename>
+ *   e.g. assets/images/projects/22nd-street/22nd-street-1.jpg
+ *        → https://jacinteriorscdn.com/projects/22nd-street/22nd-street-1.jpg
  *
- * We rewrite src to:
- *   `${R2_IMAGE_BASE}/spaces/<space>/<filename>`
+ * If the direct path 404s (Spaces only), we try:
+ *   spaces/<space>/<H1>/<filename>
  *
- * If the direct path 404s, we try one common upload pattern where a folder
- * named after the page title was uploaded into the prefix:
- *   `${R2_IMAGE_BASE}/spaces/<space>/<H1>/<filename>`
- *
- * This avoids requiring any `manifest.json` (and avoids CORS fetch issues).
+ * This avoids requiring any manifest.json (and avoids CORS fetch issues).
  */
 
 (function () {
@@ -22,19 +20,20 @@
   const PLACEHOLDER_SRC =
     "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
-  // Support both:
-  // - legacy: <img src="assets/images/spaces/...">
-  // - preferred: <img src="(placeholder)" data-r2-local-src="assets/images/spaces/...">
+  // Spaces and Projects
   const selector =
-    'img[data-r2-local-src^="assets/images/spaces/"], img[src^="assets/images/spaces/"]';
+    'img[data-r2-local-src^="assets/images/spaces/"], img[src^="assets/images/spaces/"], ' +
+    'img[data-r2-local-src^="assets/images/projects/"], img[src^="assets/images/projects/"]';
   const imgs = Array.from(document.querySelectorAll(selector));
   if (!imgs.length) return;
 
-  function parseSpaceAndName(localSrc) {
-    // assets/images/spaces/<space>/<name>
-    const m = localSrc.match(/^assets\/images\/spaces\/([^/]+)\/(.+)$/);
-    if (!m) return null;
-    return { space: m[1], name: m[2] };
+  /** @returns {{ type: 'spaces'|'projects', key: string, name: string }|null} */
+  function parseLocalSrc(localSrc) {
+    const spaceM = localSrc.match(/^assets\/images\/spaces\/([^/]+)\/(.+)$/);
+    if (spaceM) return { type: "spaces", key: spaceM[1], name: spaceM[2] };
+    const projM = localSrc.match(/^assets\/images\/projects\/([^/]+)\/(.+)$/);
+    if (projM) return { type: "projects", key: projM[1], name: projM[2] };
+    return null;
   }
 
   function encodeName(name) {
@@ -42,13 +41,14 @@
     return encodeURIComponent(name).replace(/%2F/g, "/");
   }
 
-  // Group images by space and keep their original local src.
-  const bySpace = new Map(); // space -> [{ img, localSrc, originalName }]
+  // Group images by space or project
+  const bySpace = new Map();   // space -> [{ img, localSrc, originalName }]
+  const byProject = new Map(); // project -> [{ img, localSrc, originalName }]
 
   imgs.forEach((img) => {
     const localSrc =
       img.getAttribute("data-r2-local-src") || img.getAttribute("src") || "";
-    const parsed = parseSpaceAndName(localSrc);
+    const parsed = parseLocalSrc(localSrc);
     if (!parsed) return;
 
     // Avoid double-wiring
@@ -56,17 +56,21 @@
     img.dataset.r2Wired = "1";
 
     img.dataset.r2LocalSrc = localSrc;
-    // Keep attribute for future loads / debugging
     if (!img.getAttribute("data-r2-local-src")) {
       img.setAttribute("data-r2-local-src", localSrc);
     }
-    img.dataset.r2Space = parsed.space;
     img.dataset.r2OriginalName = parsed.name;
     img.dataset.r2Managed = "1";
     img.dataset.r2Final = "0";
+    if (parsed.type === "spaces") img.dataset.r2Space = parsed.key;
 
-    if (!bySpace.has(parsed.space)) bySpace.set(parsed.space, []);
-    bySpace.get(parsed.space).push({ img, localSrc, originalName: parsed.name });
+    if (parsed.type === "spaces") {
+      if (!bySpace.has(parsed.key)) bySpace.set(parsed.key, []);
+      bySpace.get(parsed.key).push({ img, localSrc, originalName: parsed.name });
+    } else {
+      if (!byProject.has(parsed.key)) byProject.set(parsed.key, []);
+      byProject.get(parsed.key).push({ img, localSrc, originalName: parsed.name });
+    }
 
     // If R2 is not configured, fall back to local.
     if (!base) {
@@ -74,7 +78,6 @@
       return;
     }
 
-    // Prevent immediate 404s by using a placeholder until we set the final URL.
     img.setAttribute("src", PLACEHOLDER_SRC);
   });
 
@@ -126,6 +129,15 @@
     entries.forEach(({ img, originalName }) => {
       img.dataset.r2TargetName = originalName;
       const url = `${base}/spaces/${space}/${encodeName(originalName)}`;
+      setFinalSrc(img, url);
+    });
+  });
+
+  // Apply per project: R2 path projects/<project>/<filename>
+  byProject.forEach((entries, project) => {
+    entries.forEach(({ img, originalName }) => {
+      img.dataset.r2TargetName = originalName;
+      const url = `${base}/projects/${project}/${encodeName(originalName)}`;
       setFinalSrc(img, url);
     });
   });
