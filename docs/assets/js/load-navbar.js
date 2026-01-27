@@ -26,12 +26,15 @@
         if (href.startsWith('/')) {
             return href;
         }
+        // Project pages: always use site-root path so /jacinteriors/projects/22nd-street.html works from any page
+        if (href.startsWith('projects/') && basePath) {
+            return basePath + '/' + href;
+        }
         // For relative paths in subdirectories, use relative paths
         if (depth > 0 && !href.startsWith('../')) {
             return pathPrefix + href;
         }
         // For root-level relative paths, use absolute paths with basePath
-        // This ensures links work correctly on GitHub Pages project sites
         return basePath + '/' + href;
     }
     
@@ -47,7 +50,7 @@
         if (filename === 'index.html' || filename === '' || filename === 'index-variant-2.html') {
             const homeLink = nav.querySelector('a[href*="index.html"]');
             if (homeLink) homeLink.classList.add('active');
-        } else if (filename === 'portfolio.html' || filename.includes('projects/')) {
+        } else if (filename === 'portfolio.html' || currentPath.includes('/projects/')) {
             const link = nav.querySelector('a[href*="portfolio.html"]');
             if (link) link.classList.add('active');
         } else if (filename.includes('bathrooms.html') || filename.includes('bedrooms.html') || 
@@ -137,7 +140,7 @@
                         <a href="${getPath('projects/galewood.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Galewood</a>
                         <a href="${getPath('projects/ronda.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Ronda</a>
                         <a href="${getPath('projects/alpine.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Alpine</a>
-                        <a href="${getPath('projects/peary-place.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Peary Place</a>
+                        <a href="${getPath('projects/peary-way.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Peary Way</a>
                         <a href="${getPath('projects/monaco.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Monaco</a>
                         <a href="${getPath('projects/valley-vista.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Valley Vista</a>
                         <a href="${getPath('projects/colby.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Colby</a>
