@@ -1,0 +1,287 @@
+/* About page redesign: Home (Invero) look, scoped to About only */
+
+/* Scope everything so we don't change other pages */
+body.invero-about {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #222a26;
+  background: #ffffff;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
+
+body.invero-about .container {
+  max-width: 1320px;
+}
+
+body.invero-about a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+/* Typography */
+body.invero-about h1,
+body.invero-about h2,
+body.invero-about h3,
+body.invero-about h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #222a26;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+}
+
+body.invero-about h1 {
+  font-size: clamp(3.25rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -3px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+body.invero-about h2 {
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+
+body.invero-about h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+
+body.invero-about p {
+  color: #555555;
+  font-size: 20px;
+  margin-bottom: 1rem;
+  line-height: 1.4em;
+  letter-spacing: -0.48px;
+  font-weight: 500;
+}
+
+body.invero-about .kicker {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: #222a26;
+  margin-bottom: 1rem;
+}
+
+/* Top headline */
+body.invero-about .top-headline-section {
+  padding: 7rem 0 2rem;
+}
+
+body.invero-about .top-headline-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 5rem;
+  align-items: end;
+}
+
+/* Hero image (parallax) */
+body.invero-about .hero-image-section {
+  padding: 0 2rem 0;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+body.invero-about .hero-img-wrapper {
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+  background: #000;
+  display: block;
+  line-height: 0;
+}
+
+body.invero-about .parallax-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: scale(1.15);
+  transform-origin: center center;
+  display: block;
+}
+
+/* Story (sticky narrative) */
+body.invero-about .story-section {
+  padding: 120px 0;
+  border-top: 1px solid #e4e4e4;
+  margin-top: 0;
+}
+
+body.invero-about .sticky-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 6rem;
+  align-items: start;
+}
+
+body.invero-about .sticky-left {
+  position: sticky;
+  top: 100px;
+}
+
+body.invero-about .process-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+body.invero-about .process-item-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  border-bottom: 1px solid #e4e4e4;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+body.invero-about .process-num {
+  font-size: 1.05rem;
+  color: #222a26;
+  font-weight: 600;
+}
+
+body.invero-about .process-media {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #f5f5f5;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+body.invero-about .process-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Values grid (bordered cards like Home) */
+body.invero-about .values-section {
+  padding: 6rem 0;
+  background: #111111;
+  color: #ffffff;
+}
+
+body.invero-about .values-section h2,
+body.invero-about .values-section h3,
+body.invero-about .values-section .kicker {
+  color: #ffffff;
+}
+
+body.invero-about .values-section p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+body.invero-about .values-section .values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 3rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+body.invero-about .values-section .service-card {
+  background: transparent;
+  padding: 2.75rem 2rem;
+  border-radius: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+
+body.invero-about .values-section .service-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* Stats strip */
+body.invero-about .stats-section {
+  padding: 6rem 0;
+  border-bottom: 1px solid #e4e4e4;
+  border-top: 1px solid #e4e4e4;
+}
+
+body.invero-about .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+body.invero-about .stat-number {
+  font-size: 3.25rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  color: #222a26;
+  letter-spacing: -2px;
+  font-weight: 600;
+}
+
+body.invero-about .stat-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555555;
+  letter-spacing: -0.2px;
+}
+
+/* Full-width image break */
+body.invero-about .fullwidth-image-section {
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body.invero-about .fullwidth-image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  body.invero-about .top-headline-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  body.invero-about .sticky-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.invero-about .sticky-left {
+    position: static;
+    margin-bottom: 3rem;
+  }
+
+  body.invero-about .hero-img-wrapper {
+    height: 50vh;
+  }
+
+  body.invero-about .values-section .values-grid {
+    grid-template-columns: 1fr;
+    border-left: none;
+  }
+
+  body.invero-about .values-section .service-card {
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  body.invero-about .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
+

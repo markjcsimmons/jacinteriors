@@ -169,6 +169,13 @@ img {
     margin-top: 3rem;
 }
 
+/* About page: "What Makes Us Different" should be 3 columns on desktop */
+@media (min-width: 1024px) {
+    .values-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
 .service-card {
     padding: 2rem;
     background: white;

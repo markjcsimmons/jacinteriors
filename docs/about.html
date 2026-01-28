@@ -6,6 +6,7 @@
     <meta name="description" content="Learn about JAC Interiors - Full-service interior design studio in Los Angeles and Florida.">
     <title>About Us | JAC Interiors</title>
     <link rel="stylesheet" href="assets/css/style.css?v=20260118">
+    <link rel="stylesheet" href="assets/css/invero-about.css?v=20260128">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -13,76 +14,117 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="assets/js/load-navbar.js" defer></script>
 </head>
-<body>
+<body class="invero-about">
     
     
 
-    <!-- Page Header -->
-    <section class="section" style="padding-top: 100px; padding-bottom: 2rem;">
+    <!-- Top Headline (Home-style) -->
+    <section class="top-headline-section">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">About Us</span>
-                <h1>Who We Are</h1>
-                <p>A full-service interior design studio with the vision and organizational skills to make beautiful transformations happen.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Content -->
-    <section class="section" style="padding-top: 2rem;">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="assets/images/team-photo.jpg" alt="Andrea Putman and Timothy Mersman - JAC Interiors" loading="lazy">
+            <div class="top-headline-grid">
+                <div>
+                    <span class="kicker">About Us</span>
+                    <h1>Who we are.</h1>
                 </div>
-                <div class="about-content">
-                    <h2>Our Story</h2>
-                    <p>JAC Interiors was founded in 2012 and is owned and managed by designers Andrea Putman and Timothy Mersman.</p>
-                    <p>JAC Interiors is a full-service design studio in Los Angeles and Florida that can convert your home into the place of your dreams. Our unique vision and creativity are what is needed to result in a true transformation.</p>
-                    <p>What sets us apart is that we never push you into a specific look. Instead, we collaborate with you on your visions and desires, combining them to create your unique aesthetic in a functional way. Our entire team provides the best results by taking your requests and creatively finding the solutions that match for style and comfort in your home.</p>
-                    <p>Our clients have witnessed comprehensive creations that have elevated their environment from the mundane to the magnificent due to our superior attention to detail.</p>
+                <div>
+                    <p>A full-service interior design studio with the vision and organizational skills to make beautiful transformations happen.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Values Section -->
-    <section class="section" style="background-color: var(--color-bg-alt);">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">Our Approach</span>
-                <h2>What Makes Us Different</h2>
+    <!-- Hero Image (Parallax) -->
+    <div class="hero-image-section">
+        <div class="hero-img-wrapper parallax-container" data-speed="0.18">
+            <img src="assets/images/team-photo.jpg" alt="Andrea Putman and Timothy Mersman - JAC Interiors" loading="lazy">
+        </div>
+    </div>
+
+    <!-- Story (Sticky narrative like Home) -->
+    <section class="story-section">
+        <div class="container sticky-grid">
+            <div class="sticky-left">
+                <span class="kicker">Our Story</span>
+                <h2>Design leadership with taste, rigor, and heart.</h2>
+                <p>JAC Interiors was founded in 2012 and is owned and managed by designers Andrea Putman and Timothy Mersman.</p>
+                <p>We collaborate closely with you—never forcing a “house style”—so your home reflects who you are, how you live, and what you value.</p>
+                <a href="contact.html" class="text-link" style="text-decoration: underline; font-weight: 600;">Get in touch →</a>
             </div>
-            
-            <div class="services-grid">
+
+            <div class="process-list">
+                <div class="process-item">
+                    <div class="process-item-header">
+                        <span class="process-num">01</span>
+                        <h3>Full-service, start to finish</h3>
+                    </div>
+                    <div class="process-media">
+                        <img src="assets/images/projects/madison-club-hero-highres.jpg" alt="Full service interior design" loading="lazy">
+                    </div>
+                    <p>From concept through procurement and installation, our process is structured, organized, and built to make transformations feel seamless.</p>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-item-header">
+                        <span class="process-num">02</span>
+                        <h3>Los Angeles + Florida</h3>
+                    </div>
+                    <div class="process-media">
+                        <img src="assets/images/toscana-20.jpg" alt="Serving clients across Los Angeles and Florida" loading="lazy">
+                    </div>
+                    <p>Serving clients across Los Angeles and Florida, we bring a refined, timeless aesthetic to both residential and commercial projects.</p>
+                </div>
+
+                <div class="process-item">
+                    <div class="process-item-header">
+                        <span class="process-num">03</span>
+                        <h3>Built around you</h3>
+                    </div>
+                    <div class="process-media">
+                        <img src="assets/images/venice-boho-home.jpg" alt="Collaborative design process" loading="lazy">
+                    </div>
+                    <p>We listen, propose, iterate, and refine—combining your vision with our creativity and trusted vendor network to deliver a true transformation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values (Home-style bordered grid) -->
+    <section class="values-section">
+        <div class="container">
+            <div>
+                <span class="kicker">Our Approach</span>
+                <h2>What makes us different.</h2>
+            </div>
+
+            <div class="values-grid">
                 <div class="service-card">
                     <h3>Intentional Design</h3>
-                    <p>We believe every element in a space should serve a purpose — whether it's to inspire, to comfort, or to function beautifully. Our designs are thoughtful, purposeful, and always rooted in your lifestyle needs.</p>
+                    <p>We believe every element in a space should serve a purpose — whether it's to inspire, to comfort, or to function beautifully.</p>
                 </div>
 
                 <div class="service-card">
                     <h3>Collaboration First</h3>
-                    <p>We see every project as a partnership. By listening closely, sharing ideas openly, and respecting your vision, we turn your goals into reality. Together, we co-create interiors that truly reflect who you are.</p>
+                    <p>We see every project as a partnership. By listening closely and sharing ideas openly, we turn your goals into reality.</p>
                 </div>
 
                 <div class="service-card">
                     <h3>Timeless Aesthetics</h3>
-                    <p>We design with longevity in mind. By blending classic elements with modern sensibility, we create interiors that remain stylish, functional, and meaningful — spaces that age gracefully.</p>
+                    <p>By blending classic elements with modern sensibility, we create interiors that remain stylish, functional, and meaningful.</p>
                 </div>
 
                 <div class="service-card">
                     <h3>Meticulous Execution</h3>
-                    <p>Our comprehensive ingenuity and meticulous project management ensure that every detail is perfect. We work with trusted vendors and skilled craftsmen to bring your vision to life.</p>
+                    <p>Our project management ensures details are right. We work with trusted vendors and skilled craftsmen to bring your vision to life.</p>
                 </div>
 
                 <div class="service-card">
                     <h3>Transparent Pricing</h3>
-                    <p>We believe in fair, transparent, and highly competitive pricing. We obtain bids from up to three trusted vendors for every project element, ensuring you receive the best value without compromising on quality.</p>
+                    <p>We obtain bids from up to three trusted vendors for every project element, so you get the best value without compromise.</p>
                 </div>
 
                 <div class="service-card">
                     <h3>Reliable Timelines</h3>
-                    <p>We do our best to stick to project schedules and keep you informed every step of the way. All hours are logged, and we maintain clear communication if delays are expected. Your time matters to us.</p>
+                    <p>We do our best to stick to schedules and keep you informed at every step. Your time matters, and we respect it.</p>
                 </div>
             </div>
         </div>
@@ -110,6 +152,11 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Full-width Image Break -->
+    <section class="fullwidth-image-section">
+        <img src="assets/images/toscana-20.jpg" alt="JAC Interiors work" loading="lazy">
     </section>
 
     <!-- Locations Section -->
