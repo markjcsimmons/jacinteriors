@@ -41,6 +41,22 @@
     return encodeURIComponent(name).replace(/%2F/g, "/");
   }
 
+  /**
+   * Optional cache-busting suffix for R2 URLs.
+   * Usage:
+   *   <img ... data-r2-bust="20260123" />
+   * → appends "?v=20260123"
+   *
+   * If you pass a value that already starts with "?" or "&", we append it as-is.
+   * This is intentionally not URL-encoded since it's a querystring, not part of the object key.
+   */
+  function getBustSuffix(img) {
+    const raw = (img.getAttribute("data-r2-bust") || "").trim();
+    if (!raw) return "";
+    if (raw.startsWith("?") || raw.startsWith("&")) return raw;
+    return `?v=${raw}`;
+  }
+
   // Group images by space or project
   const bySpace = new Map();   // space -> [{ img, localSrc, originalName }]
   const byProject = new Map(); // project -> [{ img, localSrc, originalName }]
@@ -135,7 +151,7 @@
   bySpace.forEach((entries, space) => {
     entries.forEach(({ img, originalName }) => {
       img.dataset.r2TargetName = originalName;
-      const url = `${base}/spaces/${space}/${encodeName(originalName)}`;
+      const url = `${base}/spaces/${space}/${encodeName(originalName)}${getBustSuffix(img)}`;
       setFinalSrc(img, url);
     });
   });
@@ -144,7 +160,7 @@
   byProject.forEach((entries, project) => {
     entries.forEach(({ img, originalName }) => {
       img.dataset.r2TargetName = originalName;
-      const url = `${base}/projects/${project}/${encodeName(originalName)}`;
+      const url = `${base}/projects/${project}/${encodeName(originalName)}${getBustSuffix(img)}`;
       setFinalSrc(img, url);
     });
   });

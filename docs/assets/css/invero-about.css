@@ -234,6 +234,159 @@ body.invero-about .stat-label {
   letter-spacing: -0.2px;
 }
 
+/* Reviews carousel (prominent) */
+body.invero-about .reviews-section {
+  padding: 7rem 0;
+  background: #111111;
+  color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+body.invero-about .reviews-section h2,
+body.invero-about .reviews-section .kicker {
+  color: #ffffff;
+}
+
+body.invero-about .reviews-section p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+body.invero-about .reviews-header {
+  max-width: 900px;
+  margin-bottom: 2.5rem;
+}
+
+body.invero-about .reviews-shell {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 4px;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+body.invero-about .reviews-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+body.invero-about .trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+body.invero-about .trust-pill .stars {
+  color: #ffb800;
+  letter-spacing: 0;
+}
+
+body.invero-about .trust-pill .trophy {
+  filter: saturate(1.2);
+}
+
+body.invero-about .reviews-carousel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  align-items: center;
+  gap: 1rem;
+}
+
+body.invero-about .reviews-arrow {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.35);
+  color: #ffffff;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  font-size: 1.75rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+body.invero-about .reviews-arrow:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+body.invero-about .reviews-slides {
+  position: relative;
+  min-height: 220px;
+}
+
+body.invero-about .review-slide {
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.35s ease;
+}
+
+body.invero-about .review-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+}
+
+body.invero-about .review-stars {
+  color: #ffb800;
+  letter-spacing: 0.1em;
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+body.invero-about .review-quote {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.35;
+  letter-spacing: -0.6px;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+body.invero-about .review-meta {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+body.invero-about .reviews-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+body.invero-about .review-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+body.invero-about .review-dot.is-active {
+  width: 28px;
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
 /* Full-width image break */
 body.invero-about .fullwidth-image-section {
   width: 100%;
@@ -282,6 +435,18 @@ body.invero-about .fullwidth-image-section img {
   body.invero-about .stats-grid {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
+  }
+
+  body.invero-about .reviews-shell {
+    padding: 1.75rem 1.25rem;
+  }
+
+  body.invero-about .reviews-carousel {
+    grid-template-columns: 44px 1fr 44px;
+  }
+
+  body.invero-about .reviews-slides {
+    min-height: 260px;
   }
 }
 

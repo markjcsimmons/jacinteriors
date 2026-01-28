@@ -130,25 +130,69 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="section stats-section">
+    <!-- Reviews Carousel (replaces stats) -->
+    <section class="reviews-section">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3 class="stat-number">150+</h3>
-                    <p class="stat-label">Homes Transformed</p>
+            <div class="reviews-header">
+                <span class="kicker">Reviews</span>
+                <h2>What our clients say.</h2>
+                <p>Real feedback from Google, Yelp, and Houzz—rotating automatically with controls for browsing.</p>
+            </div>
+
+            <div class="reviews-shell" data-about-reviews-carousel="1">
+                <div class="reviews-trust-row">
+                    <div class="trust-pill"><span class="stars">★★★★★</span><span>4.9 Google</span></div>
+                    <div class="trust-pill"><span class="stars">★★★★★</span><span>4.9 Yelp</span></div>
+                    <div class="trust-pill"><span class="stars">★★★★★</span><span>5.0 Houzz</span></div>
+                    <div class="trust-pill"><span class="trophy">🏆</span><span>Best of Houzz</span></div>
                 </div>
-                <div class="stat-item">
-                    <h3 class="stat-number">40+</h3>
-                    <p class="stat-label">Commercial Spaces</p>
+
+                <div class="reviews-carousel">
+                    <button class="reviews-arrow prev" type="button" aria-label="Previous review">‹</button>
+
+                    <div class="reviews-slides" aria-live="polite">
+                        <article class="review-slide is-active">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-quote">“Andrea gave me instant direction and helped me make the changes my kitchen needed.”</p>
+                            <div class="review-meta">Tina Staffon — Google</div>
+                        </article>
+                        <article class="review-slide">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-quote">“JAC's knowledge, industry connections, and respect for budgets was a game-changer for our 1920's house renovation.”</p>
+                            <div class="review-meta">Vincent Cullinan, Los Angeles — Google</div>
+                        </article>
+                        <article class="review-slide">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-quote">“They worked within my budget and were enormously gracious about it. My canyon home office is now my favorite room.”</p>
+                            <div class="review-meta">Miriam B., Santa Monica — Yelp</div>
+                        </article>
+                        <article class="review-slide">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-quote">“Complete condo renovation from start to finish. Very collaborative, and brought great ideas we would have never thought of.”</p>
+                            <div class="review-meta">Les H., Los Angeles — Yelp</div>
+                        </article>
+                        <article class="review-slide">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-quote">“Andrea has incredible taste and listened to my needs. Every decision that stretched my comfort zone turned out magnificent.”</p>
+                            <div class="review-meta">kenneallyd — Houzz</div>
+                        </article>
+                        <article class="review-slide">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-quote">“The most professional, helpful and organized team. They elevate your style into something magical and beautiful.”</p>
+                            <div class="review-meta">Michelle — Houzz</div>
+                        </article>
+                    </div>
+
+                    <button class="reviews-arrow next" type="button" aria-label="Next review">›</button>
                 </div>
-                <div class="stat-item">
-                    <h3 class="stat-number">98%</h3>
-                    <p class="stat-label">Client Satisfaction</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number">15</h3>
-                    <p class="stat-label">Years Experience</p>
+
+                <div class="reviews-dots" aria-label="Review navigation">
+                    <button class="review-dot is-active" type="button" aria-label="Go to review 1"></button>
+                    <button class="review-dot" type="button" aria-label="Go to review 2"></button>
+                    <button class="review-dot" type="button" aria-label="Go to review 3"></button>
+                    <button class="review-dot" type="button" aria-label="Go to review 4"></button>
+                    <button class="review-dot" type="button" aria-label="Go to review 5"></button>
+                    <button class="review-dot" type="button" aria-label="Go to review 6"></button>
                 </div>
             </div>
         </div>
@@ -263,6 +307,60 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        // About page: prominent reviews carousel (isolated to About)
+        document.addEventListener('DOMContentLoaded', () => {
+            const root = document.querySelector('[data-about-reviews-carousel="1"]');
+            if (!root) return;
+
+            const slides = Array.from(root.querySelectorAll('.review-slide'));
+            const dots = Array.from(root.querySelectorAll('.review-dot'));
+            const prevBtn = root.querySelector('.reviews-arrow.prev');
+            const nextBtn = root.querySelector('.reviews-arrow.next');
+
+            if (!slides.length) return;
+
+            let idx = 0;
+            let timer = null;
+
+            function setActive(nextIdx) {
+                idx = (nextIdx + slides.length) % slides.length;
+                slides.forEach((s, i) => s.classList.toggle('is-active', i === idx));
+                dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+            }
+
+            function start() {
+                stop();
+                timer = window.setInterval(() => setActive(idx + 1), 5000);
+            }
+
+            function stop() {
+                if (timer) window.clearInterval(timer);
+                timer = null;
+            }
+
+            prevBtn?.addEventListener('click', () => {
+                setActive(idx - 1);
+                start();
+            });
+            nextBtn?.addEventListener('click', () => {
+                setActive(idx + 1);
+                start();
+            });
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => {
+                    setActive(i);
+                    start();
+                });
+            });
+
+            root.addEventListener('mouseenter', stop);
+            root.addEventListener('mouseleave', start);
+
+            setActive(0);
+            start();
+        });
+    </script>
     
 </body>
 </html>
