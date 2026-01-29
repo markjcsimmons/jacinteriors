@@ -127,9 +127,9 @@
 <nav class="navbar" style="padding: 1.5rem 0; background: white; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e4e4e4; font-family: 'Plus Jakarta Sans', sans-serif;">
     <div class="container" style="max-width: 1320px; margin: 0 auto; padding: 0 2rem;">
         <div class="nav-wrapper" style="display: flex; justify-content: space-between; align-items: center;">
-            <a href="${getPath('index.html')}" class="logo" style="font-size: 1.5rem; font-weight: 500; letter-spacing: -1px; text-transform: uppercase; text-decoration: none; color: #222a26; font-family: 'Plus Jakarta Sans', sans-serif; display: inline-flex; align-items: center; gap: 0.75rem;">
+            <a href="${getPath('index.html')}" class="logo" style="font-size: 1.5rem; font-weight: 500; letter-spacing: -1px; text-transform: uppercase; text-decoration: none; color: #222a26; font-family: 'Plus Jakarta Sans', sans-serif; display: inline-flex; align-items: center; gap: 0.9rem;">
                 <span>JAC INTERIORS</span>
-                <img src="${getPath('assets/images/jac-interiors-logo.png')}" alt="JAC Interiors logo" style="height: 28px; width: auto; display: block;"/>
+                <img src="${getPath('assets/images/jac-interiors-logo.png')}" alt="JAC Interiors logo" style="height: 44px; width: auto; display: block;"/>
             </a>
             <div class="nav-menu" id="navMenu" style="display: flex; gap: 2.5rem; align-items: center;">
                 <a href="${getPath('index.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">HOME</a>
