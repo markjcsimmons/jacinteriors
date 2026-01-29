@@ -269,7 +269,7 @@ body.invero-about .reviews-trust-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 body.invero-about .trust-pill {
@@ -325,7 +325,7 @@ body.invero-about .reviews-arrow:hover {
 
 body.invero-about .reviews-slides {
   position: relative;
-  min-height: 220px;
+  min-height: 170px;
 }
 
 body.invero-about .review-slide {
@@ -346,16 +346,17 @@ body.invero-about .review-stars {
   color: #ffb800;
   letter-spacing: 0.1em;
   font-size: 0.95rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.9rem;
 }
 
 body.invero-about .review-quote {
   color: #222a26;
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  line-height: 1.35;
-  letter-spacing: -0.6px;
+  /* Match the "Real feedback..." sentence size */
+  font-size: 20px;
+  line-height: 1.4em;
+  letter-spacing: -0.48px;
   font-weight: 500;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.15rem;
 }
 
 body.invero-about .review-meta {
@@ -369,7 +370,7 @@ body.invero-about .reviews-dots {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 2rem;
+  margin-top: 1.25rem;
 }
 
 body.invero-about .review-dot {
@@ -439,7 +440,7 @@ body.invero-about .fullwidth-image-section img {
   }
 
   body.invero-about .reviews-shell {
-    padding: 1.75rem 1.25rem;
+    padding: 1.5rem 1.1rem;
   }
 
   body.invero-about .reviews-carousel {
@@ -447,7 +448,7 @@ body.invero-about .fullwidth-image-section img {
   }
 
   body.invero-about .reviews-slides {
-    min-height: 260px;
+    min-height: 210px;
   }
 }
 
