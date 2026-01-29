@@ -25,14 +25,14 @@ body.invero-about a.btn {
 }
 
 body.invero-about a.btn.btn-primary {
-  background: #222a26 !important;
-  border-color: #222a26 !important;
+  background: var(--color-secondary) !important;
+  border-color: var(--color-secondary) !important;
   color: #ffffff !important;
 }
 
 body.invero-about a.btn.btn-primary:hover {
-  background: #111111 !important;
-  border-color: #111111 !important;
+  background: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
   color: #ffffff !important;
 }
 
@@ -134,6 +134,17 @@ body.invero-about .story-section {
   margin-top: 0;
 }
 
+body.invero-about .story-bottom-cta {
+  grid-column: 1 / -1;
+  padding-top: 1.5rem;
+  margin-top: -1rem;
+}
+
+body.invero-about .story-bottom-cta .text-link {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
 body.invero-about .sticky-grid {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -187,6 +198,8 @@ body.invero-about .values-section {
   padding: 6rem 0;
   background: #111111;
   color: #ffffff;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 body.invero-about .values-section h2,
@@ -225,6 +238,8 @@ body.invero-about .values-section .service-card:hover {
 /* CTA section (tighten spacing on About) */
 body.invero-about .cta-section {
   padding: 3.25rem 0 2.5rem;
+  background: #fafafa;
+  border-top: 1px solid #e4e4e4;
 }
 
 body.invero-about .cta-section .cta-content {
@@ -233,6 +248,14 @@ body.invero-about .cta-section .cta-content {
 
 body.invero-about .cta-section .cta-content p {
   margin-bottom: 1.25rem;
+}
+
+/* Keep long paragraphs readable (match Home line lengths) */
+body.invero-about .sticky-left p,
+body.invero-about .reviews-header p,
+body.invero-about .locations-section .section-header p,
+body.invero-about .cta-section p {
+  max-width: 70ch;
 }
 
 /* Locations section (reduce gap before CTA) */
@@ -300,6 +323,26 @@ body.invero-about .reviews-section p {
 body.invero-about .reviews-header {
   max-width: 900px;
   margin-bottom: 2.5rem;
+}
+
+body.invero-about .reviews-featured-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+body.invero-about .featured-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #e4e4e4;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #222a26;
+  background: #ffffff;
+  letter-spacing: -0.2px;
 }
 
 body.invero-about .reviews-shell {
