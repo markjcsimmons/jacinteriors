@@ -8,7 +8,7 @@
     const currentPath = window.location.pathname;
     const filename = currentPath.split('/').pop() || 'index.html';
     
-    const LOGO_SRC = 'assets/images/jac-logo.png';
+    const LOGO_SRC = 'assets/images/jac-interiors-logo.png';
     // Site uses 40px logo in other sections; navbar logo should be 2x.
     const LOGO_HEIGHT_PX = 80;
     

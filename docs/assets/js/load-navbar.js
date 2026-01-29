@@ -2,7 +2,7 @@
 (function() {
     'use strict';
     
-    const LOGO_SRC = 'assets/images/jac-logo.png';
+    const LOGO_SRC = 'assets/images/jac-interiors-logo.png';
     // Site uses 40px logo in other sections; navbar logo should be 2x.
     const LOGO_HEIGHT_PX = 80;
     
