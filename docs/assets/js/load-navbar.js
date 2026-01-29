@@ -3,8 +3,8 @@
     'use strict';
     
     const LOGO_SRC = 'assets/images/jac-interiors-logo.png';
-    // Site uses 40px logo in other sections; navbar logo should be 2x.
-    const LOGO_HEIGHT_PX = 80;
+    // Site uses 40px logo in other sections; navbar logo should be 4x.
+    const LOGO_HEIGHT_PX = 160;
     
     // Get current page to set active state and calculate paths
     const currentPath = window.location.pathname;
