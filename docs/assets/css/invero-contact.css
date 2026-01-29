@@ -263,7 +263,7 @@ body.invero-contact .step-num {
   align-items: center;
   justify-content: center;
   background: #111111;
-  color: #ffffff;
+  color: #ffffff !important;
   font-weight: 700;
   font-size: 0.9rem;
 }
