@@ -235,6 +235,15 @@ body.invero-about .cta-section .cta-content p {
   margin-bottom: 1.25rem;
 }
 
+/* Locations section (reduce gap before CTA) */
+body.invero-about .locations-section {
+  padding: 3.5rem 0 2.25rem;
+}
+
+body.invero-about .locations-section .section-header {
+  margin-bottom: 2.25rem;
+}
+
 /* Footer spacing (reduce large gap before footer columns) */
 body.invero-about .footer-grid {
   margin-top: 2.75rem;
