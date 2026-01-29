@@ -21,19 +21,19 @@ body.invero-about a {
 
 /* Ensure button/link text stays visible (override global anchor color) */
 body.invero-about a.btn {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 body.invero-about a.btn.btn-primary {
-  background: #222a26;
-  border-color: #222a26;
-  color: #ffffff;
+  background: #222a26 !important;
+  border-color: #222a26 !important;
+  color: #ffffff !important;
 }
 
 body.invero-about a.btn.btn-primary:hover {
-  background: #111111;
-  border-color: #111111;
-  color: #ffffff;
+  background: #111111 !important;
+  border-color: #111111 !important;
+  color: #ffffff !important;
 }
 
 /* Typography */
@@ -224,7 +224,7 @@ body.invero-about .values-section .service-card:hover {
 
 /* CTA section (tighten spacing on About) */
 body.invero-about .cta-section {
-  padding: 4.5rem 0;
+  padding: 3.25rem 0 2.5rem;
 }
 
 body.invero-about .cta-section .cta-content {
@@ -232,7 +232,13 @@ body.invero-about .cta-section .cta-content {
 }
 
 body.invero-about .cta-section .cta-content p {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Footer spacing (reduce large gap before footer columns) */
+body.invero-about .footer-grid {
+  margin-top: 2.75rem;
+  padding-top: 2.25rem;
 }
 
 /* Stats strip */
