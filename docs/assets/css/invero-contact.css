@@ -1,0 +1,383 @@
+/* Contact page redesign: Home/About (Invero) look, scoped to Contact only */
+
+body.invero-contact {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #222a26;
+  background: #ffffff;
+  line-height: 1.5;
+  letter-spacing: -0.3px;
+}
+
+body.invero-contact .container {
+  max-width: 1320px;
+}
+
+body.invero-contact a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+/* Keep primary buttons readable even with global anchor styles */
+body.invero-contact a.btn,
+body.invero-contact button.btn {
+  color: #ffffff !important;
+}
+
+body.invero-contact .kicker {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+/* Hero */
+body.invero-contact .contact-hero {
+  padding: 3rem 0;
+  background: #1a1a1a;
+  color: #ffffff;
+  margin-top: 5rem;
+}
+
+body.invero-contact .contact-hero h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(3.25rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -3px;
+  font-weight: 500;
+  margin: 0;
+  color: #ffffff;
+}
+
+body.invero-contact .contact-hero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  max-width: 70ch;
+}
+
+body.invero-contact .contact-hero-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 4rem;
+  align-items: end;
+}
+
+/* Trust row pills (mirrors About featured row) */
+body.invero-contact .contact-featured-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+}
+
+body.invero-contact .featured-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111111;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+}
+
+/* Main layout */
+body.invero-contact .contact-main {
+  padding: 4.5rem 0 5.5rem;
+}
+
+body.invero-contact .contact-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 2.25rem;
+  align-items: start;
+}
+
+body.invero-contact .contact-card {
+  background: #ffffff;
+  border: 2px solid #e1e1e1;
+  border-radius: 6px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  padding: 2.25rem;
+}
+
+body.invero-contact .contact-card h2,
+body.invero-contact .contact-card h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #222a26;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin: 0 0 1rem 0;
+}
+
+body.invero-contact .contact-card h2 {
+  font-size: 2rem;
+}
+
+body.invero-contact .contact-card h3 {
+  font-size: 1.2rem;
+  letter-spacing: -0.4px;
+}
+
+body.invero-contact .muted {
+  color: #555555;
+  font-size: 1rem;
+  line-height: 1.55;
+  margin: 0 0 1.5rem 0;
+  max-width: 70ch;
+}
+
+/* Form */
+body.invero-contact .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+body.invero-contact .form-group {
+  margin-bottom: 1rem;
+}
+
+body.invero-contact .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #222a26;
+  font-size: 0.95rem;
+  letter-spacing: -0.2px;
+}
+
+body.invero-contact .form-group input,
+body.invero-contact .form-group textarea,
+body.invero-contact .form-group select {
+  width: 100%;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #e4e4e4;
+  border-radius: 6px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  color: #222a26;
+  background: #ffffff;
+}
+
+body.invero-contact .form-group textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+body.invero-contact .form-group input:focus,
+body.invero-contact .form-group textarea:focus,
+body.invero-contact .form-group select:focus {
+  outline: none;
+  border-color: rgba(201, 169, 97, 0.9);
+  box-shadow: 0 0 0 4px rgba(201, 169, 97, 0.18);
+}
+
+body.invero-contact .form-hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+body.invero-contact .form-actions {
+  margin-top: 1.25rem;
+}
+
+body.invero-contact .form-actions .btn {
+  width: 100%;
+}
+
+body.invero-contact .form-success {
+  margin-top: 1.25rem;
+  padding: 1rem 1.1rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fafafa;
+  color: #222a26;
+  font-weight: 600;
+}
+
+/* Sidebar blocks */
+body.invero-contact .contact-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+body.invero-contact .contact-meta p {
+  margin: 0.6rem 0;
+  color: #555555;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+body.invero-contact .contact-meta a.text-link {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+body.invero-contact .mini-btn-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+body.invero-contact .mini-btn-row a.btn {
+  padding: 0.95rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+body.invero-contact .next-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+body.invero-contact .next-step {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 0.85rem;
+  align-items: start;
+}
+
+body.invero-contact .step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #111111;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+body.invero-contact .next-step strong {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: #222a26;
+}
+
+body.invero-contact .next-step span {
+  color: #555555;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+body.invero-contact .area-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+body.invero-contact .area-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #e4e4e4;
+  background: #ffffff;
+  color: #222a26;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: -0.2px;
+}
+
+/* FAQ */
+body.invero-contact .contact-faq {
+  padding: 4.5rem 0 5.5rem;
+  background: #fafafa;
+  border-top: 1px solid #e4e4e4;
+}
+
+body.invero-contact .faq-header {
+  max-width: 900px;
+  margin-bottom: 2rem;
+}
+
+body.invero-contact .faq-header h2 {
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -1.5px;
+}
+
+body.invero-contact .faq-header p {
+  margin: 0;
+  color: #555555;
+  font-weight: 500;
+}
+
+body.invero-contact .faq-list {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 900px;
+}
+
+body.invero-contact details.faq-item {
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 6px;
+  padding: 0.9rem 1rem;
+}
+
+body.invero-contact details.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #222a26;
+  letter-spacing: -0.2px;
+  list-style: none;
+}
+
+body.invero-contact details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+body.invero-contact details.faq-item summary::after {
+  content: '+';
+  float: right;
+  color: #222a26;
+}
+
+body.invero-contact details.faq-item[open] summary::after {
+  content: '–';
+}
+
+body.invero-contact .faq-answer {
+  padding-top: 0.75rem;
+  color: #555555;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  body.invero-contact .contact-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  body.invero-contact .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.invero-contact .form-row {
+    grid-template-columns: 1fr;
+  }
+}

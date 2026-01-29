@@ -6,154 +6,187 @@
     <meta name="description" content="Contact JAC Interiors for interior design services in Los Angeles and Florida.">
     <title>Contact Us | JAC Interiors</title>
     <link rel="stylesheet" href="assets/css/style.css?v=20260118">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="assets/css/invero-contact.css?v=20260129-1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-lg);
-            align-items: start;
-        }
-        
-        .contact-form-wrapper {
-            background-color: white;
-            padding: var(--spacing-md);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--color-border);
-        }
-        
-        .form-group {
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius);
-            font-family: var(--font-primary);
-            font-size: 1rem;
-        }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--color-primary);
-        }
-        
-        .location-card {
-            background-color: white;
-            padding: var(--spacing-md);
-            border-radius: var(--border-radius);
-            border: 1px solid var(--color-border);
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        @media (max-width: 968px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
     <script src="assets/js/load-navbar.js" defer></script>
 </head>
-<body>
+<body class="invero-contact">
     
     
 
     <!-- Page Header -->
-    <section class="section" style="padding-top: 100px; padding-bottom: 2rem;">
+    <section class="contact-hero">
         <div class="container">
-            <div class="section-header">
-                <span class="section-label">Get in Touch</span>
-                <h1>Contact Us</h1>
-                <p>Ready to begin or need guidance? The JAC Interiors team is here to help you design your space.</p>
+            <span class="kicker">Contact</span>
+            <div class="contact-hero-grid">
+                <h1>Let’s work together.</h1>
+                <p>Share a few details about your project — we’ll reply within 1 business day with next steps.</p>
+            </div>
+            <div class="contact-featured-row" aria-label="Trusted by">
+                <span class="featured-pill">Google</span>
+                <span class="featured-pill">Yelp</span>
+                <span class="featured-pill">Houzz</span>
+                <span class="featured-pill">Best of Houzz</span>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section" style="padding-top: 2rem;">
+    <section class="contact-main">
         <div class="container">
             <div class="contact-grid">
                 <!-- Contact Form -->
-                <div class="contact-form-wrapper">
-                    <h2>Send us a Message</h2>
-                    <p style="margin-bottom: var(--spacing-md);">Fill out the form below and we'll get back to you within 24 hours.</p>
+                <div class="contact-card contact-card--form">
+                    <h2>Send a message</h2>
+                    <p class="muted">Tell us what you’re working on. We’ll respond with a few quick questions and a proposed next step (call or site visit).</p>
                     
-                    <form id="contactForm" name="contact" method="POST" data-netlify="true" onsubmit="return handleFormSubmit(event)">
+                    <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleFormSubmit(event)">
                         <input type="hidden" name="form-name" value="contact">
+                        <p class="form-hidden">
+                            <label>Don’t fill this out if you’re human: <input name="bot-field"></label>
+                        </p>
                         
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full name *</label>
+                                <input type="text" id="name" name="name" autocomplete="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" autocomplete="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone (optional)</label>
+                                <input type="tel" id="phone" name="phone" autocomplete="tel">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Project location *</label>
+                                <input type="text" id="location" name="location" placeholder="City / neighborhood" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="projectType">Project type</label>
+                                <select id="projectType" name="projectType">
+                                    <option value="">Select (optional)</option>
+                                    <option value="full-service-residential">Full-service residential</option>
+                                    <option value="kitchen-bath">Kitchen / bath</option>
+                                    <option value="furnishings-styling">Furnishings / styling</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget">Budget range</label>
+                                <select id="budget" name="budget">
+                                    <option value="">Select (optional)</option>
+                                    <option value="under-50k">Under $50k</option>
+                                    <option value="50k-100k">$50k–$100k</option>
+                                    <option value="100k-250k">$100k–$250k</option>
+                                    <option value="250k-plus">$250k+</option>
+                                </select>
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" placeholder="What are you designing, and what kind of help do you need?" required></textarea>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" required>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="type">I am a... *</label>
-                            <select id="type" name="type" required>
-                                <option value="">Please select</option>
-                                <option value="homeowner">Homeowner</option>
-                                <option value="business">Business Owner</option>
-                                <option value="vendor">Vendor/Partner</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Your Message *</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Message</button>
                     </form>
+                    <div id="contactSuccess" class="form-success" hidden>
+                        Thanks — we received your message. We’ll be in touch within 1 business day.
+                    </div>
                 </div>
 
                 <!-- Contact Information -->
-                <div>
-                    <div class="location-card">
-                        <h3>Los Angeles, California</h3>
-                        <p>10401 Venice Blvd Suite 257<br>
-                        Los Angeles, CA 90034</p>
-                        <p><strong>Phone:</strong> <a href="tel:213-397-0206" class="text-link">213-397-0206</a></p>
-                        <p><strong>Email:</strong> <a href="mailto:info@jacinteriors.com" class="text-link">info@jacinteriors.com</a></p>
+                <aside class="contact-sidebar">
+                    <div class="contact-card">
+                        <h3>Contact</h3>
+                        <div class="contact-meta">
+                            <p><strong>Los Angeles Studio</strong><br>10401 Venice Blvd Suite 257<br>Los Angeles, CA 90034</p>
+                            <p><strong>Phone</strong><br><a href="tel:213-397-0206" class="text-link">213-397-0206</a></p>
+                            <p><strong>Email</strong><br><a href="mailto:info@jacinteriors.com" class="text-link">info@jacinteriors.com</a></p>
+                            <p><strong>Hours</strong><br>Mon–Fri: 9:00 AM – 6:00 PM<br>Sat: By appointment<br>Sun: Closed</p>
+                        </div>
+                        <div class="mini-btn-row">
+                            <a class="btn btn-primary" href="tel:213-397-0206">Call</a>
+                            <a class="btn btn-primary" href="mailto:info@jacinteriors.com">Email</a>
+                        </div>
                     </div>
 
-                    <div class="location-card">
-                        <h3>Business Hours</h3>
-                        <p>Monday - Friday: 9:00 AM - 6:00 PM<br>
-                        Saturday: By Appointment<br>
-                        Sunday: Closed</p>
+                    <div class="contact-card">
+                        <h3>What happens next</h3>
+                        <ul class="next-steps">
+                            <li class="next-step">
+                                <span class="step-num">1</span>
+                                <div><strong>Quick reply</strong><span>We’ll respond within 1 business day to confirm goals, location, and timing.</span></div>
+                            </li>
+                            <li class="next-step">
+                                <span class="step-num">2</span>
+                                <div><strong>Intro call</strong><span>A short call to align on scope, style, and how we can help.</span></div>
+                            </li>
+                            <li class="next-step">
+                                <span class="step-num">3</span>
+                                <div><strong>Proposal</strong><span>We’ll send a tailored plan and next steps to get started.</span></div>
+                            </li>
+                        </ul>
                     </div>
-                </div>
+
+                    <div class="contact-card">
+                        <h3>Service areas</h3>
+                        <p class="muted" style="margin-bottom: 0;">We work across Los Angeles and South Florida, and take select projects beyond.</p>
+                        <div class="area-pills" aria-label="Service areas">
+                            <span class="area-pill">Los Angeles</span>
+                            <span class="area-pill">Westside</span>
+                            <span class="area-pill">Beverly Hills</span>
+                            <span class="area-pill">Santa Monica</span>
+                            <span class="area-pill">South Florida</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-faq">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Frequently asked questions</h2>
+                <p>Quick answers to help you decide if we’re the right fit.</p>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>What types of projects do you take on?</summary>
+                    <div class="faq-answer">Full-service residential design, remodel guidance, furnishings and styling, and select commercial projects.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>Do you have a minimum budget?</summary>
+                    <div class="faq-answer">Budgets vary by scope. Share your goals and we’ll recommend an approach that fits — even if it’s a phased plan.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>How soon can we start?</summary>
+                    <div class="faq-answer">Availability changes week to week. If you have a deadline, mention it and we’ll tell you what’s realistic.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>Do you work remotely?</summary>
+                    <div class="faq-answer">Yes — we can support remote and hybrid projects depending on scope, location, and schedule.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>What’s the first step?</summary>
+                    <div class="faq-answer">Send a message with your location, scope, and timeline. We’ll respond with next steps and suggest an intro call.</div>
+                </details>
             </div>
         </div>
     </section>
@@ -210,6 +243,46 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        function handleFormSubmit(event) {
+            const form = event.target;
+            const success = document.getElementById('contactSuccess');
+            if (!form || !success) return true;
+
+            // If fetch isn't available, let the browser submit normally.
+            if (!window.fetch) return true;
+
+            event.preventDefault();
+
+            const submitBtn = form.querySelector('button[type=\"submit\"]');
+            const originalText = submitBtn ? submitBtn.textContent : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+            }
+
+            const formData = new FormData(form);
+
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            }).then(() => {
+                form.reset();
+                success.hidden = false;
+            }).catch(() => {
+                // If submission fails, fall back to normal submission.
+                form.submit();
+            }).finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText || 'Submit';
+                }
+            });
+
+            return false;
+        }
+    </script>
     
 </body>
 </html>
