@@ -308,7 +308,7 @@ img {
 /* Navigation - Ensure consistent styling from navbar.html */
 /* navbar.html has inline styles that take precedence, but these are fallbacks */
 .navbar {
-    padding: 1.5rem 0 !important;
+    padding: 0.5rem 0 !important;
     background: white !important;
     position: sticky !important;
     top: 0 !important;

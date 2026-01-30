@@ -102,7 +102,7 @@
         if (!nav) return;
         
         nav.style.setProperty('border-bottom', '1px solid #e4e4e4', 'important');
-        nav.style.setProperty('padding', '1.5rem 0', 'important');
+        nav.style.setProperty('padding', '0.5rem 0', 'important');
         nav.style.setProperty('background', 'white', 'important');
         nav.style.setProperty('position', 'sticky', 'important');
         nav.style.setProperty('top', '0', 'important');
@@ -128,7 +128,7 @@
     
     // Navbar HTML - inlined for instant loading (no XHR)
     const navbarHTML = `
-<nav class="navbar" style="padding: 1.5rem 0; background: white; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e4e4e4; font-family: 'Plus Jakarta Sans', sans-serif;">
+<nav class="navbar" style="padding: 0.5rem 0; background: white; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e4e4e4; font-family: 'Plus Jakarta Sans', sans-serif;">
     <div class="container" style="max-width: 1320px; margin: 0 auto; padding: 0 2rem;">
         <div class="nav-wrapper" style="display: flex; justify-content: space-between; align-items: center;">
             <a href="${getPath('index.html')}" class="logo" aria-label="Home" style="font-size: 1.5rem; font-weight: 500; letter-spacing: -1px; text-transform: uppercase; text-decoration: none; color: #222a26; font-family: 'Plus Jakarta Sans', sans-serif; display: inline-flex; align-items: center;">

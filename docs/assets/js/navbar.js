@@ -72,7 +72,7 @@
     
     // Navbar HTML - EXACTLY like home page: white bg, black text, "JAC INTERIORS" text logo
     const navbarHTML = `
-    <nav class="navbar" style="padding: 1.5rem 0 !important; background: white !important; position: sticky !important; top: 0 !important; z-index: 1000 !important; border-bottom: 1px solid var(--stroke) !important;">
+    <nav class="navbar" style="padding: 0.5rem 0 !important; background: white !important; position: sticky !important; top: 0 !important; z-index: 1000 !important; border-bottom: 1px solid var(--stroke) !important;">
         <div class="container">
             <div class="nav-wrapper">
                 <a href="${homeHref}" class="logo" aria-label="Home" style="font-size: 1.5rem !important; font-weight: 500 !important; letter-spacing: -1px !important; text-transform: uppercase !important; color: #222a26 !important; text-decoration: none !important; display: inline-flex !important; align-items: center !important;">
