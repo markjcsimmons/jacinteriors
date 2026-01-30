@@ -4,7 +4,7 @@
     
     const LOGO_SRC = 'assets/images/jac-interiors-logo-cropped.jpg';
     // Cropped logo allows a shorter navbar while staying legible.
-    const LOGO_HEIGHT_PX = 180;
+    const LOGO_HEIGHT_PX = 135;
     
     // Get current page to set active state and calculate paths
     const currentPath = window.location.pathname;

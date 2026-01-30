@@ -10,7 +10,7 @@
     
     const LOGO_SRC = 'assets/images/jac-interiors-logo-cropped.jpg';
     // Cropped logo allows a shorter navbar while staying legible.
-    const LOGO_HEIGHT_PX = 180;
+    const LOGO_HEIGHT_PX = 135;
     
     // Extract base path for GitHub Pages project sites (e.g., '/jacinteriors')
     const pathParts = currentPath.split('/').filter(p => p);
