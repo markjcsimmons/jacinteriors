@@ -357,20 +357,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.remove('home-page');
     }
     
-    // Internal pages (not home): dark navbar with white text
-    if (!isHomePage) {
-        navbar.classList.add('navbar-dark');
-    }
-    
-    // On portfolio, project, city, or space pages, always keep navbar visible (dark)
-    if (!isHomePage && (isPortfolioPage || isProjectPage || isCityPage || isSpacePage)) {
-        navbar.classList.add('navbar-dark');
-    }
-    
-    // Home page: ensure navbar-dark is removed
-    if (isHomePage) {
-        navbar.classList.remove('navbar-dark');
-    }
+    // Navbar is now consistent across all pages (white background + logo).
+    // Ensure any legacy "navbar-dark" styling is removed everywhere.
+    navbar.classList.remove('navbar-dark');
+    document.body.classList.remove('navbar-dark');
     
     window.addEventListener('scroll', function() {
         if (isHomePage) {
