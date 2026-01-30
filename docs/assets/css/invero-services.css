@@ -1,0 +1,239 @@
+/* Services page redesign: Invero services look, scoped to Services only */
+
+body.invero-services {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #222a26;
+  background: #ffffff;
+  line-height: 1.5;
+  letter-spacing: -0.5px;
+}
+
+body.invero-services .container {
+  max-width: 1320px;
+}
+
+body.invero-services a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.25s;
+}
+
+/* Hero */
+body.invero-services .services-hero {
+  padding: 2rem 0 3rem;
+}
+
+body.invero-services .kicker {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  color: #222a26;
+  margin-bottom: 1rem;
+}
+
+body.invero-services h1 {
+  font-size: clamp(3.25rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -3px;
+  font-weight: 500;
+  margin: 0 0 0.75rem 0;
+  color: #222a26;
+}
+
+body.invero-services .hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: end;
+}
+
+body.invero-services .hero-grid p {
+  margin: 0;
+  color: #555555;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  max-width: 70ch;
+}
+
+/* Services grid */
+body.invero-services .services-section {
+  padding: 0 0 5rem;
+}
+
+body.invero-services .services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+body.invero-services .service-card {
+  border: 1px solid #e4e4e4;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 2rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+body.invero-services .service-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+body.invero-services .service-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  background: #ffffff;
+}
+
+body.invero-services .service-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+body.invero-services .service-card h3 {
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem 0;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+  color: #222a26;
+}
+
+body.invero-services .service-card p {
+  margin: 0 0 1.25rem 0;
+  color: #555555;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+}
+
+body.invero-services .service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.invero-services .service-tags li {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111111;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+body.invero-services .learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+body.invero-services .learn-more:hover {
+  opacity: 0.75;
+}
+
+body.invero-services .learn-more svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* CTA */
+body.invero-services .services-cta {
+  padding: 5rem 0 6rem;
+  border-top: 1px solid #e4e4e4;
+}
+
+body.invero-services .services-cta .cta-shell {
+  background: #111111;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+body.invero-services .services-cta .cta-shell .kicker {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+body.invero-services .services-cta h2 {
+  margin: 0.25rem 0 0;
+  color: #ffffff;
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  letter-spacing: -2px;
+  font-weight: 600;
+}
+
+body.invero-services .services-cta p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+body.invero-services .services-cta .cta-link {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.2rem;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111111;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-weight: 800;
+}
+
+body.invero-services .services-cta .cta-link:hover {
+  opacity: 0.9;
+}
+
+body.invero-services .services-cta .cta-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  body.invero-services .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  body.invero-services .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.invero-services .services-cta .cta-shell {
+    grid-template-columns: 1fr;
+  }
+
+  body.invero-services .services-cta .cta-link {
+    justify-self: start;
+  }
+}
+
