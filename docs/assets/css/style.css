@@ -620,7 +620,7 @@ img {
 
 .project-list-image {
     flex: 0 0 40% !important;
-    aspect-ratio: 1/1; /* Square images */
+    aspect-ratio: 3/2; /* Landscape images to fit layout */
     overflow: hidden;
     border-radius: 4px;
     position: relative;
