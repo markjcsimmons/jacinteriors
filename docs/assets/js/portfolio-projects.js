@@ -87,14 +87,16 @@
         </div>
         <div class="project-list-content">
           <div style="margin-bottom: 2rem;">
-            <span class="project-date">Project</span>
+            <div class="project-tags-top" aria-label="Project details">
+              <span class="tag-gray" data-project-tag="0">…</span>
+              <span class="tag-gray" data-project-tag="1">…</span>
+              <span class="tag-gray" data-project-tag="2">…</span>
+              <span class="tag-gray" data-project-tag="3">…</span>
+            </div>
             <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 0.75rem 0; letter-spacing: -1px;">${title}</h3>
-            <a href="${href}" class="view-project-btn" style="margin-top: 0.5rem;">View project</a>
           </div>
           <div class="project-bottom-row" style="margin-top: auto;">
-            <div class="project-tags-vertical">
-              <span class="tag-gray">Project</span>
-            </div>
+            <a href="${href}" class="view-project-btn">View project</a>
             <div class="project-secondary-image">
               <img src="${PLACEHOLDER_SRC}" alt="${title} Detail" loading="lazy">
             </div>
@@ -160,6 +162,14 @@
     return candidates.slice(0, 3);
   }
 
+  function extractProjectCallouts(doc) {
+    // Most project pages: <div class="project-callouts"><span class="project-callout">...</span>...</div>
+    const callouts = Array.from(doc.querySelectorAll('.project-callouts .project-callout'))
+      .map((n) => (n.textContent || '').trim())
+      .filter(Boolean);
+    return callouts.slice(0, 4);
+  }
+
   async function hydrateCardImages(cardEl) {
     const rawHref = cardEl.dataset.projectHref || '';
     const href = normalizeProjectHref(rawHref);
@@ -189,6 +199,30 @@
       primary.src = FALLBACK_PRIMARY;
       hover.src = FALLBACK_HOVER;
       secondary.src = FALLBACK_SECONDARY;
+    }
+  }
+
+  async function hydrateCardTags(cardEl) {
+    const rawHref = cardEl.dataset.projectHref || '';
+    const href = normalizeProjectHref(rawHref);
+    if (!href) return;
+
+    const tagEls = Array.from(cardEl.querySelectorAll('[data-project-tag]'));
+    if (!tagEls.length) return;
+
+    try {
+      const res = await fetch(href, { cache: 'force-cache' });
+      if (!res.ok) throw new Error(`Failed to fetch ${href}`);
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const tags = extractProjectCallouts(doc);
+
+      for (let i = 0; i < tagEls.length; i += 1) {
+        const t = tags[i] || '\u00A0';
+        tagEls[i].textContent = t;
+      }
+    } catch (_) {
+      // Keep placeholders if fetch fails
     }
   }
 
@@ -259,7 +293,7 @@
       while (active < CONCURRENCY && queue.length) {
         const card = queue.shift();
         active += 1;
-        hydrateCardImages(card)
+        Promise.allSettled([hydrateCardImages(card), hydrateCardTags(card)])
           .catch(() => {})
           .finally(() => {
             active -= 1;

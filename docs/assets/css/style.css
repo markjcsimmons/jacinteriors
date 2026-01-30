@@ -699,6 +699,13 @@ img {
     max-width: 65%; /* Restrict width to force wrapping next to secondary image */
 }
 
+.project-tags-top {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin: 0 0 1.25rem 0;
+}
+
 .tag-gray {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
@@ -720,6 +727,10 @@ img {
     justify-content: space-between;
     width: 100%;
     margin-top: auto;
+}
+
+.project-bottom-row .view-project-btn {
+    margin-top: 0;
 }
 
 .project-secondary-image {
