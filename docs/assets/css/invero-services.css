@@ -64,13 +64,17 @@ body.invero-services .services-section {
   padding: 0 0 5rem;
 }
 
-body.invero-services .services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+/* Template-style rows: text left, image right */
+body.invero-services .services-list {
+  display: flex;
+  flex-direction: column;
   gap: 1.25rem;
 }
 
-body.invero-services .service-card {
+body.invero-services .service-row {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.25rem;
   border: 1px solid #e4e4e4;
   background: #ffffff;
   border-radius: 6px;
@@ -78,10 +82,31 @@ body.invero-services .service-card {
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-body.invero-services .service-card:hover {
+body.invero-services .service-row:hover {
   transform: translateY(-2px);
   border-color: rgba(0, 0, 0, 0.18);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+body.invero-services .service-copy {
+  min-width: 0;
+}
+
+body.invero-services .service-media {
+  min-width: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f5f5;
+  display: flex;
+  align-items: stretch;
+}
+
+body.invero-services .service-media img {
+  width: 100%;
+  height: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  display: block;
 }
 
 body.invero-services .service-icon {
@@ -101,7 +126,16 @@ body.invero-services .service-icon svg {
   height: 22px;
 }
 
-body.invero-services .service-card h3 {
+body.invero-services .service-copy h2 {
+  font-size: 2rem;
+  margin: 0 0 0.75rem 0;
+  font-weight: 600;
+  letter-spacing: -1.2px;
+  color: #222a26;
+}
+
+body.invero-services .service-card h3,
+body.invero-services .service-row h3 {
   font-size: 1.5rem;
   margin: 0 0 0.75rem 0;
   font-weight: 600;
@@ -109,7 +143,7 @@ body.invero-services .service-card h3 {
   color: #222a26;
 }
 
-body.invero-services .service-card p {
+body.invero-services .service-row p {
   margin: 0 0 1.25rem 0;
   color: #555555;
   font-size: 1.02rem;
@@ -224,7 +258,7 @@ body.invero-services .services-cta .cta-link svg {
     align-items: start;
   }
 
-  body.invero-services .services-grid {
+  body.invero-services .service-row {
     grid-template-columns: 1fr;
   }
 
