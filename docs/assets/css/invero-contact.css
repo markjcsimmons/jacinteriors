@@ -39,7 +39,8 @@ body.invero-contact .contact-hero {
   padding: 3rem 0;
   background: #1a1a1a;
   color: #ffffff;
-  margin-top: 5rem;
+  /* Match other pages: no extra offset under navbar */
+  margin-top: 0;
 }
 
 body.invero-contact .contact-hero h1 {

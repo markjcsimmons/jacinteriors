@@ -89,7 +89,8 @@ body.invero-about .kicker {
 
 /* Top headline */
 body.invero-about .top-headline-section {
-  padding: 7rem 0 2rem;
+  /* Match Home page spacing under navbar */
+  padding: 2rem 0 2rem;
 }
 
 body.invero-about .top-headline-grid {
