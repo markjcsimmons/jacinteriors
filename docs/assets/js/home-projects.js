@@ -122,7 +122,8 @@
   async function hydrateRowFromProject(link, idx) {
     const href = normalizeProjectHref(link.href);
     const title = link.title;
-    const reverse = idx % 2 === 1;
+    // Home page request: keep image on the left for all 3 rows
+    const reverse = false;
 
     try {
       const res = await fetch(href, { cache: 'force-cache' });
