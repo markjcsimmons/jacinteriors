@@ -214,15 +214,13 @@
         </div>
     </div>
 </nav>
-<div class="navbar-spacer" style="height: ${LOGO_HEIGHT_PX}px; width: 100%;"></div>`;
+`;
     
     // Load navbar instantly (no XHR - completely non-blocking)
     function loadNavbar() {
         // Remove any existing navbar
         const existingNav = document.querySelector('nav.navbar');
         if (existingNav) existingNav.remove();
-        const existingSpacer = document.querySelector('.navbar-spacer');
-        if (existingSpacer) existingSpacer.remove();
         
         // Insert navbar immediately
         if (document.body) {
@@ -233,16 +231,6 @@
                 initDropdowns();
                 enforceNavbarStyles(nav);
                 setTimeout(() => enforceNavbarStyles(nav), 10);
-            }
-            
-            // Match spacer height to actual navbar height (prevents content overlap).
-            const spacer = document.querySelector('.navbar-spacer');
-            if (nav && spacer) {
-                const syncSpacerHeight = () => {
-                    spacer.style.height = `${Math.ceil(nav.getBoundingClientRect().height)}px`;
-                };
-                syncSpacerHeight();
-                window.addEventListener('resize', syncSpacerHeight, { passive: true });
             }
         }
     }

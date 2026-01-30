@@ -115,8 +115,7 @@
                 </button>
             </div>
         </div>
-    </nav>
-    <div class="navbar-spacer" style="height: ${LOGO_HEIGHT_PX}px; width: 100%;"></div>`;
+    </nav>`;
     
     // Function to inject navbar
     function injectNavbar() {
