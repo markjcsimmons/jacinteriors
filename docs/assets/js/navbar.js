@@ -8,9 +8,9 @@
     const currentPath = window.location.pathname;
     const filename = currentPath.split('/').pop() || 'index.html';
     
-    const LOGO_SRC = 'assets/images/jac-interiors-logo.png';
-    // Site uses 40px logo in other sections; navbar logo should be 8x.
-    const LOGO_HEIGHT_PX = 320;
+    const LOGO_SRC = 'assets/images/jac-interiors-logo-cropped.jpg';
+    // Cropped logo allows a shorter navbar while staying legible.
+    const LOGO_HEIGHT_PX = 180;
     
     // Extract base path for GitHub Pages project sites (e.g., '/jacinteriors')
     const pathParts = currentPath.split('/').filter(p => p);
