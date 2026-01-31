@@ -627,15 +627,20 @@ img {
     color: #222a26;
     border-top: 1px solid #e4e4e4;
     border-bottom: 1px solid #e4e4e4;
+    /* Match About page typography */
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: -0.48px;
 }
 
 .reviews-section h2,
 .reviews-section .kicker {
     color: #222a26;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .reviews-section p {
     color: #555555;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .reviews-header {
@@ -734,6 +739,8 @@ img {
     letter-spacing: -0.48px;
     font-weight: 500;
     margin-bottom: 1.15rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: italic;
 }
 
 .review-meta {
@@ -741,6 +748,7 @@ img {
     color: #555555;
     font-weight: 600;
     letter-spacing: -0.2px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 .reviews-dots {
