@@ -708,11 +708,11 @@ img {
 }
 
 .reviews-shell {
-    border: 2px solid #e1e1e1;
+    border: 3px solid #d6d6d6;
     border-radius: 4px;
     padding: 2.5rem;
     background: #fafafa;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 28px 85px rgba(0, 0, 0, 0.14);
 }
 
 .reviews-carousel {
