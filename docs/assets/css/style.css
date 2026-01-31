@@ -622,11 +622,9 @@ img {
 
 /* Reviews carousel (shared: Home + About) */
 .reviews-section {
-    padding: 7rem 0;
+    padding: 6rem 0;
     background: #ffffff;
     color: #222a26;
-    border-top: 1px solid #e4e4e4;
-    border-bottom: 1px solid #e4e4e4;
     /* Match About page typography */
     font-family: 'Plus Jakarta Sans', sans-serif;
     letter-spacing: -0.48px;
@@ -793,7 +791,7 @@ img {
 .reviews-dots {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.65rem;
     margin-top: 1.25rem;
 }
 
@@ -801,8 +799,8 @@ img {
     width: 10px;
     height: 10px;
     border-radius: 999px;
-    border: 1px solid #d7d7d7;
-    background: #f0f0f0;
+    border: 1px solid #c9c9c9;
+    background: #e6e6e6;
     cursor: pointer;
     transition: 0.25s ease;
 }
@@ -814,6 +812,9 @@ img {
 }
 
 @media (max-width: 900px) {
+    .reviews-section {
+        padding: 4.75rem 0;
+    }
     .reviews-shell {
         padding: 1.5rem 1.1rem;
     }
