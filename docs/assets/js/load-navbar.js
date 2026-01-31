@@ -5,6 +5,12 @@
     const LOGO_SRC = 'assets/images/jac-interiors-logo-cropped.jpg';
     // Cropped logo allows a shorter navbar while staying legible.
     const LOGO_HEIGHT_PX = 135;
+    const FOOTER_ADDRESS_LINES = [
+        '8033 W Sunset Blvd #107',
+        'Los Angeles, CA 90046'
+    ];
+    const FOOTER_PHONE_DISPLAY = '213-397-0206';
+    const FOOTER_EMAIL = 'info@jacinteriors.com';
     
     // Get current page to set active state and calculate paths
     const currentPath = window.location.pathname;
@@ -217,6 +223,217 @@
 </nav>
 `;
 
+    function ensureFooterStyles() {
+        if (!document.head) return;
+        if (document.getElementById('jacFooterStyles')) return;
+
+        const style = document.createElement('style');
+        style.id = 'jacFooterStyles';
+        style.textContent = `
+          /* Sitewide dark footer (2026) */
+          .footer.footer--dark {
+            background: #0b0f0e;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 5rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.10);
+          }
+          .footer.footer--dark .footer-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr 1fr 1.15fr;
+            gap: 3rem;
+            align-items: start;
+          }
+          .footer.footer--dark h4 {
+            margin: 0 0 1rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 700;
+          }
+          .footer.footer--dark .footer-brand-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            text-decoration: none;
+          }
+          .footer.footer--dark .footer-brand-title img {
+            height: 34px;
+            width: auto;
+            display: block;
+            border-radius: 2px;
+          }
+          .footer.footer--dark p {
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.6;
+          }
+          .footer.footer--dark ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          .footer.footer--dark li + li { margin-top: 0.55rem; }
+          .footer.footer--dark a {
+            color: rgba(255, 255, 255, 0.82);
+            text-decoration: none;
+          }
+          .footer.footer--dark a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+          }
+          .footer.footer--dark .footer-contact-lines {
+            margin: 0 0 1rem;
+            color: rgba(255, 255, 255, 0.72);
+            line-height: 1.5;
+          }
+          .footer.footer--dark .footer-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: #ffffff;
+            color: #0b0f0e !important;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            text-decoration: none !important;
+            box-shadow: 0 18px 55px rgba(0, 0, 0, 0.35);
+          }
+          .footer.footer--dark .footer-cta:hover {
+            text-decoration: none !important;
+            filter: brightness(0.96);
+          }
+          .footer.footer--dark .footer-bottom {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.10);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+          }
+          .footer.footer--dark .footer-bottom p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.9rem;
+          }
+          .footer.footer--dark .footer-mini {
+            display: inline-flex;
+            gap: 0.9rem;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.9rem;
+          }
+          .footer.footer--dark .footer-mini a {
+            color: rgba(255, 255, 255, 0.68);
+          }
+          @media (max-width: 980px) {
+            .footer.footer--dark .footer-grid {
+              grid-template-columns: 1fr 1fr;
+              gap: 2.25rem;
+            }
+          }
+          @media (max-width: 640px) {
+            .footer.footer--dark {
+              padding: 4rem 0 1.6rem;
+            }
+            .footer.footer--dark .footer-grid {
+              grid-template-columns: 1fr;
+              gap: 1.9rem;
+            }
+            .footer.footer--dark .footer-bottom {
+              margin-top: 2.25rem;
+            }
+          }
+        `.trim();
+        document.head.appendChild(style);
+    }
+
+    function ensureFooter() {
+        if (!document.body) return;
+        ensureFooterStyles();
+
+        const year = new Date().getFullYear();
+        const addressHtml = FOOTER_ADDRESS_LINES.map(l => l.replace(/</g, '&lt;').replace(/>/g, '&gt;')).join('<br>');
+        const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
+
+        const footerHTML = `
+<footer class="footer footer--dark" aria-label="Footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a class="footer-brand-title" href="${getPath('index.html')}" aria-label="Home">
+          <img src="${getPath(LOGO_SRC)}" alt="JAC Interiors">
+          <span>JAC Interiors</span>
+        </a>
+        <p style="margin: 1rem 0 1.25rem;">
+          Full-service interior design studio creating refined, timeless spaces across Los Angeles and beyond.
+        </p>
+        <div class="footer-mini" aria-label="Social">
+          <a href="https://www.instagram.com/jacinteriors" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="${getPath('residential-design.html')}">Residential Interior Design</a></li>
+          <li><a href="${getPath('commercial-design.html')}">Commercial Interior Design</a></li>
+          <li><a href="${getPath('interior-styling.html')}">Interior Styling &amp; Decor</a></li>
+          <li><a href="${getPath('concept-design.html')}">Concept Design &amp; Visualization</a></li>
+          <li><a href="${getPath('furniture-sourcing.html')}">Furniture &amp; Object Sourcing</a></li>
+          <li><a href="${getPath('design-consulting.html')}">Design Consulting</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="${getPath('about.html')}">About</a></li>
+          <li><a href="${getPath('portfolio.html')}">Portfolio</a></li>
+          <li><a href="${getPath('services.html')}">Services</a></li>
+          <li><a href="${getPath('contact.html')}">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p class="footer-contact-lines">${addressHtml}</p>
+        <p style="margin: 0 0 0.75rem;">
+          <a href="tel:${FOOTER_PHONE_DISPLAY}">${FOOTER_PHONE_DISPLAY}</a><br>
+          <a href="mailto:${FOOTER_EMAIL}">${FOOTER_EMAIL}</a>
+        </p>
+        <a class="footer-cta" href="${contactHref}">Book a call</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; ${year} JAC Interiors, LLC. All Rights Reserved.</p>
+      <div class="footer-mini" aria-label="Footer links">
+        <span>Los Angeles + Florida</span>
+      </div>
+    </div>
+  </div>
+</footer>
+        `.trim();
+
+        const existingFooter = document.querySelector('footer.footer');
+        if (existingFooter) {
+            existingFooter.outerHTML = footerHTML;
+        } else {
+            document.body.insertAdjacentHTML('beforeend', footerHTML);
+        }
+    }
+
     function ensureMobileCtaBar() {
         if (!document.body) return;
         if (document.getElementById('mobileCtaBar')) return;
@@ -257,6 +474,7 @@
                 setTimeout(() => enforceNavbarStyles(nav), 10);
             }
             ensureMobileCtaBar();
+            ensureFooter();
         }
     }
     
