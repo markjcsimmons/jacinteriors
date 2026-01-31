@@ -5,6 +5,7 @@
     const LOGO_SRC = 'assets/images/jac-interiors-logo-cropped.jpg';
     // Cropped logo allows a shorter navbar while staying legible.
     const LOGO_HEIGHT_PX = 135;
+    const FOOTER_LOGO_SRC = 'assets/images/jac-interiors-logo-reverse.png';
     const FOOTER_ADDRESS_LINES = [
         '8033 W Sunset Blvd #107',
         'Los Angeles, CA 90046'
@@ -255,17 +256,24 @@
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
             color: #ffffff;
             text-decoration: none;
           }
           .footer.footer--dark .footer-brand-title img {
-            height: 34px;
+            height: 44px;
             width: auto;
             display: block;
-            border-radius: 2px;
+          }
+          .footer.footer--dark .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
           }
           .footer.footer--dark p {
             color: rgba(255, 255, 255, 0.72);
@@ -336,6 +344,23 @@
           .footer.footer--dark .footer-mini a {
             color: rgba(255, 255, 255, 0.68);
           }
+          .footer.footer--dark .footer-ig {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            color: rgba(255, 255, 255, 0.68);
+            text-decoration: none;
+          }
+          .footer.footer--dark .footer-ig svg {
+            width: 18px;
+            height: 18px;
+            display: block;
+          }
+          .footer.footer--dark .footer-ig:hover {
+            color: #ffffff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+          }
           @media (max-width: 980px) {
             .footer.footer--dark .footer-grid {
               grid-template-columns: 1fr 1fr;
@@ -372,15 +397,12 @@
     <div class="footer-grid">
       <div class="footer-col">
         <a class="footer-brand-title" href="${getPath('index.html')}" aria-label="Home">
-          <img src="${getPath(LOGO_SRC)}" alt="JAC Interiors">
-          <span>JAC Interiors</span>
+          <img src="${getPath(FOOTER_LOGO_SRC)}" alt="JAC Interiors">
+          <span class="sr-only">JAC Interiors</span>
         </a>
         <p style="margin: 1rem 0 1.25rem;">
           Full-service interior design studio creating refined, timeless spaces across Los Angeles and beyond.
         </p>
-        <div class="footer-mini" aria-label="Social">
-          <a href="https://www.instagram.com/jacinteriors" target="_blank" rel="noopener">Instagram</a>
-        </div>
       </div>
 
       <div class="footer-col">
@@ -419,6 +441,14 @@
     <div class="footer-bottom">
       <p>&copy; ${year} JAC Interiors, LLC. All Rights Reserved.</p>
       <div class="footer-mini" aria-label="Footer links">
+        <a class="footer-ig" href="https://www.instagram.com/jacinteriors" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="4"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.5" cy="6.6" r="0.8" fill="currentColor" stroke="none"></circle>
+          </svg>
+          <span>Instagram</span>
+        </a>
         <span>Los Angeles + Florida</span>
       </div>
     </div>
@@ -426,7 +456,7 @@
 </footer>
         `.trim();
 
-        const existingFooter = document.querySelector('footer.footer');
+        const existingFooter = document.querySelector('footer');
         if (existingFooter) {
             existingFooter.outerHTML = footerHTML;
         } else {
