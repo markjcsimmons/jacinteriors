@@ -255,7 +255,7 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 Columns */
+            grid-template-columns: repeat(3, 1fr); /* 3 Columns (3x2 grid for 6 cards) */
             gap: 0; /* Border separation */
             margin-top: 4rem;
             border-left: 1px solid var(--stroke);
@@ -523,6 +523,10 @@
         }
 
         /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 900px) {
             .top-headline-grid { grid-template-columns: 1fr; gap: 2rem; }
             .sticky-grid { grid-template-columns: 1fr; }
@@ -540,7 +544,10 @@
     </style>
     <script src="assets/js/load-navbar.js?v=20260130-6" defer></script>
     <script src="assets/js/r2-config.js?v=20260130-1" defer></script>
-    <script src="assets/js/home-projects.js?v=20260130-2" defer></script>
+    <script src="assets/js/home-portfolio-cards.js?v=20260130-1" defer></script>
+    <script src="assets/js/reviews-data.js?v=20260131-1" defer></script>
+    <script src="assets/js/reviews-carousel.js?v=20260131-1" defer></script>
+    <script src="assets/js/lead-form.js?v=20260131-1" defer></script>
 </head>
 <body>
 
@@ -559,6 +566,42 @@
                 </div>
                 <div>
                     <p>We design interiors that reflect your lifestyle and values, ensuring they stand the test of time. From Los Angeles to Florida, we create luxury spaces that elevate everyday living.</p>
+                    <div class="lead-form-card">
+                        <h3>Request a call</h3>
+                        <form class="lead-form" data-lead-form="1" aria-label="Request a call">
+                            <div class="lead-row">
+                                <div>
+                                    <label for="leadName">Name</label>
+                                    <input id="leadName" name="name" type="text" autocomplete="name" required>
+                                </div>
+                                <div>
+                                    <label for="leadEmail">Email</label>
+                                    <input id="leadEmail" name="email" type="email" autocomplete="email" required>
+                                </div>
+                            </div>
+                            <div class="lead-row">
+                                <div>
+                                    <label for="leadLocation">City / neighborhood</label>
+                                    <input id="leadLocation" name="location" type="text" autocomplete="address-level2" required>
+                                </div>
+                                <div>
+                                    <label for="leadProjectType">Project type</label>
+                                    <select id="leadProjectType" name="projectType">
+                                        <option value="">Select (optional)</option>
+                                        <option value="full-service-residential">Full-service residential</option>
+                                        <option value="kitchen-bath">Kitchen / bath</option>
+                                        <option value="furnishings-styling">Furnishings / styling</option>
+                                        <option value="commercial">Commercial</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="lead-actions">
+                                <button type="submit" class="btn btn-primary">Request a call</button>
+                                <p class="lead-note">Or call <a href="tel:213-397-0206" style="text-decoration: underline; font-weight: 700;">213-397-0206</a></p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -571,7 +614,7 @@
         </div>
 
             <!-- Compact Reviews Box -->
-            <div class="reviews-compact-box">
+            <div class="reviews-compact-box" data-reviews-compact-carousel="1">
                 <div class="trust-badges-inline">
                     <div class="trust-badge-inline">
                         <span class="trust-badge-stars">★★★★★</span>
@@ -590,176 +633,9 @@
                     </div>
                 </div>
                 
-                <div class="testimonial-carousel">
-                    <!-- Google Reviews -->
-                    <div class="testimonial-slide active">
-                        <p class="testimonial-text">"Andrea gave me instant direction and helped me make the changes my kitchen needed."</p>
-                        <div class="testimonial-author">Tina Staffon — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"JAC's knowledge, industry connections, and respect for budgets was a game-changer for our 1920's house renovation."</p>
-                        <div class="testimonial-author">Vincent Cullinan, Los Angeles — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Every piece of this house is custom designed from floors to walls. Even the books and plants were their choice."</p>
-                        <div class="testimonial-author">Stuart Gross — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Good people, great design, listens to your needs. They can do it all from remodels to fully furnishing your spaces."</p>
-                        <div class="testimonial-author">Stancy Tomlinson — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Impeccable taste down to every detail. Great communication throughout—we always knew what was going on."</p>
-                        <div class="testimonial-author">Holly Kurtz — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"They transformed my outdated living space into a fabulous modern place I love to entertain in."</p>
-                        <div class="testimonial-author">Madison Pollack — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"They listened closely and worked collaboratively. Documentation was clear, everything done on time."</p>
-                        <div class="testimonial-author">Les Hine — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Tim helped make my space a sanctuary—a place I could feel comfortable and at peace."</p>
-                        <div class="testimonial-author">Andrew Watman — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Andrea was super responsive, generous with her time and helpful. I really appreciate her kindness."</p>
-                        <div class="testimonial-author">Yael Saidoff — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Tim is amazing. He helped us take our very dated bathroom from drab to FAB!"</p>
-                        <div class="testimonial-author">KevDave Davison — Google</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Great designers in LA. I worked with the JAC team on my home design."</p>
-                        <div class="testimonial-author">Madison Houseworth-Skaggs — Google</div>
-                    </div>
-                    
-                    <!-- Yelp Reviews -->
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"They worked within my budget and were enormously gracious about it. My canyon home office is now my favorite room."</p>
-                        <div class="testimonial-author">Miriam B., Santa Monica — Yelp</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Complete condo renovation from start to finish. Very collaborative, and brought great ideas we would have never thought of."</p>
-                        <div class="testimonial-author">Les H., Los Angeles — Yelp</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"They worked on our vacation home. Made everything easy and polished. Super responsive—we especially loved their wallpaper selections."</p>
-                        <div class="testimonial-author">Daisy H., Pasadena — Yelp</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"They created the home of our dreams. Truly understood our vision and nailed the wow factor in every room."</p>
-                        <div class="testimonial-author">Chaya S., Los Angeles — Yelp</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Transformed our Hollywood Hills house. They tie everything together and make it look fabulous."</p>
-                        <div class="testimonial-author">Ray B., Los Angeles — Yelp</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Excellent customer service, expertise and professionalism. Highly recommend for projects big and small."</p>
-                        <div class="testimonial-author">Suzsanna P., Los Angeles — Yelp</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"They made over my daughter's bedroom from little girl to chic tween. Way beyond our expectations and within budget."</p>
-                        <div class="testimonial-author">Deborah S., Los Angeles — Yelp</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"They listen and care about who you are. Your space reflects your lifestyle. Beautiful and unique items—not generic."</p>
-                        <div class="testimonial-author">Molly P., Santa Monica — Yelp</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Complete Marina del Rey remodel. Consultative approach, worked within budget, reasonable fees. Fun to work with!"</p>
-                        <div class="testimonial-author">Michael P., Venice — Yelp</div>
-                    </div>
-                    
-                    <!-- Houzz Reviews -->
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Working with them from initial design, product sourcing and installation was a dream."</p>
-                        <div class="testimonial-author">Client Review — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"They transformed my patio into an outdoor sanctuary and my family room into a contemporary yet kid-friendly space."</p>
-                        <div class="testimonial-author">Client Review — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Andrea has incredible taste and listened to my needs. Every decision that stretched my comfort zone turned out magnificent."</p>
-                        <div class="testimonial-author">kenneallyd — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"The most professional, helpful and organized team. They elevate your style into something magical and beautiful."</p>
-                        <div class="testimonial-author">Michelle — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Helped us navigate fixtures, tiles, vanities, and paint for all four bathrooms. Made them look like magazine features."</p>
-                        <div class="testimonial-author">monica78 — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Professional, prompt, beautiful work. Worked within budget and went out of their way to make our house ready for holidays."</p>
-                        <div class="testimonial-author">lululemom — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"They embraced my modern meets boho style and pulled it all together professionally. Fabulous eye and immaculate taste."</p>
-                        <div class="testimonial-author">Holly K. — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Serious professionals with excellent project management. No egos—always about a great end product and client satisfaction."</p>
-                        <div class="testimonial-author">kshamamehra — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Friendly team that understood exactly the look I wanted. All deadlines met and came in on budget."</p>
-                        <div class="testimonial-author">charleswalder — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Venice cottage remodel. Strong teamwork attitude, knowledgeable insight, and finishing touches on time and within budget."</p>
-                        <div class="testimonial-author">Dodd Holsapple, Dodd-Art Inc. — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Marina Del-Rey 3-story remodel. Very professional with attention to details and high aesthetic eye. Budget conscious with high customer service."</p>
-                        <div class="testimonial-author">Creative Builders — Houzz</div>
-                    </div>
-                    <div class="testimonial-slide">
-                        <p class="testimonial-text">"Talented, creative, super fun to work with. Developed a color scheme that felt current and reflected us as individuals."</p>
-                        <div class="testimonial-author">shannie43 — Houzz</div>
-                    </div>
-                </div>
+                <div class="testimonial-carousel" aria-live="polite"></div>
                 
-                <div class="carousel-dots">
-                    <span class="carousel-dot active" data-slide="0"></span>
-                    <span class="carousel-dot" data-slide="1"></span>
-                    <span class="carousel-dot" data-slide="2"></span>
-                    <span class="carousel-dot" data-slide="3"></span>
-                    <span class="carousel-dot" data-slide="4"></span>
-                    <span class="carousel-dot" data-slide="5"></span>
-                    <span class="carousel-dot" data-slide="6"></span>
-                    <span class="carousel-dot" data-slide="7"></span>
-                    <span class="carousel-dot" data-slide="8"></span>
-                    <span class="carousel-dot" data-slide="9"></span>
-                    <span class="carousel-dot" data-slide="10"></span>
-                    <span class="carousel-dot" data-slide="11"></span>
-                    <span class="carousel-dot" data-slide="12"></span>
-                    <span class="carousel-dot" data-slide="13"></span>
-                    <span class="carousel-dot" data-slide="14"></span>
-                    <span class="carousel-dot" data-slide="15"></span>
-                    <span class="carousel-dot" data-slide="16"></span>
-                    <span class="carousel-dot" data-slide="17"></span>
-                    <span class="carousel-dot" data-slide="18"></span>
-                    <span class="carousel-dot" data-slide="19"></span>
-                    <span class="carousel-dot" data-slide="20"></span>
-                    <span class="carousel-dot" data-slide="21"></span>
-                    <span class="carousel-dot" data-slide="22"></span>
-                    <span class="carousel-dot" data-slide="23"></span>
-                    <span class="carousel-dot" data-slide="24"></span>
-                    <span class="carousel-dot" data-slide="25"></span>
-                    <span class="carousel-dot" data-slide="26"></span>
-                    <span class="carousel-dot" data-slide="27"></span>
-                    <span class="carousel-dot" data-slide="28"></span>
-                    <span class="carousel-dot" data-slide="29"></span>
-                    <span class="carousel-dot" data-slide="30"></span>
-                    <span class="carousel-dot" data-slide="31"></span>
-                </div>
+                <div class="carousel-dots" aria-label="Review navigation"></div>
             </div>
 
     </div>
@@ -854,33 +730,49 @@
                         <p style="font-size:0.95rem;">Our concept design process explores layouts and moods through compelling visuals.</p>
                     </div>
                 </div>
+                <div class="service-card">
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Concept Design</h3>
+                        <p style="font-size:0.95rem;">Moodboards, layouts, and visual direction—so you can move forward with confidence.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div>
+                        <span class="service-icon">✦</span>
+                        <h3>Furniture &amp; Sourcing</h3>
+                        <p style="font-size:0.95rem;">Curated furniture, lighting, and decor that fits your space, style, and budget.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- 6. STATS STRIP -->
-    <section class="stats-section">
+    <section class="reviews-section">
         <div class="container">
-            <div style="margin-bottom:4rem;">
-                <h2>Numbers that speak<br>for themselves.</h2>
+            <div class="reviews-header">
+                <span class="kicker">Reviews</span>
+                <h2>What our clients say.</h2>
+                <p>Real feedback from Google, Yelp, and Houzz.</p>
+                <div class="reviews-featured-row" aria-label="Review sources">
+                    <span class="featured-pill">Google</span>
+                    <span class="featured-pill">Yelp</span>
+                    <span class="featured-pill">Houzz</span>
+                    <span class="featured-pill">Best of Houzz</span>
+                </div>
             </div>
-            <div class="stats-flex">
-                <div class="stat-item">
-                    <h4>50+</h4>
-                    <span>Homes Transformed</span>
+
+            <div class="reviews-shell" data-reviews-carousel="1">
+                <div class="reviews-carousel">
+                    <button class="reviews-arrow prev" type="button" aria-label="Previous review">‹</button>
+
+                    <div class="reviews-slides" aria-live="polite"></div>
+
+                    <button class="reviews-arrow next" type="button" aria-label="Next review">›</button>
                 </div>
-                <div class="stat-item">
-                    <h4>15+</h4>
-                    <span>Commercial Spaces</span>
-                </div>
-                <div class="stat-item">
-                    <h4>98%</h4>
-                    <span>Client Satisfaction</span>
-                </div>
-                <div class="stat-item">
-                    <h4>12+</h4>
-                    <span>Years Experience</span>
-                </div>
+
+                <div class="reviews-dots" aria-label="Review navigation"></div>
             </div>
         </div>
     </section>
@@ -896,7 +788,7 @@
             <div style="text-align:center; margin-bottom:6rem;">
                 <h2>Our work speaks<br>through spaces.</h2>
             </div>
-            <div id="homeProjectRows"></div>
+            <div id="homeProjectCards"></div>
 
             <!-- View More Button -->
             <div style="text-align:center; margin-top:6rem;">
@@ -930,71 +822,6 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Testimonial Carousel Auto-Rotation with Click to Expand
-            const slides = document.querySelectorAll('.testimonial-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
-            let currentSlide = 0;
-            let autoRotateInterval;
-
-            // Make each slide clickable to expand/collapse
-            slides.forEach(slide => {
-                slide.addEventListener('click', (e) => {
-                    const textElement = slide.querySelector('.testimonial-text');
-                    if (textElement) {
-                        textElement.classList.toggle('expanded');
-                    }
-                });
-            });
-
-            function showSlide(index) {
-                // Remove active class and collapse all slides
-                slides.forEach(slide => {
-                    slide.classList.remove('active');
-                    const textElement = slide.querySelector('.testimonial-text');
-                    if (textElement) {
-                        textElement.classList.remove('expanded');
-                    }
-                });
-                dots.forEach(dot => dot.classList.remove('active'));
-                
-                // Add active class to current slide and dot
-                slides[index].classList.add('active');
-                dots[index].classList.add('active');
-                
-                currentSlide = index;
-            }
-
-            function nextSlide() {
-                const next = (currentSlide + 1) % slides.length;
-                showSlide(next);
-            }
-
-            function startAutoRotate() {
-                autoRotateInterval = setInterval(nextSlide, 4000); // Change every 4 seconds
-            }
-
-            function stopAutoRotate() {
-                clearInterval(autoRotateInterval);
-            }
-
-            // Dot click handlers
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    showSlide(index);
-                    stopAutoRotate();
-                    startAutoRotate(); // Restart auto-rotation after manual click
-                });
-            });
-
-            // Initialize first slide
-            if (slides.length > 0) {
-                showSlide(0);
-                startAutoRotate();
-            }
-        });
-    </script>
     
 </body>
 </html>

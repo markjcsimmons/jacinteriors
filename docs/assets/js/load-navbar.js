@@ -207,6 +207,7 @@
                 </div>
                 <a href="${getPath('about.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">ABOUT</a>
                 <a href="${getPath('contact.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">CONTACT</a>
+                <a href="${getPath('contact.html')}?intent=call#contactForm" class="nav-cta" style="display:inline-flex; align-items:center; justify-content:center; padding:0.65rem 1rem; border-radius:999px; border:1px solid #222a26; background:#222a26; color:#fff; font-size:0.85rem; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; text-decoration:none;">Book a call</a>
             </div>
             <button class="mobile-menu-toggle" id="mobileMenuToggle" style="display: none;">
                 <span></span><span></span><span></span>
@@ -215,6 +216,29 @@
     </div>
 </nav>
 `;
+
+    function ensureMobileCtaBar() {
+        if (!document.body) return;
+        if (document.getElementById('mobileCtaBar')) return;
+
+        const phoneDisplay = '213-397-0206';
+        const phoneE164 = '+12133970206';
+        const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
+
+        const bar = document.createElement('div');
+        bar.id = 'mobileCtaBar';
+        bar.className = 'mobile-cta-bar';
+        bar.setAttribute('role', 'navigation');
+        bar.setAttribute('aria-label', 'Quick contact');
+        bar.innerHTML = `
+          <a class="mobile-cta-btn mobile-cta-btn--ghost" href="sms:${phoneE164}" aria-label="Text us">Text</a>
+          <a class="mobile-cta-btn mobile-cta-btn--primary" href="tel:${phoneDisplay}" aria-label="Call us">Call</a>
+          <a class="mobile-cta-btn mobile-cta-btn--ghost" href="${contactHref}" aria-label="Book a call">Book</a>
+        `.trim();
+
+        document.body.appendChild(bar);
+        document.body.classList.add('has-mobile-cta');
+    }
     
     // Load navbar instantly (no XHR - completely non-blocking)
     function loadNavbar() {
@@ -232,6 +256,7 @@
                 enforceNavbarStyles(nav);
                 setTimeout(() => enforceNavbarStyles(nav), 10);
             }
+            ensureMobileCtaBar();
         }
     }
     

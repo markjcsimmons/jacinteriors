@@ -611,6 +611,316 @@ img {
     transition: opacity 0.3s;
     align-items: start;
 }
+.project-list-item.reverse .project-list-image {
+    order: 2;
+}
+.project-list-item.reverse .project-list-content {
+    order: 1;
+    padding-left: 0 !important;
+    padding-right: 20px !important;
+}
+
+/* Reviews carousel (shared: Home + About) */
+.reviews-section {
+    padding: 7rem 0;
+    background: #ffffff;
+    color: #222a26;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.reviews-section h2,
+.reviews-section .kicker {
+    color: #222a26;
+}
+
+.reviews-section p {
+    color: #555555;
+}
+
+.reviews-header {
+    max-width: 900px;
+    margin-bottom: 2.5rem;
+}
+
+.reviews-featured-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1rem;
+}
+
+.featured-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid #e4e4e4;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #222a26;
+    background: #ffffff;
+    letter-spacing: -0.2px;
+}
+
+.reviews-shell {
+    border: 2px solid #e1e1e1;
+    border-radius: 4px;
+    padding: 2.5rem;
+    background: #fafafa;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+}
+
+.reviews-carousel {
+    position: relative;
+    display: grid;
+    grid-template-columns: 48px 1fr 48px;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reviews-arrow {
+    appearance: none;
+    border: 1px solid #e4e4e4;
+    background: #ffffff;
+    color: #222a26;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    font-size: 1.75rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.reviews-arrow:hover {
+    background: #f5f5f5;
+    border-color: #d7d7d7;
+}
+
+.reviews-slides {
+    position: relative;
+    min-height: 170px;
+}
+
+.review-slide {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.35s ease;
+}
+
+.review-slide.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+}
+
+.review-stars {
+    color: #ffb800;
+    letter-spacing: 0.1em;
+    font-size: 0.95rem;
+    margin-bottom: 0.9rem;
+}
+
+.review-quote {
+    color: #222a26;
+    font-size: 20px;
+    line-height: 1.4em;
+    letter-spacing: -0.48px;
+    font-weight: 500;
+    margin-bottom: 1.15rem;
+}
+
+.review-meta {
+    font-size: 0.95rem;
+    color: #555555;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+}
+
+.reviews-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+}
+
+.review-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: 1px solid #d7d7d7;
+    background: #f0f0f0;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.review-dot.is-active {
+    width: 28px;
+    background: #222a26;
+    border-color: #222a26;
+}
+
+@media (max-width: 900px) {
+    .reviews-shell {
+        padding: 1.5rem 1.1rem;
+    }
+    .reviews-carousel {
+        grid-template-columns: 44px 1fr 44px;
+    }
+    .reviews-slides {
+        min-height: 210px;
+    }
+}
+
+/* Navbar CTA */
+.navbar .nav-cta:hover {
+    background: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+    color: #fff !important;
+    transform: translateY(-1px);
+}
+
+/* Mobile sticky CTA bar (Call/Text/Book) */
+.mobile-cta-bar {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .mobile-cta-bar {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0.75rem;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0.9rem 1rem;
+        background: rgba(255, 255, 255, 0.92);
+        border-top: 1px solid #e4e4e4;
+        backdrop-filter: blur(10px);
+        z-index: 1200;
+    }
+
+    body.has-mobile-cta {
+        padding-bottom: 88px;
+    }
+}
+
+.mobile-cta-btn {
+    height: 46px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    border: 1px solid #e4e4e4;
+    background: #ffffff;
+    color: #222a26;
+}
+
+.mobile-cta-btn--primary {
+    background: #222a26;
+    border-color: #222a26;
+    color: #ffffff;
+}
+
+.mobile-cta-btn--primary:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #ffffff;
+}
+
+.mobile-cta-btn--ghost:hover {
+    background: #f5f5f5;
+    border-color: #d7d7d7;
+}
+
+/* Above-the-fold lead form (Home) */
+.lead-form-card {
+    border: 1px solid #e4e4e4;
+    background: #ffffff;
+    padding: 1.25rem;
+    max-width: 520px;
+    margin-top: 1.25rem;
+}
+
+.lead-form-card h3 {
+    font-size: 1.15rem;
+    margin: 0 0 0.75rem 0;
+    letter-spacing: -0.2px;
+}
+
+.lead-form {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.lead-form .lead-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.lead-form label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #222a26;
+    margin-bottom: 0.35rem;
+}
+
+.lead-form input,
+.lead-form select {
+    width: 100%;
+    padding: 0.8rem 0.85rem;
+    border: 1px solid #e4e4e4;
+    border-radius: 6px;
+    font-size: 0.98rem;
+    outline: none;
+}
+
+.lead-form input:focus,
+.lead-form select:focus {
+    border-color: #222a26;
+    box-shadow: 0 0 0 3px rgba(34, 42, 38, 0.08);
+}
+
+.lead-form .lead-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.lead-form .lead-actions .btn {
+    padding: 0.95rem 1.25rem;
+    height: 46px;
+    white-space: nowrap;
+}
+
+.lead-form .lead-note {
+    font-size: 0.9rem;
+    color: #666666;
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    .lead-form-card {
+        max-width: 100%;
+    }
+    .lead-form .lead-row {
+        grid-template-columns: 1fr;
+    }
+}
 .project-list-item:hover {
     opacity: 0.8;
 }
