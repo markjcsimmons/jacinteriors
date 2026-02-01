@@ -260,7 +260,7 @@
             text-decoration: none;
           }
           .footer.footer--dark .footer-brand-title img {
-            height: 44px;
+            height: 84px;
             width: auto;
             display: block;
           }
@@ -370,6 +370,9 @@
           @media (max-width: 640px) {
             .footer.footer--dark {
               padding: 4rem 0 1.6rem;
+            }
+            .footer.footer--dark .footer-brand-title img {
+              height: 68px;
             }
             .footer.footer--dark .footer-grid {
               grid-template-columns: 1fr;
