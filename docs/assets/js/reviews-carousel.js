@@ -70,7 +70,7 @@
 
     function start() {
       stop();
-      timer = window.setInterval(() => setActive(idx + 1), 5000);
+      timer = window.setInterval(() => setActive(idx + 1), 3000);
     }
 
     prevBtn?.addEventListener('click', () => {
@@ -152,7 +152,7 @@
 
     function startAutoRotate() {
       if (autoRotateInterval) window.clearInterval(autoRotateInterval);
-      autoRotateInterval = window.setInterval(nextSlide, 4000);
+      autoRotateInterval = window.setInterval(nextSlide, 3000);
     }
 
     function stopAutoRotate() {
