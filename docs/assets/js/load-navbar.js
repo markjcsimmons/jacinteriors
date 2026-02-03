@@ -12,6 +12,7 @@
     ];
     const FOOTER_PHONE_DISPLAY = '213-397-0206';
     const FOOTER_EMAIL = 'info@jacinteriors.com';
+    const INVERO_CITIES_CSS_HREF = 'assets/css/invero-cities.css?v=20260203-1';
     
     // Get current page to set active state and calculate paths
     const currentPath = window.location.pathname;
@@ -386,6 +387,227 @@
         document.head.appendChild(style);
     }
 
+    function ensureCitiesStyles() {
+        if (!document.head) return;
+        if (document.getElementById('inveroCitiesCss')) return;
+        const link = document.createElement('link');
+        link.id = 'inveroCitiesCss';
+        link.rel = 'stylesheet';
+        link.href = getPath(INVERO_CITIES_CSS_HREF);
+        document.head.appendChild(link);
+    }
+
+    function isCitiesPage() {
+        return currentPath.includes('/cities/');
+    }
+
+    function escapeHtml(str) {
+        return String(str || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function stripInlineStyles(root) {
+        if (!root) return;
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT, null);
+        while (walker.nextNode()) {
+            walker.currentNode.removeAttribute('style');
+        }
+        if (root.removeAttribute) root.removeAttribute('style');
+    }
+
+    // Convert legacy city pages (black header + inline styles) into shared Invero-style template
+    function transformLegacyCityPage() {
+        if (!isCitiesPage()) return;
+
+        // New template pages (e.g. pacific-palisades) already carry this class.
+        if (document.body && document.body.classList.contains('city-page')) {
+            ensureCitiesStyles();
+            return;
+        }
+
+        const firstSection = document.querySelector('section');
+        const h1 = firstSection ? firstSection.querySelector('h1') : null;
+        const cityName = (h1 && h1.textContent) ? h1.textContent.trim() : (document.title.split('|')[0] || '').trim();
+        const subtitleEl = (h1 && h1.parentElement) ? h1.parentElement.querySelector('p') : null;
+        const subtitle = subtitleEl ? subtitleEl.textContent.trim() : '';
+
+        // Meta (Region / Service / Status) from legacy header right column
+        const meta = [];
+        if (firstSection) {
+            const headerFlex = firstSection.querySelector('div[style*="display: flex"]');
+            const metaHolder = headerFlex ? headerFlex.querySelector('div[style*="display: flex"]') : null;
+            const metaItems = metaHolder ? Array.from(metaHolder.children) : [];
+            metaItems.forEach((item) => {
+                const spans = item.querySelectorAll('span');
+                if (spans.length >= 2) {
+                    const label = spans[0].textContent.trim();
+                    const value = spans[1].textContent.trim();
+                    if (label && value) meta.push([label, value]);
+                }
+            });
+        }
+
+        // Find first meaningful image for the hero (avoid navbar logo)
+        const allImgs = Array.from(document.querySelectorAll('img'));
+        const heroImg = allImgs.find((img) => {
+            if (img.closest('nav')) return false;
+            const src = img.getAttribute('src') || '';
+            return !!src && !src.includes(LOGO_SRC);
+        });
+        const heroSrc = heroImg ? (heroImg.getAttribute('src') || '') : '';
+        const heroAlt = heroImg ? (heroImg.getAttribute('alt') || `${cityName} interior design`) : `${cityName} interior design`;
+
+        // Collect legacy content rows (each is a flex row with image + copy)
+        const candidateSections = Array.from(document.querySelectorAll('section'));
+        const contentSection = candidateSections.find((s) => s !== firstSection && s.querySelector('h2') && s.querySelector('img'));
+        const contentContainer = contentSection ? (contentSection.querySelector('.container') || contentSection.querySelector('div')) : null;
+        const rows = contentContainer ? Array.from(contentContainer.children).filter((el) => el.querySelector && el.querySelector('h2')) : [];
+
+        const blocksHtml = rows.map((row, idx) => {
+            const label = String(idx + 1).padStart(2, '0');
+            const textCol =
+                Array.from(row.children || []).find((child) => child && child.querySelector && child.querySelector('h2')) ||
+                row.querySelector('h2')?.parentElement ||
+                row;
+
+            const titleEl = textCol.querySelector ? textCol.querySelector('h2') : null;
+            const title = titleEl ? titleEl.textContent.trim() : `Section ${idx + 1}`;
+
+            const clone = textCol.cloneNode(true);
+            stripInlineStyles(clone);
+            // Remove the title from content to avoid duplication
+            const cloneTitle = clone.querySelector ? clone.querySelector('h2') : null;
+            if (cloneTitle) cloneTitle.remove();
+            // Remove images (we use a single hero image for a cleaner Invero feel)
+            (clone.querySelectorAll ? clone.querySelectorAll('img') : []).forEach((img) => img.remove());
+
+            const contentHtml = (clone.innerHTML || '').trim();
+            return `
+              <div class="story-block">
+                <div class="story-label">${label}</div>
+                <div class="story-content">
+                  <h2 class="story-title">${escapeHtml(title)}</h2>
+                  ${contentHtml}
+                </div>
+              </div>
+            `.trim();
+        }).join('\n');
+
+        const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
+        const phoneHref = `tel:${FOOTER_PHONE_DISPLAY}`;
+        const emailHref = `mailto:${FOOTER_EMAIL}`;
+
+        const metaGridHtml = meta.length
+            ? `
+              <div class="city-meta-grid" aria-label="Project details">
+                ${meta.slice(0, 3).map(([k, v]) => `
+                  <div class="city-meta-item"><span>${escapeHtml(k)}</span><strong>${escapeHtml(v)}</strong></div>
+                `.trim()).join('')}
+              </div>
+            `.trim()
+            : '';
+
+        const mainHtml = `
+          <main class="city-main">
+            <section class="city-top">
+              <div class="container">
+                <div class="city-top-grid">
+                  <div>
+                    <span class="city-kicker">Cities we serve</span>
+                    <h1>${escapeHtml(cityName || 'City')}</h1>
+                    ${subtitle ? `<p>${escapeHtml(subtitle)}</p>` : ''}
+                    <a class="city-readabout" href="#about" aria-label="Read about ${escapeHtml(cityName)}">
+                      Read about
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M5 12h12" stroke-linecap="round"></path>
+                        <path d="M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </a>
+                    ${metaGridHtml}
+                  </div>
+                  <div>
+                    <p>Full-service interior design tailored to the way you live—designed with clarity, structure, and a refined, timeless point of view.</p>
+                    <div class="city-actions">
+                      <a class="btn btn-primary" href="${contactHref}">Book a call</a>
+                      <a class="btn btn-secondary" href="#contact-us">Contact us</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            ${heroSrc ? `
+              <section class="city-hero-media" aria-label="${escapeHtml(cityName)} hero image">
+                <div class="container">
+                  <div class="city-hero-img-wrapper">
+                    <img src="${escapeHtml(heroSrc)}" alt="${escapeHtml(heroAlt)}" loading="lazy" decoding="async">
+                  </div>
+                </div>
+              </section>
+            `.trim() : ''}
+
+            <section class="section" id="about">
+              <div class="container">
+                <div class="story-blocks" aria-label="City story">
+                  ${blocksHtml || ''}
+                </div>
+              </div>
+            </section>
+
+            <section class="city-cta" id="ready">
+              <div class="container">
+                <div class="city-cta-inner">
+                  <h2>Ready to begin?</h2>
+                  <p><strong>Call:</strong> <a class="inline" href="${phoneHref}">${FOOTER_PHONE_DISPLAY}</a> &nbsp; | &nbsp; <strong>Email:</strong> <a class="inline" href="${emailHref}">${FOOTER_EMAIL}</a></p>
+                  <div class="cta-links">
+                    <a class="btn btn-solid-white" href="${contactHref}">Book a call</a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="section" id="contact-us">
+              <div class="container">
+                <div class="city-section-head">
+                  <span class="rebuild-kicker">Contact</span>
+                  <h2>Contact us.</h2>
+                  <p>Tell us about your project and we’ll reply within 1–2 business days.</p>
+                </div>
+                <a class="btn btn-primary" href="${contactHref}">Get in touch</a>
+              </div>
+            </section>
+          </main>
+        `.trim();
+
+        ensureCitiesStyles();
+        if (document.body) document.body.classList.add('city-page');
+
+        const nav = document.querySelector('nav.navbar');
+        const footer = document.querySelector('footer');
+        const mobile = document.getElementById('mobileCtaBar');
+
+        Array.from(document.body.children).forEach((el) => {
+            if (el === nav) return;
+            if (el === footer) return;
+            if (el === mobile) return;
+            if (el.tagName === 'SCRIPT') return;
+            el.remove();
+        });
+
+        const existingMain = document.querySelector('main.city-main');
+        if (existingMain) existingMain.remove();
+
+        if (nav) {
+            nav.insertAdjacentHTML('afterend', mainHtml);
+        } else {
+            document.body.insertAdjacentHTML('afterbegin', mainHtml);
+        }
+    }
+
     function ensureFooter() {
         if (!document.body) return;
         ensureFooterStyles();
@@ -507,6 +729,7 @@
                 setTimeout(() => enforceNavbarStyles(nav), 10);
             }
             ensureMobileCtaBar();
+            transformLegacyCityPage();
             ensureFooter();
         }
     }
