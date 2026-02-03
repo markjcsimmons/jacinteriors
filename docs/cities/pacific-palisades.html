@@ -25,14 +25,14 @@
       }
 
       .city-top {
-        padding: 3.25rem 0 2.25rem;
+        padding: 2.5rem 0 1.75rem;
         border-bottom: 1px solid var(--stroke);
         background: #ffffff;
       }
       .city-top-grid {
         display: grid;
         grid-template-columns: 1.25fr 0.75fr;
-        gap: 4.5rem;
+        gap: 3.25rem;
         align-items: end;
       }
       .city-top h1 {
@@ -48,39 +48,55 @@
         color: #555;
         line-height: 1.7;
       }
-      .city-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-        margin-top: 1.15rem;
+      .city-meta-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+        margin-top: 1.25rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--stroke);
       }
-      .city-pill {
+      .city-meta-item span {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #777;
+        margin-bottom: 0.35rem;
+      }
+      .city-meta-item strong {
+        display: block;
+        color: #222a26;
+        font-weight: 600;
+        letter-spacing: -0.2px;
+      }
+
+      .city-readabout {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.45rem 0.8rem;
-        border: 1px solid var(--stroke);
-        border-radius: 999px;
-        background: #ffffff;
-        color: #222a26;
+        margin-top: 1.25rem;
         font-size: 0.9rem;
         font-weight: 600;
         letter-spacing: -0.2px;
       }
-      .city-pill span { color: #666; font-weight: 600; }
+      .city-readabout:hover { opacity: 0.75; }
+      .city-readabout svg { width: 18px; height: 18px; }
+
       .city-actions {
         display: flex;
         gap: 0.75rem;
         flex-wrap: wrap;
         align-items: center;
         justify-content: flex-start;
-        margin-top: 1.15rem;
+        margin-top: 1rem;
       }
 
-      .city-hero-media { padding: 2rem 0 2.75rem; background: #ffffff; }
+      .city-hero-media { padding: 1.5rem 0 2.25rem; background: #ffffff; }
       .city-hero-img-wrapper {
         width: 100%;
-        height: clamp(340px, 62vh, 760px);
+        height: clamp(320px, 56vh, 700px);
         overflow: hidden;
         border-radius: 10px;
         background: #111;
@@ -98,7 +114,7 @@
 
       .city-section-head {
         max-width: 980px;
-        margin-bottom: 2.25rem;
+        margin-bottom: 1.6rem;
       }
       .city-section-head h2 {
         margin: 0 0 1rem;
@@ -110,10 +126,10 @@
       .phase-list {
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
+        gap: 1rem;
       }
       .phase-card {
-        padding: 1.75rem;
+        padding: 1.4rem;
         border-radius: 8px;
         background: #fff;
       }
@@ -139,12 +155,44 @@
       .phase-card ul { margin: 0.6rem 0 0; padding-left: 1.15rem; color: #444; line-height: 1.75; }
       .phase-card li { margin: 0.5rem 0; }
 
+      /* Invero-style story blocks (Brief / Considerations / Solution / Result) */
+      .story-blocks {
+        display: flex;
+        flex-direction: column;
+        gap: 2.25rem;
+      }
+      .story-block {
+        display: grid;
+        grid-template-columns: 0.36fr 0.64fr;
+        gap: 2.25rem;
+        padding-top: 2.25rem;
+        border-top: 1px solid var(--stroke);
+      }
+      .story-label {
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #777;
+      }
+      .story-title {
+        margin: 0 0 0.85rem;
+        font-size: clamp(1.8rem, 2.4vw, 2.35rem);
+        letter-spacing: -0.9px;
+        line-height: 1.1;
+        color: #222a26;
+      }
+      .story-content p { margin: 0 0 1rem; color: #555; line-height: 1.75; }
+      .story-content p:last-child { margin-bottom: 0; }
+      .story-content ul { margin: 0.35rem 0 0; padding-left: 1.15rem; color: #444; line-height: 1.75; }
+      .story-content li { margin: 0.55rem 0; }
+
       .pricing-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
+        gap: 1rem;
       }
-      .pricing-card { padding: 1.75rem; border-radius: 8px; background: #fff; }
+      .pricing-card { padding: 1.4rem; border-radius: 8px; background: #fff; }
       .pricing-tier {
         display: flex;
         align-items: center;
@@ -170,9 +218,9 @@
       .trust-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.25rem;
+        gap: 1rem;
       }
-      .trust-card { padding: 1.75rem; border-radius: 8px; background: #fff; }
+      .trust-card { padding: 1.4rem; border-radius: 8px; background: #fff; }
       .trust-card h3 { margin: 0 0 0.6rem; }
       .trust-card p { margin: 0; }
 
@@ -215,17 +263,24 @@
 
       .rebuild-form-hidden { display: none; }
 
+      .city-page .section { padding: 5.25rem 0; }
+
+      .city-main .container { max-width: 1200px; }
+
       @media (max-width: 980px) {
         .city-top-grid { grid-template-columns: 1fr; gap: 2.25rem; }
         .pricing-grid { grid-template-columns: 1fr; }
         .trust-grid { grid-template-columns: 1fr; }
+        .city-meta-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+        .story-block { grid-template-columns: 1fr; gap: 0.85rem; padding-top: 1.5rem; }
       }
     </style>
 
 </head>
-<body>
+<body class="city-page">
     
     
+    <main class="city-main">
 
     <!-- City Headline -->
     <section class="city-top">
@@ -235,10 +290,17 @@
             <span class="city-kicker">Cities we serve</span>
             <h1>Pacific Palisades</h1>
             <p>Supporting Palisades recovery with professional rebuild design and finish-spec services—structured, responsive, and built for speed without surprises.</p>
-            <div class="city-meta" aria-label="Page highlights">
-              <span class="city-pill"><span>Region</span> Los Angeles</span>
-              <span class="city-pill"><span>Service</span> Wildfire Recovery</span>
-              <span class="city-pill"><span>Status</span> Accepting Projects</span>
+            <a class="city-readabout" href="#rebuild-la" aria-label="Read about Rebuild LA">
+              Read about
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h12" stroke-linecap="round"></path>
+                <path d="M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+            <div class="city-meta-grid" aria-label="Project details">
+              <div class="city-meta-item"><span>Region</span><strong>Los Angeles</strong></div>
+              <div class="city-meta-item"><span>Service</span><strong>Wildfire Recovery</strong></div>
+              <div class="city-meta-item"><span>Status</span><strong>Accepting Projects</strong></div>
             </div>
           </div>
           <div>
@@ -261,81 +323,123 @@
       </div>
     </section>
 
-    <!-- Rebuild LA (structured + sticky narrative) -->
-    <section class="sticky-section" id="rebuild-la">
+    <!-- Rebuild LA (Invero-style story layout) -->
+    <section class="section" id="rebuild-la">
       <div class="container">
-        <div class="sticky-grid">
-          <div class="sticky-content">
-            <span class="rebuild-kicker">Wildfire-recovery builds</span>
-            <h2>Rebuild LA, Re‑Imagine Home</h2>
-            <p>Professional interior design &amp; finish-spec services for wildfire-recovery builds.</p>
-            <p style="margin-top: 1.1rem;">
-              Los Angeles is still healing from recent wildfire seasons. Whether you’re a <strong>home-owner starting over</strong>, a <strong>developer filling critical housing gaps</strong>, or an <strong>architect/GC managing multiple rebuilds</strong>, JAC Interiors brings clarity and design excellence to every square foot. Our mission: help you <strong>rebuild faster</strong>, <strong>within budget</strong>, and <strong>more beautifully</strong>—without surprises.
-            </p>
-            <div class="city-meta" aria-label="Rebuild highlights">
-              <span class="city-pill"><span>Area</span> Pacific Palisades</span>
-              <span class="city-pill"><span>Focus</span> Finish specs</span>
-              <span class="city-pill"><span>Outcome</span> Faster rebuilds</span>
-            </div>
-            <div class="city-actions">
-              <a class="btn btn-primary" href="../contact.html?intent=call#contactForm">Book a call</a>
-              <a class="btn btn-secondary" href="../rebuild-la.html">Rebuild LA page</a>
+        <div class="story-blocks" aria-label="Rebuild story">
+          <div class="story-block" id="brief">
+            <div class="story-label">Brief</div>
+            <div class="story-content">
+              <span class="rebuild-kicker">Wildfire-recovery builds</span>
+              <h2 class="story-title">Rebuild LA, Re‑Imagine Home</h2>
+              <p>Professional interior design &amp; finish-spec services for wildfire-recovery builds.</p>
+              <p>Los Angeles is still healing from recent wildfire seasons. Whether you’re a <strong>home-owner starting over</strong>, a <strong>developer filling critical housing gaps</strong>, or an <strong>architect/GC managing multiple rebuilds</strong>, JAC Interiors brings clarity and design excellence to every square foot. Our mission: help you <strong>rebuild faster</strong>, <strong>within budget</strong>, and <strong>more beautifully</strong>—without surprises.</p>
+              <div class="city-actions">
+                <a class="btn btn-primary" href="../contact.html?intent=call#contactForm">Book a call</a>
+                <a class="btn btn-secondary" href="../rebuild-la.html">Rebuild LA page</a>
+              </div>
             </div>
           </div>
 
-          <div class="phase-list" aria-label="Rebuild phases">
-            <div class="service-card phase-card">
-              <div class="phase-head">
-                <span class="phase-num">01</span>
-                <h3>Assessment &amp; Scope</h3>
-              </div>
+          <div class="story-block" id="considerations">
+            <div class="story-label">Challenge</div>
+            <div class="story-content">
+              <h2 class="story-title">Considerations</h2>
               <ul>
-                <li>Review project goals, timeline, and target budget</li>
-                <li>Identify smart finish options that balance durability, wildfire resilience, and aesthetics</li>
+                <li>Finish options that balance <strong>durability</strong>, <strong>wildfire resilience</strong>, and aesthetics</li>
+                <li>Prioritizing <strong>sustainable</strong>, <strong>low‑VOC</strong>, and <strong>long‑lead‑proof</strong> materials</li>
+                <li>Securing inventory early through trusted vendor relationships</li>
+                <li>Coordinating directly with GCs and trades to resolve field questions fast</li>
+                <li>Milestone walk‑throughs to keep schedules on track</li>
               </ul>
             </div>
+          </div>
 
-            <div class="service-card phase-card">
-              <div class="phase-head">
-                <span class="phase-num">02</span>
-                <h3>Finish &amp; Fixture Design</h3>
+          <div class="story-block" id="solution">
+            <div class="story-label">Solution</div>
+            <div class="story-content">
+              <h2 class="story-title">What we deliver</h2>
+
+              <div class="phase-list" aria-label="Rebuild phases">
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">01</span>
+                    <h3>Assessment &amp; Scope</h3>
+                  </div>
+                  <ul>
+                    <li>Review project goals, timeline, and target budget</li>
+                    <li>Identify smart finish options that balance durability, wildfire resilience, and aesthetics</li>
+                  </ul>
+                </div>
+
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">02</span>
+                    <h3>Finish &amp; Fixture Design</h3>
+                  </div>
+                  <ul>
+                    <li>Source all interior hardscape: tile, flooring, countertops, backsplashes, ceilings, plumbing &amp; decorative lighting</li>
+                    <li>Prioritize sustainable, low‑VOC, and long‑lead‑proof materials</li>
+                  </ul>
+                </div>
+
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">03</span>
+                    <h3>Procurement &amp; Logistics</h3>
+                  </div>
+                  <ul>
+                    <li>Leverage decade‑long vendor relationships to secure inventory early</li>
+                    <li>Provide transparent purchase tracking—no hidden mark‑ups</li>
+                  </ul>
+                </div>
+
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">04</span>
+                    <h3>On‑Site Collaboration</h3>
+                  </div>
+                  <ul>
+                    <li>Coordinate directly with GCs and trades to resolve field questions fast</li>
+                    <li>Perform milestone walk‑throughs to keep schedules on track</li>
+                  </ul>
+                </div>
+
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">05</span>
+                    <h3>Move‑In Styling (optional)</h3>
+                  </div>
+                  <ul>
+                    <li>Furnishings, rugs, window treatments, art &amp; accessories selected to fit the new envelope—and your budget</li>
+                  </ul>
+                </div>
               </div>
-              <ul>
-                <li>Source all interior hardscape: tile, flooring, countertops, backsplashes, ceilings, plumbing &amp; decorative lighting</li>
-                <li>Prioritize sustainable, low‑VOC, and long‑lead‑proof materials</li>
-              </ul>
             </div>
+          </div>
 
-            <div class="service-card phase-card">
-              <div class="phase-head">
-                <span class="phase-num">03</span>
-                <h3>Procurement &amp; Logistics</h3>
+          <div class="story-block" id="result">
+            <div class="story-label">Result</div>
+            <div class="story-content">
+              <h2 class="story-title">What you can expect</h2>
+              <div class="trust-grid" aria-label="Trust factors">
+                <div class="service-card trust-card">
+                  <h3>Quality you can see</h3>
+                  <p>Detailed specifications, vetted vendors, and strict QA walkthroughs ensure every finish meets the highest standard.</p>
+                </div>
+                <div class="service-card trust-card">
+                  <h3>On-budget assurance</h3>
+                  <p>Up-front, per-square-foot pricing and real-time cost tracking keep surprises (and stress) off the table.</p>
+                </div>
+                <div class="service-card trust-card">
+                  <h3>On-time delivery</h3>
+                  <p>Tight scheduling, rapid issue-resolution, and priority supplier slots keep your build moving—no costly delays.</p>
+                </div>
+                <div class="service-card trust-card">
+                  <h3>Great to work with</h3>
+                  <p>Clear communication, quick turnarounds, and a can-do attitude make us the design partner contractors and architects actually enjoy collaborating with.</p>
+                </div>
               </div>
-              <ul>
-                <li>Leverage decade‑long vendor relationships to secure inventory early</li>
-                <li>Provide transparent purchase tracking—no hidden mark‑ups</li>
-              </ul>
-            </div>
-
-            <div class="service-card phase-card">
-              <div class="phase-head">
-                <span class="phase-num">04</span>
-                <h3>On‑Site Collaboration</h3>
-              </div>
-              <ul>
-                <li>Coordinate directly with GCs and trades to resolve field questions fast</li>
-                <li>Perform milestone walk‑throughs to keep schedules on track</li>
-              </ul>
-            </div>
-
-            <div class="service-card phase-card">
-              <div class="phase-head">
-                <span class="phase-num">05</span>
-                <h3>Move‑In Styling (optional)</h3>
-              </div>
-              <ul>
-                <li>Furnishings, rugs, window treatments, art &amp; accessories selected to fit the new envelope—and your budget</li>
-              </ul>
             </div>
           </div>
         </div>
@@ -377,35 +481,6 @@
             </div>
             <p><strong>Best for:</strong> Showcase luxury properties</p>
             <p><strong>Material profile:</strong> Fully bespoke, artisan-crafted interiors</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Trust -->
-    <section class="section bg-light" id="why">
-      <div class="container">
-        <div class="city-section-head">
-          <span class="rebuild-kicker">Why JAC</span>
-          <h2>Why homeowners, developers and architects trust JAC Interiors.</h2>
-        </div>
-
-        <div class="trust-grid" aria-label="Trust factors">
-          <div class="service-card trust-card">
-            <h3>Quality you can see</h3>
-            <p>Detailed specifications, vetted vendors, and strict QA walkthroughs ensure every finish meets the highest standard.</p>
-          </div>
-          <div class="service-card trust-card">
-            <h3>On-budget assurance</h3>
-            <p>Up-front, per-square-foot pricing and real-time cost tracking keep surprises (and stress) off the table.</p>
-          </div>
-          <div class="service-card trust-card">
-            <h3>On-time delivery</h3>
-            <p>Tight scheduling, rapid issue-resolution, and priority supplier slots keep your build moving—no costly delays.</p>
-          </div>
-          <div class="service-card trust-card">
-            <h3>Great to work with</h3>
-            <p>Clear communication, quick turnarounds, and a can-do attitude make us the design partner contractors and architects actually enjoy collaborating with.</p>
           </div>
         </div>
       </div>
@@ -487,6 +562,7 @@
         </div>
       </div>
     </section>
+    </main>
 
     <script>
       (function () {
