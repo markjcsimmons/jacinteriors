@@ -346,9 +346,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const isSpacePage = path.includes('bathrooms.html') || path.includes('bedrooms.html') || 
                        path.includes('kitchens.html') || path.includes('dining-rooms.html') ||
                        path.includes('living-spaces.html') || path.includes('office-spaces.html') ||
-                       path.includes('kids-bedrooms.html') || path.includes('entryways.html') ||
-                       path.includes('bar-area.html') || path.includes('laundry-rooms.html') ||
-                       path.includes('outdoor-spaces.html');
+                       path.includes('entryways.html') || path.includes('bar-area.html') ||
+                       path.includes('laundry-rooms.html') || path.includes('outdoor-spaces.html');
     
     // Add body class for CSS targeting
     if (isHomePage) {

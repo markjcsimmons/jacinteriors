@@ -54,9 +54,8 @@
     } else if (filename.includes('bathrooms.html') || filename.includes('bedrooms.html') || 
                filename.includes('kitchens.html') || filename.includes('dining-rooms.html') ||
                filename.includes('living-spaces.html') || filename.includes('office-spaces.html') ||
-               filename.includes('kids-bedrooms.html') || filename.includes('entryways.html') ||
-               filename.includes('bar-area.html') || filename.includes('laundry-rooms.html') ||
-               filename.includes('outdoor-spaces.html')) {
+               filename.includes('entryways.html') || filename.includes('bar-area.html') ||
+               filename.includes('laundry-rooms.html') || filename.includes('outdoor-spaces.html')) {
         spacesActive = ' active';
     } else if (filename === 'services.html' || filename.includes('residential-design.html') ||
                filename.includes('commercial-design.html') || filename.includes('interior-styling.html') ||
@@ -90,7 +89,6 @@
                             <a href="${getPath('dining-rooms.html')}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Dining Rooms</a>
                             <a href="${getPath('living-spaces.html')}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Living Spaces</a>
                             <a href="${getPath('office-spaces.html')}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Office Spaces</a>
-                            <a href="${getPath('kids-bedrooms.html')}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Kid's Bedrooms</a>
                             <a href="${getPath('entryways.html')}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Entryways</a>
                             <a href="${getPath('bar-area.html')}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Bar Area</a>
                             <a href="${getPath('laundry-rooms.html')}" style="color: #222a26 !important; padding: 0.5rem 1rem !important; text-decoration: none !important; display: block !important;">Laundry Rooms</a>

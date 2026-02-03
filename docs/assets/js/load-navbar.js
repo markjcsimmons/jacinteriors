@@ -68,9 +68,8 @@
         } else if (filename.includes('bathrooms.html') || filename.includes('bedrooms.html') || 
                    filename.includes('kitchens.html') || filename.includes('dining-rooms.html') ||
                    filename.includes('living-spaces.html') || filename.includes('office-spaces.html') ||
-                   filename.includes('kids-bedrooms.html') || filename.includes('entryways.html') ||
-                   filename.includes('bar-area.html') || filename.includes('laundry-rooms.html') ||
-                   filename.includes('outdoor-spaces.html')) {
+                   filename.includes('entryways.html') || filename.includes('bar-area.html') ||
+                   filename.includes('laundry-rooms.html') || filename.includes('outdoor-spaces.html')) {
             const link = nav.querySelector('.nav-dropdown:first-of-type .nav-link');
             if (link) link.classList.add('active');
         } else if (filename === 'services.html' || filename.includes('residential-design.html') ||
@@ -196,7 +195,6 @@
                         <a href="${getPath('dining-rooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Dining Rooms</a>
                         <a href="${getPath('living-spaces.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Living Spaces</a>
                         <a href="${getPath('office-spaces.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Office Spaces</a>
-                        <a href="${getPath('kids-bedrooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Kid's Bedrooms</a>
                         <a href="${getPath('entryways.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Entryways</a>
                         <a href="${getPath('bar-area.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Bar Area</a>
                         <a href="${getPath('laundry-rooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Laundry Rooms</a>
