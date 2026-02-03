@@ -533,7 +533,6 @@
                     <p>Full-service interior design tailored to the way you live—designed with clarity, structure, and a refined, timeless point of view.</p>
                     <div class="city-actions">
                       <a class="btn btn-primary" href="${contactHref}">Book a call</a>
-                      <a class="btn btn-secondary" href="#contact-us">Contact us</a>
                     </div>
                   </div>
                 </div>
@@ -577,7 +576,7 @@
                   <h2>Contact us.</h2>
                   <p>Tell us about your project and we’ll reply within 1–2 business days.</p>
                 </div>
-                <a class="btn btn-primary" href="${contactHref}">Get in touch</a>
+                <a class="btn btn-primary" href="${contactHref}">Book a call</a>
               </div>
             </section>
           </main>
@@ -606,6 +605,60 @@
         } else {
             document.body.insertAdjacentHTML('afterbegin', mainHtml);
         }
+    }
+
+    function normalizeContactButtons() {
+        if (!document.body) return;
+        const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
+
+        const targets = new Set([
+            'contact us',
+            'get in touch',
+            "let's get in touch",
+            'lets get in touch',
+            'let’s get in touch',
+            'start your project',
+            'request a call'
+        ]);
+
+        const links = Array.from(document.querySelectorAll('a'));
+        links.forEach((a) => {
+            if (!a || !a.textContent) return;
+            if (a.closest('nav.navbar')) return;  // don't touch nav links like CONTACT
+            if (a.closest('footer')) return;
+            const txt = a.textContent.replace(/\s+/g, ' ').trim().toLowerCase();
+            if (!targets.has(txt)) return;
+
+            // If this is a secondary CTA next to an existing "Book a call", remove it.
+            const isSecondaryVariant = txt !== 'book a call';
+            if (isSecondaryVariant) {
+                const scope = a.parentElement || null;
+                if (scope) {
+                    const sibs = Array.from(scope.querySelectorAll('a')).filter((x) => x && x !== a);
+                    const hasBookSibling = sibs.some((x) => {
+                        const t = (x.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+                        return t === 'book a call';
+                    });
+                    if (hasBookSibling) {
+                        a.remove();
+                        return;
+                    }
+                }
+            }
+
+            a.setAttribute('href', contactHref);
+
+            // Preserve SVG icons if present
+            const svg = a.querySelector('svg');
+            if (svg) {
+                const svgClone = svg.cloneNode(true);
+                a.innerHTML = '';
+                a.appendChild(document.createTextNode('Book a call'));
+                a.appendChild(svgClone);
+            } else {
+                a.textContent = 'Book a call';
+            }
+        });
     }
 
     function ensureFooter() {
@@ -731,6 +784,7 @@
             ensureMobileCtaBar();
             transformLegacyCityPage();
             ensureFooter();
+            normalizeContactButtons();
         }
     }
     
