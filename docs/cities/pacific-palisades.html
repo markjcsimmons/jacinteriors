@@ -187,12 +187,30 @@
       .story-content ul { margin: 0.35rem 0 0; padding-left: 1.15rem; color: #444; line-height: 1.75; }
       .story-content li { margin: 0.55rem 0; }
 
+      /* Match legacy city pages' typography (16px body copy) */
+      .city-main p,
+      .city-main li {
+        font-size: 16px;
+        line-height: 24px;
+      }
+      .city-main .city-kicker,
+      .city-main .rebuild-kicker {
+        font-size: 12px;
+      }
+      .city-main .city-top p {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
       .pricing-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 1rem;
+        max-width: 1080px;
+        margin: 0 auto;
       }
       .pricing-card { padding: 1.4rem; border-radius: 8px; background: #fff; }
+      .pricing-grid > * { min-width: 0; }
       .pricing-tier {
         display: flex;
         align-items: center;
