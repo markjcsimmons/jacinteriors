@@ -36,6 +36,30 @@
     return null;
   }
 
+  function getAltNameVariants(name) {
+    // Try common extension and case variants. (R2 keys are case-sensitive.)
+    const m = name.match(/^(.*)\.(jpe?g|png|webp)$/i);
+    if (!m) return [];
+    const stem = m[1];
+    const ext = m[2].toLowerCase();
+
+    const orderedExts = [];
+    if (ext === "jpg" || ext === "jpeg") {
+      orderedExts.push("jpg", "JPG", "jpeg", "JPEG", "webp", "WEBP", "png", "PNG");
+    } else if (ext === "png") {
+      orderedExts.push("png", "PNG", "webp", "WEBP", "jpg", "JPG", "jpeg", "JPEG");
+    } else if (ext === "webp") {
+      orderedExts.push("webp", "WEBP", "jpg", "JPG", "jpeg", "JPEG", "png", "PNG");
+    } else {
+      orderedExts.push(ext, ext.toUpperCase());
+    }
+
+    // Remove the original ext (in its original casing) from the list
+    const original = name;
+    const variants = orderedExts.map((e) => `${stem}.${e}`);
+    return variants.filter((v) => v !== original);
+  }
+
   function encodeName(name) {
     // Encode spaces and special chars safely; keep slashes if any (shouldn't be).
     return encodeURIComponent(name).replace(/%2F/g, "/");
@@ -78,6 +102,8 @@
     img.dataset.r2OriginalName = parsed.name;
     img.dataset.r2Managed = "1";
     img.dataset.r2Final = "0";
+    img.dataset.r2Type = parsed.type;
+    img.dataset.r2Key = parsed.key;
     if (parsed.type === "spaces") img.dataset.r2Space = parsed.key;
 
     if (parsed.type === "spaces") {
@@ -111,18 +137,35 @@
     img.addEventListener(
       "error",
       () => {
-        // If R2 fails, optionally try one nested folder based on the page H1 (Spaces only)
-        // e.g. spaces/bedrooms/Bedrooms/bedrooms-1.jpg
+        const type = img.dataset.r2Type || "";
+        const key = img.dataset.r2Key || "";
         const space = img.dataset.r2Space || "";
         const name = img.dataset.r2TargetName || img.dataset.r2OriginalName || "";
-        const triedNested = img.dataset.r2TriedNested === "1";
 
+        // 1) Try extension/case variants first (spaces + projects)
+        const tried = new Set((img.dataset.r2TriedNames || "").split("|").filter(Boolean));
+        const variants = getAltNameVariants(name);
+        for (const v of variants) {
+          if (tried.has(v)) continue;
+          tried.add(name);
+          tried.add(v);
+          img.dataset.r2TriedNames = Array.from(tried).join("|");
+          img.dataset.r2TargetName = v;
+          const bust = getBustSuffix(img);
+          const altUrl = type && key ? `${base}/${type}/${key}/${encodeName(v)}${bust}` : "";
+          if (altUrl && img.getAttribute("src") !== altUrl) {
+            img.setAttribute("src", altUrl);
+            return;
+          }
+        }
+
+        // 2) Spaces only: optionally try one nested folder based on the page H1
+        // e.g. spaces/bedrooms/Bedrooms/bedrooms-1.jpg
+        const triedNested = img.dataset.r2TriedNested === "1";
         const h1Text = (document.querySelector("h1")?.textContent || "").trim();
         const nestedFolder = h1Text ? encodeName(h1Text) : "";
         const nestedUrl =
-          space && name && nestedFolder
-            ? `${base}/spaces/${space}/${nestedFolder}/${encodeName(name)}`
-            : "";
+          space && name && nestedFolder ? `${base}/spaces/${space}/${nestedFolder}/${encodeName(name)}` : "";
 
         if (!triedNested && nestedUrl && img.getAttribute("src") !== nestedUrl) {
           img.dataset.r2TriedNested = "1";
@@ -130,8 +173,7 @@
           return;
         }
 
-        // Projects: no nested retry; local path would resolve wrong from /projects/.
-        // Mark final so masonry hides the tile; do not set a bad local src.
+        // Projects: no local fallback; mark final so masonry hides the tile
         if (!space) {
           img.dataset.r2Final = "1";
           return;
