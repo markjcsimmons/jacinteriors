@@ -9,7 +9,38 @@
   const PLACEHOLDER_SRC =
     'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
-  const R2_BASE = (window.R2_IMAGE_BASE || '').replace(/\/+$/, '');
+  // Default to production CDN even if r2-config.js fails to load.
+  const DEFAULT_R2_BASE = 'https://jacinteriorscdn.com';
+  const R2_BASE = (window.R2_IMAGE_BASE || DEFAULT_R2_BASE).replace(/\/+$/, '');
+
+  // Fallback list in case navbar injection fails for any reason.
+  // Keep in sync with the Portfolio dropdown in load-navbar.js.
+  const FALLBACK_PROJECT_LINKS = [
+    { title: '22nd Street', href: 'projects/22nd-street.html' },
+    { title: 'JAMM Visual', href: 'projects/jamm-visual.html' },
+    { title: 'Alpine', href: 'projects/alpine.html' },
+    { title: 'Brown Deer Park', href: 'projects/brown-deer-park.html' },
+    { title: 'Colby', href: 'projects/colby.html' },
+    { title: 'Colette Way', href: 'projects/colette-way.html' },
+    { title: 'Columbus Way', href: 'projects/columbus-way.html' },
+    { title: 'Frances', href: 'projects/frances.html' },
+    { title: 'Galewood', href: 'projects/galewood.html' },
+    { title: 'Highland', href: 'projects/highland.html' },
+    { title: 'Medio', href: 'projects/medio.html' },
+    { title: 'Monaco', href: 'projects/monaco.html' },
+    { title: 'Mulholland Drive', href: 'projects/mulholland-drive.html' },
+    { title: 'Oakwood', href: 'projects/oakwood.html' },
+    { title: 'Peary Way', href: 'projects/peary-way.html' },
+    { title: 'Presson Place', href: 'projects/presson-place.html' },
+    { title: 'River Homestead', href: 'projects/river-homestead.html' },
+    { title: 'Ronda', href: 'projects/ronda.html' },
+    { title: 'Sherbourne', href: 'projects/sherbourne.html' },
+    { title: 'Sunnyside', href: 'projects/sunnyside.html' },
+    { title: 'Vale Crest', href: 'projects/vale-crest.html' },
+    { title: 'Valley Vista', href: 'projects/valley-vista.html' },
+    { title: 'Via Pisa', href: 'projects/via-pisa.html' },
+    { title: 'Wilshire', href: 'projects/wilshire.html' },
+  ];
 
   function encodeName(name) {
     return encodeURIComponent(name).replace(/%2F/g, '/');
@@ -119,7 +150,8 @@
 
   async function fetchProjectImages(projectHref) {
     // Fetch project page HTML and extract first 3 project image paths.
-    const res = await fetch(projectHref, { cache: 'force-cache' });
+    // Avoid stale HTML when project pages change (callouts/images).
+    const res = await fetch(projectHref, { cache: 'no-store' });
     if (!res.ok) throw new Error(`Failed to fetch ${projectHref}`);
     const html = await res.text();
 
@@ -211,7 +243,8 @@
     if (!tagEls.length) return;
 
     try {
-      const res = await fetch(href, { cache: 'force-cache' });
+      // Avoid stale HTML when project callouts change.
+      const res = await fetch(href, { cache: 'no-store' });
       if (!res.ok) throw new Error(`Failed to fetch ${href}`);
       const html = await res.text();
       const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -275,10 +308,11 @@
     if (!container) return false;
 
     const links = getProjectLinksFromNavbar();
-    if (!links.length) return false;
+    const list = links.length ? links : FALLBACK_PROJECT_LINKS;
+    if (!list.length) return false;
 
     container.innerHTML = '';
-    links.forEach((x) => container.appendChild(buildProjectItem(x)));
+    list.forEach((x) => container.appendChild(buildProjectItem(x)));
 
     initHoverAndScrollEffects();
 
