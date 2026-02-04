@@ -385,6 +385,108 @@
         return currentPath.includes('/cities/');
     }
 
+    // Try to apply a city-specific hero image from R2 (if it exists).
+    // If no matching object exists, we keep the current image.
+    function applyCityR2Images() {
+        const DEFAULT_R2_BASE = 'https://jacinteriorscdn.com';
+        const R2_BASE = String(window.R2_IMAGE_BASE || DEFAULT_R2_BASE).replace(/\/+$/, '');
+
+        function slugifyCitySlugFromHref(href) {
+            const m = String(href || '').match(/cities\/([^/?#]+)\.html/i);
+            return m ? m[1] : '';
+        }
+
+        function getCitySlugFromPath() {
+            const m = currentPath.match(/\/cities\/([^/?#]+)\.html/i);
+            return m ? m[1] : '';
+        }
+
+        function trySetImageFromCandidates(imgEl, candidates) {
+            if (!imgEl || !candidates || !candidates.length) return;
+            if (imgEl.dataset.cityR2Attempted === '1') return;
+            imgEl.dataset.cityR2Attempted = '1';
+
+            const original = imgEl.getAttribute('src') || '';
+            let i = 0;
+
+            const probe = () => {
+                if (i >= candidates.length) {
+                    // Restore original if we overwrote it with a failing candidate.
+                    if (original) imgEl.setAttribute('src', original);
+                    return;
+                }
+                const url = candidates[i++];
+                const tester = new Image();
+                tester.onload = () => {
+                    imgEl.setAttribute('src', url);
+                };
+                tester.onerror = () => probe();
+                tester.src = url;
+            };
+
+            probe();
+        }
+
+        function buildCityCandidates(citySlug, hintSrc) {
+            if (!citySlug) return [];
+            const slug = citySlug;
+            const exts = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG', 'WEBP'];
+            const stems = [
+                `${slug}-hero`,
+                `${slug}-1`,
+                `${slug}`,
+                'hero',
+                '1',
+                'cover',
+            ];
+            const prefixes = [
+                `jac-images/cities/${slug}/`,
+                `cities/${slug}/`,
+            ];
+
+            const out = [];
+            // If we already have a filename (local hero image), try that exact name first.
+            const hint = String(hintSrc || '').trim();
+            const baseName = hint ? hint.split('?')[0].split('#')[0].split('/').pop() : '';
+            if (baseName && /\.[a-z0-9]+$/i.test(baseName)) {
+                prefixes.forEach((pre) => out.push(`${R2_BASE}/${pre}${baseName}`));
+            }
+            prefixes.forEach((pre) => {
+                stems.forEach((stem) => {
+                    exts.forEach((ext) => {
+                        out.push(`${R2_BASE}/${pre}${stem}.${ext}`);
+                    });
+                });
+            });
+            return out;
+        }
+
+        // 1) Individual city pages: set the main hero image if a matching R2 object exists.
+        if (isCitiesPage()) {
+            const slug = getCitySlugFromPath();
+            const hero =
+                document.querySelector('.city-hero-img-wrapper img') ||
+                document.querySelector('.city-hero-media img') ||
+                null;
+            if (hero && slug) {
+                trySetImageFromCandidates(hero, buildCityCandidates(slug, hero.getAttribute('src') || ''));
+            }
+        }
+
+        // 2) Cities We Serve cards: for each region card, try using the first city link's R2 hero.
+        if (filename === 'cities-we-serve.html') {
+            const cards = Array.from(document.querySelectorAll('.project-list-item'));
+            cards.forEach((card) => {
+                const firstCityLink = card.querySelector('.city-tags-container a.city-tag[href*="cities/"]');
+                const slug = firstCityLink ? slugifyCitySlugFromHref(firstCityLink.getAttribute('href') || '') : '';
+                if (!slug) return;
+                const img = card.querySelector('.project-list-image img.region-img.active') || card.querySelector('.project-list-image img');
+                if (!img) return;
+                trySetImageFromCandidates(img, buildCityCandidates(slug, img.getAttribute('src') || ''));
+            });
+        }
+    }
+
     function escapeHtml(str) {
         return String(str || '')
             .replace(/&/g, '&amp;')
@@ -767,6 +869,7 @@
             }
             ensureMobileCtaBar();
             transformLegacyCityPage();
+            applyCityR2Images();
             ensureFooter();
             normalizeContactButtons();
         }

@@ -19,7 +19,7 @@ import re
 from pathlib import Path
 
 
-NEW_VERSION = "20260204-1"
+NEW_VERSION = "20260204-3"
 
 ROOT = Path(__file__).resolve().parents[1]  # jacinteriors/
 DOCS = ROOT / "docs"
