@@ -28,6 +28,10 @@
             color: white;
             border-color: #222;
         }
+        .city-tag-static {
+            pointer-events: none;
+            cursor: default;
+        }
         .city-tags-container {
             display: flex;
             flex-wrap: wrap;
@@ -181,60 +185,96 @@
                 </div>
             </div>
 
-            <!-- Central Los Angeles -->
+            <!-- Greater Los Angeles -->
             <div class="project-list-item">
                 <div style="display: flex; width: 100%;">
                     <div class="project-list-image">
-                        <!-- Mulholland Estate - all 6 images -->
-                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-1.jpg" alt="Hollywood" class="region-img active">
-                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-2.jpg" alt="Hollywood" class="region-img">
-                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-3.jpg" alt="Hollywood" class="region-img">
-                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-4.jpg" alt="Hollywood" class="region-img">
-                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-5.jpg" alt="Hollywood" class="region-img">
-                        <img src="assets/images/projects/mulholland-estate/mulholland-estate-6.jpg" alt="Hollywood" class="region-img">
+                        <!-- Use Pasadena photo -->
+                        <img src="assets/images/cities/pasadena-hero.jpg" alt="Greater Los Angeles" class="region-img active">
                     </div>
                     <div class="project-list-content">
                         <div style="margin-bottom: 2rem;">
                             <span class="project-date">SoCal</span>
-                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Central Los Angeles</h3>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Greater Los Angeles</h3>
                         </div>
                         <div class="city-tags-container">
                             <a href="cities/hollywood.html" class="city-tag">Hollywood</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pasadena & San Gabriel Valley -->
-            <div class="project-list-item">
-                <div style="display: flex; width: 100%;">
-                    <div class="project-list-image">
-                        <!-- Pasadena - hero image -->
-                        <img src="assets/images/cities/pasadena-hero.jpg" alt="Pasadena" class="region-img active">
-                    </div>
-                    <div class="project-list-content">
-                        <div style="margin-bottom: 2rem;">
-                            <span class="project-date">SoCal</span>
-                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Pasadena & San Gabriel Valley</h3>
-                        </div>
-                        <div class="city-tags-container">
                             <a href="cities/pasadena.html" class="city-tag">Pasadena</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Miami & South Florida -->
+            <!-- Coachella Valley -->
             <div class="project-list-item">
                 <div style="display: flex; width: 100%;">
                     <div class="project-list-image">
-                        <!-- Miami - hero image for entire region -->
-                        <img src="assets/images/cities/miami-hero.jpg" alt="Miami & South Florida" class="region-img active">
+                        <img src="assets/images/cities/coachella-valley-hero.png" alt="Coachella Valley" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">SoCal</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Coachella Valley</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <span class="city-tag city-tag-static">Palm Springs</span>
+                            <span class="city-tag city-tag-static">Palm Desert</span>
+                            <span class="city-tag city-tag-static">La Quinta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Palm Beach County -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/cities/palm-beach-county-hero.png" alt="Palm Beach County" class="region-img active">
                     </div>
                     <div class="project-list-content">
                         <div style="margin-bottom: 2rem;">
                             <span class="project-date">Florida</span>
-                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Miami & South Florida</h3>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Palm Beach County</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/boca-raton.html" class="city-tag">Boca Raton</a>
+                            <span class="city-tag city-tag-static">Delray Beach</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Broward County -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/cities/fort-lauderdale-hero.jpg" alt="Broward County" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Florida</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Broward County</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/fort-lauderdale.html" class="city-tag">Fort Lauderdale</a>
+                            <a href="cities/pompano-beach.html" class="city-tag">Pompano Beach</a>
+                            <a href="cities/deerfield-beach.html" class="city-tag">Deerfield Beach</a>
+                            <a href="cities/plantation.html" class="city-tag">Plantation</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Miami-Dade County -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/cities/miami-hero.jpg" alt="Miami-Dade County" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Florida</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Miami-Dade County</h3>
                         </div>
                         <div class="city-tags-container">
                             <a href="cities/coral-gables.html" class="city-tag">Coral Gables</a>
@@ -244,31 +284,8 @@
                             <a href="cities/key-biscayne.html" class="city-tag">Key Biscayne</a>
                             <a href="cities/hialeah.html" class="city-tag">Hialeah</a>
                             <a href="cities/doral.html" class="city-tag">Doral</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fort Lauderdale & Broward County -->
-            <div class="project-list-item">
-                <div style="display: flex; width: 100%;">
-                    <div class="project-list-image">
-                        <!-- Fort Lauderdale - hero image for entire region -->
-                        <img src="assets/images/cities/fort-lauderdale-hero.jpg" alt="Fort Lauderdale & Broward County" class="region-img active">
-                    </div>
-                    <div class="project-list-content">
-                        <div style="margin-bottom: 2rem;">
-                            <span class="project-date">Florida</span>
-                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Fort Lauderdale & Broward County</h3>
-                        </div>
-                        <div class="city-tags-container">
                             <a href="cities/aventura.html" class="city-tag">Aventura</a>
                             <a href="cities/bal-harbour.html" class="city-tag">Bal Harbour</a>
-                            <a href="cities/fort-lauderdale.html" class="city-tag">Fort Lauderdale</a>
-                            <a href="cities/boca-raton.html" class="city-tag">Boca Raton</a>
-                            <a href="cities/pompano-beach.html" class="city-tag">Pompano Beach</a>
-                            <a href="cities/deerfield-beach.html" class="city-tag">Deerfield Beach</a>
-                            <a href="cities/plantation.html" class="city-tag">Plantation</a>
                         </div>
                     </div>
                 </div>
