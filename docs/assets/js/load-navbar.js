@@ -385,6 +385,163 @@
         return currentPath.includes('/cities/');
     }
 
+    // Cities that should feature a specific project (hero image + "See Project" button).
+    // When multiple projects exist for a city, we pick the project with the most images in R2.
+    // Source: "JAC project cities.pdf" (2026-01-29).
+    const CITY_FEATURED_PROJECT = {
+        'beverly-hills': 'alpine',
+        'brentwood': 'medio',
+        'calabasas': 'colette-way',
+        'hancock-park': 'highland',
+        'hollywood-hills': 'mulholland-drive', // (mulholland-drive has more images than presson-place)
+        'indian-wells': 'via-pisa',
+        'la-quinta': 'columbus-way', // (columbus-way has more images than ronda)
+        'laguna-beach': 'monaco',
+        'mar-vista': 'frances', // (frances has more images than colby)
+        'marina-del-rey': 'sunnyside',
+        'montana': 'river-homestead',
+        'palm-desert': 'peary-way', // (peary-way has more images than vale-crest / brown-deer-park)
+        'santa-monica': '22nd-street',
+        'sherman-oaks': 'valley-vista',
+        'studio-city': 'galewood',
+        'venice': 'oakwood',
+        'west-hollywood': 'sherbourne',
+        'westwood': 'wilshire',
+    };
+
+    function applyCityFeaturedProject() {
+        if (!isCitiesPage()) return;
+
+        const DEFAULT_R2_BASE = 'https://jacinteriorscdn.com';
+        const R2_BASE = String(window.R2_IMAGE_BASE || DEFAULT_R2_BASE).replace(/\/+$/, '');
+
+        function getCitySlugFromPath() {
+            const m = currentPath.match(/\/cities\/([^/?#]+)\.html/i);
+            return m ? decodeURIComponent(m[1]) : '';
+        }
+
+        function normalizeCitySlug(slug) {
+            const s = String(slug || '').trim().toLowerCase();
+            // Handle duplicate files like "west-hollywood 2.html"
+            return s.replace(/\s+2$/, '').replace(/-2$/, '');
+        }
+
+        function buildProjectImageCandidates(projectSlug, maxN) {
+            const slug = String(projectSlug || '').trim();
+            if (!slug) return [];
+            const exts = ['jpg', 'jpeg', 'png', 'webp', 'JPG', 'JPEG', 'PNG', 'WEBP'];
+            const out = [];
+            const N = Math.max(1, Math.min(Number(maxN || 18), 40));
+            for (let i = 1; i <= N; i += 1) {
+                for (const ext of exts) {
+                    out.push(`${R2_BASE}/projects/${slug}/${slug}-${i}.${ext}`);
+                }
+            }
+            return out;
+        }
+
+        function findHeroImageEl() {
+            return (
+                document.querySelector('.city-hero-img-wrapper img') ||
+                document.querySelector('.city-hero-media img') ||
+                document.querySelector('.parallax-image img') ||
+                document.querySelector('main img') ||
+                document.querySelector('img')
+            );
+        }
+
+        function ensureSeeProjectButton(projectSlug, heroImg) {
+            const href = getPath(`projects/${projectSlug}.html`);
+
+            // Only look for an existing link near the hero (avoid matching nav dropdown links).
+            const heroMedia = heroImg ? heroImg.closest('.city-hero-media') : null;
+            const existingNearHero = heroMedia
+                ? (heroMedia.querySelector('a.city-see-project-btn') || heroMedia.querySelector(`a[href*="projects/${projectSlug}.html"]`))
+                : null;
+            if (existingNearHero) return;
+
+            const btn = document.createElement('a');
+            btn.className = 'btn btn-primary city-see-project-btn';
+            btn.href = href;
+            btn.textContent = 'See Project';
+
+            const wrap = document.createElement('div');
+            wrap.className = 'city-project-cta';
+            wrap.style.marginTop = '1rem';
+            wrap.appendChild(btn);
+
+            // Try to place directly beneath the hero image.
+            const container = heroMedia ? heroMedia.querySelector('.container') : null;
+            const imgWrapper = heroMedia ? heroMedia.querySelector('.city-hero-img-wrapper') : null;
+
+            if (container && imgWrapper && imgWrapper.parentNode) {
+                imgWrapper.insertAdjacentElement('afterend', wrap);
+                return;
+            }
+
+            if (heroImg && heroImg.parentNode) {
+                heroImg.insertAdjacentElement('afterend', wrap);
+            }
+        }
+
+        function trySetLandscapeFromCandidates(imgEl, candidates) {
+            if (!imgEl || !candidates || !candidates.length) return;
+            if (imgEl.dataset && imgEl.dataset.cityProjectAttempted === '1') return;
+            if (imgEl.dataset) imgEl.dataset.cityProjectAttempted = '1';
+
+            // Prevent city-hero auto replacement (we want project imagery here).
+            if (imgEl.dataset) imgEl.dataset.cityR2Skip = '1';
+
+            const original = imgEl.getAttribute('src') || '';
+            let firstLoaded = '';
+            let i = 0;
+
+            const probe = () => {
+                if (i >= candidates.length) {
+                    if (firstLoaded) return;
+                    if (original) imgEl.setAttribute('src', original);
+                    return;
+                }
+
+                const url = candidates[i++];
+                const tester = new Image();
+                tester.onload = () => {
+                    // Set the first valid image immediately for faster paint,
+                    // then keep probing until we find a landscape candidate.
+                    if (!firstLoaded) {
+                        firstLoaded = url;
+                        imgEl.setAttribute('src', url);
+                    }
+                    const w = tester.naturalWidth || 0;
+                    const h = tester.naturalHeight || 0;
+                    const isLandscape = w > 0 && h > 0 && w >= h * 1.08;
+                    if (isLandscape) {
+                        imgEl.setAttribute('src', url);
+                        return;
+                    }
+                    probe();
+                };
+                tester.onerror = () => probe();
+                tester.src = url;
+            };
+
+            probe();
+        }
+
+        const citySlugRaw = getCitySlugFromPath();
+        const citySlug = normalizeCitySlug(citySlugRaw);
+        const projectSlug = CITY_FEATURED_PROJECT[citySlug];
+        if (!projectSlug) return;
+
+        const heroImg = findHeroImageEl();
+        if (!heroImg) return;
+
+        heroImg.setAttribute('alt', `${projectSlug.replace(/-/g, ' ')} project in ${citySlug.replace(/-/g, ' ')}`);
+
+        ensureSeeProjectButton(projectSlug, heroImg);
+        trySetLandscapeFromCandidates(heroImg, buildProjectImageCandidates(projectSlug, 18));
+    }
+
     // Try to apply a city-specific hero image from R2 (if it exists).
     // If no matching object exists, we keep the current image.
     function applyCityR2Images() {
@@ -403,6 +560,8 @@
 
         function trySetImageFromCandidates(imgEl, candidates) {
             if (!imgEl || !candidates || !candidates.length) return;
+            // Allow specific pages to pin a custom hero image.
+            if (imgEl.dataset && imgEl.dataset.cityR2Skip === '1') return;
             if (imgEl.dataset.cityR2Attempted === '1') return;
             imgEl.dataset.cityR2Attempted = '1';
 
@@ -870,6 +1029,7 @@
             ensureMobileCtaBar();
             transformLegacyCityPage();
             applyCityR2Images();
+            applyCityFeaturedProject();
             ensureFooter();
             normalizeContactButtons();
         }
