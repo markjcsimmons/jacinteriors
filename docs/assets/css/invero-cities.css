@@ -182,44 +182,6 @@
 .city-page.city-layout-single .story-content { max-width: 72ch; }
 .city-page.city-layout-single .story-label { margin-top: 0.15rem; }
 
-/* Optional: collapse long sections with <details> (opt-in via body class) */
-.city-page.city-layout-collapse .city-collapse {
-  border: 1px solid var(--stroke);
-  border-radius: 12px;
-  padding: 0.9rem 1rem;
-  background: #fff;
-}
-.city-page.city-layout-collapse .city-collapse + .city-collapse { margin-top: 1rem; }
-.city-page.city-layout-collapse .city-collapse-summary {
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-}
-.city-page.city-layout-collapse .city-collapse-summary::-webkit-details-marker { display: none; }
-.city-page.city-layout-collapse .city-collapse-summary::after {
-  content: "+";
-  font-weight: 800;
-  color: #222a26;
-  flex: 0 0 auto;
-  line-height: 1;
-  transform: translateY(-1px);
-}
-.city-page.city-layout-collapse .city-collapse[open] .city-collapse-summary::after { content: "–"; }
-.city-page.city-layout-collapse .city-collapse-summary .story-title {
-  margin: 0;
-  display: block;
-  font-size: clamp(1.55rem, 2.1vw, 2.05rem);
-  letter-spacing: -0.9px;
-  line-height: 1.1;
-  color: #222a26;
-  font-weight: 600;
-}
-.city-page.city-layout-collapse .city-collapse-body { margin-top: 0.85rem; }
-.city-page.city-layout-collapse .city-collapse-body > :last-child { margin-bottom: 0; }
-
 /* Optional: Invero-like editorial grid (sticky rail + content) */
 .city-page .city-editorial {
   display: grid;
