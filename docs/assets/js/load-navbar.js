@@ -456,9 +456,22 @@
             // Only look for an existing link near the hero (avoid matching nav dropdown links).
             const heroMedia = heroImg ? heroImg.closest('.city-hero-media') : null;
             const existingNearHero = heroMedia
-                ? (heroMedia.querySelector('a.city-see-project-btn') || heroMedia.querySelector(`a[href*="projects/${projectSlug}.html"]`))
+                ? (heroMedia.querySelector('a.city-see-project-btn') ||
+                    heroMedia.querySelector(`a[href*="projects/${projectSlug}.html"]`) ||
+                    Array.from(heroMedia.querySelectorAll('a')).find((a) => {
+                        const txt = (a.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+                        return txt === 'see project';
+                    }))
                 : null;
-            if (existingNearHero) return;
+
+            // Some pages place "See Project" in the top-right city actions instead of below the hero.
+            const existingInActions = Array.from(document.querySelectorAll('.city-actions a')).find((a) => {
+                const hrefAttr = String(a.getAttribute('href') || '');
+                const txt = (a.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+                return txt === 'see project' || hrefAttr.includes('/projects/') || hrefAttr.includes('projects/');
+            });
+
+            if (existingNearHero || existingInActions) return;
 
             const btn = document.createElement('a');
             btn.className = 'btn btn-primary city-see-project-btn';
