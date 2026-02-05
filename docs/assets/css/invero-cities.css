@@ -169,6 +169,14 @@
   line-height: 1.1;
   color: #222a26;
 }
+.city-page .story-content h3 {
+  margin: 1.15rem 0 0.5rem;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  color: #222a26;
+  font-weight: 650;
+}
 .city-page .story-content p { margin: 0 0 1rem; color: #555; line-height: 1.75; }
 .city-page .story-content p:last-child { margin-bottom: 0; }
 .city-page .story-content ul { margin: 0.35rem 0 0; padding-left: 1.15rem; color: #444; line-height: 1.75; }
