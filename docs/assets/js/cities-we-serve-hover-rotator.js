@@ -13,10 +13,10 @@
   /** @type {WeakMap<Element, {timer: number | null, idx: number, active: boolean, urls: string[]}>} */
   const rotationStateByCard = new WeakMap();
 
-  const ROTATE_EVERY_MS = 1400;
-  const FADE_MS = 220;
-  const MAX_URLS = 30;
-  const PER_CITY_MAX = 3;
+  const ROTATE_EVERY_MS = 1600;
+  const FADE_MS = 260;
+  const MAX_URLS = 80;
+  const PER_CITY_MAX = 12;
   const FETCH_CONCURRENCY = 4;
   const DEBUG = new URLSearchParams(window.location.search).has("debugCities");
 
@@ -74,6 +74,27 @@
     }
   }
 
+  function encodeName(name) {
+    return encodeURIComponent(name).replace(/%2F/g, "/");
+  }
+
+  function toR2UrlIfPossible(absUrl) {
+    if (!absUrl) return absUrl;
+    if (isR2Url(absUrl)) return absUrl;
+    if (!R2_BASE) return absUrl;
+    try {
+      const u = new URL(absUrl, window.location.href);
+      const m = u.pathname.match(/\/assets\/images\/(projects|spaces)\/([^/]+)\/([^?#]+)$/);
+      if (!m) return absUrl;
+      const type = m[1];
+      const key = m[2];
+      const filename = m[3];
+      return `${R2_BASE.origin}/${type}/${key}/${encodeName(filename)}`;
+    } catch {
+      return absUrl;
+    }
+  }
+
   function extractCandidateImageUrls(doc, baseUrl) {
     /** @type {string[]} */
     const urls = [];
@@ -85,26 +106,24 @@
         if (!src) continue;
         const abs = new URL(src, baseUrl).toString();
         if (!isLikelyRealPhotoUrl(abs)) continue;
-        urls.push(abs);
+        urls.push(toR2UrlIfPossible(abs));
         if (urls.length >= limit) return true;
       }
       return false;
     };
 
     // Prefer explicit city hero image (newer city template).
-    pickFromSelector(".city-hero-media img[src]", 4);
+    pickFromSelector(".city-hero-media img[src]", 40);
 
     // Older city pages: parallax/section images.
-    pickFromSelector(".parallax-image img[src]", 4);
-
-    // Additional: allow project/space images embedded on the city page.
-    pickFromSelector('img[src*="assets/images/projects/"], img[src*="assets/images/spaces/"]', 6);
+    pickFromSelector(".parallax-image img[src]", 60);
 
     // Fallback: any non-logo images in the main content.
-    pickFromSelector("main img[src], section img[src]", 8);
+    pickFromSelector("main img[src], section img[src]", 120);
 
     const uniq = uniqueCompact(urls);
     const r2Only = uniq.filter(isR2Url);
+    // If this city yields any R2-mapped URLs, only return those.
     return r2Only.length ? r2Only : uniq;
   }
 
@@ -155,30 +174,46 @@
       .map((img) => img.getAttribute("src") || "")
       .map((src) => new URL(src, window.location.href).toString())
       .filter(isLikelyRealPhotoUrl);
-    return uniqueCompact(urls).slice(0, MAX_URLS);
+    return uniqueCompact(urls).map(toR2UrlIfPossible).slice(0, MAX_URLS);
   }
 
-  function getDisplayImageEl(card) {
+  function getImagePair(card) {
     const container = card.querySelector(".project-list-image");
     if (!container) return null;
-    // Use the first image as the single display surface.
+
+    // Use the first existing image as layer A.
     const firstImg = container.querySelector("img");
     if (!firstImg) return null;
-    firstImg.style.position = "absolute";
-    firstImg.style.top = "0";
-    firstImg.style.left = "0";
-    firstImg.style.width = "100%";
-    firstImg.style.height = "100%";
-    firstImg.style.objectFit = "cover";
-    firstImg.style.transition = `opacity ${FADE_MS}ms ease`;
-    firstImg.style.opacity = "1";
+
+    // Ensure layer B exists (swap layer)
+    let swapImg = container.querySelector("img.cws-rotator-swap");
+    if (!swapImg) {
+      swapImg = document.createElement("img");
+      swapImg.className = "cws-rotator-swap";
+      swapImg.alt = firstImg.getAttribute("alt") || "";
+      container.appendChild(swapImg);
+    }
+
+    const styleLayer = (img, opacity) => {
+      img.style.position = "absolute";
+      img.style.top = "0";
+      img.style.left = "0";
+      img.style.width = "100%";
+      img.style.height = "100%";
+      img.style.objectFit = "cover";
+      img.style.transition = `opacity ${FADE_MS}ms ease`;
+      img.style.opacity = opacity;
+      img.style.willChange = "opacity";
+    };
+
+    styleLayer(firstImg, "1");
+    styleLayer(swapImg, "0");
 
     // Hide any other images already present in the markup to avoid stacking conflicts.
-    const rest = Array.from(container.querySelectorAll("img")).slice(1);
-    for (const img of rest) {
-      img.style.display = "none";
-    }
-    return firstImg;
+    const rest = Array.from(container.querySelectorAll("img")).filter((img) => img !== firstImg && img !== swapImg);
+    for (const img of rest) img.style.display = "none";
+
+    return { container, a: firstImg, b: swapImg };
   }
 
   function ensureUrlsPromise(card) {
@@ -226,28 +261,72 @@
   function getRotationState(card) {
     let st = rotationStateByCard.get(card);
     if (!st) {
-      st = { timer: null, idx: 0, active: false, urls: [] };
+      st = { timer: null, idx: 0, active: false, urls: [], token: 0, swapping: false, front: "a" };
       rotationStateByCard.set(card, st);
     }
     return st;
   }
 
-  function fadeSwap(img, nextSrc) {
-    img.style.opacity = "0";
-    window.setTimeout(() => {
-      img.src = nextSrc;
-      img.style.opacity = "1";
-    }, FADE_MS);
+  /** @type {Map<string, Promise<boolean>>} */
+  const preloadCache = new Map();
+
+  function preload(src) {
+    if (!src) return Promise.resolve(false);
+    const key = src;
+    const existing = preloadCache.get(key);
+    if (existing) return existing;
+    const p = new Promise((resolve) => {
+      const i = new Image();
+      i.onload = () => resolve(true);
+      i.onerror = () => resolve(false);
+      i.src = src;
+    });
+    preloadCache.set(key, p);
+    return p;
   }
 
-  function ensureInterval(img, state) {
+  async function crossfadeTo(pair, state, nextSrc) {
+    if (!pair) return false;
+    if (!nextSrc) return false;
+    if (!state.active) return false;
+    if (state.swapping) return false;
+    state.swapping = true;
+    const myToken = ++state.token;
+
+    const ok = await preload(nextSrc);
+    if (!ok || !state.active || myToken !== state.token) {
+      state.swapping = false;
+      return false;
+    }
+
+    const frontEl = state.front === "a" ? pair.a : pair.b;
+    const backEl = state.front === "a" ? pair.b : pair.a;
+
+    backEl.src = nextSrc;
+    backEl.style.opacity = "1";
+    frontEl.style.opacity = "0";
+
+    window.setTimeout(() => {
+      // If the card stopped or another swap began, don't flip state.
+      if (!state.active || myToken !== state.token) return;
+      state.front = state.front === "a" ? "b" : "a";
+      const newBack = state.front === "a" ? pair.b : pair.a;
+      newBack.style.opacity = "0";
+      state.swapping = false;
+    }, FADE_MS + 30);
+
+    return true;
+  }
+
+  function ensureInterval(pair, state) {
     if (state.timer) return;
     if (!state.urls || state.urls.length < 2) return;
     state.timer = window.setInterval(() => {
       if (!state.active) return;
       if (!state.urls || state.urls.length < 2) return;
+      if (state.swapping) return;
       state.idx = (state.idx + 1) % state.urls.length;
-      fadeSwap(img, state.urls[state.idx]);
+      crossfadeTo(pair, state, state.urls[state.idx]);
     }, ROTATE_EVERY_MS);
   }
 
@@ -256,13 +335,18 @@
     if (state.active) return;
     state.active = true;
 
-    const img = getDisplayImageEl(card);
-    if (!img) return;
+    const pair = getImagePair(card);
+    if (!pair) return;
 
-    const originalSrc = img.getAttribute("data-original-src") || img.src;
-    if (!img.getAttribute("data-original-src")) {
-      img.setAttribute("data-original-src", originalSrc);
+    const originalSrc = pair.a.getAttribute("data-original-src") || pair.a.src;
+    if (!pair.a.getAttribute("data-original-src")) {
+      pair.a.setAttribute("data-original-src", originalSrc);
     }
+    // Reset visual state at start
+    state.front = "a";
+    pair.a.style.opacity = "1";
+    pair.b.style.opacity = "0";
+    state.swapping = false;
 
     // Start quickly with existing card images (so hover feels instant),
     // then swap to city-page-derived images once fetched.
@@ -270,8 +354,8 @@
     if (fallbackUrls.length >= 2) {
       state.urls = fallbackUrls;
       state.idx = (Math.floor(Date.now() / 1000) + state.urls.length) % state.urls.length;
-      fadeSwap(img, state.urls[state.idx]);
-      ensureInterval(img, state);
+      crossfadeTo(pair, state, state.urls[state.idx]);
+      ensureInterval(pair, state);
       debugLog("started fallback rotation", { count: state.urls.length });
     }
 
@@ -282,8 +366,8 @@
 
       state.urls = urls;
       state.idx = (Math.floor(Date.now() / 1000) + state.urls.length) % state.urls.length;
-      fadeSwap(img, state.urls[state.idx]);
-      ensureInterval(img, state);
+      crossfadeTo(pair, state, state.urls[state.idx]);
+      ensureInterval(pair, state);
       debugLog("switched to city-page rotation", { count: state.urls.length });
     } catch (err) {
       debugLog("failed to load city-page images", err);
@@ -293,17 +377,22 @@
   function stopRotation(card) {
     const state = getRotationState(card);
     state.active = false;
+    state.token += 1;
+    state.swapping = false;
     if (state.timer) {
       window.clearInterval(state.timer);
       state.timer = null;
     }
 
-    const img = card.querySelector(".project-list-image img");
-    if (!img) return;
-    const originalSrc = img.getAttribute("data-original-src");
+    const pair = getImagePair(card);
+    if (!pair) return;
+    const originalSrc = pair.a.getAttribute("data-original-src");
     if (originalSrc) {
-      img.style.opacity = "1";
-      img.src = originalSrc;
+      pair.a.style.opacity = "1";
+      pair.b.style.opacity = "0";
+      pair.a.src = originalSrc;
+      pair.b.removeAttribute("src");
+      state.front = "a";
     }
   }
 
@@ -312,7 +401,7 @@
     debugLog("init", { cards: cards.length });
     for (const card of cards) {
       // Prime display image styling and hide any stacked images.
-      getDisplayImageEl(card);
+      getImagePair(card);
 
       // Use pointer events where available; keep mouse events as fallback.
       card.addEventListener("pointerenter", () => startRotation(card));
