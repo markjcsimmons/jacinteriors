@@ -354,64 +354,7 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
-    <script>
-        // Image carousel for regions - cycles through images automatically on hover
-        document.querySelectorAll('.project-list-item').forEach(item => {
-            const images = item.querySelectorAll('.region-img');
-            let currentIndex = 0;
-            let intervalId = null;
-
-            function showNextImage() {
-                images[currentIndex].classList.remove('active');
-                images[currentIndex].style.opacity = '0';
-                currentIndex = (currentIndex + 1) % images.length;
-                images[currentIndex].classList.add('active');
-                images[currentIndex].style.opacity = '1';
-            }
-
-            item.addEventListener('mouseenter', () => {
-                intervalId = setInterval(showNextImage, 2000); // 2 seconds
-            });
-
-            item.addEventListener('mouseleave', () => {
-                if (intervalId) {
-                    clearInterval(intervalId);
-                    intervalId = null;
-                }
-                // Reset to first image
-                images.forEach((img, idx) => {
-                    img.classList.remove('active');
-                    img.style.opacity = '0';
-                });
-                images[0].classList.add('active');
-                images[0].style.opacity = '1';
-                currentIndex = 0;
-            });
-
-            // Set up initial state
-            images.forEach((img, idx) => {
-                if (img.tagName === 'DIV') {
-                    // Already has inline styles
-                    if (idx !== 0) {
-                        img.style.opacity = '0';
-                    }
-                } else {
-                    img.style.position = 'absolute';
-                    img.style.top = '0';
-                    img.style.left = '0';
-                    img.style.width = '100%';
-                    img.style.height = '100%';
-                    img.style.objectFit = 'cover';
-                    img.style.transition = 'opacity 0.5s ease';
-                    if (idx === 0) {
-                        img.style.opacity = '1';
-                    } else {
-                        img.style.opacity = '0';
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="assets/js/cities-we-serve-hover-rotator.js?v=20260205-3"></script>
     
 </body>
 </html>
