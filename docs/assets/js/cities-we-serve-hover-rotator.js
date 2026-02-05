@@ -20,6 +20,15 @@
   const FETCH_CONCURRENCY = 4;
   const DEBUG = new URLSearchParams(window.location.search).has("debugCities");
 
+  const R2_BASE = (() => {
+    const base = (window.R2_IMAGE_BASE || "https://jacinteriorscdn.com").toString().replace(/\/+$/, "");
+    try {
+      return new URL(base);
+    } catch {
+      return null;
+    }
+  })();
+
   // Handy in case you want to confirm load in DevTools.
   window.__citiesWeServeHoverRotatorLoaded = true;
 
@@ -53,6 +62,18 @@
     return out;
   }
 
+  function isR2Url(url) {
+    if (!url) return false;
+    try {
+      const u = new URL(url, window.location.href);
+      if (R2_BASE && u.host === R2_BASE.host) return true;
+      // Fallback: handle hardcoded domain even if R2_BASE isn't set/parseable.
+      return u.host === "jacinteriorscdn.com";
+    } catch {
+      return false;
+    }
+  }
+
   function extractCandidateImageUrls(doc, baseUrl) {
     /** @type {string[]} */
     const urls = [];
@@ -71,15 +92,20 @@
     };
 
     // Prefer explicit city hero image (newer city template).
-    if (pickFromSelector(".city-hero-media img[src]", 3)) return uniqueCompact(urls);
+    pickFromSelector(".city-hero-media img[src]", 4);
 
     // Older city pages: parallax/section images.
-    if (pickFromSelector(".parallax-image img[src]", 3)) return uniqueCompact(urls);
+    pickFromSelector(".parallax-image img[src]", 4);
+
+    // Additional: allow project/space images embedded on the city page.
+    pickFromSelector('img[src*="assets/images/projects/"], img[src*="assets/images/spaces/"]', 6);
 
     // Fallback: any non-logo images in the main content.
-    pickFromSelector("main img[src], section img[src]", 5);
+    pickFromSelector("main img[src], section img[src]", 8);
 
-    return uniqueCompact(urls);
+    const uniq = uniqueCompact(urls);
+    const r2Only = uniq.filter(isR2Url);
+    return r2Only.length ? r2Only : uniq;
   }
 
   async function fetchCityPageImageUrls(href) {
@@ -173,13 +199,23 @@
 
       /** @type {string[]} */
       const flattened = [];
+      let sawR2 = false;
       for (const list of lists) {
         if (!list || !list.length) continue;
-        flattened.push(...list.slice(0, PER_CITY_MAX));
+        const r2InCity = list.filter(isR2Url);
+        const usable = r2InCity.length ? r2InCity : list;
+        if (r2InCity.length) sawR2 = true;
+        flattened.push(...usable.slice(0, PER_CITY_MAX));
         if (flattened.length >= MAX_URLS) break;
       }
 
-      const urls = uniqueCompact(flattened).slice(0, MAX_URLS);
+      let urls = uniqueCompact(flattened).slice(0, MAX_URLS);
+
+      // If any linked city yields R2 images, only rotate through R2 images (no local mixes).
+      if (sawR2) {
+        const r2Only = urls.filter(isR2Url);
+        if (r2Only.length) urls = r2Only;
+      }
       return urls.length ? urls : getFallbackUrlsFromExistingCardImages(card);
     })();
 
