@@ -1,38 +1,40 @@
 /**
- * Load Spaces and Projects page images from Cloudflare R2.
+ * Load Spaces, Projects, and Cities images from Cloudflare R2.
  *
- * Spaces – HTML local paths: assets/images/spaces/<space>/<filename>
- *   R2: spaces/<space>/<filename>
+ * Supported HTML local paths (relative or ../relative):
+ * - assets/images/spaces/<space>/<filename>   → {base}/spaces/<space>/<filename>
+ * - assets/images/projects/<project>/<filename> → {base}/projects/<project>/<filename>
+ * - assets/images/cities/<filename>           → {base}/cities/<filename>
  *
- * Projects – HTML local paths: assets/images/projects/<project>/<filename>
- *   R2: projects/<project>/<filename>
- *   e.g. assets/images/projects/22nd-street/22nd-street-1.jpg
- *        → https://jacinteriorscdn.com/projects/22nd-street/22nd-street-1.jpg
- *
- * If the direct path 404s (Spaces only), we try:
- *   spaces/<space>/<H1>/<filename>
- *
- * This avoids requiring any manifest.json (and avoids CORS fetch issues).
+ * Notes:
+ * - Safe to call multiple times; images are "wired" once via data-r2-wired.
+ * - Exposes a global `window.applyR2Images(root=document)` so SPA-like navigation can re-run it.
+ * - This avoids requiring any manifest.json (and avoids CORS fetch issues).
  */
 
 (function () {
-  const base = (window.R2_IMAGE_BASE || "").replace(/\/+$/, "");
   const PLACEHOLDER_SRC =
     "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
-  // Spaces and Projects
-  const selector =
-    'img[data-r2-local-src^="assets/images/spaces/"], img[src^="assets/images/spaces/"], ' +
-    'img[data-r2-local-src^="assets/images/projects/"], img[src^="assets/images/projects/"]';
-  const imgs = Array.from(document.querySelectorAll(selector));
-  if (!imgs.length) return;
+  function normalizeLocalSrc(localSrc) {
+    let s = (localSrc || "").trim();
+    // Convert absolute-path to relative-path for matching.
+    if (s.startsWith("/")) s = s.slice(1);
+    while (s.startsWith("../")) s = s.slice(3);
+    if (s.startsWith("./")) s = s.slice(2);
+    return s;
+  }
 
-  /** @returns {{ type: 'spaces'|'projects', key: string, name: string }|null} */
-  function parseLocalSrc(localSrc) {
-    const spaceM = localSrc.match(/^assets\/images\/spaces\/([^/]+)\/(.+)$/);
-    if (spaceM) return { type: "spaces", key: spaceM[1], name: spaceM[2] };
-    const projM = localSrc.match(/^assets\/images\/projects\/([^/]+)\/(.+)$/);
-    if (projM) return { type: "projects", key: projM[1], name: projM[2] };
+  /** @returns {{ type: 'spaces'|'projects'|'cities', key: string, name: string, normalizedSrc: string, fallbackSrc: string }|null} */
+  function parseLocalSrc(rawLocalSrc) {
+    const normalizedSrc = normalizeLocalSrc(rawLocalSrc);
+    const fallbackSrc = (rawLocalSrc || "").trim();
+    const spaceM = normalizedSrc.match(/^assets\/images\/spaces\/([^/]+)\/(.+)$/);
+    if (spaceM) return { type: "spaces", key: spaceM[1], name: spaceM[2], normalizedSrc, fallbackSrc };
+    const projM = normalizedSrc.match(/^assets\/images\/projects\/([^/]+)\/(.+)$/);
+    if (projM) return { type: "projects", key: projM[1], name: projM[2], normalizedSrc, fallbackSrc };
+    const cityM = normalizedSrc.match(/^assets\/images\/cities\/(.+)$/);
+    if (cityM) return { type: "cities", key: "", name: cityM[1], normalizedSrc, fallbackSrc };
     return null;
   }
 
@@ -81,133 +83,200 @@
     return `?v=${raw}`;
   }
 
-  // Group images by space or project
-  const bySpace = new Map();   // space -> [{ img, localSrc, originalName }]
-  const byProject = new Map(); // project -> [{ img, localSrc, originalName }]
-
-  imgs.forEach((img) => {
-    const localSrc =
-      img.getAttribute("data-r2-local-src") || img.getAttribute("src") || "";
-    const parsed = parseLocalSrc(localSrc);
-    if (!parsed) return;
-
-    // Avoid double-wiring
-    if (img.dataset.r2Wired === "1") return;
-    img.dataset.r2Wired = "1";
-
-    img.dataset.r2LocalSrc = localSrc;
-    if (!img.getAttribute("data-r2-local-src")) {
-      img.setAttribute("data-r2-local-src", localSrc);
-    }
-    img.dataset.r2OriginalName = parsed.name;
-    img.dataset.r2Managed = "1";
-    img.dataset.r2Final = "0";
-    img.dataset.r2Type = parsed.type;
-    img.dataset.r2Key = parsed.key;
-    if (parsed.type === "spaces") img.dataset.r2Space = parsed.key;
-
-    if (parsed.type === "spaces") {
-      if (!bySpace.has(parsed.key)) bySpace.set(parsed.key, []);
-      bySpace.get(parsed.key).push({ img, localSrc, originalName: parsed.name });
-    } else {
-      if (!byProject.has(parsed.key)) byProject.set(parsed.key, []);
-      byProject.get(parsed.key).push({ img, localSrc, originalName: parsed.name });
-    }
-
-    // If R2 is not configured, fall back to local.
-    if (!base) {
-      img.setAttribute("src", localSrc);
-      return;
-    }
-
-    img.setAttribute("src", PLACEHOLDER_SRC);
-  });
-
-  function setFinalSrc(img, url) {
-    if (!url) return;
-    // Only mark as final once we've successfully loaded.
-    // This prevents masonry from permanently hiding tiles while we're still iterating on mapping.
-    img.addEventListener(
-      "load",
-      () => {
-        img.dataset.r2Final = "1";
-      },
-      { once: true }
-    );
-    img.addEventListener(
-      "error",
-      () => {
-        const type = img.dataset.r2Type || "";
-        const key = img.dataset.r2Key || "";
-        const space = img.dataset.r2Space || "";
-        const name = img.dataset.r2TargetName || img.dataset.r2OriginalName || "";
-
-        // 1) Try extension/case variants first (spaces + projects)
-        const tried = new Set((img.dataset.r2TriedNames || "").split("|").filter(Boolean));
-        const variants = getAltNameVariants(name);
-        for (const v of variants) {
-          if (tried.has(v)) continue;
-          tried.add(name);
-          tried.add(v);
-          img.dataset.r2TriedNames = Array.from(tried).join("|");
-          img.dataset.r2TargetName = v;
-          const bust = getBustSuffix(img);
-          const altUrl = type && key ? `${base}/${type}/${key}/${encodeName(v)}${bust}` : "";
-          if (altUrl && img.getAttribute("src") !== altUrl) {
-            img.setAttribute("src", altUrl);
-            return;
-          }
-        }
-
-        // 2) Spaces only: optionally try one nested folder based on the page H1
-        // e.g. spaces/bedrooms/Bedrooms/bedrooms-1.jpg
-        const triedNested = img.dataset.r2TriedNested === "1";
-        const h1Text = (document.querySelector("h1")?.textContent || "").trim();
-        const nestedFolder = h1Text ? encodeName(h1Text) : "";
-        const nestedUrl =
-          space && name && nestedFolder ? `${base}/spaces/${space}/${nestedFolder}/${encodeName(name)}` : "";
-
-        if (!triedNested && nestedUrl && img.getAttribute("src") !== nestedUrl) {
-          img.dataset.r2TriedNested = "1";
-          img.setAttribute("src", nestedUrl);
-          return;
-        }
-
-        // Projects: no local fallback; mark final so masonry hides the tile
-        if (!space) {
-          img.dataset.r2Final = "1";
-          return;
-        }
-
-        // Spaces: fall back to local
-        const localSrc = img.dataset.r2LocalSrc;
-        if (localSrc) img.setAttribute("src", localSrc);
-      },
-      { once: true }
-    );
-    img.setAttribute("src", url);
+  function encodeName(name) {
+    // Encode spaces and special chars safely; keep slashes if any (shouldn't be).
+    return encodeURIComponent(name).replace(/%2F/g, "/");
   }
 
-  // Apply per space (direct mapping only)
-  if (!base) return;
-  bySpace.forEach((entries, space) => {
-    entries.forEach(({ img, originalName }) => {
+  /**
+   * Optional cache-busting suffix for R2 URLs.
+   * Usage:
+   *   <img ... data-r2-bust="20260123" />
+   * → appends "?v=20260123"
+   */
+  function getBustSuffix(img) {
+    const raw = (img.getAttribute("data-r2-bust") || "").trim();
+    if (!raw) return "";
+    if (raw.startsWith("?") || raw.startsWith("&")) return raw;
+    return `?v=${raw}`;
+  }
+
+  function getBase() {
+    return (window.R2_IMAGE_BASE || "").toString().replace(/\/+$/, "");
+  }
+
+  function selectImages(root) {
+    const selector =
+      'img[data-r2-local-src*="assets/images/spaces/"], img[src*="assets/images/spaces/"], ' +
+      'img[data-r2-local-src*="assets/images/projects/"], img[src*="assets/images/projects/"], ' +
+      'img[data-r2-local-src*="assets/images/cities/"], img[src*="assets/images/cities/"]';
+    return Array.from((root || document).querySelectorAll(selector));
+  }
+
+  // Group images by space or project, plus cities as a flat list.
+  const bySpace = new Map(); // space -> [{ img, originalName }]
+  const byProject = new Map(); // project -> [{ img, originalName }]
+  const cityImgs = []; // [{ img, originalName }]
+
+  function wireImages(root) {
+    const base = getBase();
+    const imgs = selectImages(root);
+    if (!imgs.length) return;
+
+    imgs.forEach((img) => {
+      const rawLocalSrc = img.getAttribute("data-r2-local-src") || img.getAttribute("src") || "";
+      const parsed = parseLocalSrc(rawLocalSrc);
+      if (!parsed) return;
+
+      // Avoid double-wiring
+      if (img.dataset.r2Wired === "1") return;
+      img.dataset.r2Wired = "1";
+
+      img.dataset.r2LocalSrc = parsed.fallbackSrc;
+      if (!img.getAttribute("data-r2-local-src")) {
+        img.setAttribute("data-r2-local-src", parsed.fallbackSrc);
+      }
+      img.dataset.r2OriginalName = parsed.name;
+      img.dataset.r2Managed = "1";
+      img.dataset.r2Final = "0";
+      img.dataset.r2Type = parsed.type;
+      img.dataset.r2Key = parsed.key;
+      if (parsed.type === "spaces") img.dataset.r2Space = parsed.key;
+
+      if (parsed.type === "spaces") {
+        if (!bySpace.has(parsed.key)) bySpace.set(parsed.key, []);
+        bySpace.get(parsed.key).push({ img, originalName: parsed.name });
+      } else if (parsed.type === "projects") {
+        if (!byProject.has(parsed.key)) byProject.set(parsed.key, []);
+        byProject.get(parsed.key).push({ img, originalName: parsed.name });
+      } else {
+        cityImgs.push({ img, originalName: parsed.name });
+      }
+
+      // If R2 is not configured, fall back to local.
+      if (!base) {
+        img.setAttribute("src", parsed.fallbackSrc);
+        return;
+      }
+
+      img.setAttribute("src", PLACEHOLDER_SRC);
+    });
+
+    function setFinalSrc(img, url) {
+      if (!url) return;
+      const baseNow = getBase();
+
+      img.addEventListener(
+        "load",
+        () => {
+          img.dataset.r2Final = "1";
+        },
+        { once: true }
+      );
+
+      img.addEventListener(
+        "error",
+        () => {
+          const type = img.dataset.r2Type || "";
+          const key = img.dataset.r2Key || "";
+          const name = img.dataset.r2TargetName || img.dataset.r2OriginalName || "";
+
+          // 1) Try extension/case variants first (spaces + projects + cities)
+          const tried = new Set((img.dataset.r2TriedNames || "").split("|").filter(Boolean));
+          const variants = getAltNameVariants(name);
+          for (const v of variants) {
+            if (tried.has(v)) continue;
+            tried.add(name);
+            tried.add(v);
+            img.dataset.r2TriedNames = Array.from(tried).join("|");
+            img.dataset.r2TargetName = v;
+            const bust = getBustSuffix(img);
+
+            let altUrl = "";
+            if (type === "cities") altUrl = `${baseNow}/cities/${encodeName(v)}${bust}`;
+            else altUrl = type && key ? `${baseNow}/${type}/${key}/${encodeName(v)}${bust}` : "";
+
+            if (altUrl && img.getAttribute("src") !== altUrl) {
+              img.setAttribute("src", altUrl);
+              return;
+            }
+          }
+
+          // 2) Spaces only: optionally try one nested folder based on the page H1
+          if (type === "spaces") {
+            const space = img.dataset.r2Space || "";
+            const triedNested = img.dataset.r2TriedNested === "1";
+            const h1Text = (document.querySelector("h1")?.textContent || "").trim();
+            const nestedFolder = h1Text ? encodeName(h1Text) : "";
+            const nestedUrl =
+              space && name && nestedFolder
+                ? `${baseNow}/spaces/${space}/${nestedFolder}/${encodeName(name)}${getBustSuffix(img)}`
+                : "";
+
+            if (!triedNested && nestedUrl && img.getAttribute("src") !== nestedUrl) {
+              img.dataset.r2TriedNested = "1";
+              img.setAttribute("src", nestedUrl);
+              return;
+            }
+          }
+
+          // Projects: no local fallback; mark final so masonry hides the tile.
+          if (type === "projects") {
+            img.dataset.r2Final = "1";
+            return;
+          }
+
+          // Cities + Spaces: fall back to local.
+          const localSrc = img.dataset.r2LocalSrc;
+          if (localSrc) img.setAttribute("src", localSrc);
+        },
+        { once: true }
+      );
+
+      img.setAttribute("src", url);
+    }
+
+    if (!base) return;
+
+    // Apply per space
+    bySpace.forEach((entries, space) => {
+      entries.forEach(({ img, originalName }) => {
+        img.dataset.r2TargetName = originalName;
+        const url = `${base}/spaces/${space}/${encodeName(originalName)}${getBustSuffix(img)}`;
+        setFinalSrc(img, url);
+      });
+    });
+
+    // Apply per project
+    byProject.forEach((entries, project) => {
+      entries.forEach(({ img, originalName }) => {
+        img.dataset.r2TargetName = originalName;
+        const url = `${base}/projects/${project}/${encodeName(originalName)}${getBustSuffix(img)}`;
+        setFinalSrc(img, url);
+      });
+    });
+
+    // Apply cities
+    cityImgs.forEach(({ img, originalName }) => {
       img.dataset.r2TargetName = originalName;
-      const url = `${base}/spaces/${space}/${encodeName(originalName)}${getBustSuffix(img)}`;
+      const url = `${base}/cities/${encodeName(originalName)}${getBustSuffix(img)}`;
       setFinalSrc(img, url);
     });
-  });
 
-  // Apply per project: R2 path projects/<project>/<filename>
-  byProject.forEach((entries, project) => {
-    entries.forEach(({ img, originalName }) => {
-      img.dataset.r2TargetName = originalName;
-      const url = `${base}/projects/${project}/${encodeName(originalName)}${getBustSuffix(img)}`;
-      setFinalSrc(img, url);
-    });
-  });
+    // Tell masonry to re-wire and relayout (if it's listening)
+    document.dispatchEvent(new CustomEvent("spaces:gallery-updated"));
+  }
 
-  // Tell masonry to re-wire and relayout (if it's listening)
-  document.dispatchEvent(new CustomEvent("spaces:gallery-updated"));
+  // Expose globally for SPA / dynamic content updates.
+  window.applyR2Images = function (root) {
+    // Clear per-call containers to avoid growing across calls.
+    bySpace.clear();
+    byProject.clear();
+    cityImgs.length = 0;
+    wireImages(root || document);
+  };
+
+  // Run once on initial load.
+  window.applyR2Images(document);
 })();
 

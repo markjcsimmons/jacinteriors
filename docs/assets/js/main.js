@@ -4,6 +4,87 @@
 // SPA-LIKE NAVIGATION (No page reload for navbar)
 // ===================================
 
+// ===================================
+// GLOBAL IMAGE PERFORMANCE HELPERS
+// ===================================
+(() => {
+    const R2_DEFAULT = 'https://jacinteriorscdn.com';
+
+    function getAssetsJsBaseUrl() {
+        const scripts = Array.from(document.querySelectorAll('script[src]'));
+        const mainScript = scripts.find(s => /\/assets\/js\/main\.js(\?|#|$)/.test(s.src));
+        if (mainScript) {
+            // .../assets/js/main.js -> .../assets/js/
+            return new URL('.', mainScript.src).toString();
+        }
+        // Best-effort fallback: site-root assets/js
+        return new URL('/jacinteriors/assets/js/', window.location.origin).toString();
+    }
+
+    function loadScriptOnce(url) {
+        const existing = Array.from(document.querySelectorAll('script[src]')).some(s => s.src === url);
+        if (existing) return Promise.resolve();
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = url;
+            s.defer = true;
+            s.dataset.dynamic = '1';
+            s.onload = () => resolve();
+            s.onerror = () => reject(new Error(`Failed to load ${url}`));
+            document.head.appendChild(s);
+        });
+    }
+
+    async function ensureR2Images() {
+        if (!window.R2_IMAGE_BASE) window.R2_IMAGE_BASE = R2_DEFAULT;
+        const base = getAssetsJsBaseUrl();
+        const r2ImagesUrl = new URL('r2-images.js', base).toString();
+        try {
+            await loadScriptOnce(r2ImagesUrl);
+        } catch (e) {
+            // Ignore; fall back to local images.
+        }
+        if (typeof window.applyR2Images === 'function') {
+            window.applyR2Images(document);
+        }
+    }
+
+    function optimizeImages(root = document) {
+        const imgs = Array.from(root.querySelectorAll('img'));
+        if (!imgs.length) return;
+
+        // Pick a "hero" image: first non-logo image near the top of the page.
+        const hero = imgs.find(img => {
+            const src = (img.getAttribute('src') || '').toLowerCase();
+            if (!src) return false;
+            if (src.includes('logo')) return false;
+            const rect = img.getBoundingClientRect();
+            return rect.top >= -50 && rect.top <= 700;
+        });
+
+        imgs.forEach(img => {
+            if (!img.getAttribute('decoding')) img.setAttribute('decoding', 'async');
+            // Leave authors free to override explicitly.
+            if (!img.getAttribute('loading')) img.setAttribute('loading', 'lazy');
+        });
+
+        if (hero) {
+            hero.setAttribute('loading', 'eager');
+            hero.setAttribute('fetchpriority', 'high');
+            hero.setAttribute('decoding', 'async');
+        }
+    }
+
+    // Expose for SPA reinit hook.
+    window.__optimizeImages = optimizeImages;
+    window.__ensureR2Images = ensureR2Images;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        ensureR2Images();
+        optimizeImages(document);
+    });
+})();
+
 const SPANav = {
     contentSelector: null,
     isNavigating: false,
@@ -265,6 +346,16 @@ const SPANav = {
         
         // Trigger resize to recalculate layouts
         window.dispatchEvent(new Event('resize'));
+
+        // Re-apply image optimizations and CDN rewriting for newly injected content (if SPA is enabled).
+        if (typeof window.__ensureR2Images === 'function') {
+            window.__ensureR2Images();
+        } else if (typeof window.applyR2Images === 'function') {
+            window.applyR2Images(document);
+        }
+        if (typeof window.__optimizeImages === 'function') {
+            window.__optimizeImages(document);
+        }
     },
     
     sleep(ms) {
