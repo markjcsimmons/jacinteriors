@@ -18,6 +18,7 @@
   const MAX_URLS = 80;
   const PER_CITY_MAX = 12;
   const FETCH_CONCURRENCY = 4;
+  const PRELOAD_AHEAD = 4;
   const DEBUG = new URLSearchParams(window.location.search).has("debugCities");
 
   const R2_BASE = (() => {
@@ -78,6 +79,34 @@
     return encodeURIComponent(name).replace(/%2F/g, "/");
   }
 
+  function expandProjectSequence(url, max = 16) {
+    // https://.../projects/<folder>/<stem>-<n>.jpg  -> expand in same folder
+    try {
+      const u = new URL(url, window.location.href);
+      const m = u.pathname.match(/^\/projects\/([^/]+)\/(.+)-(\d+)\.(jpe?g|png|webp)$/i);
+      if (!m) return [url];
+      const folder = m[1];
+      const stem = m[2];
+      const n = Number(m[3]);
+      const ext = m[4];
+      const base = `${u.origin}/projects/${folder}/`;
+      const out = [];
+      for (let i = 1; i <= max; i += 1) {
+        out.push(`${base}${encodeName(`${stem}-${i}.${ext}`)}`);
+      }
+      // Keep original near the front
+      if (Number.isFinite(n) && n >= 1 && n <= max) {
+        const originalIdx = n - 1;
+        const originalUrl = out[originalIdx];
+        out.splice(originalIdx, 1);
+        out.unshift(originalUrl);
+      }
+      return out;
+    } catch {
+      return [url];
+    }
+  }
+
   function toR2UrlIfPossible(absUrl) {
     if (!absUrl) return absUrl;
     if (isR2Url(absUrl)) return absUrl;
@@ -124,7 +153,14 @@
     const uniq = uniqueCompact(urls);
     const r2Only = uniq.filter(isR2Url);
     // If this city yields any R2-mapped URLs, only return those.
-    return r2Only.length ? r2Only : uniq;
+    const baseList = r2Only.length ? r2Only : uniq;
+
+    // If we only have 1 image for this city, try to expand a projects/<...>/<...>-N.ext sequence.
+    if (baseList.length === 1 && isR2Url(baseList[0]) && baseList[0].includes("/projects/")) {
+      return uniqueCompact(expandProjectSequence(baseList[0], 16));
+    }
+
+    return baseList;
   }
 
   async function fetchCityPageImageUrls(href) {
@@ -157,6 +193,19 @@
     const workers = Array.from({ length: Math.min(limit, items.length) }, () => worker());
     await Promise.all(workers);
     return results;
+  }
+
+  async function validateUrls(urls, limit = MAX_URLS) {
+    const sliced = urls.slice(0, limit);
+    const results = await mapLimit(sliced, 6, async (u) => {
+      try {
+        const ok = await preload(u);
+        return ok ? u : null;
+      } catch {
+        return null;
+      }
+    });
+    return results.filter(Boolean);
   }
 
   function getCityLinksForCard(card) {
@@ -251,7 +300,21 @@
         const r2Only = urls.filter(isR2Url);
         if (r2Only.length) urls = r2Only;
       }
-      return urls.length ? urls : getFallbackUrlsFromExistingCardImages(card);
+
+      // Validate URLs so we don't stall on missing images.
+      let validated = await validateUrls(urls, MAX_URLS);
+
+      // If we ended up with <2 images, try expanding a project sequence (common on city pages).
+      if (validated.length < 2) {
+        const firstProject = urls.find((u) => typeof u === "string" && u.includes("/projects/") && isR2Url(u));
+        if (firstProject) {
+          const expanded = uniqueCompact(expandProjectSequence(firstProject, 16));
+          const expandedValidated = await validateUrls(expanded, 16);
+          validated = uniqueCompact([...validated, ...expandedValidated]).slice(0, MAX_URLS);
+        }
+      }
+
+      return validated.length ? validated : getFallbackUrlsFromExistingCardImages(card);
     })();
 
     urlsPromiseByCard.set(card, promise);
@@ -318,6 +381,14 @@
     return true;
   }
 
+  function preloadAhead(state) {
+    if (!state.urls || state.urls.length < 2) return;
+    for (let i = 1; i <= PRELOAD_AHEAD; i += 1) {
+      const idx = (state.idx + i) % state.urls.length;
+      preload(state.urls[idx]);
+    }
+  }
+
   function ensureInterval(pair, state) {
     if (state.timer) return;
     if (!state.urls || state.urls.length < 2) return;
@@ -327,6 +398,7 @@
       if (state.swapping) return;
       state.idx = (state.idx + 1) % state.urls.length;
       crossfadeTo(pair, state, state.urls[state.idx]);
+      preloadAhead(state);
     }, ROTATE_EVERY_MS);
   }
 
@@ -355,6 +427,7 @@
       state.urls = fallbackUrls;
       state.idx = (Math.floor(Date.now() / 1000) + state.urls.length) % state.urls.length;
       crossfadeTo(pair, state, state.urls[state.idx]);
+      preloadAhead(state);
       ensureInterval(pair, state);
       debugLog("started fallback rotation", { count: state.urls.length });
     }
@@ -367,6 +440,7 @@
       state.urls = urls;
       state.idx = (Math.floor(Date.now() / 1000) + state.urls.length) % state.urls.length;
       crossfadeTo(pair, state, state.urls[state.idx]);
+      preloadAhead(state);
       ensureInterval(pair, state);
       debugLog("switched to city-page rotation", { count: state.urls.length });
     } catch (err) {
