@@ -179,7 +179,43 @@
     if (!res.ok) throw new Error(`Failed to fetch ${pageUrl} (${res.status})`);
     const html = await res.text();
     const doc = new DOMParser().parseFromString(html, "text/html");
-    return extractCandidateImageUrls(doc, pageUrl);
+    const cityUrls = extractCandidateImageUrls(doc, pageUrl);
+
+    // Many city pages only surface 1 "featured" image in markup. If the city page links
+    // to a featured project, pull a bigger set of images from that project page.
+    const projectHrefEl =
+      doc.querySelector('a[href^="../projects/"]') ||
+      doc.querySelector('a[href^="projects/"]') ||
+      doc.querySelector('a[href*="/projects/"]');
+
+    const projectHrefRaw = (projectHrefEl && projectHrefEl.getAttribute("href")) || "";
+    if (!projectHrefRaw) return cityUrls;
+
+    try {
+      const projectUrl = new URL(projectHrefRaw, pageUrl);
+      const pr = await fetch(projectUrl.toString(), { credentials: "same-origin" });
+      if (!pr.ok) return cityUrls;
+      const phtml = await pr.text();
+      const pdoc = new DOMParser().parseFromString(phtml, "text/html");
+
+      /** @type {string[]} */
+      const projectUrls = [];
+      // Prefer R2-managed images if present.
+      pdoc.querySelectorAll("img").forEach((img) => {
+        const localSrc = (img.getAttribute("data-r2-local-src") || "").trim();
+        const src = localSrc || (img.getAttribute("src") || "").trim();
+        if (!src) return;
+        const abs = localSrc ? new URL(src, window.location.href).toString() : new URL(src, projectUrl).toString();
+        if (!isLikelyRealPhotoUrl(abs)) return;
+        projectUrls.push(toR2UrlIfPossible(abs));
+      });
+
+      // Keep the project set reasonably sized per city.
+      const combined = uniqueCompact([...cityUrls, ...projectUrls]).slice(0, MAX_URLS);
+      return combined;
+    } catch {
+      return cityUrls;
+    }
   }
 
   async function mapLimit(items, limit, mapper) {
@@ -334,7 +370,9 @@
         }
       }
 
-      return validated.length ? validated : getFallbackUrlsFromExistingCardImages(card);
+      // If still <2, disable rotation (static card) by falling back to existing card image(s).
+      // This prevents "broken" carousels on regions whose linked pages don't expose usable images.
+      return validated.length >= 2 ? validated : getFallbackUrlsFromExistingCardImages(card);
     })();
 
     urlsPromiseByCard.set(card, promise);
