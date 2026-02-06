@@ -220,15 +220,16 @@
             }
           }
 
-          // Projects: no local fallback; mark final so masonry hides the tile.
-          if (type === "projects") {
-            img.dataset.r2Final = "1";
+          // Fall back to local for all types (projects/spaces/cities).
+          // This prevents blank tiles when an asset is missing from R2/CDN but present locally.
+          const localSrc = img.dataset.r2LocalSrc;
+          if (localSrc) {
+            img.setAttribute("src", localSrc);
             return;
           }
 
-          // Cities + Spaces: fall back to local.
-          const localSrc = img.dataset.r2LocalSrc;
-          if (localSrc) img.setAttribute("src", localSrc);
+          // If we have nothing to fall back to, mark as final so grids can handle it.
+          img.dataset.r2Final = "1";
         },
         { once: true }
       );
