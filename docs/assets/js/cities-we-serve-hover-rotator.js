@@ -13,7 +13,7 @@
   /** @type {WeakMap<Element, {timer: number | null, idx: number, active: boolean, urls: string[]}>} */
   const rotationStateByCard = new WeakMap();
 
-  const ROTATE_EVERY_MS = 800;
+  const ROTATE_EVERY_MS = 1600;
   const FADE_MS = 260;
   const MAX_URLS = 80;
   const PER_CITY_MAX = 12;
