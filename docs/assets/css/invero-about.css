@@ -48,15 +48,17 @@ body.invero-about h4 {
 }
 
 body.invero-about h1 {
+  /* Match Home hero typography */
   font-size: clamp(3.25rem, 6vw, 5rem);
-  line-height: 1.05;
-  letter-spacing: -3px;
+  line-height: 1.1em;
+  letter-spacing: -4px;
   font-weight: 500;
   margin-bottom: 0;
 }
 
 body.invero-about h2 {
-  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  /* Match Home section headings */
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
   line-height: 1.1;
   margin-bottom: 1.25rem;
 }
@@ -89,15 +91,16 @@ body.invero-about .kicker {
 
 /* Hero: image left, copy right */
 body.invero-about .about-hero-split {
-  padding: 3.25rem 0 4.25rem;
+  /* Match Home top-headline spacing */
+  padding: 2rem 0 2rem;
 }
 
 body.invero-about .about-hero-split-grid {
   display: grid;
   /* Prevent upscaling the (portrait) image too much */
   grid-template-columns: minmax(280px, 680px) 1fr;
-  gap: 3.25rem;
-  align-items: center;
+  gap: 5rem;
+  align-items: end;
 }
 
 body.invero-about .about-hero-media {
@@ -125,7 +128,8 @@ body.invero-about .about-hero-copy .text-link {
 
 /* How we work */
 body.invero-about .how-we-work {
-  padding: 4.75rem 0 6rem;
+  /* Match Home section spacing */
+  padding: 120px 0;
   border-top: 1px solid #e4e4e4;
 }
 
