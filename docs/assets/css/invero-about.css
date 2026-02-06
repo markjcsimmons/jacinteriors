@@ -87,50 +87,125 @@ body.invero-about .kicker {
   margin-bottom: 1rem;
 }
 
-/* Top headline */
-body.invero-about .top-headline-section {
-  /* Match Home page spacing under navbar */
-  padding: 2rem 0 2rem;
+/* Hero: image left, copy right */
+body.invero-about .about-hero-split {
+  padding: 3.25rem 0 4.25rem;
 }
 
-body.invero-about .top-headline-grid {
+body.invero-about .about-hero-split-grid {
   display: grid;
-  grid-template-columns: 1.4fr 0.6fr;
-  gap: 5rem;
-  align-items: end;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 3.25rem;
+  align-items: start;
 }
 
-/* Hero image (parallax) */
-body.invero-about .hero-image-section {
-  padding: 0 2rem 0;
-  max-width: 1320px;
-  margin: 0 auto;
-}
-
-body.invero-about .hero-img-wrapper {
-  width: 100%;
-  /* Portrait-friendly: show full image without cropping */
-  height: auto;
-  max-height: 82vh;
-  overflow: visible;
-  position: relative;
-  border-radius: 4px;
+body.invero-about .about-hero-media {
+  border-radius: 8px;
+  overflow: hidden;
   background: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.10);
   line-height: 0;
 }
 
-body.invero-about .hero-img-wrapper img {
+body.invero-about .about-hero-media img {
   display: block;
-  width: auto;
-  height: 82vh;
-  max-width: 100%;
-  max-height: 82vh;
-  object-fit: contain;
-  object-position: center center;
-  border-radius: 4px;
+  width: 100%;
+  height: auto;
+}
+
+body.invero-about .about-hero-copy .text-link {
+  display: inline-block;
+  margin-top: 0.35rem;
+  text-decoration: underline;
+  font-weight: 650;
+}
+
+/* How we work */
+body.invero-about .how-we-work {
+  padding: 4.75rem 0 6rem;
+  border-top: 1px solid #e4e4e4;
+}
+
+body.invero-about .how-we-work-header {
+  max-width: 70ch;
+}
+
+body.invero-about .how-we-work-subhead {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  letter-spacing: -0.2px;
+  font-weight: 550;
+  color: #555555;
+}
+
+body.invero-about .how-stack {
+  position: relative;
+  max-width: 980px;
+  margin-top: 2.5rem;
+  height: 420px;
+}
+
+body.invero-about .how-card {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 1.7rem 1.7rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+  transform: translateY(calc(var(--i) * 22px));
+  z-index: calc(10 - var(--i));
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+body.invero-about .how-card-top {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+body.invero-about .how-card-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: #222a26;
+  opacity: 0.75;
+}
+
+body.invero-about .how-card h3 {
+  margin: 0;
+}
+
+body.invero-about .how-card p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #555555;
+  letter-spacing: -0.2px;
+  font-weight: 550;
+}
+
+/* "Dynamic" stacked behavior: spread slightly on hover/focus */
+body.invero-about .how-stack:hover .how-card,
+body.invero-about .how-stack:focus-within .how-card {
+  transform: translateY(calc(var(--i) * 44px));
+}
+
+body.invero-about .how-card:hover,
+body.invero-about .how-card:focus-within {
+  transform: translateY(calc(var(--i) * 44px - 6px));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.invero-about .how-card {
+    transition: none;
+  }
 }
 
 /* Story (sticky narrative) */
@@ -501,28 +576,32 @@ body.invero-about .fullwidth-image-section img {
 
 /* Responsive */
 @media (max-width: 900px) {
-  body.invero-about .top-headline-grid {
+  body.invero-about .about-hero-split {
+    padding: 2.5rem 0 3.25rem;
+  }
+
+  body.invero-about .about-hero-split-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.75rem;
   }
 
-  body.invero-about .sticky-grid {
-    grid-template-columns: 1fr;
+  body.invero-about .how-we-work {
+    padding: 3.75rem 0 4.75rem;
   }
 
-  body.invero-about .sticky-left {
-    position: static;
-    margin-bottom: 3rem;
-  }
-
-  body.invero-about .hero-img-wrapper {
-    max-height: none;
-  }
-
-  body.invero-about .hero-img-wrapper img {
-    width: 100%;
+  body.invero-about .how-stack {
     height: auto;
-    max-height: none;
+  }
+
+  body.invero-about .how-card {
+    position: static;
+    transform: none;
+    margin-bottom: 1rem;
+  }
+
+  body.invero-about .how-stack:hover .how-card,
+  body.invero-about .how-stack:focus-within .how-card {
+    transform: none;
   }
 
   body.invero-about .values-section .values-grid {

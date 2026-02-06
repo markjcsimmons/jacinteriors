@@ -13,155 +13,60 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="assets/js/load-navbar.js?v=20260204-4" defer></script>
-    <script src="assets/js/reviews-data.js?v=20260131-1" defer></script>
-    <script src="assets/js/reviews-carousel.js?v=20260202-1" defer></script>
 </head>
 <body class="invero-about">
     
     
 
-    <!-- Top Headline (Home-style) -->
-    <section class="top-headline-section">
-        <div class="container">
-            <div class="top-headline-grid">
-                <div>
-                    <span class="kicker">About Us</span>
-                    <h1>Who we are.</h1>
-                </div>
-                <div>
-                <p>A full-service interior design studio with the vision and organizational skills to make beautiful transformations happen.</p>
-                </div>
+    <!-- Hero: image left, story right -->
+    <section class="about-hero-split">
+        <div class="container about-hero-split-grid">
+            <div class="about-hero-media">
+                <img src="assets/images/team-photo-20260206.png" alt="Andrea Putman and Timothy Mersman - JAC Interiors" loading="eager" decoding="async" fetchpriority="high">
             </div>
-        </div>
-    </section>
-
-    <!-- Hero Image (Single team image) -->
-    <div class="hero-image-section">
-        <div class="hero-img-wrapper">
-                    <img src="assets/images/team-photo-20260206.png" alt="Andrea Putman and Timothy Mersman - JAC Interiors" loading="eager" decoding="async" fetchpriority="high">
-        </div>
-    </div>
-
-    <!-- Story (Sticky narrative like Home) -->
-    <section class="story-section">
-        <div class="container sticky-grid">
-            <div class="sticky-left">
+            <div class="about-hero-copy">
                 <span class="kicker">Our Story</span>
-                <h2>Design leadership with taste, rigor, and heart.</h2>
+                <h1>Design leadership with taste, rigor, and heart.</h1>
                 <p>JAC Interiors was founded in 2012 and is owned and managed by designers Andrea Putman and Timothy Mersman.</p>
                 <p>We collaborate closely with you—never forcing a “house style”—so your home reflects who you are, how you live, and what you value.</p>
-                <a href="contact.html?intent=call#contactForm" class="text-link" style="text-decoration: underline; font-weight: 600;">Book a call →</a>
-            </div>
-
-            <div class="process-list">
-                <div class="process-item">
-                    <div class="process-item-header">
-                        <span class="process-num">01</span>
-                        <h3>Full-service, start to finish</h3>
-                    </div>
-                    <p>From concept through procurement and installation, our process is structured, organized, and built to make transformations feel seamless.</p>
-                </div>
-
-                <div class="process-item">
-                    <div class="process-item-header">
-                        <span class="process-num">02</span>
-                        <h3>Los Angeles + Florida</h3>
-                    </div>
-                    <p>Serving clients across Los Angeles and Florida, we bring a refined, timeless aesthetic to both residential and commercial projects.</p>
-                </div>
-
-                <div class="process-item">
-                    <div class="process-item-header">
-                        <span class="process-num">03</span>
-                        <h3>Built around you</h3>
-                    </div>
-                    <p>We listen, propose, iterate, and refine—combining your vision with our creativity and trusted vendor network to deliver a true transformation.</p>
-                </div>
-            </div>
-
-            <div class="story-bottom-cta">
-                <a href="#our-approach" class="text-link">Explore our process →</a>
+                <a href="contact.html?intent=call#contactForm" class="text-link">Book a call →</a>
             </div>
         </div>
     </section>
 
-    <!-- Values (Home-style bordered grid) -->
-    <section class="values-section" id="our-approach">
+    <!-- How we work -->
+    <section class="how-we-work">
         <div class="container">
-            <div>
-                <span class="kicker">Our Approach</span>
-                <h2>What makes us different.</h2>
-            </div>
-            
-            <div class="values-grid">
-                <div class="service-card">
-                    <h3>Intentional Design</h3>
-                    <p>We believe every element in a space should serve a purpose — whether it's to inspire, to comfort, or to function beautifully.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Collaboration First</h3>
-                    <p>We see every project as a partnership. By listening closely and sharing ideas openly, we turn your goals into reality.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Timeless Aesthetics</h3>
-                    <p>By blending classic elements with modern sensibility, we create interiors that remain stylish, functional, and meaningful.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Meticulous Execution</h3>
-                    <p>Our project management ensures details are right. We work with trusted vendors and skilled craftsmen to bring your vision to life.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Transparent Pricing</h3>
-                    <p>We obtain bids from up to three trusted vendors for every project element, so you get the best value without compromise.</p>
-                </div>
-
-                <div class="service-card">
-                    <h3>Reliable Timelines</h3>
-                    <p>We do our best to stick to schedules and keep you informed at every step. Your time matters, and we respect it.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Carousel (replaces stats) -->
-    <section class="reviews-section">
-        <div class="container">
-            <div class="reviews-header">
-                <h2>What our clients say.</h2>
+            <div class="how-we-work-header">
+                <span class="kicker">How we work</span>
+                <h2>A clear process, tailored to you.</h2>
+                <p class="how-we-work-subhead">Placeholder copy: A short overview of what it’s like to collaborate with us—structure, clarity, and calm from start to finish.</p>
             </div>
 
-            <div class="reviews-shell" data-reviews-carousel="1">
-                <div class="reviews-trust-row" aria-label="Ratings">
-                    <span class="trust-pill"><span class="stars">★★★★★</span><span>4.9 Google</span></span>
-                    <span class="trust-pill"><span class="stars">★★★★★</span><span>4.9 Yelp</span></span>
-                    <span class="trust-pill"><span class="stars">★★★★★</span><span>5.0 Houzz</span></span>
-                    <span class="trust-pill"><span class="trophy">🏆</span><span>20x Best of Houzz</span></span>
-                </div>
-                <div class="reviews-carousel">
-                    <button class="reviews-arrow prev" type="button" aria-label="Previous review">‹</button>
+            <div class="how-stack" aria-label="How we work cards">
+                <article class="how-card" style="--i: 0;">
+                    <div class="how-card-top">
+                        <span class="how-card-num">01</span>
+                        <h3>Discover</h3>
+                    </div>
+                    <p>Placeholder copy: We align on goals, scope, timeline, and budget. We listen closely to how you live—and what you want your space to feel like.</p>
+                </article>
 
-                    <div class="reviews-slides" aria-live="polite"></div>
+                <article class="how-card" style="--i: 1;">
+                    <div class="how-card-top">
+                        <span class="how-card-num">02</span>
+                        <h3>Design</h3>
+                    </div>
+                    <p>Placeholder copy: We develop a cohesive concept, layouts, and selections. We refine with you, then document everything so decisions feel easy.</p>
+                </article>
 
-                    <button class="reviews-arrow next" type="button" aria-label="Next review">›</button>
-                </div>
-
-                <div class="reviews-dots" aria-label="Review navigation"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <span class="section-label">Let's Work Together</span>
-                <h2>Ready to Transform Your Space?</h2>
-                <p>Whether you're starting a new project or need design guidance, the JAC Interiors team is here to help bring your vision to life.</p>
-                <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+                <article class="how-card" style="--i: 2;">
+                    <div class="how-card-top">
+                        <span class="how-card-num">03</span>
+                        <h3>Deliver</h3>
+                    </div>
+                    <p>Placeholder copy: We manage ordering, coordination, and installation. You get a finished space that’s beautiful, functional, and feels like you.</p>
+                </article>
             </div>
         </div>
     </section>
