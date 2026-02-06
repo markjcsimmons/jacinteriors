@@ -114,11 +114,20 @@
     try {
       const u = new URL(absUrl, window.location.href);
       const m = u.pathname.match(/\/assets\/images\/(projects|spaces)\/([^/]+)\/([^?#]+)$/);
-      if (!m) return absUrl;
-      const type = m[1];
-      const key = m[2];
-      const filename = m[3];
-      return `${R2_BASE.origin}/${type}/${key}/${encodeName(filename)}`;
+      if (m) {
+        const type = m[1];
+        const key = m[2];
+        const filename = m[3];
+        return `${R2_BASE.origin}/${type}/${key}/${encodeName(filename)}`;
+      }
+
+      const c = u.pathname.match(/\/assets\/images\/cities\/([^?#]+)$/);
+      if (c) {
+        const filename = c[1];
+        return `${R2_BASE.origin}/cities/${encodeName(filename)}`;
+      }
+
+      return absUrl;
     } catch {
       return absUrl;
     }
@@ -131,9 +140,10 @@
     const pickFromSelector = (selector, limit) => {
       const els = Array.from(doc.querySelectorAll(selector));
       for (const el of els) {
-        const src = el.getAttribute("src") || "";
+        const localSrc = (el.getAttribute("data-r2-local-src") || "").trim();
+        const src = localSrc || (el.getAttribute("src") || "").trim();
         if (!src) continue;
-        const abs = new URL(src, baseUrl).toString();
+        const abs = localSrc ? new URL(src, window.location.href).toString() : new URL(src, baseUrl).toString();
         if (!isLikelyRealPhotoUrl(abs)) continue;
         urls.push(toR2UrlIfPossible(abs));
         if (urls.length >= limit) return true;
@@ -217,6 +227,15 @@
       .filter((href) => href.startsWith("cities/")); // ignore project links, etc.
   }
 
+  function getProjectLinksForCard(card) {
+    const links = Array.from(card.querySelectorAll(".city-tags-container a[href]"));
+    return links
+      .map((a) => a.getAttribute("href") || "")
+      .map((href) => href.trim())
+      .filter(Boolean)
+      .filter((href) => href.startsWith("projects/"));
+  }
+
   function getFallbackUrlsFromExistingCardImages(card) {
     const imgs = Array.from(card.querySelectorAll(".project-list-image img[src]"));
     const urls = imgs
@@ -271,9 +290,10 @@
 
     const promise = (async () => {
       const cityLinks = getCityLinksForCard(card);
-      if (cityLinks.length === 0) return getFallbackUrlsFromExistingCardImages(card);
+      const sourceLinks = cityLinks.length ? cityLinks : getProjectLinksForCard(card);
+      if (sourceLinks.length === 0) return getFallbackUrlsFromExistingCardImages(card);
 
-      const lists = await mapLimit(cityLinks, FETCH_CONCURRENCY, async (href) => {
+      const lists = await mapLimit(sourceLinks, FETCH_CONCURRENCY, async (href) => {
         try {
           return await fetchCityPageImageUrls(href);
         } catch (e) {
