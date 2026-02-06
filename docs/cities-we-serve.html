@@ -47,6 +47,15 @@
             font-size: 1.2rem;
             font-weight: 500;
         }
+
+        /* Static image per region card (no carousel) */
+        .project-list-image img {
+            display: none;
+        }
+        .project-list-image img.region-img.active,
+        .project-list-image img.region-img:first-child {
+            display: block;
+        }
     </style>
     
     <script src="assets/js/load-navbar.js?v=20260204-4" defer></script>
@@ -354,7 +363,6 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/cities-we-serve-hover-rotator.js?v=20260205-10"></script>
     
 </body>
 </html>
