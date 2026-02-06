@@ -200,6 +200,11 @@ body.invero-contact .form-actions .btn {
   width: 100%;
 }
 
+/* When arriving via `#contactForm`, keep the top visible under sticky navbar */
+body.invero-contact #contactForm {
+  scroll-margin-top: 180px;
+}
+
 body.invero-contact .form-success {
   margin-top: 1.25rem;
   padding: 1rem 1.1rem;

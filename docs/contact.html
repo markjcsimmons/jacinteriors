@@ -6,14 +6,14 @@
     <meta name="description" content="Contact JAC Interiors for interior design services in Los Angeles and Florida.">
     <title>Contact Us | JAC Interiors</title>
     <link rel="stylesheet" href="assets/css/style.css?v=20260118">
-    <link rel="stylesheet" href="assets/css/invero-contact.css?v=20260130-1">
+    <link rel="stylesheet" href="assets/css/invero-contact.css?v=20260206-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="assets/js/load-navbar.js?v=20260204-4" defer></script>
-    <script src="assets/js/lead-form.js?v=20260131-1" defer></script>
+    <script src="assets/js/lead-form.js?v=20260206-1" defer></script>
 </head>
 <body class="invero-contact">
     
@@ -36,10 +36,11 @@
             <div class="contact-grid">
                 <!-- Contact Form -->
                 <div class="contact-card contact-card--form">
+                    <div id="contactForm" aria-hidden="true"></div>
                     <h2>Send a message</h2>
                     <p class="muted">Tell us what you’re working on. We’ll respond with a few quick questions and a proposed next step (call or site visit).</p>
                     
-                    <form id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleFormSubmit(event)">
+                    <form id="contactFormForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleFormSubmit(event)">
                         <input type="hidden" name="form-name" value="contact">
                         <p class="form-hidden">
                             <label>Don’t fill this out if you’re human: <input name="bot-field"></label>
@@ -145,10 +146,12 @@
                             <span class="area-pill">Beverly Hills &amp; Westside</span>
                             <span class="area-pill">Beach Cities</span>
                             <span class="area-pill">San Fernando Valley</span>
-                            <span class="area-pill">Central Los Angeles</span>
-                            <span class="area-pill">Pasadena &amp; San Gabriel Valley</span>
-                            <span class="area-pill">Miami &amp; South Florida</span>
-                            <span class="area-pill">Fort Lauderdale &amp; Broward County</span>
+                            <span class="area-pill">Greater Los Angeles</span>
+                            <span class="area-pill">Coachella Valley</span>
+                            <span class="area-pill">Montana</span>
+                            <span class="area-pill">Palm Beach County</span>
+                            <span class="area-pill">Broward County</span>
+                            <span class="area-pill">Miami-Dade County</span>
                         </div>
                     </div>
                 </aside>
@@ -276,6 +279,30 @@
 
             return false;
         }
+    </script>
+    <script>
+        // If we arrive via `#contactForm`, ensure the top of the form is visible.
+        // (Some browsers / late-loading assets can land the anchor slightly off.)
+        (function () {
+            if (window.location.hash !== '#contactForm') return;
+
+            function scrollToContactForm() {
+                const form = document.getElementById('contactForm');
+                if (!form) return;
+
+                const nav = document.querySelector('nav.navbar, .navbar');
+                const navH = nav ? Math.ceil(nav.getBoundingClientRect().height) : 0;
+
+                const top = form.getBoundingClientRect().top + window.scrollY;
+                const targetY = Math.max(0, Math.round(top - navH - 16));
+                window.scrollTo({ top: targetY, behavior: 'auto' });
+            }
+
+            window.addEventListener('load', () => {
+                scrollToContactForm();
+                setTimeout(scrollToContactForm, 120);
+            });
+        })();
     </script>
     
 </body>

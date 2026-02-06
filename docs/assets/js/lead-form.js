@@ -11,7 +11,7 @@
   }
 
   function bootPrefill() {
-    const form = document.getElementById('contactForm');
+    const form = document.querySelector('form[name="contact"]');
     if (!form) return;
 
     const params = new URLSearchParams(window.location.search || '');
@@ -24,19 +24,29 @@
     setIfEmpty(document.getElementById('projectType'), params.get('projectType'));
     setIfEmpty(document.getElementById('budget'), params.get('budget'));
 
-    const message = document.getElementById('message');
-    const intent = params.get('intent') || '';
-    const source = params.get('source') || '';
-    const noteBits = [];
-    if (intent) noteBits.push(`Intent: ${intent}`);
-    if (source) noteBits.push(`Source: ${source}`);
-    const noteLine = noteBits.length ? `\n\n(${noteBits.join(' | ')})` : '';
+    // Never auto-fill the message body. (Users should start with a blank message.)
+    // If a future flow needs message prefill, pass an explicit `message` query param.
+    setIfEmpty(document.getElementById('message'), params.get('message'));
 
-    // Provide a helpful default message if empty.
-    setIfEmpty(
-      message,
-      `Hi JAC Interiors — I’d like to discuss a potential design project. Please reach out to schedule a call.${noteLine}`.trim()
-    );
+    // Ensure the form anchor is fully visible under the sticky navbar.
+    if (window.location.hash === '#contactForm') {
+      const scrollToForm = () => {
+        const el = document.getElementById('contactForm');
+        if (!el) return;
+
+        const nav = document.querySelector('nav.navbar, .navbar');
+        const navH = nav ? Math.ceil(nav.getBoundingClientRect().height) : 0;
+
+        // Align the form's top just below the navbar, with a little breathing room.
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        const targetY = Math.max(0, Math.round(top - navH - 16));
+        window.scrollTo({ top: targetY, behavior: 'auto' });
+      };
+
+      // Run after layout settles (navbar injection, fonts).
+      setTimeout(scrollToForm, 0);
+      setTimeout(scrollToForm, 120);
+    }
   }
 
   function bootHomeLeadForm() {
