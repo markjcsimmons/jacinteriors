@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="assets/js/load-navbar.js?v=20260204-4" defer></script>
+    <script src="assets/js/reviews-data.js?v=20260131-1" defer></script>
+    <script src="assets/js/reviews-carousel.js?v=20260202-1" defer></script>
 </head>
 <body class="invero-about">
     
@@ -43,8 +45,8 @@
                 <p class="how-we-work-subhead">Placeholder copy: A short overview of what it’s like to collaborate with us—structure, clarity, and calm from start to finish.</p>
             </div>
 
-            <div class="how-stack" aria-label="How we work cards">
-                <article class="how-card" style="--i: 0;">
+            <div class="how-cards" aria-label="How we work cards">
+                <article class="how-card" tabindex="0">
                     <div class="how-card-top">
                         <span class="how-card-num">01</span>
                         <h3>Discover</h3>
@@ -52,7 +54,7 @@
                     <p>Placeholder copy: We align on goals, scope, timeline, and budget. We listen closely to how you live—and what you want your space to feel like.</p>
                 </article>
 
-                <article class="how-card" style="--i: 1;">
+                <article class="how-card" tabindex="0">
                     <div class="how-card-top">
                         <span class="how-card-num">02</span>
                         <h3>Design</h3>
@@ -60,13 +62,82 @@
                     <p>Placeholder copy: We develop a cohesive concept, layouts, and selections. We refine with you, then document everything so decisions feel easy.</p>
                 </article>
 
-                <article class="how-card" style="--i: 2;">
+                <article class="how-card" tabindex="0">
                     <div class="how-card-top">
                         <span class="how-card-num">03</span>
                         <h3>Deliver</h3>
                     </div>
                     <p>Placeholder copy: We manage ordering, coordination, and installation. You get a finished space that’s beautiful, functional, and feels like you.</p>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values (6 boxes) -->
+    <section class="values-section">
+        <div class="container">
+            <div>
+                <span class="kicker">Our Approach</span>
+                <h2>What makes us different.</h2>
+            </div>
+            
+            <div class="values-grid">
+                <div class="service-card">
+                    <h3>Intentional Design</h3>
+                    <p>We believe every element in a space should serve a purpose — whether it's to inspire, to comfort, or to function beautifully.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Collaboration First</h3>
+                    <p>We see every project as a partnership. By listening closely and sharing ideas openly, we turn your goals into reality.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Timeless Aesthetics</h3>
+                    <p>By blending classic elements with modern sensibility, we create interiors that remain stylish, functional, and meaningful.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Meticulous Execution</h3>
+                    <p>Our project management ensures details are right. We work with trusted vendors and skilled craftsmen to bring your vision to life.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Transparent Pricing</h3>
+                    <p>We obtain bids from up to three trusted vendors for every project element, so you get the best value without compromise.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Reliable Timelines</h3>
+                    <p>We do our best to stick to schedules and keep you informed at every step. Your time matters, and we respect it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer reviews -->
+    <section class="reviews-section">
+        <div class="container">
+            <div class="reviews-header">
+                <h2>What our clients say.</h2>
+            </div>
+
+            <div class="reviews-shell" data-reviews-carousel="1">
+                <div class="reviews-trust-row" aria-label="Ratings">
+                    <span class="trust-pill"><span class="stars">★★★★★</span><span>4.9 Google</span></span>
+                    <span class="trust-pill"><span class="stars">★★★★★</span><span>4.9 Yelp</span></span>
+                    <span class="trust-pill"><span class="stars">★★★★★</span><span>5.0 Houzz</span></span>
+                    <span class="trust-pill"><span class="trophy">🏆</span><span>20x Best of Houzz</span></span>
+                </div>
+                <div class="reviews-carousel">
+                    <button class="reviews-arrow prev" type="button" aria-label="Previous review">‹</button>
+
+                    <div class="reviews-slides" aria-live="polite"></div>
+
+                    <button class="reviews-arrow next" type="button" aria-label="Next review">›</button>
+                </div>
+
+                <div class="reviews-dots" aria-label="Review navigation"></div>
             </div>
         </div>
     </section>
