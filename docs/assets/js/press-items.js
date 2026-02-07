@@ -1,7 +1,15 @@
 // Press items for the "In the media" section.
 // Add / edit items here (supports optional PDF link).
 // Shape:
-// { outlet: string, title: string, year?: string, href?: string, pdfHref?: string }
+// {
+//   outlet: string,
+//   title: string,
+//   year?: string,
+//   href?: string,
+//   pdfHref?: string,
+//   featured?: boolean,      // show in the featured list
+//   logoLabel?: string       // label for the logo strip (defaults to outlet)
+// }
 
 (function () {
   'use strict';
@@ -10,19 +18,22 @@
     {
       outlet: 'HBD',
       title: 'Editorial feature (April / May)',
+      featured: true,
+      logoLabel: 'HBD',
       // PDF exists on the legacy site (Shopify CDN)
-      pdfHref:
-        'https://cdn.shopify.com/s/files/1/0511/7945/4662/files/22_HBD_April_May_EDITORIAL.pdf?v=1651454855',
+      pdfHref: 'assets/pdfs/press/22_HBD_April_May_EDITORIAL.pdf',
     },
     {
       outlet: 'JAC Interiors',
       title: 'Press feature (PDF)',
-      pdfHref:
-        'https://cdn.shopify.com/s/files/1/0511/7945/4662/files/JAC_Interiors.pdf?v=1651454855',
+      featured: true,
+      logoLabel: 'JAC Interiors',
+      pdfHref: 'assets/pdfs/press/JAC_Interiors.pdf',
     },
     {
       outlet: 'Pinterest',
       title: 'Check us out on Pinterest',
+      logoLabel: 'Pinterest',
       href: 'https://www.pinterest.com/jacinteriordesign/',
     },
   ];
