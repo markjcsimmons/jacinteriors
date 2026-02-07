@@ -919,6 +919,76 @@
         });
     }
 
+    function removeLegacyBottomCtas() {
+        if (!document.body) return;
+
+        // City pages: remove old "Ready to start your project?" blocks.
+        document.querySelectorAll('section.city-cta').forEach((el) => el.remove());
+
+        // Home page: remove the old giant dark CTA (Ready to transform your space?).
+        const inlineSections = Array.from(document.querySelectorAll('section[style]'));
+        inlineSections.forEach((section) => {
+            const styleText = (section.getAttribute('style') || '').toLowerCase().replace(/\s+/g, '');
+            const looksLikeOldDarkHomeCta =
+                (styleText.includes('background:#111') || styleText.includes('background-color:#111')) &&
+                styleText.includes('padding:8rem0');
+            if (looksLikeOldDarkHomeCta) {
+                const h2 = section.querySelector('h2');
+                const a = section.querySelector('a');
+                const h2Text = (h2?.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+                const aText = (a?.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+                if (h2Text.includes('ready to transform') && aText.includes('book a call')) {
+                    section.remove();
+                }
+            }
+
+            // Legacy light CTA blocks on many pages (Ready to Transform Your X? / Start Your Project).
+            const looksLikeLegacyLightCta =
+                styleText.includes('background:#fafafa') &&
+                styleText.includes('text-align:center');
+            if (looksLikeLegacyLightCta) {
+                const hasPrimaryBtn = !!section.querySelector('a.btn.btn-primary');
+                const hasH2 = !!section.querySelector('h2');
+                if (hasPrimaryBtn && hasH2) {
+                    section.remove();
+                }
+            }
+        });
+    }
+
+    function ensureSiteCta() {
+        if (!document.body) return;
+        if (document.getElementById('siteCta')) return;
+
+        const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
+
+        const html = `
+<section class="site-cta" id="siteCta" aria-label="Let's work together">
+  <div class="container">
+    <div class="site-cta-card">
+      <div class="site-cta-copy">
+        <div class="site-cta-eyebrow">LET’S WORK TOGETHER</div>
+        <h2 class="site-cta-title">Ready to begin?</h2>
+        <p class="site-cta-subtitle">
+          Need full-service design or quick guidance? The JAC Interiors team is here to help you design a space that feels like home.
+        </p>
+      </div>
+      <a class="site-cta-button" href="${contactHref}">
+        <span>Book a call</span><span class="site-cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+        `.trim();
+
+        const footer = document.querySelector('footer');
+        if (footer && footer.parentElement) {
+            footer.insertAdjacentHTML('beforebegin', html);
+        } else {
+            document.body.insertAdjacentHTML('beforeend', html);
+        }
+    }
+
     // Gradually replace repeated inline styles with CSS classes.
     // This lets us unify spacing/typography without editing dozens of HTML files at once.
     function normalizeLegacyInlineSections() {
@@ -1153,15 +1223,23 @@
             transformLegacyCityPage();
             applyCityR2Images();
             applyCityFeaturedProject();
+            const enforceCta = () => {
+                removeLegacyBottomCtas();
+                ensureSiteCta();
+            };
             const normalizeAll = () => {
                 normalizeLegacyInlineSections();
                 normalizeLegacyContainers();
                 normalizeLegacyHeroTypography();
             };
             // Run now, then again after layout/scripts settle.
+            enforceCta();
             normalizeAll();
+            setTimeout(enforceCta, 0);
             setTimeout(normalizeAll, 0);
+            setTimeout(enforceCta, 250);
             setTimeout(normalizeAll, 250);
+            setTimeout(enforceCta, 600);
             ensureFooter();
             normalizeContactButtons();
         }

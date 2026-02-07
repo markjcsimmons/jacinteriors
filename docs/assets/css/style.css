@@ -323,6 +323,76 @@ section[style*="padding: 6rem 0"][style*="background: #fafafa"][style*="text-ali
     transform: translateY(-1px);
 }
 
+/* Site-wide CTA card (replaces legacy bottom CTA blocks) */
+.site-cta {
+    padding: clamp(3.5rem, 7vw, 5rem) 0;
+}
+.site-cta-card {
+    background: radial-gradient(1200px 400px at 30% 0%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 45%, rgba(255, 255, 255, 0.02) 100%),
+        linear-gradient(180deg, #121212 0%, #0c0c0c 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: clamp(2rem, 3.6vw, 3rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.site-cta-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 0.6rem;
+}
+.site-cta-title {
+    color: #fff;
+    font-size: clamp(2rem, 4.2vw, 3.25rem);
+    line-height: 1.05;
+    margin: 0 0 0.75rem 0;
+}
+.site-cta-subtitle {
+    margin: 0;
+    max-width: 58ch;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+.site-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1.25rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #111;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+.site-cta-button:hover {
+    transform: translateY(-1px);
+    background: #fff;
+}
+.site-cta-arrow {
+    display: inline-block;
+    transform: translateY(-0.5px);
+}
+@media (max-width: 900px) {
+    .site-cta-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+    }
+    .site-cta-button {
+        align-self: flex-start;
+    }
+}
+
 /* Legacy inline footer blocks (fallback if JS replacement doesn't run) */
 footer[style*="#1a1a1a"] {
     background: var(--color-bg-dark) !important;
