@@ -7,6 +7,7 @@
 //   year?: string,
 //   href?: string,
 //   pdfHref?: string,
+//   coverSrc?: string,       // optional cover thumbnail image
 //   featured?: boolean,      // show in the featured list
 //   logoLabel?: string       // label for the logo strip (defaults to outlet)
 // }
@@ -22,6 +23,7 @@
       logoLabel: 'HBD',
       // PDF exists on the legacy site (Shopify CDN)
       pdfHref: 'assets/pdfs/press/22_HBD_April_May_EDITORIAL.pdf',
+      coverSrc: 'assets/images/press/covers/hbd-editorial-cover.png',
     },
     {
       outlet: 'JAC Interiors',
@@ -29,6 +31,7 @@
       featured: true,
       logoLabel: 'JAC Interiors',
       pdfHref: 'assets/pdfs/press/JAC_Interiors.pdf',
+      coverSrc: 'assets/images/press/covers/jac-interiors-press-cover.png',
     },
     {
       outlet: 'Pinterest',

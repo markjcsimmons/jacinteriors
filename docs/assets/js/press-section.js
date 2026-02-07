@@ -41,6 +41,7 @@
         year: String(item?.year || '').trim(),
         href: item?.href ? String(item.href).trim() : '',
         pdfHref: item?.pdfHref ? String(item.pdfHref).trim() : '',
+        coverSrc: item?.coverSrc ? String(item.coverSrc).trim() : '',
         featured: Boolean(item?.featured),
       }))
       .filter((x) => x.outlet && x.title && (x.href || x.pdfHref));
@@ -81,9 +82,15 @@
         const articleHref = item.href || '';
         const showPdf = !!pdfHref;
         const showRead = !!articleHref;
+        const showCover = !!item.coverSrc;
 
         return `
           <div class="press-download-row">
+            ${showCover ? `
+              <a class="press-cover" href="${escapeHtml(pdfHref || articleHref)}" ${isExternal(pdfHref || articleHref) ? 'target="_blank" rel="noopener"' : ''} aria-label="${escapeHtml(item.outlet)} cover">
+                <img src="${escapeHtml(item.coverSrc)}" alt="${escapeHtml(item.outlet)} cover" loading="lazy" decoding="async">
+              </a>
+            `.trim() : ''}
             <div class="press-download-meta">
               <div class="press-outlet">${escapeHtml(item.outlet)}</div>
               ${item.year ? `<div class="press-year">${escapeHtml(item.year)}</div>` : ''}
