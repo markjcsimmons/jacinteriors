@@ -356,6 +356,11 @@ const SPANav = {
         if (typeof window.__optimizeImages === 'function') {
             window.__optimizeImages(document);
         }
+
+        // Page-specific sections that render via JS (safe no-op if absent)
+        if (typeof window.initializePressSection === 'function') {
+            window.initializePressSection();
+        }
     },
     
     sleep(ms) {

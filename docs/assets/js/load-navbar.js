@@ -18,9 +18,11 @@
     const currentPath = window.location.pathname;
     const filename = currentPath.split('/').pop() || 'index.html';
     
-    // Extract base path for GitHub Pages project sites (e.g., '/jacinteriors')
+    // Extract base path for GitHub Pages project sites (e.g., '/jacinteriors').
+    // On localhost (or root deployment) the first segment is a filename like "index.html",
+    // so we treat that as "no base path".
     const pathParts = currentPath.split('/').filter(p => p);
-    const basePath = pathParts.length > 0 ? '/' + pathParts[0] : '';
+    const basePath = (pathParts.length > 0 && !pathParts[0].includes('.')) ? '/' + pathParts[0] : '';
     
     // Calculate depth for subdirectories (e.g., cities/, projects/)
     // For root-level pages: /jacinteriors/page.html -> depth = 0
@@ -225,18 +227,38 @@
           }
           .footer.footer--dark .footer-top {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
             gap: 1rem;
-            padding-bottom: 1.25rem;
-            margin-bottom: 2.25rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+            flex-wrap: wrap;
+            row-gap: 0.75rem;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.25rem;
+            border-bottom: none;
+          }
+          .footer.footer--dark .footer-badges {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+          }
+          .footer.footer--dark .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none !important;
+          }
+          .footer.footer--dark .footer-badge img {
+            height: 44px;
+            width: auto;
+            display: block;
           }
           .footer.footer--dark .footer-top-links {
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
             flex-wrap: wrap;
+            justify-content: flex-end;
           }
           .footer.footer--dark .footer-social-btn {
             display: inline-flex;
@@ -409,7 +431,16 @@
             }
             .footer.footer--dark .footer-top {
               justify-content: center;
-              margin-bottom: 1.75rem;
+              margin-bottom: 1rem;
+            }
+            .footer.footer--dark .footer-badges {
+              justify-content: center;
+            }
+            .footer.footer--dark .footer-badge img {
+              height: 40px;
+            }
+            .footer.footer--dark .footer-top-links {
+              justify-content: center;
             }
             .footer.footer--dark .footer-brand-title img {
               height: 68px;
@@ -1166,6 +1197,14 @@
 <footer class="footer footer--dark" aria-label="Footer">
   <div class="container">
     <div class="footer-top" aria-label="Social links">
+      <div class="footer-badges" aria-label="Awards">
+        <a class="footer-badge" href="https://www.houzz.com/professionals/interior-designers-and-decorators/jac-interiors-pfvwus-pf~914469284?" target="_blank" rel="noopener" aria-label="Best of Houzz 2024 Design">
+          <img src="${getPath('assets/images/badges/houzz-best-of-2024-design.png')}" alt="Best of Houzz 2024 Design" loading="lazy" decoding="async">
+        </a>
+        <a class="footer-badge" href="https://www.houzz.com/professionals/interior-designers-and-decorators/jac-interiors-pfvwus-pf~914469284?" target="_blank" rel="noopener" aria-label="Best of Houzz 2024 Service">
+          <img src="${getPath('assets/images/badges/houzz-best-of-2024-service.png')}" alt="Best of Houzz 2024 Service" loading="lazy" decoding="async">
+        </a>
+      </div>
       <div class="footer-top-links">
         <a class="footer-social-btn" href="https://www.instagram.com/jacinteriors" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">

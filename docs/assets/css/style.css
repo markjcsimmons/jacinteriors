@@ -1168,6 +1168,140 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     }
 }
 
+/* Press / "In the media" (About) */
+.press-section {
+    padding: 6rem 0;
+    background: #ffffff;
+    color: #222a26;
+}
+
+.press-header {
+    max-width: 900px;
+    margin-bottom: 2.5rem;
+}
+
+.press-section .kicker {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgba(34, 42, 38, 0.62);
+    margin-bottom: 0.75rem;
+}
+
+.press-subhead {
+    margin: 0;
+    max-width: 70ch;
+}
+
+.press-section p {
+    color: #555555;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    letter-spacing: -0.2px;
+    font-weight: 500;
+}
+
+.press-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.press-card {
+    border: 1px solid #e4e4e4;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1.25rem 1.25rem 1.1rem;
+    box-shadow: 0 18px 55px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.press-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 28px 85px rgba(0, 0, 0, 0.10);
+    border-color: #d7d7d7;
+}
+
+.press-card-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.press-outlet {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #222a26;
+}
+
+.press-year {
+    color: rgba(34, 42, 38, 0.55);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.press-section h3.press-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    font-weight: 650;
+}
+
+.press-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+}
+
+.press-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 0.95rem;
+    border-radius: 999px;
+    border: 1px solid #e4e4e4;
+    background: #222a26;
+    color: #ffffff;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    text-decoration: none !important;
+}
+
+.press-action:hover {
+    filter: brightness(1.03);
+    transform: translateY(-1px);
+}
+
+.press-action--secondary {
+    background: #ffffff;
+    color: #222a26;
+}
+
+@media (max-width: 980px) {
+    .press-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .press-section {
+        padding: 4.75rem 0;
+    }
+    .press-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* Navbar CTA */
 .navbar .nav-cta:hover {
     background: var(--color-primary) !important;
