@@ -1,4 +1,4 @@
-// Render "In the media" (Option 3): logo strip + featured items (supports optional PDF).
+// Render "In the media" (Option 3): logo strip + compact downloads list.
 (function () {
   'use strict';
 
@@ -21,7 +21,12 @@
     const attrs = isExternal(href)
       ? ' target="_blank" rel="noopener"'
       : '';
-    const cls = variant === 'secondary' ? 'press-action press-action--secondary' : 'press-action';
+    const cls =
+      variant === 'secondary'
+        ? 'press-action press-action--secondary'
+        : variant === 'link'
+          ? 'press-download-link'
+          : 'press-action';
     const downloadAttr = safeHref.toLowerCase().endsWith('.pdf') ? ' download' : '';
     return `<a class="${cls}" href="${safeHref}"${attrs}${downloadAttr}>${escapeHtml(label)}</a>`;
   }
@@ -63,7 +68,7 @@
       .join('\n');
   }
 
-  function renderFeatured(root, items) {
+  function renderDownloads(root, items) {
     if (!root) return;
     if (!items.length) {
       root.innerHTML = '';
@@ -72,40 +77,44 @@
 
     root.innerHTML = items
       .map((item) => {
-        const primaryHref = item.href || item.pdfHref;
-        const primaryLabel = item.href ? 'Read' : 'Open PDF';
-        const secondary = item.href && item.pdfHref ? renderAction('PDF', item.pdfHref, 'secondary') : '';
+        const pdfHref = item.pdfHref || '';
+        const articleHref = item.href || '';
+        const showPdf = !!pdfHref;
+        const showRead = !!articleHref;
 
         return `
-          <article class="press-feature">
-            <div class="press-feature-meta">
+          <div class="press-download-row">
+            <div class="press-download-meta">
               <div class="press-outlet">${escapeHtml(item.outlet)}</div>
               ${item.year ? `<div class="press-year">${escapeHtml(item.year)}</div>` : ''}
             </div>
-            <h3 class="press-title">${escapeHtml(item.title)}</h3>
-            <div class="press-actions">
-              ${renderAction(primaryLabel, primaryHref, 'primary')}
-              ${secondary}
+            <div class="press-download-title">${escapeHtml(item.title)}</div>
+            <div class="press-download-actions">
+              ${showRead ? renderAction('Read', articleHref, 'link') : ''}
+              ${showPdf ? renderAction('Download PDF', pdfHref, 'link') : ''}
             </div>
-          </article>
+          </div>
         `.trim();
       })
       .join('\n');
   }
 
   function init() {
-    const featured = document.querySelector('[data-press-featured="1"]');
-    if (!featured) return;
+    const downloads = document.querySelector('[data-press-downloads="1"]');
+    if (!downloads) return;
 
     const items = normalizeItems(window.JAC_PRESS_ITEMS);
     if (!items.length) {
-      if (featured) featured.innerHTML = '';
+      downloads.innerHTML = '';
       return;
     }
 
-    const featuredItems = items.filter((x) => x.featured).slice(0, 3);
-
-    if (featured) renderFeatured(featured, featuredItems.length ? featuredItems : items.slice(0, 3));
+    // Keep it tight like the legacy site: show downloads first.
+    const ordered = [
+      ...items.filter((x) => x.pdfHref),
+      ...items.filter((x) => !x.pdfHref),
+    ];
+    renderDownloads(downloads, ordered.slice(0, 6));
   }
 
   window.initializePressSection = init;

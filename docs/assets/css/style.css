@@ -1226,25 +1226,25 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     opacity: 0.9;
 }
 
-.press-featured {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+.press-downloads {
+    max-width: 980px;
 }
 
-.press-feature {
-    border: 1px solid #e4e4e4;
-    background: #fafafa;
-    border-radius: 10px;
-    padding: 1.35rem 1.35rem 1.25rem;
+.press-download-row {
+    padding: 1.05rem 0;
+    border-bottom: 1px solid #eaeaea;
 }
 
-.press-feature-meta {
+.press-download-row:first-child {
+    border-top: 1px solid #eaeaea;
+}
+
+.press-download-meta {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.35rem;
 }
 
 .press-outlet {
@@ -1259,50 +1259,44 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     font-size: 0.9rem;
 }
 
-.press-section h3.press-title {
-    margin: 0 0 1rem 0;
-    font-size: 1.15rem;
-    line-height: 1.3;
+.press-download-title {
+    margin: 0;
+    color: #222a26;
+    font-size: 1.05rem;
+    line-height: 1.4;
     letter-spacing: -0.02em;
     font-weight: 650;
+    max-width: 75ch;
 }
 
-.press-actions {
+.press-download-actions {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 1rem;
     flex-wrap: wrap;
+    margin-top: 0.5rem;
 }
 
-.press-action {
+.press-download-link {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    height: 40px;
-    padding: 0 0.95rem;
-    border-radius: 999px;
-    border: 1px solid #e4e4e4;
-    background: #222a26;
-    color: #ffffff !important;
+    gap: 0.5rem;
+    color: rgba(34, 42, 38, 0.75) !important;
     font-weight: 800;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     text-decoration: none !important;
 }
 
-.press-action:hover {
-    filter: brightness(1.03);
-    transform: translateY(-1px);
-}
-
-.press-action--secondary {
-    background: #ffffff;
-    color: #222a26 !important;
+.press-download-link:hover {
+    color: rgba(34, 42, 38, 0.95) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 3px;
 }
 
 @media (max-width: 980px) {
-    .press-featured { grid-template-columns: 1fr; }
+    .press-downloads { max-width: 100%; }
 }
 
 @media (max-width: 640px) {
