@@ -36,6 +36,29 @@ body.invero-about a.btn.btn-primary:hover {
   color: #ffffff !important;
 }
 
+/* Site-wide CTA card: ensure correct colors on About (overrides global h2/p rules below) */
+body.invero-about .site-cta-card {
+  color: #ffffff !important;
+}
+body.invero-about .site-cta-eyebrow {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+body.invero-about .site-cta-title {
+  color: #ffffff !important;
+  letter-spacing: -0.02em !important;
+}
+body.invero-about .site-cta-subtitle {
+  color: rgba(255, 255, 255, 0.72) !important;
+  font-size: 1.05rem !important;
+  line-height: 1.6 !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  margin: 0 !important;
+}
+body.invero-about .site-cta-button {
+  color: #111 !important;
+}
+
 /* Typography */
 body.invero-about h1,
 body.invero-about h2,
@@ -53,7 +76,8 @@ body.invero-about h1 {
   line-height: 1.1em;
   letter-spacing: -4px;
   font-weight: 500;
-  margin-bottom: 0;
+  /* Give breathing room like Home page headline blocks */
+  margin-bottom: 1.25rem;
 }
 
 body.invero-about h2 {

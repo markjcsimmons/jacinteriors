@@ -146,30 +146,31 @@
                 <div class="nav-dropdown" style="position: relative; display: inline-block;">
                     <a href="${getPath('portfolio.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">PORTFOLIO</a>
                     <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 220px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column; max-height: 500px; overflow-y: auto;">
+                        <a href="${getPath('projects/fox-hills.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Fox Hills</a>
                         <a href="${getPath('projects/22nd-street.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">22nd Street</a>
-                        <a href="${getPath('projects/jamm-visual.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">JAMM Visual</a>
-                        <a href="${getPath('projects/alpine.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Alpine</a>
-                        <a href="${getPath('projects/brown-deer-park.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Brown Deer Park</a>
-                        <a href="${getPath('projects/colby.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Colby</a>
-                        <a href="${getPath('projects/colette-way.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Colette Way</a>
-                        <a href="${getPath('projects/columbus-way.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Columbus Way</a>
-                        <a href="${getPath('projects/frances.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Frances</a>
-                        <a href="${getPath('projects/galewood.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Galewood</a>
-                        <a href="${getPath('projects/highland.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Highland</a>
-                        <a href="${getPath('projects/medio.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Medio</a>
-                        <a href="${getPath('projects/monaco.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Monaco</a>
-                        <a href="${getPath('projects/mulholland-drive.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Mulholland Drive</a>
-                        <a href="${getPath('projects/oakwood.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Oakwood</a>
-                        <a href="${getPath('projects/peary-way.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Peary Way</a>
-                        <a href="${getPath('projects/presson-place.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Presson Place</a>
-                        <a href="${getPath('projects/river-homestead.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">River Homestead</a>
-                        <a href="${getPath('projects/ronda.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Ronda</a>
-                        <a href="${getPath('projects/sherbourne.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Sherbourne</a>
                         <a href="${getPath('projects/sunnyside.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Sunnyside</a>
-                        <a href="${getPath('projects/vale-crest.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Vale Crest</a>
-                        <a href="${getPath('projects/valley-vista.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Valley Vista</a>
+                        <a href="${getPath('projects/frances.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Frances</a>
+                        <a href="${getPath('projects/columbus-way.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Columbus Way</a>
+                        <a href="${getPath('projects/colette-way.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Colette Way</a>
+                        <a href="${getPath('projects/river-homestead.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">River Homestead</a>
+                        <a href="${getPath('projects/oakwood.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Oakwood</a>
+                        <a href="${getPath('projects/wilshire.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Wilshire</a>
+                        <a href="${getPath('projects/mulholland-drive.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Mulholland Drive</a>
                         <a href="${getPath('projects/via-pisa.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Via Pisa</a>
-                        <a href="${getPath('projects/wilshire.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">Wilshire</a>
+                        <a href="${getPath('projects/galewood.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Galewood</a>
+                        <a href="${getPath('projects/ronda.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Ronda</a>
+                        <a href="${getPath('projects/alpine.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Alpine</a>
+                        <a href="${getPath('projects/peary-way.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Peary Place</a>
+                        <a href="${getPath('projects/monaco.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Monaco</a>
+                        <a href="${getPath('projects/valley-vista.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Valley Vista</a>
+                        <a href="${getPath('projects/colby.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Colby</a>
+                        <a href="${getPath('projects/sherbourne.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Sherbourne</a>
+                        <a href="${getPath('projects/highland.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Highland</a>
+                        <a href="${getPath('projects/vale-crest.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Vale Crest</a>
+                        <a href="${getPath('projects/presson-place.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Presson Place</a>
+                        <a href="${getPath('projects/medio.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Medio</a>
+                        <a href="${getPath('projects/brown-deer-park.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Brown Deer Park</a>
+                        <a href="${getPath('projects/jamm-visual.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">JAMM Agency Office</a>
                     </div>
                 </div>
                 <div class="nav-dropdown" style="position: relative; display: inline-block;">
@@ -198,7 +199,6 @@
                     </div>
                 </div>
                 <a href="${getPath('about.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">ABOUT</a>
-                <a href="${getPath('contact.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">CONTACT</a>
                 <a href="${getPath('contact.html')}?intent=call#contactForm" class="nav-cta" style="display:inline-flex; align-items:center; justify-content:center; padding:0.65rem 1rem; border-radius:999px; border:1px solid #222a26; background:#222a26; color:#fff; font-size:0.85rem; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; text-decoration:none;">Book a call</a>
             </div>
             <button class="mobile-menu-toggle" id="mobileMenuToggle" style="display: none;">
@@ -222,6 +222,57 @@
             color: rgba(255, 255, 255, 0.9);
             padding: 5rem 0 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.10);
+          }
+          .footer.footer--dark .footer-top {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1.25rem;
+            margin-bottom: 2.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+          }
+          .footer.footer--dark .footer-top-links {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+          }
+          .footer.footer--dark .footer-social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.55rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 0.85rem;
+            font-weight: 750;
+            letter-spacing: -0.01em;
+            text-decoration: none !important;
+          }
+          .footer.footer--dark .footer-social-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            text-decoration: none !important;
+          }
+          .footer.footer--dark .footer-social-btn svg {
+            width: 18px;
+            height: 18px;
+            display: block;
+          }
+          .footer.footer--dark .footer-social-btn .houzz-mark {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #4dbc15;
+            color: #0b0f0e;
+            font-weight: 900;
+            font-size: 0.75rem;
+            line-height: 1;
           }
           .footer.footer--dark .footer-grid {
             display: grid;
@@ -355,6 +406,10 @@
           @media (max-width: 640px) {
             .footer.footer--dark {
               padding: 4rem 0 1.6rem;
+            }
+            .footer.footer--dark .footer-top {
+              justify-content: center;
+              margin-bottom: 1.75rem;
             }
             .footer.footer--dark .footer-brand-title img {
               height: 68px;
@@ -1110,6 +1165,22 @@
         const footerHTML = `
 <footer class="footer footer--dark" aria-label="Footer">
   <div class="container">
+    <div class="footer-top" aria-label="Social links">
+      <div class="footer-top-links">
+        <a class="footer-social-btn" href="https://www.instagram.com/jacinteriors" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="4"></rect>
+            <circle cx="12" cy="12" r="4"></circle>
+            <circle cx="17.5" cy="6.6" r="0.8" fill="currentColor" stroke="none"></circle>
+          </svg>
+          <span>Instagram</span>
+        </a>
+        <a class="footer-social-btn" href="https://www.houzz.com/professionals/interior-designers-and-decorators/jac-interiors-pfvwus-pf~914469284?" target="_blank" rel="noopener" aria-label="Houzz">
+          <span class="houzz-mark" aria-hidden="true">H</span>
+          <span>Houzz</span>
+        </a>
+      </div>
+    </div>
     <div class="footer-grid">
       <div class="footer-col">
         <a class="footer-brand-title" href="${getPath('index.html')}" aria-label="Home">
@@ -1157,14 +1228,6 @@
     <div class="footer-bottom">
       <p>&copy; ${year} JAC Interiors, LLC. All Rights Reserved.</p>
       <div class="footer-mini" aria-label="Footer links">
-        <a class="footer-ig" href="https://www.instagram.com/jacinteriors" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3.5" y="3.5" width="17" height="17" rx="4"></rect>
-            <circle cx="12" cy="12" r="4"></circle>
-            <circle cx="17.5" cy="6.6" r="0.8" fill="currentColor" stroke="none"></circle>
-          </svg>
-          <span>Instagram</span>
-        </a>
         <span>Los Angeles + Florida</span>
       </div>
     </div>
