@@ -31,7 +31,7 @@
       featured: true,
       logoLabel: 'JAC Interiors',
       pdfHref: 'assets/pdfs/press/JAC_Interiors.pdf',
-      coverSrc: 'assets/images/press/covers/jac-interiors-press-cover.png',
+      coverSrc: 'assets/images/press/covers/jac-interiors-press-cover-2.webp',
     },
   ];
 })();
