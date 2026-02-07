@@ -1,4 +1,4 @@
-// Render "In the media" (Option 3): logo strip + compact downloads list.
+// Render "In the media" (Option 3): logo strip + compact PDF cards.
 (function () {
   'use strict';
 
@@ -79,30 +79,33 @@
     root.innerHTML = items
       .map((item) => {
         const pdfHref = item.pdfHref || '';
-        const articleHref = item.href || '';
-        const showPdf = !!pdfHref;
-        const showRead = !!articleHref;
         const showCover = !!item.coverSrc;
+        if (!pdfHref) return '';
+
+        const attrs = isExternal(pdfHref) ? ' target="_blank" rel="noopener"' : '';
+        const downloadAttr = pdfHref.toLowerCase().endsWith('.pdf') ? ' download' : '';
 
         return `
-          <div class="press-download-row">
+          <article class="press-pdf-card">
             ${showCover ? `
-              <a class="press-cover" href="${escapeHtml(pdfHref || articleHref)}" ${isExternal(pdfHref || articleHref) ? 'target="_blank" rel="noopener"' : ''} aria-label="${escapeHtml(item.outlet)} cover">
+              <a class="press-pdf-cover" href="${escapeHtml(pdfHref)}"${attrs}${downloadAttr} aria-label="Download ${escapeHtml(item.outlet)} PDF">
                 <img src="${escapeHtml(item.coverSrc)}" alt="${escapeHtml(item.outlet)} cover" loading="lazy" decoding="async">
               </a>
             `.trim() : ''}
-            <div class="press-download-meta">
-              <div class="press-outlet">${escapeHtml(item.outlet)}</div>
-              ${item.year ? `<div class="press-year">${escapeHtml(item.year)}</div>` : ''}
+            <div class="press-pdf-body">
+              <div class="press-pdf-top">
+                <div class="press-outlet">${escapeHtml(item.outlet)}</div>
+                ${item.year ? `<div class="press-year">${escapeHtml(item.year)}</div>` : ''}
+              </div>
+              <div class="press-pdf-title">${escapeHtml(item.title)}</div>
+              <div class="press-pdf-actions">
+                ${renderAction('Download PDF', pdfHref, 'link')}
+              </div>
             </div>
-            <div class="press-download-title">${escapeHtml(item.title)}</div>
-            <div class="press-download-actions">
-              ${showRead ? renderAction('Read', articleHref, 'link') : ''}
-              ${showPdf ? renderAction('Download PDF', pdfHref, 'link') : ''}
-            </div>
-          </div>
+          </article>
         `.trim();
       })
+      .filter(Boolean)
       .join('\n');
   }
 
@@ -116,12 +119,9 @@
       return;
     }
 
-    // Keep it tight like the legacy site: show downloads first.
-    const ordered = [
-      ...items.filter((x) => x.pdfHref),
-      ...items.filter((x) => !x.pdfHref),
-    ];
-    renderDownloads(downloads, ordered.slice(0, 6));
+    // Only show the PDF items here (2-up grid).
+    const pdfItems = items.filter((x) => x.pdfHref).slice(0, 2);
+    renderDownloads(downloads, pdfItems);
   }
 
   window.initializePressSection = init;

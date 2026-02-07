@@ -33,12 +33,6 @@
       pdfHref: 'assets/pdfs/press/JAC_Interiors.pdf',
       coverSrc: 'assets/images/press/covers/jac-interiors-press-cover.png',
     },
-    {
-      outlet: 'Pinterest',
-      title: 'Check us out on Pinterest',
-      logoLabel: 'Pinterest',
-      href: 'https://www.pinterest.com/jacinteriordesign/',
-    },
   ];
 })();
 
