@@ -22,8 +22,9 @@
     --stroke: #e4e4e4;
     
     /* Typography */
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --font-display: 'Inter', sans-serif;
+    /* Match Home page font */
+    --font-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+    --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
     
     /* Spacing */
     --spacing-xs: 0.5rem;
@@ -99,9 +100,269 @@ img {
     padding: 0 2rem;
 }
 
+/* Container width modifiers (used to replace inline max-width overrides) */
+.container--1320 { max-width: 1320px; }
+.container--1340 { max-width: 1340px; }
+.container--1200 { max-width: 1200px; }
+
 .section { padding: var(--spacing-xl) 0; }
 .section-lg { padding: var(--spacing-xxl) 0; }
 .section-full { min-height: 100vh; display: flex; align-items: center; }
+
+/* Normalized legacy inline sections (gradual cleanup) */
+.section-hero-dark {
+    padding: 3rem 0;
+    background: var(--color-secondary);
+    color: white;
+    margin-top: 0;
+}
+.hero-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 500;
+    margin: 0 0 1rem 0;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    color: white;
+}
+.hero-subtitle {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: 700px;
+}
+
+/* Legacy dark hero blocks still using inline styles.
+   Override inline typography to keep site consistent. */
+section[style*="background: #1a1a1a"][style*="padding: 3rem 0"] h1,
+section[style*="background-color: #1a1a1a"][style*="padding: 3rem 0"] h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
+    font-weight: 500 !important;
+    margin: 0 0 1rem 0 !important;
+    letter-spacing: -1.5px !important;
+    line-height: 1.1 !important;
+    color: white !important;
+}
+section[style*="background: #1a1a1a"][style*="padding: 3rem 0"] p,
+section[style*="background-color: #1a1a1a"][style*="padding: 3rem 0"] p {
+    font-size: 16px !important;
+    color: #ccc !important;
+    line-height: 1.6 !important;
+    font-weight: 400 !important;
+    max-width: 700px !important;
+}
+
+/* Legacy black hero blocks (many city pages + rebuild-la) */
+section[style*="background-color: #000"][style*="padding: 2rem 0"] h1 {
+    color: #fff !important;
+    font-size: clamp(2.35rem, 4.5vw, 3rem) !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+    letter-spacing: -1px !important;
+    line-height: 1.1 !important;
+}
+section[style*="background-color: #000"][style*="padding: 2rem 0"] p {
+    color: #fff !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    margin: 0.5rem 0 0 0 !important;
+    opacity: 0.9 !important;
+}
+
+/* Legacy black hero meta (Service / Pricing / Status, etc.) */
+section[style*="background-color: #000"][style*="padding: 2rem 0"] div[style*="font-size: 14px"][style*="gap: 2rem"] {
+    display: flex !important;
+    gap: 2rem !important;
+    color: #fff !important;
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.15 !important;
+    letter-spacing: -0.1px !important;
+}
+section[style*="background-color: #000"][style*="padding: 2rem 0"] div[style*="font-size: 14px"][style*="gap: 2rem"] > div {
+    min-width: 9.5rem;
+}
+section[style*="background-color: #000"][style*="padding: 2rem 0"] div[style*="font-size: 14px"][style*="gap: 2rem"] > div > span:first-child {
+    opacity: 0.72 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+}
+section[style*="background-color: #000"][style*="padding: 2rem 0"] div[style*="font-size: 14px"][style*="gap: 2rem"] > div > span:nth-child(3) {
+    font-weight: 600 !important;
+    opacity: 1 !important;
+}
+
+/* Legacy content typography blocks (cities + projects + rebuild-la).
+   Normalize h2/p styles that are hardcoded inline. */
+h2[style*="font-size: 1.8rem"][style*="font-weight: 500"][style*="letter-spacing: -0.5px"] {
+    font-size: clamp(1.6rem, 2.2vw, 2.1rem) !important;
+    letter-spacing: -0.02em !important;
+    font-weight: 500 !important;
+    line-height: 1.15 !important;
+    margin-bottom: 1rem !important;
+    color: var(--color-secondary) !important;
+}
+p[style*="font-size: 16px"][style*="line-height: 24px"][style*="color: #444"] {
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+    color: var(--color-text) !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Legacy split rows (image left + copy right).
+   Normalize spacing and make it responsive without editing every page. */
+div[style*="display: flex"][style*="gap: 3rem"][style*="margin-bottom: 3rem"][style*="align-items: center"] {
+    display: flex !important;
+    gap: 3rem !important;
+    margin-bottom: 3rem !important;
+    align-items: center !important;
+}
+div[style*="display: flex"][style*="gap: 3rem"][style*="margin-bottom: 3rem"][style*="align-items: center"] > div[style*="flex: 0 0 48%"] {
+    flex: 0 0 48% !important;
+    max-width: 48% !important;
+}
+div[style*="display: flex"][style*="gap: 3rem"][style*="margin-bottom: 3rem"][style*="align-items: center"] > div[style*="flex: 1"][style*="padding-left: 2rem"] {
+    flex: 1 1 0% !important;
+    padding-left: 0 !important; /* gap already provides spacing */
+}
+@media (max-width: 900px) {
+    div[style*="display: flex"][style*="gap: 3rem"][style*="margin-bottom: 3rem"][style*="align-items: center"] {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 1.5rem !important;
+        margin-bottom: 2.25rem !important;
+    }
+    div[style*="display: flex"][style*="gap: 3rem"][style*="margin-bottom: 3rem"][style*="align-items: center"] > div[style*="flex: 0 0 48%"] {
+        flex: 0 0 auto !important;
+        max-width: 100% !important;
+    }
+}
+
+/* Legacy "first row" two-column grid used on spaces + project pages */
+div.first-row-grid[style*="display: grid"][style*="grid-template-columns: 1fr 1fr"][style*="gap: 2rem"] {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+    width: 100% !important;
+    margin-bottom: 2rem !important;
+}
+@media (max-width: 900px) {
+    div.first-row-grid[style*="display: grid"][style*="grid-template-columns: 1fr 1fr"][style*="gap: 2rem"] {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+/* Legacy masonry grid wrapper spacing */
+div.image-gallery-grid[style*="margin-bottom: 2rem"] {
+    margin-bottom: 2rem !important;
+}
+
+/* Legacy light intro cards on masonry pages (.first-row-text) */
+div.first-row-text[style*="background: #fafafa"][style*="padding: 2.5rem"][style*="border-radius: 4px"] {
+    background: #fafafa !important;
+    padding: clamp(1.5rem, 2.3vw, 2.5rem) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+}
+
+/* Card title (often an h3 with inline 1.8rem rules) */
+h3[style*="font-size: 1.8rem"][style*="font-weight: 500"][style*="letter-spacing: -0.5px"] {
+    font-size: clamp(1.35rem, 1.7vw, 1.75rem) !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.9rem !important;
+    color: var(--color-secondary) !important;
+}
+
+/* Card body text (many pages set margin-bottom:0) */
+p[style*="font-size: 16px"][style*="line-height: 24px"][style*="color: #444"][style*="margin-bottom: 0"] {
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+    color: var(--color-text) !important;
+    margin-bottom: 0 !important;
+}
+
+/* Legacy CTA blocks (Ready to ... / Start Your Project) */
+section[style*="padding: 6rem 0"][style*="background: #fafafa"][style*="text-align: center"] {
+    padding: clamp(4rem, 9vw, 6rem) 0 !important;
+    background: #fafafa !important;
+    text-align: center !important;
+}
+section[style*="padding: 6rem 0"][style*="background: #fafafa"][style*="text-align: center"] .container[style*="max-width: 700px"] {
+    max-width: 700px !important;
+}
+section[style*="padding: 6rem 0"][style*="background: #fafafa"][style*="text-align: center"] h2[style*="font-size: 2.5rem"][style*="letter-spacing: -1px"] {
+    font-size: clamp(2rem, 3.6vw, 2.75rem) !important;
+    letter-spacing: -0.03em !important;
+    margin-bottom: 1rem !important;
+    line-height: 1.1 !important;
+}
+section[style*="padding: 6rem 0"][style*="background: #fafafa"][style*="text-align: center"] p[style*="font-size: 1.1rem"][style*="color: #666"][style*="margin-bottom: 2rem"] {
+    font-size: 1.05rem !important;
+    color: var(--color-text-light) !important;
+    margin-bottom: 1.5rem !important;
+}
+section[style*="padding: 6rem 0"][style*="background: #fafafa"][style*="text-align: center"] a.btn.btn-primary[style*="padding: 1rem 2.5rem"][style*="border-radius: 4px"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.95rem 2.25rem !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+    text-decoration: none !important;
+}
+section[style*="padding: 6rem 0"][style*="background: #fafafa"][style*="text-align: center"] a.btn.btn-primary:hover {
+    transform: translateY(-1px);
+}
+
+/* Legacy inline footer blocks (fallback if JS replacement doesn't run) */
+footer[style*="#1a1a1a"] {
+    background: var(--color-bg-dark) !important;
+    color: white !important;
+    padding: 3rem 0 2rem !important;
+}
+footer[style*="#1a1a1a"] p,
+footer[style*="#1a1a1a"] a {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+footer[style*="#1a1a1a"] a:hover {
+    color: rgba(255, 255, 255, 0.92) !important;
+}
+footer[style*="#1a1a1a"] h4 {
+    color: white !important;
+    font-size: 1.05rem !important;
+    line-height: 1.2 !important;
+    margin-top: 0 !important;
+    letter-spacing: -0.01em;
+}
+footer[style*="#1a1a1a"] img[style*="filter: brightness(0) invert(1)"] {
+    opacity: 0.95;
+}
+footer[style*="#1a1a1a"] div[style*="display: grid"][style*="grid-template-columns"][style*="gap: 5rem"] {
+    gap: 3rem !important;
+    margin-bottom: 2.5rem !important;
+}
+footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1px solid #333"] {
+    padding-top: 1.5rem !important;
+    border-top-color: rgba(255, 255, 255, 0.14) !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+}
+@media (max-width: 900px) {
+    footer[style*="#1a1a1a"] div[style*="display: grid"][style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 1.75rem !important;
+    }
+}
+.section-pad-4 { padding: 4rem 0; }
+.section-pad-6 { padding: 6rem 0; }
 
 .section-label {
     display: inline-block;

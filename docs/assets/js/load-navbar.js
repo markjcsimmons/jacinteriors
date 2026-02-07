@@ -919,6 +919,116 @@
         });
     }
 
+    // Gradually replace repeated inline styles with CSS classes.
+    // This lets us unify spacing/typography without editing dozens of HTML files at once.
+    function normalizeLegacyInlineSections() {
+        const sections = Array.from(document.querySelectorAll('section[style]'));
+        sections.forEach((section) => {
+            const styleText = (section.getAttribute('style') || '').toLowerCase();
+
+            const isHeroDark =
+                /padding\s*:\s*3rem\s+0/.test(styleText) &&
+                (/background\s*:\s*#1a1a1a/.test(styleText) || /background-color\s*:\s*#1a1a1a/.test(styleText)) &&
+                /color\s*:\s*(white|#fff)/.test(styleText) &&
+                /margin-top\s*:\s*0/.test(styleText);
+
+            if (isHeroDark) {
+                section.classList.add('section-hero-dark');
+                section.style.removeProperty('padding');
+                section.style.removeProperty('background');
+                section.style.removeProperty('background-color');
+                section.style.removeProperty('color');
+                section.style.removeProperty('margin-top');
+            }
+
+            if (/padding\s*:\s*6rem\s+0/.test(styleText)) {
+                section.classList.add('section-pad-6');
+                section.style.removeProperty('padding');
+            } else if (/padding\s*:\s*4rem\s+0/.test(styleText)) {
+                section.classList.add('section-pad-4');
+                section.style.removeProperty('padding');
+            }
+
+            // If we removed everything, drop the attribute entirely.
+            const after = (section.getAttribute('style') || '').trim();
+            if (!after) section.removeAttribute('style');
+        });
+    }
+
+    function normalizeLegacyContainers() {
+        const containers = Array.from(document.querySelectorAll('.container[style]'));
+        containers.forEach((el) => {
+            const styleText = (el.getAttribute('style') || '').toLowerCase();
+
+            // Keep layout identical, just move max-width into a class.
+            if (/max-width\\s*:\\s*1200px/.test(styleText)) {
+                el.classList.add('container--1200');
+                el.style.removeProperty('max-width');
+            } else if (/max-width\\s*:\\s*1320px/.test(styleText)) {
+                el.classList.add('container--1320');
+                el.style.removeProperty('max-width');
+            } else if (/max-width\\s*:\\s*1340px/.test(styleText)) {
+                el.classList.add('container--1340');
+                el.style.removeProperty('max-width');
+            }
+
+            const after = (el.getAttribute('style') || '').trim();
+            if (!after) el.removeAttribute('style');
+        });
+    }
+
+    function normalizeLegacyHeroTypography() {
+        const titleEls = Array.from(document.querySelectorAll('h1[style]'));
+        titleEls.forEach((h1) => {
+            const s = (h1.getAttribute('style') || '').toLowerCase();
+            const looksLikeLegacyHeroTitle =
+                /font-size\\s*:\\s*3\\.5rem/.test(s) &&
+                /font-weight\\s*:\\s*500/.test(s) &&
+                /letter-spacing\\s*:\\s*-1\\.5px/.test(s) &&
+                /line-height\\s*:\\s*1\\.1/.test(s) &&
+                /color\\s*:\\s*(white|#fff)/.test(s);
+
+            if (!looksLikeLegacyHeroTitle) return;
+
+            h1.classList.add('hero-title');
+            h1.style.removeProperty('font-size');
+            h1.style.removeProperty('font-weight');
+            h1.style.removeProperty('margin');
+            h1.style.removeProperty('letter-spacing');
+            h1.style.removeProperty('line-height');
+            h1.style.removeProperty('color');
+
+            const afterTitle = (h1.getAttribute('style') || '').trim();
+            if (!afterTitle) h1.removeAttribute('style');
+
+            // Subtitle: usually the next <p> in the same container.
+            const scope = h1.parentElement || null;
+            if (!scope) return;
+            const p = scope.querySelector('p[style]');
+            if (!p) return;
+
+            const ps = (p.getAttribute('style') || '').toLowerCase();
+            const looksLikeLegacyHeroSubtitle =
+                /font-size\\s*:\\s*16px/.test(ps) &&
+                /color\\s*:\\s*#ccc/.test(ps) &&
+                /line-height\\s*:\\s*1\\.6/.test(ps) &&
+                /font-weight\\s*:\\s*400/.test(ps) &&
+                /max-width\\s*:\\s*700px/.test(ps);
+
+            if (!looksLikeLegacyHeroSubtitle) return;
+
+            p.classList.add('hero-subtitle');
+            p.style.removeProperty('font-size');
+            p.style.removeProperty('color');
+            p.style.removeProperty('line-height');
+            p.style.removeProperty('font-weight');
+            p.style.removeProperty('max-width');
+
+            const afterP = (p.getAttribute('style') || '').trim();
+            if (!afterP) p.removeAttribute('style');
+        });
+    }
+
     function ensureFooter() {
         if (!document.body) return;
         ensureFooterStyles();
@@ -1043,6 +1153,15 @@
             transformLegacyCityPage();
             applyCityR2Images();
             applyCityFeaturedProject();
+            const normalizeAll = () => {
+                normalizeLegacyInlineSections();
+                normalizeLegacyContainers();
+                normalizeLegacyHeroTypography();
+            };
+            // Run now, then again after layout/scripts settle.
+            normalizeAll();
+            setTimeout(normalizeAll, 0);
+            setTimeout(normalizeAll, 250);
             ensureFooter();
             normalizeContactButtons();
         }
