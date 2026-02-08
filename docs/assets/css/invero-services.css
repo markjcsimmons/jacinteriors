@@ -18,6 +18,17 @@ body.invero-services a {
   transition: 0.25s;
 }
 
+/* Site-wide CTA button: keep black type like other pages
+   (body.invero-services a { color: inherit; } would otherwise override it) */
+body.invero-services .site-cta-button {
+  color: #111111 !important;
+  text-decoration: none !important;
+}
+
+body.invero-services .site-cta-button:hover {
+  color: #111111 !important;
+}
+
 /* Hero */
 body.invero-services .services-hero {
   padding: 2rem 0 3rem;
