@@ -80,7 +80,9 @@
   }
 
   async function fetchProjectImages(projectHref) {
-    const res = await fetch(projectHref, { cache: 'force-cache' });
+    // Avoid stale HTML caching on GitHub Pages; we want the latest image filenames
+    // so cards can consistently resolve to R2/CDN.
+    const res = await fetch(projectHref, { cache: 'no-store' });
     if (!res.ok) throw new Error(`Failed to fetch ${projectHref}`);
     const html = await res.text();
 
@@ -117,7 +119,8 @@
   }
 
   async function fetchProjectCallouts(projectHref) {
-    const res = await fetch(projectHref, { cache: 'force-cache' });
+    // Same rationale as fetchProjectImages(): prevent stale cached HTML.
+    const res = await fetch(projectHref, { cache: 'no-store' });
     if (!res.ok) throw new Error(`Failed to fetch ${projectHref}`);
     const html = await res.text();
     const doc = new DOMParser().parseFromString(html, 'text/html');
