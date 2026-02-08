@@ -264,9 +264,9 @@
 
     host.innerHTML = '';
 
-    const cards = links.map((l, i) => {
-      // Home request: only the 2nd card has the large image on the right
-      const reverse = i === 1;
+    const cards = links.map((l) => {
+      // Home request: keep all cards consistent (large image on the left)
+      const reverse = false;
       return buildCard({ title: l.title, href: l.href, reverse });
     });
 
