@@ -82,6 +82,32 @@ body.invero-services .service-row {
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
+/* Anchor navigation: keep section titles below sticky navbar */
+body.invero-services .service-row[id],
+body.invero-services .services-anchor[id] {
+  scroll-margin-top: 170px;
+}
+
+body.invero-services .services-anchor {
+  display: block;
+  height: 1px;
+}
+
+/* Bullet copy for service sections */
+body.invero-services .service-bullets {
+  margin: 0 0 1.25rem 0;
+  padding-left: 1.1rem;
+}
+
+body.invero-services .service-bullets li {
+  margin: 0.6rem 0;
+  color: #555555;
+  font-size: 1.02rem;
+  line-height: 1.6;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+}
+
 body.invero-services .service-row:hover {
   transform: translateY(-2px);
   border-color: rgba(0, 0, 0, 0.18);

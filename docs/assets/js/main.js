@@ -165,11 +165,13 @@ const SPANav = {
     async navigate(path) {
         if (this.isNavigating) return;
         
-        // Resolve relative paths
-        const fullPath = new URL(path, window.location.href).pathname;
+        // Resolve relative paths (preserve query + hash for anchor navigation)
+        const nextUrl = new URL(path, window.location.href);
+        const fullPath = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
+        const currentFull = `${window.location.pathname}${window.location.search}${window.location.hash}`;
         
         // Don't navigate to same page
-        if (fullPath === window.location.pathname) return;
+        if (fullPath === currentFull) return;
         
         this.isNavigating = true;
         
@@ -190,6 +192,10 @@ const SPANav = {
         }
         
         try {
+            const nextUrl = new URL(path, window.location.href);
+            const fetchPath = `${nextUrl.pathname}${nextUrl.search}`;
+            const hash = nextUrl.hash || '';
+
             // Fade out current content
             if (animate) {
                 contentArea.style.opacity = '0';
@@ -197,7 +203,7 @@ const SPANav = {
             }
             
             // Fetch new page
-            const response = await fetch(path);
+            const response = await fetch(fetchPath);
             if (!response.ok) throw new Error('Page not found');
             
             const html = await response.text();
@@ -238,13 +244,10 @@ const SPANav = {
             }
             
             // Update active nav state
-            this.updateActiveNav(path);
+            this.updateActiveNav(nextUrl.pathname);
             
             // Re-run any inline scripts from the new content
             this.executeScripts(contentArea);
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
             
             // Fade in new content
             if (animate) {
@@ -254,6 +257,19 @@ const SPANav = {
             
             // Re-initialize animations and observers
             this.reinitializeFeatures();
+
+            // Scroll after content + feature re-init (supports anchor navigation).
+            if (hash && hash.length > 1) {
+                const id = hash.slice(1);
+                const target = document.getElementById(id) || document.querySelector(`[name="${CSS.escape(id)}"]`);
+                if (target && typeof target.scrollIntoView === 'function') {
+                    target.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', block: 'start' });
+                } else {
+                    window.scrollTo(0, 0);
+                }
+            } else {
+                window.scrollTo(0, 0);
+            }
             
         } catch (error) {
             console.error('SPA Navigation error:', error);
@@ -268,8 +284,9 @@ const SPANav = {
             link.classList.remove('active');
         });
         
-        // Determine which nav item should be active
-        const filename = path.split('/').pop() || 'index-variant-2.html';
+        // Determine which nav item should be active (path only; strip query/hash)
+        const safePath = String(path || '').split('?')[0].split('#')[0];
+        const filename = safePath.split('/').pop() || 'index-variant-2.html';
         
         document.querySelectorAll('.nav-menu .nav-link, .nav-links .nav-link').forEach(link => {
             const href = link.getAttribute('href');
@@ -285,26 +302,26 @@ const SPANav = {
             }
             
             // Check for section matches (spaces, services, etc.)
-            if (path.includes('bathrooms') || path.includes('bedrooms') || 
-                path.includes('kitchens') || path.includes('dining') ||
-                path.includes('living') || path.includes('office') ||
-                path.includes('kids') || path.includes('entryway') ||
-                path.includes('bar-area') || path.includes('laundry') ||
-                path.includes('outdoor')) {
+            if (safePath.includes('bathrooms') || safePath.includes('bedrooms') || 
+                safePath.includes('kitchens') || safePath.includes('dining') ||
+                safePath.includes('living') || safePath.includes('office') ||
+                safePath.includes('kids') || safePath.includes('entryway') ||
+                safePath.includes('bar-area') || safePath.includes('laundry') ||
+                safePath.includes('outdoor')) {
                 if (link.textContent.trim() === 'SPACES') {
                     link.classList.add('active');
                 }
             }
             
-            if (path.includes('cities') || path.includes('residential') ||
-                path.includes('commercial') || path.includes('interior-styling') ||
-                path.includes('space-planning') || path.includes('services')) {
+            if (safePath.includes('cities') || safePath.includes('residential') ||
+                safePath.includes('commercial') || safePath.includes('interior-styling') ||
+                safePath.includes('space-planning') || safePath.includes('services')) {
                 if (link.textContent.trim() === 'SERVICES') {
                     link.classList.add('active');
                 }
             }
             
-            if (path.includes('projects') || path.includes('portfolio')) {
+            if (safePath.includes('projects') || safePath.includes('portfolio')) {
                 if (link.textContent.trim() === 'PORTFOLIO') {
                     link.classList.add('active');
                 }
