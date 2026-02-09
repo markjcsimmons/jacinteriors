@@ -1995,8 +1995,9 @@ body.invero-blog .journal-title {
     margin: 0 0 1rem 0;
     letter-spacing: -0.03em;
     /* Override global h1 hero sizing for blog pages */
-    font-size: clamp(2.25rem, 4.2vw, 3.6rem);
-    line-height: 1.08;
+    font-size: clamp(2.75rem, 5.6vw, 4.6rem);
+    line-height: 1.04;
+    max-width: 22ch;
 }
 
 body.invero-blog .journal-subtitle {
