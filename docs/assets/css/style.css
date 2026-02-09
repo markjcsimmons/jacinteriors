@@ -2199,3 +2199,66 @@ body.invero-blog .post-backlink {
 body.invero-blog .post-backlink:hover {
     color: var(--color-secondary);
 }
+
+body.invero-blog .post-section-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(34, 42, 38, 0.72);
+    margin-bottom: 1rem;
+}
+
+body.invero-blog .post-more {
+    padding: var(--spacing-xl) 0 var(--spacing-xl);
+}
+
+body.invero-blog .post-more .container {
+    max-width: 1200px;
+}
+
+body.invero-blog .post-more-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+body.invero-blog .post-more-header h2 {
+    margin: 0;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    letter-spacing: -0.02em;
+}
+
+body.invero-blog .post-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(34, 42, 38, 0.8);
+    white-space: nowrap;
+}
+
+body.invero-blog .post-more-link:hover {
+    color: var(--color-secondary);
+}
+
+body.invero-blog .journal-grid--related {
+    gap: 2rem;
+}
+
+body.invero-blog .journal-grid--related .journal-media {
+    aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 760px) {
+    body.invero-blog .post-more-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
