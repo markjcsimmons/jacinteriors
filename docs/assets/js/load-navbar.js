@@ -291,6 +291,16 @@
 
     // Expose SEO helper for SPA navigation re-inits.
     window.__ensureSeoMeta = ensureSeoMeta;
+
+    function ensureAnalytics() {
+        if (!document || !document.head) return;
+        if (document.getElementById('jacAnalytics')) return;
+        const s = document.createElement('script');
+        s.id = 'jacAnalytics';
+        s.defer = true;
+        s.src = getPath('assets/js/analytics.js?v=20260209-1');
+        document.head.appendChild(s);
+    }
     
     // Determine which nav item should be active
     function setActiveNav() {
@@ -304,6 +314,9 @@
         if (filename === 'index.html' || filename === '' || filename === 'index-variant-2.html') {
             const homeLink = nav.querySelector('a[href*="index.html"]');
             if (homeLink) homeLink.classList.add('active');
+        } else if (filename === 'gallery.html') {
+            const link = nav.querySelector('a[href*="gallery.html"]');
+            if (link) link.classList.add('active');
         } else if (filename === 'portfolio.html' || currentPath.includes('/projects/')) {
             const link = nav.querySelector('a[href*="portfolio.html"]');
             if (link) link.classList.add('active');
@@ -385,6 +398,7 @@
             </a>
             <div class="nav-menu" id="navMenu" style="display: flex; gap: 2.5rem; align-items: center;">
                 <a href="${getPath('index.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">HOME</a>
+                <a href="${getPath('gallery.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">GALLERY</a>
                 <div class="nav-dropdown" style="position: relative; display: inline-block;">
                     <a href="${getPath('portfolio.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">PORTFOLIO</a>
                     <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 220px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column; max-height: 500px; overflow-y: auto;">
@@ -449,7 +463,7 @@
                         <a href="${getPath('blog.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">Blog</a>
                     </div>
                 </div>
-                <a href="${getPath('contact.html')}?intent=call#contactForm" class="nav-cta" style="display:inline-flex; align-items:center; justify-content:center; padding:0.65rem 1rem; border-radius:999px; border:1px solid #222a26; background:#222a26; color:#fff; font-size:0.85rem; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; text-decoration:none;">Book a call</a>
+                <a href="${getPath('contact.html')}?intent=call#contactForm" class="nav-cta" aria-label="Book a 15-minute intro call" title="15-minute intro call" style="display:inline-flex; align-items:center; justify-content:center; padding:0.65rem 1rem; border-radius:999px; border:1px solid #222a26; background:#222a26; color:#fff; font-size:0.85rem; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; text-decoration:none;">Book a call</a>
             </div>
             <button class="mobile-menu-toggle" id="mobileMenuToggle" style="display: none;">
                 <span></span><span></span><span></span>
@@ -1304,7 +1318,7 @@
         <div class="site-cta-eyebrow">LET’S WORK TOGETHER</div>
         <h2 class="site-cta-title">Ready to begin?</h2>
         <p class="site-cta-subtitle">
-          Need full-service design or quick guidance? The JAC Interiors team is here to help you design a space that feels like home.
+          Start with a 15‑minute intro call—so we can understand your goals and recommend the right next step.
         </p>
       </div>
       <a class="site-cta-button" href="${contactHref}">
@@ -1576,6 +1590,7 @@
             transformLegacyCityPage();
             applyCityR2Images();
             applyCityFeaturedProject();
+            ensureAnalytics();
             const enforceCta = () => {
                 removeLegacyBottomCtas();
                 ensureSiteCta();

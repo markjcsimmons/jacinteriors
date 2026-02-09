@@ -23,7 +23,13 @@
             <span class="kicker">Contact</span>
             <div class="contact-hero-grid">
                 <h1>Let’s work together.</h1>
-                <p>Share a few details about your project — we’ll reply within 1 business day with next steps.</p>
+                <p>Share a few details about your project — we’ll reply within 1 business day and schedule a 15‑minute intro call.</p>
+            </div>
+            <div class="contact-featured-row" aria-label="Highlights">
+                <span class="featured-pill">15‑minute intro call</span>
+                <span class="featured-pill">Reply within 1 business day</span>
+                <span class="featured-pill">Los Angeles + South Florida</span>
+                <span class="featured-pill">5.0 Houzz</span>
             </div>
         </div>
     </section>
@@ -35,8 +41,8 @@
                 <!-- Contact Form -->
                 <div class="contact-card contact-card--form">
                     <div id="contactForm" aria-hidden="true"></div>
-                    <h2>Send a message</h2>
-                    <p class="muted">Tell us what you’re working on. We’ll respond with a few quick questions and a proposed next step (call or site visit).</p>
+                    <h2>Request an intro call</h2>
+                    <p class="muted">Tell us what you’re working on. We’ll respond with a few quick questions and schedule a short call to see if it’s a fit.</p>
                     
                     <form id="contactFormForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleFormSubmit(event)">
                         <input type="hidden" name="form-name" value="contact">
@@ -96,11 +102,16 @@
                         </div>
                         
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Request intro call</button>
+                            <p class="form-note">No hard sell — just a quick, thoughtful first conversation.</p>
                         </div>
                     </form>
                     <div id="contactSuccess" class="form-success" hidden>
                         Thanks — we received your message. We’ll be in touch within 1 business day.
+                    </div>
+                    <div id="contactError" class="form-error" hidden>
+                        <strong>Something went wrong submitting the form.</strong>
+                        <span>Please call <a href="tel:213-397-0206">213-397-0206</a> or email <a href="mailto:info@jacinteriors.com">info@jacinteriors.com</a>.</span>
                     </div>
                 </div>
 
@@ -128,11 +139,11 @@
                             </li>
                             <li class="next-step">
                                 <span class="step-num">2</span>
-                                <div><strong>Intro call</strong><span>A short call to align on scope, style, and how we can help.</span></div>
+                                <div><strong>15‑minute intro call</strong><span>A short call to align on scope, style, and how we can help.</span></div>
                             </li>
                             <li class="next-step">
                                 <span class="step-num">3</span>
-                                <div><strong>Arrange a visit</strong><span>Arrange a visit at your home to determine project scope and provide initial ideas</span></div>
+                                <div><strong>Next step</strong><span>If it’s a fit, we’ll recommend the best next step (site visit, proposal, or a phased plan).</span></div>
                             </li>
                         </ul>
                     </div>
@@ -265,9 +276,15 @@
             }).then(() => {
                 form.reset();
                 success.hidden = false;
+                if (typeof window.jacTrack === 'function') {
+                    window.jacTrack('contact_form_submit', { status: 'success', source: 'contact_page', intent: 'call' });
+                }
             }).catch(() => {
-                // If submission fails, fall back to normal submission.
-                form.submit();
+                const err = document.getElementById('contactError');
+                if (err) err.hidden = false;
+                if (typeof window.jacTrack === 'function') {
+                    window.jacTrack('contact_form_submit', { status: 'error', source: 'contact_page', intent: 'call' });
+                }
             }).finally(() => {
                 if (submitBtn) {
                     submitBtn.disabled = false;

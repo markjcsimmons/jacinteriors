@@ -358,6 +358,12 @@ const SPANav = {
                 }
             }
 
+            if (safePath.includes('gallery')) {
+                if (link.textContent.trim() === 'GALLERY') {
+                    link.classList.add('active');
+                }
+            }
+
             if (safePath.includes('about') || safePath.includes('blog') || safePath.includes('/blog/')) {
                 if (link.textContent.trim() === 'ABOUT') {
                     link.classList.add('active');

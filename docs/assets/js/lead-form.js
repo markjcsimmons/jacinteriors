@@ -49,6 +49,25 @@
     }
   }
 
+  function applyIntentCopy() {
+    const params = new URLSearchParams(window.location.search || '');
+    const intent = String(params.get('intent') || '').trim().toLowerCase();
+    if (!intent) return;
+
+    const formCard = document.querySelector('.contact-card--form');
+    if (!formCard) return;
+
+    const h2 = formCard.querySelector('h2');
+    const muted = formCard.querySelector('p.muted');
+    const submitBtn = formCard.querySelector('button[type="submit"]');
+
+    if (intent === 'call') {
+      if (h2) h2.textContent = 'Book a 15‑minute intro call';
+      if (muted) muted.textContent = 'Share a few details. We’ll reply within 1 business day and schedule a short intro call to align on scope, style, and timing.';
+      if (submitBtn) submitBtn.textContent = 'Request intro call';
+    }
+  }
+
   function bootHomeLeadForm() {
     const leadForm = document.querySelector('form[data-lead-form="1"]');
     if (!leadForm) return;
@@ -71,6 +90,16 @@
       if (location) params.set('location', location);
       if (projectType) params.set('projectType', projectType);
 
+      if (typeof window.jacTrack === 'function') {
+        window.jacTrack('lead_form_start', {
+          source: 'home',
+          intent: 'call',
+          has_email: !!email,
+          has_location: !!location,
+          has_project_type: !!projectType,
+        });
+      }
+
       // Route to contact and focus the form.
       window.location.href = `contact.html?${params.toString()}#contactForm`;
     });
@@ -79,6 +108,7 @@
   function boot() {
     bootHomeLeadForm();
     bootPrefill();
+    applyIntentCopy();
   }
 
   if (document.readyState === 'loading') {
