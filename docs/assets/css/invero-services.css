@@ -219,6 +219,19 @@ body.invero-services .learn-more {
   letter-spacing: -0.2px;
 }
 
+body.invero-services .service-inline-link {
+  margin: -0.25rem 0 1.25rem 0;
+  color: rgba(34, 42, 38, 0.75);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  letter-spacing: -0.1px;
+}
+
+body.invero-services .service-inline-link a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 body.invero-services .learn-more:hover {
   opacity: 0.75;
 }

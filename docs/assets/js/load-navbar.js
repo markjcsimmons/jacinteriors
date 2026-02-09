@@ -57,12 +57,21 @@
 
         const siteName = 'JAC Interiors';
         const defaultDescription = 'Full-service interior design studio creating refined, timeless spaces across Los Angeles and beyond.';
+        const canonicalHost = 'https://jacinteriors.com';
 
-        // Canonical URL: strip query params + hash.
-        const canonicalUrl = new URL(window.location.href);
-        canonicalUrl.search = '';
-        canonicalUrl.hash = '';
-        const canonicalHref = canonicalUrl.toString();
+        function getCanonicalPathname() {
+            // Prefer stripping GitHub project basePath from canonical URLs.
+            let p = window.location.pathname || '/';
+            if (basePath && p.startsWith(basePath + '/')) {
+                p = p.slice(basePath.length);
+            }
+            if (!p.startsWith('/')) p = '/' + p;
+            // Canonicalize /index.html to /
+            if (p === '/index.html') return '/';
+            return p;
+        }
+
+        const canonicalHref = canonicalHost + getCanonicalPathname();
 
         let canonicalEl = document.querySelector('link[rel="canonical"]');
         if (!canonicalEl) {
@@ -80,13 +89,118 @@
             document.head.appendChild(descEl);
         }
         const existingDesc = (descEl.getAttribute('content') || '').trim();
-        if (!existingDesc) {
-            descEl.setAttribute('content', defaultDescription);
+
+        function humanizeFromFilename(name) {
+            const raw = String(name || '').replace(/\.html$/i, '').replace(/[-_]+/g, ' ').trim();
+            if (!raw) return '';
+            return raw.replace(/\b\w/g, (m) => m.toUpperCase());
         }
 
-        const title = (document.title || siteName).trim();
+        function getPageSignals() {
+            const pathname = getCanonicalPathname();
+            const file = pathname.split('/').filter(Boolean).pop() || 'index.html';
+            const h1 = document.querySelector('main h1') || document.querySelector('h1');
+            const h1Text = (h1 && h1.textContent) ? h1.textContent.replace(/\s+/g, ' ').trim() : '';
+
+            const isBlogPost = pathname.startsWith('/blog/') && file.endsWith('.html') && file !== 'blog.html';
+            const isCityPage = pathname.startsWith('/cities/') && file.endsWith('.html');
+            const isProjectPage = pathname.startsWith('/projects/') && file.endsWith('.html');
+            const isSpacesPage = [
+                'bathrooms.html',
+                'bedrooms.html',
+                'kitchens.html',
+                'dining-rooms.html',
+                'living-spaces.html',
+                'office-spaces.html',
+                'entryways.html',
+                'bar-area.html',
+                'laundry-rooms.html',
+                'outdoor-spaces.html',
+            ].includes(file);
+
+            return { pathname, file, h1Text, isBlogPost, isCityPage, isProjectPage, isSpacesPage };
+        }
+
+        function pickOgImageUrl() {
+            const candidates = [
+                '.post-cover img',
+                '.journal-media img',
+                'main img',
+                'img',
+            ];
+            for (const sel of candidates) {
+                const img = document.querySelector(sel);
+                if (!img) continue;
+                const src = (img.getAttribute('src') || '').trim();
+                const dataLocal = (img.getAttribute('data-r2-local-src') || '').trim();
+                const pick = (src && !src.startsWith('data:')) ? src : (dataLocal || '');
+                if (!pick || pick.startsWith('data:')) continue;
+                try {
+                    return new URL(pick, window.location.href).toString();
+                } catch (e) {
+                    // ignore
+                }
+            }
+            // Fallback: site logo
+            try {
+                return new URL(getPath(LOGO_SRC), window.location.href).toString();
+            } catch (e) {
+                return '';
+            }
+        }
+
+        function computeSeoOverrides() {
+            const s = getPageSignals();
+            const title = (document.title || siteName).trim();
+            const fromH1 = s.h1Text || humanizeFromFilename(s.file);
+
+            // Only override description if missing in the HTML head.
+            let description = existingDesc;
+            if (!description) {
+                if (s.file === 'index.html' || s.file === '' || s.pathname === '/') {
+                    description = 'Luxury interior design studio serving Los Angeles and Florida. Full-service residential design, developer interiors, and commercial spaces.';
+                } else if (s.file === 'services.html') {
+                    description = 'Interior design services from JAC Interiors—residential design, developer interiors, sourcing & purchasing, construction supervision, space planning, and commercial design.';
+                } else if (s.file === 'portfolio.html') {
+                    description = 'Explore JAC Interiors’ portfolio of luxury interior design projects across Los Angeles, California, and beyond.';
+                } else if (s.file === 'cities-we-serve.html') {
+                    description = 'Explore the Los Angeles and Florida cities JAC Interiors serves for full-service interior design. Find your city and book a call.';
+                } else if (s.file === 'about.html') {
+                    description = 'Meet JAC Interiors—full-service interior design studio creating refined, timeless spaces across Los Angeles and beyond.';
+                } else if (s.file === 'contact.html') {
+                    description = 'Contact JAC Interiors to start your project. Book a call and tell us about your space, timeline, and goals.';
+                } else if (s.file === 'blog.html') {
+                    description = 'Interior design ideas, insights, and inspiration from JAC Interiors—tips, style notes, and guides for elevated living.';
+                } else if (s.isBlogPost) {
+                    description = defaultDescription;
+                } else if (s.isCityPage) {
+                    description = `Full-service interior design in ${fromH1 || 'your city'}—residential design, developer interiors, and commercial spaces. Book a call with JAC Interiors.`;
+                } else if (s.isProjectPage) {
+                    description = `Explore ${fromH1 || 'this project'}—a JAC Interiors interior design project. View images and details from our portfolio.`;
+                } else if (s.isSpacesPage) {
+                    description = `Explore ${fromH1 || 'spaces'} designed by JAC Interiors—timeless interiors with refined details and livable comfort.`;
+                } else {
+                    description = defaultDescription;
+                }
+            }
+
+            // OG type and image selection
+            const ogType = s.isBlogPost ? 'article' : 'website';
+            const ogImage = pickOgImageUrl();
+
+            return { title, description, ogType, ogImage };
+        }
+
+        const overrides = computeSeoOverrides();
+
+        // Ensure meta description is populated (unique where possible).
+        if (!existingDesc || overrides.description) {
+            descEl.setAttribute('content', (overrides.description || defaultDescription).trim());
+        }
+
+        const title = (overrides.title || siteName).trim();
         const description = (descEl.getAttribute('content') || defaultDescription).trim();
-        const ogImage = new URL(getPath(LOGO_SRC), window.location.href).toString();
+        const ogImage = (overrides.ogImage || '').trim();
 
         function upsertMeta(attr, key, content) {
             if (!content) return;
@@ -104,7 +218,7 @@
         upsertMeta('property', 'og:title', title);
         upsertMeta('property', 'og:description', description);
         upsertMeta('property', 'og:url', canonicalHref);
-        upsertMeta('property', 'og:type', 'website');
+        upsertMeta('property', 'og:type', overrides.ogType || 'website');
         upsertMeta('property', 'og:image', ogImage);
 
         // Twitter
@@ -123,7 +237,7 @@
             document.head.appendChild(ld);
         }
 
-        const siteRoot = new URL(basePath ? `${basePath}/` : '/', window.location.origin).toString();
+        const siteRoot = canonicalHost + '/';
         const org = {
             '@context': 'https://schema.org',
             '@type': ['LocalBusiness', 'ProfessionalService'],
@@ -152,7 +266,31 @@
         } catch (e) {
             // If JSON serialization fails, fail silently (never break page rendering).
         }
+
+        // WebSite JSON-LD (sitewide)
+        const websiteJsonLdId = 'jacWebsiteJsonLd';
+        let websiteLd = document.getElementById(websiteJsonLdId);
+        if (!websiteLd) {
+            websiteLd = document.createElement('script');
+            websiteLd.id = websiteJsonLdId;
+            websiteLd.type = 'application/ld+json';
+            document.head.appendChild(websiteLd);
+        }
+        const website = {
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: siteName,
+            url: siteRoot,
+        };
+        try {
+            websiteLd.textContent = JSON.stringify(website);
+        } catch (e) {
+            // ignore
+        }
     }
+
+    // Expose SEO helper for SPA navigation re-inits.
+    window.__ensureSeoMeta = ensureSeoMeta;
     
     // Determine which nav item should be active
     function setActiveNav() {
@@ -1345,6 +1483,7 @@
         <h4>Services</h4>
         <ul>
           <li><a href="${getPath('residential-design.html')}">Residential Interior Design</a></li>
+          <li><a href="${getPath('kitchen-design.html')}">Kitchen Design</a></li>
           <li><a href="${getPath('commercial-design.html')}">Commercial Interior Design</a></li>
           <li><a href="${getPath('interior-styling.html')}">Interior Styling &amp; Decor</a></li>
           <li><a href="${getPath('concept-design.html')}">Concept Design &amp; Visualization</a></li>
@@ -1359,6 +1498,7 @@
           <li><a href="${getPath('about.html')}">Who We Are</a></li>
           <li><a href="${getPath('portfolio.html')}">Portfolio</a></li>
           <li><a href="${getPath('blog.html')}">Blog</a></li>
+          <li><a href="${getPath('cities-we-serve.html')}">Cities We Serve</a></li>
           <li><a href="${getPath('services.html')}">Services</a></li>
           <li><a href="${getPath('contact.html')}">Contact</a></li>
         </ul>

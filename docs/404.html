@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Page not found. Explore JAC Interiors services, portfolio, blog, or contact us to book a call." />
+    <title>Page not found | JAC Interiors</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=20260209-1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="assets/js/load-navbar.js?v=20260209-1" defer></script>
+    <style>
+      /* Simple, scoped 404 layout */
+      body.not-found {
+        background: #ffffff;
+      }
+      .nf {
+        padding: 5rem 0 6rem;
+      }
+      .nf-card {
+        border: 1px solid var(--color-border, #e4e4e4);
+        border-radius: 10px;
+        padding: 2.25rem;
+        background: #ffffff;
+        max-width: 880px;
+        margin: 0 auto;
+      }
+      .nf-kicker {
+        font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        color: rgba(34, 42, 38, 0.65);
+        margin-bottom: 0.85rem;
+      }
+      .nf h1 {
+        margin: 0 0 0.75rem 0;
+        letter-spacing: -0.03em;
+        font-weight: 650;
+        font-size: clamp(2.3rem, 5vw, 3.5rem);
+        line-height: 1.08;
+      }
+      .nf p {
+        margin: 0 0 1.5rem 0;
+        color: rgba(34, 42, 38, 0.78);
+        font-size: 1.05rem;
+        line-height: 1.65;
+        max-width: 70ch;
+      }
+      .nf-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+      }
+      .nf-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+        border-radius: 999px;
+        border: 1px solid rgba(34, 42, 38, 0.22);
+        text-decoration: none;
+        font-weight: 750;
+        color: #222a26;
+        background: rgba(34, 42, 38, 0.03);
+      }
+      .nf-links a.primary {
+        background: #222a26;
+        color: #ffffff;
+        border-color: #222a26;
+      }
+    </style>
+  </head>
+  <body class="not-found">
+    <main class="nf" aria-label="Page not found">
+      <div class="container">
+        <div class="nf-card">
+          <div class="nf-kicker">404</div>
+          <h1>That page doesn’t exist.</h1>
+          <p>
+            The link may be outdated, or the URL may have been typed incorrectly. You can head back to the home page or jump to a
+            popular section below.
+          </p>
+          <div class="nf-links" aria-label="Helpful links">
+            <a class="primary" href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html?intent=call#contactForm">Book a call</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
+

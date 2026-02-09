@@ -242,6 +242,37 @@ const SPANav = {
             if (newTitle) {
                 document.title = newTitle.textContent;
             }
+
+            // Update meta description from the fetched page (if present).
+            const newDesc = doc.querySelector('meta[name="description"]');
+            if (newDesc && newDesc.getAttribute('content')) {
+                let desc = document.querySelector('meta[name="description"]');
+                if (!desc) {
+                    desc = document.createElement('meta');
+                    desc.setAttribute('name', 'description');
+                    document.head.appendChild(desc);
+                }
+                desc.setAttribute('content', newDesc.getAttribute('content'));
+            }
+
+            // Replace BlogPosting JSON-LD (if the destination page defines it).
+            // This prevents stale BlogPosting markup when navigating without full reload.
+            const destBlogLd = Array.from(doc.querySelectorAll('script[type="application/ld+json"]')).filter((s) =>
+                /\"@type\"\\s*:\\s*\"BlogPosting\"/i.test(s.textContent || '')
+            );
+            if (destBlogLd.length) {
+                Array.from(document.head.querySelectorAll('script[type="application/ld+json"]')).forEach((s) => {
+                    if (/\"@type\"\\s*:\\s*\"BlogPosting\"/i.test(s.textContent || '')) {
+                        s.remove();
+                    }
+                });
+                destBlogLd.forEach((s) => {
+                    const clone = document.createElement('script');
+                    clone.type = 'application/ld+json';
+                    clone.textContent = s.textContent || '';
+                    document.head.appendChild(clone);
+                });
+            }
             
             // Update active nav state
             this.updateActiveNav(nextUrl.pathname);
@@ -378,6 +409,14 @@ const SPANav = {
         }
         if (typeof window.__optimizeImages === 'function') {
             window.__optimizeImages(document);
+        }
+
+        // Refresh canonical/OG/twitter meta (useful if SPA nav is enabled).
+        if (typeof window.__ensureSeoMeta === 'function') {
+            window.__ensureSeoMeta();
+            setTimeout(() => {
+                try { window.__ensureSeoMeta(); } catch (e) {}
+            }, 250);
         }
 
         // Page-specific sections that render via JS (safe no-op if absent)
