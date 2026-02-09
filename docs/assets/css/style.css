@@ -1969,3 +1969,229 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     .hero-title-mega { font-size: 3.5rem; }
     .hero-cta-group { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
 }
+
+/* -----------------------------
+   Blog (Journal) layout (2026)
+   ----------------------------- */
+body.invero-blog .journal-hero {
+    padding: calc(var(--spacing-xl) + 2.75rem) 0 var(--spacing-md);
+}
+
+body.invero-blog .journal-hero .container {
+    max-width: 1200px;
+}
+
+body.invero-blog .journal-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(34, 42, 38, 0.75);
+    margin-bottom: 1rem;
+}
+
+body.invero-blog .journal-title {
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.03em;
+}
+
+body.invero-blog .journal-subtitle {
+    margin: 0;
+    max-width: 68ch;
+    color: var(--color-text-light);
+}
+
+body.invero-blog .journal-grid-section {
+    padding: var(--spacing-md) 0 var(--spacing-xl);
+}
+
+body.invero-blog .journal-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.25rem;
+}
+
+body.invero-blog .journal-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    background: #fff;
+    transition: var(--transition);
+    min-height: 100%;
+}
+
+body.invero-blog .journal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+}
+
+body.invero-blog .journal-media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--color-bg-alt);
+}
+
+body.invero-blog .journal-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+body.invero-blog .journal-card:hover .journal-media img {
+    transform: scale(1.03);
+}
+
+body.invero-blog .journal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem 1.5rem 1.75rem;
+}
+
+body.invero-blog .journal-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(34, 42, 38, 0.7);
+}
+
+body.invero-blog .journal-kicker::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--color-primary);
+    display: inline-block;
+}
+
+body.invero-blog .journal-card h3 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    line-height: 1.15;
+}
+
+body.invero-blog .journal-excerpt {
+    margin: 0;
+    color: var(--color-text-light);
+    font-size: 1.02rem;
+}
+
+body.invero-blog .journal-readmore {
+    margin-top: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+body.invero-blog .journal-readmore span[aria-hidden="true"] {
+    transition: var(--transition);
+}
+
+body.invero-blog .journal-card:hover .journal-readmore span[aria-hidden="true"] {
+    transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+    body.invero-blog .journal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    body.invero-blog .journal-hero {
+        padding-top: calc(var(--spacing-xl) + 2.25rem);
+    }
+    body.invero-blog .journal-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    body.invero-blog .journal-body {
+        padding: 1.25rem 1.25rem 1.5rem;
+    }
+}
+
+/* Blog post detail pages */
+body.invero-blog .post-shell {
+    padding: 0 0 var(--spacing-xl);
+}
+
+body.invero-blog .post-shell .container {
+    max-width: 900px;
+}
+
+body.invero-blog .post-meta {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    color: rgba(34, 42, 38, 0.7);
+    font-size: 0.95rem;
+}
+
+body.invero-blog .post-meta .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(34, 42, 38, 0.35);
+    display: inline-block;
+    align-self: center;
+}
+
+body.invero-blog .post-cover {
+    margin-top: 2rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+body.invero-blog .post-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+body.invero-blog .post-content {
+    padding: 2.25rem 0 0;
+}
+
+body.invero-blog .post-content h2 {
+    font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+    margin: 2.5rem 0 1rem;
+}
+
+body.invero-blog .post-content ul {
+    padding-left: 1.25rem;
+    margin: 0 0 1.25rem 0;
+}
+
+body.invero-blog .post-content li {
+    margin: 0.4rem 0;
+    color: var(--color-text-light);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+body.invero-blog .post-backlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: rgba(34, 42, 38, 0.8);
+}
+
+body.invero-blog .post-backlink:hover {
+    color: var(--color-secondary);
+}

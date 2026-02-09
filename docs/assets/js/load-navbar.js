@@ -51,6 +51,108 @@
         // For root-level relative paths, use absolute paths with basePath
         return basePath + '/' + href;
     }
+
+    function ensureSeoMeta() {
+        if (!document || !document.head) return;
+
+        const siteName = 'JAC Interiors';
+        const defaultDescription = 'Full-service interior design studio creating refined, timeless spaces across Los Angeles and beyond.';
+
+        // Canonical URL: strip query params + hash.
+        const canonicalUrl = new URL(window.location.href);
+        canonicalUrl.search = '';
+        canonicalUrl.hash = '';
+        const canonicalHref = canonicalUrl.toString();
+
+        let canonicalEl = document.querySelector('link[rel="canonical"]');
+        if (!canonicalEl) {
+            canonicalEl = document.createElement('link');
+            canonicalEl.setAttribute('rel', 'canonical');
+            document.head.appendChild(canonicalEl);
+        }
+        canonicalEl.setAttribute('href', canonicalHref);
+
+        // Ensure meta description exists.
+        let descEl = document.querySelector('meta[name="description"]');
+        if (!descEl) {
+            descEl = document.createElement('meta');
+            descEl.setAttribute('name', 'description');
+            document.head.appendChild(descEl);
+        }
+        const existingDesc = (descEl.getAttribute('content') || '').trim();
+        if (!existingDesc) {
+            descEl.setAttribute('content', defaultDescription);
+        }
+
+        const title = (document.title || siteName).trim();
+        const description = (descEl.getAttribute('content') || defaultDescription).trim();
+        const ogImage = new URL(getPath(LOGO_SRC), window.location.href).toString();
+
+        function upsertMeta(attr, key, content) {
+            if (!content) return;
+            let el = document.querySelector(`meta[${attr}="${key}"]`);
+            if (!el) {
+                el = document.createElement('meta');
+                el.setAttribute(attr, key);
+                document.head.appendChild(el);
+            }
+            el.setAttribute('content', content);
+        }
+
+        // Open Graph
+        upsertMeta('property', 'og:site_name', siteName);
+        upsertMeta('property', 'og:title', title);
+        upsertMeta('property', 'og:description', description);
+        upsertMeta('property', 'og:url', canonicalHref);
+        upsertMeta('property', 'og:type', 'website');
+        upsertMeta('property', 'og:image', ogImage);
+
+        // Twitter
+        upsertMeta('name', 'twitter:card', 'summary_large_image');
+        upsertMeta('name', 'twitter:title', title);
+        upsertMeta('name', 'twitter:description', description);
+        upsertMeta('name', 'twitter:image', ogImage);
+
+        // Organization JSON-LD (sitewide)
+        const jsonLdId = 'jacJsonLd';
+        let ld = document.getElementById(jsonLdId);
+        if (!ld) {
+            ld = document.createElement('script');
+            ld.id = jsonLdId;
+            ld.type = 'application/ld+json';
+            document.head.appendChild(ld);
+        }
+
+        const siteRoot = new URL(basePath ? `${basePath}/` : '/', window.location.origin).toString();
+        const org = {
+            '@context': 'https://schema.org',
+            '@type': ['LocalBusiness', 'ProfessionalService'],
+            name: siteName,
+            url: siteRoot,
+            logo: ogImage,
+            image: ogImage,
+            telephone: '+1-213-397-0206',
+            email: 'info@jacinteriors.com',
+            address: {
+                '@type': 'PostalAddress',
+                streetAddress: '8033 W Sunset Blvd #107',
+                addressLocality: 'Los Angeles',
+                addressRegion: 'CA',
+                postalCode: '90046',
+                addressCountry: 'US'
+            },
+            sameAs: [
+                'https://www.instagram.com/jacinteriors',
+                'https://www.houzz.com/professionals/interior-designers-and-decorators/jac-interiors-pfvwus-pf~914469284?'
+            ]
+        };
+
+        try {
+            ld.textContent = JSON.stringify(org);
+        } catch (e) {
+            // If JSON serialization fails, fail silently (never break page rendering).
+        }
+    }
     
     // Determine which nav item should be active
     function setActiveNav() {
@@ -79,7 +181,7 @@
                    filename.includes('space-planning.html') || filename.includes('cities-we-serve.html')) {
             const link = nav.querySelector('a[href*="services.html"]');
             if (link) link.classList.add('active');
-        } else if (filename === 'about.html') {
+        } else if (filename === 'about.html' || filename === 'blog.html' || currentPath.includes('/blog/')) {
             const link = nav.querySelector('a[href*="about.html"]');
             if (link) link.classList.add('active');
         } else if (filename === 'contact.html') {
@@ -202,7 +304,13 @@
                         <a href="${getPath('cities-we-serve.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">Cities We Serve</a>
                     </div>
                 </div>
-                <a href="${getPath('about.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">ABOUT</a>
+                <div class="nav-dropdown" style="position: relative; display: inline-block;">
+                    <a href="${getPath('about.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">ABOUT</a>
+                    <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column;">
+                        <a href="${getPath('about.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Who We Are</a>
+                        <a href="${getPath('blog.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">Blog</a>
+                    </div>
+                </div>
                 <a href="${getPath('contact.html')}?intent=call#contactForm" class="nav-cta" style="display:inline-flex; align-items:center; justify-content:center; padding:0.65rem 1rem; border-radius:999px; border:1px solid #222a26; background:#222a26; color:#fff; font-size:0.85rem; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; text-decoration:none;">Book a call</a>
             </div>
             <button class="mobile-menu-toggle" id="mobileMenuToggle" style="display: none;">
@@ -1248,8 +1356,9 @@
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="${getPath('about.html')}">About</a></li>
+          <li><a href="${getPath('about.html')}">Who We Are</a></li>
           <li><a href="${getPath('portfolio.html')}">Portfolio</a></li>
+          <li><a href="${getPath('blog.html')}">Blog</a></li>
           <li><a href="${getPath('services.html')}">Services</a></li>
           <li><a href="${getPath('contact.html')}">Contact</a></li>
         </ul>
@@ -1346,6 +1455,7 @@
             setTimeout(enforceCta, 600);
             ensureFooter();
             normalizeContactButtons();
+            ensureSeoMeta();
         }
     }
     
