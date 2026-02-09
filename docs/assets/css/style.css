@@ -2164,6 +2164,16 @@ body.invero-blog .post-cover img {
     object-fit: cover;
 }
 
+body.invero-blog .post-cover--contain {
+    aspect-ratio: auto;
+    overflow: visible;
+}
+
+body.invero-blog .post-cover--contain img {
+    height: auto;
+    object-fit: contain;
+}
+
 body.invero-blog .post-content {
     padding: 2.25rem 0 0;
 }
