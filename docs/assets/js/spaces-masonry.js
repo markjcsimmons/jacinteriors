@@ -45,14 +45,14 @@
       container.style.boxSizing = "border-box";
     }
 
-    const img = item.querySelector("img");
-    if (img) {
-      img.style.setProperty("width", "100%", "important");
-      img.style.setProperty("max-width", "100%", "important");
-      img.style.setProperty("height", "auto", "important");
-      img.style.setProperty("display", "block", "important");
-      img.style.setProperty("object-fit", "contain", "important");
-      img.style.setProperty("box-sizing", "border-box", "important");
+    const media = item.querySelector("img, video");
+    if (media) {
+      media.style.setProperty("width", "100%", "important");
+      media.style.setProperty("max-width", "100%", "important");
+      media.style.setProperty("height", "auto", "important");
+      media.style.setProperty("display", "block", "important");
+      media.style.setProperty("object-fit", "contain", "important");
+      media.style.setProperty("box-sizing", "border-box", "important");
     }
   }
 
@@ -108,37 +108,42 @@
     }, 50);
   }
 
-  function wireImageHandlers(grid) {
-    const imgs = Array.from(grid.querySelectorAll("img"));
-    imgs.forEach((img) => {
-      if (img.dataset.masonryWired === "1") return;
-      img.dataset.masonryWired = "1";
+  function shouldDelayHide(el) {
+    return el?.dataset?.r2Managed === "1" && el.dataset.r2Final !== "1" && el.dataset.r2Space;
+  }
 
-      // If the image fails, hide the tile and reflow.
-      img.addEventListener(
+  function hideTileFor(el) {
+    const tile = el.closest(".parallax-image") || el.closest("a") || el.parentElement;
+    if (tile && tile.dataset) tile.dataset.masonryHidden = "1";
+    if (tile && tile.style) tile.style.display = "none";
+  }
+
+  function wireMediaHandlers(grid) {
+    const mediaEls = Array.from(grid.querySelectorAll("img, video"));
+    mediaEls.forEach((el) => {
+      if (el.dataset.masonryWired === "1") return;
+      el.dataset.masonryWired = "1";
+
+      el.addEventListener(
         "error",
         () => {
-          // Spaces only: if R2 is managing and might retry (nested path), don't hide yet.
-          // Projects (no r2Space) have no retry; hide immediately.
-          if (img.dataset?.r2Managed === "1" && img.dataset.r2Final !== "1" && img.dataset.r2Space) {
+          if (shouldDelayHide(el)) {
             scheduleRelayout();
             return;
           }
-          const tile = img.closest(".parallax-image") || img.parentElement;
-          if (tile && tile.dataset) tile.dataset.masonryHidden = "1";
-          if (tile && tile.style) tile.style.display = "none";
+          hideTileFor(el);
           scheduleRelayout();
         },
         { once: true }
       );
 
-      img.addEventListener(
-        "load",
-        () => {
-          scheduleRelayout();
-        },
-        { once: true }
-      );
+      // Images fire "load"; videos fire "loadedmetadata"/"loadeddata"
+      if (el.tagName === "IMG") {
+        el.addEventListener("load", () => scheduleRelayout(), { once: true });
+      } else {
+        el.addEventListener("loadedmetadata", () => scheduleRelayout(), { once: true });
+        el.addEventListener("loadeddata", () => scheduleRelayout(), { once: true });
+      }
     });
   }
 
@@ -147,7 +152,7 @@
     if (!grids.length) return;
 
     grids.forEach((grid) => {
-      wireImageHandlers(grid);
+      wireMediaHandlers(grid);
     });
 
     scheduleRelayout();

@@ -12,6 +12,13 @@
   display: block;
 }
 
+.image-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #000;
+}
+
 .image-gallery-grid {
   position: relative;
   width: 100%;
@@ -47,6 +54,15 @@
 }
 
 .image-gallery-grid .image-container img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: contain !important;
+  box-sizing: border-box !important;
+}
+
+.image-gallery-grid .image-container video {
   width: 100% !important;
   max-width: 100% !important;
   height: auto !important;

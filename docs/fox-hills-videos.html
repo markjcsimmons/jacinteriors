@@ -3,24 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="A curated gallery of JAC Interiors projects — refined, timeless spaces across Los Angeles and South Florida."
-    />
-    <title>Gallery | JAC Interiors</title>
-    <link rel="stylesheet" href="assets/css/style.css?v=20260209-2" />
-    <link rel="stylesheet" href="assets/css/spaces-masonry.css?v=20260210-2" />
+    <meta name="description" content="Video gallery from the Fox Hills project by JAC Interiors." />
+    <title>Fox Hills Videos | JAC Interiors</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=20260210-1" />
+    <link rel="stylesheet" href="assets/css/spaces-masonry.css?v=20260210-3" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <script defer src="assets/js/spaces-masonry.js?v=20260210-1"></script>
+    <script defer src="assets/js/spaces-masonry.js?v=20260210-2"></script>
     <script src="assets/js/r2-config.js?v=20260209-2"></script>
-    <script defer src="assets/js/r2-images.js?v=20260209-2"></script>
     <script src="assets/js/load-navbar.js?v=20260209-1" defer></script>
-    <script src="assets/js/gallery.js?v=20260210-8" defer></script>
+    <script src="assets/js/fox-hills-videos.js?v=20260210-1" defer></script>
   </head>
   <body>
     <main>
@@ -36,30 +32,32 @@
               color: white;
             "
           >
-            Gallery
+            Fox Hills Videos
           </h1>
           <p style="font-size: 16px; color: #ccc; line-height: 1.6; font-weight: 400; max-width: 700px;">
-            Click any image to see the project.
+            A curated set of project clips. Tap any video to play.
           </p>
         </div>
       </section>
 
-      <section style="padding: 4rem 0;" aria-label="Project image gallery">
+      <section style="padding: 4rem 0;" aria-label="Fox Hills video gallery">
         <div class="container" style="max-width: 1400px;">
-          <div id="galleryGrid" class="image-gallery-grid gallery-masonry-grid" style="margin-bottom: 2rem;" aria-live="polite">
+          <div id="videosGrid" class="image-gallery-grid gallery-masonry-grid" style="margin-bottom: 2rem;" aria-live="polite">
             <noscript>
               <p style="color: rgba(34, 42, 38, 0.75); font-size: 1rem; line-height: 1.6">
-                Please enable JavaScript to view the gallery.
+                Please enable JavaScript to view the videos.
               </p>
             </noscript>
           </div>
 
-          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2.75rem;">
-            <a class="btn btn-secondary" href="fox-hills-videos.html" style="padding: 0.95rem 2.25rem;">See videos</a>
-            <button id="galleryLoadMore" class="btn btn-primary" type="button" style="padding: 0.95rem 2.25rem;">
-              Load more
-            </button>
+          <div id="videosControls" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+            <a class="btn btn-secondary" href="gallery.html" style="padding: 0.95rem 2.25rem;">Back to gallery</a>
+            <button id="videosLoadMore" class="btn btn-primary" type="button" style="padding: 0.95rem 2.25rem;">Load more</button>
           </div>
+          <p
+            id="videosStatus"
+            style="text-align: center; margin-top: 1rem; color: rgba(34, 42, 38, 0.72); font-size: 0.95rem; line-height: 1.6"
+          ></p>
         </div>
       </section>
     </main>
