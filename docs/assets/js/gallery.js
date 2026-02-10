@@ -219,6 +219,9 @@
           altSuffix: `Image ${round + 1}`,
           eager: count < 10,
         });
+        // Gallery tiles are injected after the global scroll animation boot,
+        // so force them visible immediately (otherwise `.scale-in-image` stays opacity: 0).
+        tile.classList.add("visible");
 
         // Local project image: load from CDN with local fallback.
         if (src.startsWith("assets/images/projects/")) {
