@@ -125,7 +125,8 @@
   function createMasonryTile({ href, label, altSuffix, eager }) {
     // Use a real link so click + open-in-new-tab works.
     const tile = document.createElement("a");
-    tile.className = "parallax-image scale-in-image hover-zoom-image";
+    // Avoid `.parallax-image` on Gallery: it can shift some wide images out of view.
+    tile.className = "scale-in-image hover-zoom-image";
     tile.href = href;
     tile.setAttribute("aria-label", `View project: ${label}`);
 
