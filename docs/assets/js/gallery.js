@@ -1,11 +1,14 @@
-// Gallery page: masonry grid sourced from Portfolio dropdown order.
+// Gallery page: project-page masonry look, one image per project (dropdown order).
 (function () {
   "use strict";
 
-  const DEFAULT_R2 = "https://jacinteriorscdn.com";
+  const DEFAULT_R2_BASE = "https://jacinteriorscdn.com";
+  const FALLBACK_PRIMARY = "assets/images/projects/bg-hero_2000x7e9e.jpg";
+  const PLACEHOLDER_SRC =
+    "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
-  function getR2Base() {
-    return String(window.R2_IMAGE_BASE || DEFAULT_R2).replace(/\/+$/, "");
+  function r2Base() {
+    return String(window.R2_IMAGE_BASE || DEFAULT_R2_BASE).replace(/\/+$/, "");
   }
 
   function sleep(ms) {
@@ -16,12 +19,6 @@
     return String(text || "").replace(/\s+/g, " ").trim();
   }
 
-  function extractProjectSlugFromHref(href) {
-    const h = String(href || "");
-    const m = h.match(/projects\/([^/?#]+)\.html/i);
-    return m ? decodeURIComponent(m[1]) : "";
-  }
-
   function findPortfolioProjectLinks() {
     const nav = document.querySelector("nav.navbar");
     if (!nav) return [];
@@ -30,125 +27,136 @@
     const portfolioDropdown = portfolioLink ? portfolioLink.closest(".nav-dropdown") : null;
     if (!portfolioDropdown) return [];
 
-    const links = Array.from(
+    return Array.from(
       portfolioDropdown.querySelectorAll('.nav-dropdown-content a[href*="projects/"]')
     );
-    return links;
   }
 
-  function buildImageCandidates(slug) {
-    const base = getR2Base();
-    const s = String(slug || "").trim();
-    if (!s) return [];
-
-    const exts = ["jpg", "jpeg", "png", "webp"];
-    const stems = [`${s}-1`, `${s}-2`, `${s}-primary`, `${s}-hover`];
-    const urls = [];
-    for (const stem of stems) {
-      for (const ext of exts) {
-        urls.push(`${base}/projects/${encodeURIComponent(s)}/${encodeURIComponent(stem)}.${ext}`);
-      }
+  function normalizeProjectHref(href) {
+    let h = String(href || "").trim();
+    if (!h) return "";
+    h = h.replace(/^\/[^/]+\.html\/projects\//i, "/projects/");
+    try {
+      return new URL(h, window.location.href).toString();
+    } catch (_) {
+      return h;
     }
-    return urls;
   }
 
-  function setImgWithFallback(img, candidates) {
-    const list = Array.isArray(candidates) ? candidates : [];
-    let idx = 0;
+  function slugFromHref(href) {
+    const h = String(href || "");
+    const m = h.match(/projects\/([^/?#]+)\.html/i);
+    return m ? decodeURIComponent(m[1]) : "";
+  }
 
-    function tryNext() {
-      if (idx >= list.length) return;
-      const next = list[idx++];
-      img.src = next;
+  function parseProjectLocalSrc(localSrc) {
+    // assets/images/projects/<project>/<filename>
+    const m = String(localSrc || "").match(/^assets\/images\/projects\/([^/]+)\/(.+)$/);
+    if (!m) return null;
+    return { project: m[1], name: m[2] };
+  }
+
+  function encodeName(name) {
+    return encodeURIComponent(name).replace(/%2F/g, "/");
+  }
+
+  function toFinalSrc(localSrc) {
+    const parsed = parseProjectLocalSrc(localSrc);
+    if (!parsed) return localSrc;
+    const base = r2Base();
+    if (!base) return localSrc;
+    return `${base}/projects/${parsed.project}/${encodeName(parsed.name)}`;
+  }
+
+  function normalizeLocalSrc(raw) {
+    const s = String(raw || "").trim();
+    if (!s) return "";
+    if (/^https?:\/\//i.test(s)) return s;
+    const idx = s.indexOf("assets/images/projects/");
+    if (idx >= 0) return s.slice(idx);
+    return s;
+  }
+
+  async function fetchProjectImages(projectHref) {
+    const res = await fetch(projectHref, { cache: "no-store" });
+    if (!res.ok) throw new Error(`Failed to fetch ${projectHref}`);
+    const html = await res.text();
+
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const seen = new Set();
+    const out = [];
+
+    function push(raw) {
+      const norm = normalizeLocalSrc(raw);
+      if (!norm) return;
+      if (seen.has(norm)) return;
+
+      const isLocal = norm.startsWith("assets/images/projects/");
+      const isCdnProject = /^https?:\/\//i.test(norm) && /\/projects\/[^/]+\//.test(norm);
+      if (!isLocal && !isCdnProject) return;
+
+      seen.add(norm);
+      out.push(norm);
     }
 
-    img.addEventListener(
-      "error",
-      () => {
-        tryNext();
-      },
-      { passive: true }
-    );
+    // Choose + order images like a project page:
+    // 1) first-row image (hero) first
+    // 2) then masonry grid images in DOM order
+    const firstRowImgs = Array.from(doc.querySelectorAll(".first-row-grid img"));
+    const gridImgs = Array.from(doc.querySelectorAll(".image-gallery-grid img"));
 
-    tryNext();
+    firstRowImgs.forEach((img) => {
+      push(img.getAttribute("data-r2-local-src") || "");
+      const src = img.getAttribute("src") || "";
+      if (!src.startsWith("data:")) push(src);
+    });
+
+    gridImgs.forEach((img) => {
+      push(img.getAttribute("data-r2-local-src") || "");
+      const src = img.getAttribute("src") || "";
+      if (!src.startsWith("data:")) push(src);
+    });
+
+    // Fallback: if markup doesn't match, scan all images.
+    if (!out.length) {
+      Array.from(doc.querySelectorAll("img")).forEach((img) => {
+        push(img.getAttribute("data-r2-local-src") || "");
+        const src = img.getAttribute("src") || "";
+        if (!src.startsWith("data:")) push(src);
+      });
+    }
+
+    return out;
   }
 
-  function createTile({ href, label, slug }) {
+  function createMasonryTile({ href, label, altSuffix }) {
     const a = document.createElement("a");
-    a.className = "gallery-tile";
+    a.className = "parallax-image scale-in-image hover-zoom-image";
     a.href = href;
     a.setAttribute("aria-label", `View project: ${label}`);
 
-    const media = document.createElement("div");
-    media.className = "gallery-media";
+    const container = document.createElement("div");
+    container.className = "image-container";
 
     const img = document.createElement("img");
-    img.alt = label ? `${label} — JAC Interiors project` : "JAC Interiors project";
+    const suffix = altSuffix ? ` — ${altSuffix}` : "";
+    img.alt = label ? `${label}${suffix} — JAC Interiors project` : "JAC Interiors project";
     img.loading = "lazy";
     img.decoding = "async";
+    img.src = PLACEHOLDER_SRC;
 
-    // Start from R2, fall back across common variants.
-    setImgWithFallback(img, buildImageCandidates(slug));
-
-    media.appendChild(img);
-
-    const caption = document.createElement("div");
-    caption.className = "gallery-caption";
-    caption.innerHTML = `
-      <div class="gallery-name">${label || "Project"}</div>
-      <div class="gallery-cta">View project <span aria-hidden="true">→</span></div>
-    `.trim();
-
-    a.appendChild(media);
-    a.appendChild(caption);
+    container.appendChild(img);
+    a.appendChild(container);
     return { tile: a, img };
-  }
-
-  function initMasonry(grid) {
-    if (!grid) return () => {};
-
-    function resizeOne(item) {
-      const rowHeight = parseFloat(getComputedStyle(grid).getPropertyValue("grid-auto-rows")) || 10;
-      const rowGap = parseFloat(getComputedStyle(grid).getPropertyValue("gap")) || 24;
-      const media = item.querySelector(".gallery-media");
-      const caption = item.querySelector(".gallery-caption");
-      if (!media || !caption) return;
-
-      const h = media.getBoundingClientRect().height + caption.getBoundingClientRect().height;
-      const span = Math.ceil((h + rowGap) / (rowHeight + rowGap));
-      item.style.gridRowEnd = `span ${span}`;
-    }
-
-    let raf = 0;
-    const schedule = () => {
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        Array.from(grid.children).forEach((child) => {
-          if (child && child.classList && child.classList.contains("gallery-tile")) {
-            resizeOne(child);
-          }
-        });
-      });
-    };
-
-    const onResize = () => schedule();
-    window.addEventListener("resize", onResize, { passive: true });
-
-    return () => {
-      window.removeEventListener("resize", onResize);
-      if (raf) cancelAnimationFrame(raf);
-    };
   }
 
   async function boot() {
     const grid = document.getElementById("galleryGrid");
     if (!grid) return;
 
-    // Wait for navbar injection to complete so dropdown links exist.
-    for (let i = 0; i < 60; i += 1) {
-      const links = findPortfolioProjectLinks();
-      if (links.length) break;
+    // Wait for navbar injection so dropdown links exist.
+    for (let i = 0; i < 80; i += 1) {
+      if (findPortfolioProjectLinks().length) break;
       await sleep(50);
     }
 
@@ -160,40 +168,98 @@
     }
 
     grid.innerHTML = "";
-    const cleanupMasonry = initMasonry(grid);
 
-    const tiles = [];
+    const projects = [];
     links.forEach((link) => {
-      const href = link.getAttribute("href") || "";
-      const slug = extractProjectSlugFromHref(href);
+      const rawHref = link.getAttribute("href") || "";
+      const slug = slugFromHref(rawHref);
       if (!slug) return;
+
       const label = humanize(link.textContent) || humanize(slug.replace(/-/g, " "));
-      const { tile, img } = createTile({ href, label, slug });
-      tiles.push({ tile, img });
-      grid.appendChild(tile);
+      const absHref = normalizeProjectHref(rawHref);
+      projects.push({ rawHref, absHref, label, images: [] });
     });
 
-    // Reflow masonry after images load.
+    // Fetch image lists per project (concurrency-limited).
+    const concurrency = 4;
+    let i = 0;
+    async function fetchOne(p) {
+      try {
+        const images = await fetchProjectImages(p.absHref);
+        p.images = Array.isArray(images) ? images : [];
+      } catch (_) {
+        p.images = [];
+      }
+      if (!p.images.length) p.images = [FALLBACK_PRIMARY];
+    }
+    async function fetchWorker() {
+      while (i < projects.length) {
+        const idx = i++;
+        await fetchOne(projects[idx]);
+      }
+    }
+    await Promise.all(new Array(concurrency).fill(0).map(() => fetchWorker()));
+
+    // Interleave images across projects in dropdown order:
+    // project1 img1, project2 img1, ... then project1 img2, project2 img2, ...
+    const maxLen = projects.reduce((m, p) => Math.max(m, p.images.length || 0), 0);
+    const frag = document.createDocumentFragment();
+    const tiles = [];
+
+    for (let round = 0; round < maxLen; round += 1) {
+      for (let pIdx = 0; pIdx < projects.length; pIdx += 1) {
+        const p = projects[pIdx];
+        const src = (p.images && p.images[round]) || "";
+        if (!src) continue;
+
+        const { tile, img } = createMasonryTile({
+          href: p.rawHref,
+          label: p.label,
+          altSuffix: `Image ${round + 1}`,
+        });
+
+        // Local project image: load from CDN with local fallback.
+        if (src.startsWith("assets/images/projects/")) {
+          const final = toFinalSrc(src);
+          img.addEventListener(
+            "error",
+            () => {
+              img.src = src;
+            },
+            { once: true }
+          );
+          img.src = final;
+        } else {
+          img.src = src;
+        }
+
+        tiles.push({ tile, img });
+        frag.appendChild(tile);
+      }
+    }
+
+    grid.appendChild(frag);
+
+    // Let the shared masonry script wire up relayout + load/error listeners.
+    document.dispatchEvent(new Event("spaces:gallery-updated"));
+
+    // Extra: as images lazy-load, trigger relayout.
     tiles.forEach(({ img }) => {
       img.addEventListener(
         "load",
         () => {
-          try {
-            // Trigger a resize pass
-            window.dispatchEvent(new Event("resize"));
-          } catch (e) {}
+          document.dispatchEvent(new Event("spaces:gallery-updated"));
         },
-        { passive: true }
+        { once: true, passive: true }
+      );
+      img.addEventListener(
+        "error",
+        () => {
+          document.dispatchEvent(new Event("spaces:gallery-updated"));
+        },
+        { once: true, passive: true }
       );
     });
-
-    // Initial pass
-    try {
-      window.dispatchEvent(new Event("resize"));
-    } catch (e) {}
-
-    // If the page is later torn down, we at least keep reference to cleanup.
-    window.__galleryCleanup = cleanupMasonry;
   }
 
   if (document.readyState === "loading") {

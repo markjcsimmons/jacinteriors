@@ -8,32 +8,52 @@
       content="A curated gallery of JAC Interiors projects — refined, timeless spaces across Los Angeles and South Florida."
     />
     <title>Gallery | JAC Interiors</title>
-    <link rel="stylesheet" href="assets/css/style.css?v=20260209-1" />
+    <link rel="stylesheet" href="assets/css/style.css?v=20260209-2" />
+    <link rel="stylesheet" href="assets/css/spaces-masonry.css?v=20260209-2" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <script defer src="assets/js/spaces-masonry.js?v=20260209-2"></script>
+    <script src="assets/js/r2-config.js?v=20260209-2"></script>
+    <script defer src="assets/js/r2-images.js?v=20260209-2"></script>
     <script src="assets/js/load-navbar.js?v=20260209-1" defer></script>
-    <script src="assets/js/gallery.js?v=20260209-1" defer></script>
+    <script src="assets/js/gallery.js?v=20260209-2" defer></script>
   </head>
-  <body class="invero-gallery">
+  <body>
     <main>
-      <section class="gallery-hero" aria-label="Gallery">
+      <section style="padding: 3rem 0; background: #1a1a1a; color: white; margin-top: 0;">
         <div class="container">
-          <div class="gallery-kicker">Gallery</div>
-          <h1 class="gallery-title">A living archive of our work.</h1>
-          <p class="gallery-subtitle">
-            A masonry view across projects—crafted with taste, rigor, and a point of view that’s beautifully designed and perfectly
-            livable.
-          </p>
+          <div class="project-header-row">
+            <h1
+              class="scroll-fade-in"
+              style="
+                font-size: 3.5rem;
+                font-weight: 500;
+                margin: 0;
+                letter-spacing: -1.5px;
+                line-height: 1.1;
+                color: white;
+              "
+            >
+              Gallery
+            </h1>
+            <div class="project-callouts scroll-fade-in" aria-label="Gallery overview">
+              <span class="project-callout">All Projects</span>
+              <span class="project-callout">Interiors</span>
+              <span class="project-callout-break" aria-hidden="true"></span>
+              <span class="project-callout">Los Angeles</span>
+              <span class="project-callout">South Florida</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="gallery-grid-section" aria-label="Project gallery">
-        <div class="container">
-          <div id="galleryGrid" class="gallery-grid" aria-live="polite">
+      <section style="padding: 4rem 0;" aria-label="Project image gallery">
+        <div class="container" style="max-width: 1400px;">
+          <div id="galleryGrid" class="image-gallery-grid" style="margin-bottom: 2rem;" aria-live="polite">
             <noscript>
               <p style="color: rgba(34, 42, 38, 0.75); font-size: 1rem; line-height: 1.6">
                 Please enable JavaScript to view the gallery.
