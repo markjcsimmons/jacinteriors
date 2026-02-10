@@ -1,4 +1,4 @@
-// Gallery page: project-page masonry look, one image per project (dropdown order).
+// Gallery page: project-page mosaic tiles, one image per project (dropdown order).
 (function () {
   "use strict";
 
@@ -77,56 +77,49 @@
     return s;
   }
 
-  async function fetchProjectImages(projectHref) {
+  async function fetchPrimaryProjectImage(projectHref) {
     const res = await fetch(projectHref, { cache: "no-store" });
     if (!res.ok) throw new Error(`Failed to fetch ${projectHref}`);
     const html = await res.text();
 
     const doc = new DOMParser().parseFromString(html, "text/html");
-    const seen = new Set();
-    const out = [];
 
     function push(raw) {
       const norm = normalizeLocalSrc(raw);
       if (!norm) return;
-      if (seen.has(norm)) return;
 
       const isLocal = norm.startsWith("assets/images/projects/");
       const isCdnProject = /^https?:\/\//i.test(norm) && /\/projects\/[^/]+\//.test(norm);
       if (!isLocal && !isCdnProject) return;
 
-      seen.add(norm);
-      out.push(norm);
+      return norm;
     }
 
-    // Choose + order images like a project page:
-    // 1) first-row image (hero) first
-    // 2) then masonry grid images in DOM order
-    const firstRowImgs = Array.from(doc.querySelectorAll(".first-row-grid img"));
-    const gridImgs = Array.from(doc.querySelectorAll(".image-gallery-grid img"));
-
-    firstRowImgs.forEach((img) => {
-      push(img.getAttribute("data-r2-local-src") || "");
-      const src = img.getAttribute("src") || "";
-      if (!src.startsWith("data:")) push(src);
-    });
-
-    gridImgs.forEach((img) => {
-      push(img.getAttribute("data-r2-local-src") || "");
-      const src = img.getAttribute("src") || "";
-      if (!src.startsWith("data:")) push(src);
-    });
-
-    // Fallback: if markup doesn't match, scan all images.
-    if (!out.length) {
-      Array.from(doc.querySelectorAll("img")).forEach((img) => {
-        push(img.getAttribute("data-r2-local-src") || "");
-        const src = img.getAttribute("src") || "";
-        if (!src.startsWith("data:")) push(src);
-      });
+    // Primary image should match project pages: the first-row hero image.
+    const hero = doc.querySelector(".first-row-grid img");
+    if (hero) {
+      const a = push(hero.getAttribute("data-r2-local-src") || "");
+      if (a) return a;
+      const src = hero.getAttribute("src") || "";
+      if (src && !src.startsWith("data:")) {
+        const b = push(src);
+        if (b) return b;
+      }
     }
 
-    return out;
+    // Fallback: first project image we can find.
+    const any = doc.querySelector("img[data-r2-local-src], .image-gallery-grid img, img");
+    if (any) {
+      const a = push(any.getAttribute("data-r2-local-src") || "");
+      if (a) return a;
+      const src = any.getAttribute("src") || "";
+      if (src && !src.startsWith("data:")) {
+        const b = push(src);
+        if (b) return b;
+      }
+    }
+
+    return "";
   }
 
   function createMasonryTile({ href, label, altSuffix, eager }) {
@@ -170,6 +163,54 @@
     return { tile, img };
   }
 
+  function buildCdnCandidatesFromSlug(slug) {
+    const s = String(slug || "").trim();
+    if (!s) return [];
+    const base = r2Base();
+    if (!base) return [];
+
+    // Prefer smaller-ish filenames if you add them later (e.g. "-1200").
+    // For now: try typical primary filenames first.
+    const stems = [
+      `${s}-1-1200`,
+      `${s}-1-900`,
+      `${s}-1-600`,
+      `${s}-1`,
+      `${s}-primary`,
+    ];
+    const exts = ["webp", "jpg", "jpeg", "png"];
+    const urls = [];
+    for (const stem of stems) {
+      for (const ext of exts) {
+        urls.push(`${base}/projects/${encodeURIComponent(s)}/${encodeURIComponent(stem)}.${ext}`);
+      }
+    }
+    return urls;
+  }
+
+  function setImgWithFallback(img, candidates, onExhausted) {
+    const list = Array.isArray(candidates) ? candidates.filter(Boolean) : [];
+    let idx = 0;
+
+    function tryNext() {
+      if (idx >= list.length) {
+        if (typeof onExhausted === "function") onExhausted();
+        return;
+      }
+      img.src = list[idx++];
+    }
+
+    img.addEventListener(
+      "error",
+      () => {
+        tryNext();
+      },
+      { passive: true }
+    );
+
+    tryNext();
+  }
+
   async function boot() {
     const grid = document.getElementById("galleryGrid");
     if (!grid) return;
@@ -189,80 +230,67 @@
 
     grid.innerHTML = "";
 
-    const projects = [];
-    links.forEach((link) => {
+    const projects = links
+      .map((link) => {
       const rawHref = link.getAttribute("href") || "";
       const slug = slugFromHref(rawHref);
-      if (!slug) return;
+      if (!slug) return null;
 
       const label = humanize(link.textContent) || humanize(slug.replace(/-/g, " "));
       const absHref = normalizeProjectHref(rawHref);
-      projects.push({ rawHref, absHref, label, images: [] });
-    });
+      return { rawHref, absHref, label, slug };
+    })
+      .filter(Boolean);
 
-    // Fetch image lists per project (concurrency-limited).
-    const concurrency = 4;
-    let i = 0;
-    async function fetchOne(p) {
-      try {
-        const images = await fetchProjectImages(p.absHref);
-        p.images = Array.isArray(images) ? images : [];
-      } catch (_) {
-        p.images = [];
-      }
-      if (!p.images.length) p.images = [FALLBACK_PRIMARY];
-    }
-    async function fetchWorker() {
-      while (i < projects.length) {
-        const idx = i++;
-        await fetchOne(projects[idx]);
-      }
-    }
-    await Promise.all(new Array(concurrency).fill(0).map(() => fetchWorker()));
-
-    // Interleave images across projects in dropdown order:
-    // project1 img1, project2 img1, ... then project1 img2, project2 img2, ...
-    const maxLen = projects.reduce((m, p) => Math.max(m, p.images.length || 0), 0);
     const frag = document.createDocumentFragment();
     const tiles = [];
+    projects.forEach((p, idx) => {
+      const { tile, img } = createMasonryTile({
+        href: p.rawHref,
+        label: p.label,
+        altSuffix: "Project",
+        eager: idx < 6,
+      });
 
-    let count = 0;
-    for (let round = 0; round < maxLen; round += 1) {
-      for (let pIdx = 0; pIdx < projects.length; pIdx += 1) {
-        const p = projects[pIdx];
-        const src = (p.images && p.images[round]) || "";
-        if (!src) continue;
+      // Ensure the injected tiles aren’t hidden by scroll-animation CSS.
+      tile.classList.add("visible");
 
-        const { tile, img } = createMasonryTile({
-          href: p.rawHref,
-          label: p.label,
-          altSuffix: `Image ${round + 1}`,
-          eager: count < 10,
-        });
-        // Gallery tiles are injected after the global scroll animation boot,
-        // so force them visible immediately (otherwise `.scale-in-image` stays opacity: 0).
-        tile.classList.add("visible");
+      // Prefer predictable CDN path first; if not found, fall back to parsing the project page.
+      const cdnCandidates = buildCdnCandidatesFromSlug(p.slug);
+      setImgWithFallback(img, cdnCandidates, async () => {
+        try {
+          const primary = await fetchPrimaryProjectImage(p.absHref);
+          if (!primary) {
+            img.src = FALLBACK_PRIMARY;
+            return;
+          }
 
-        // Local project image: load from CDN with local fallback.
-        if (src.startsWith("assets/images/projects/")) {
-          const final = toFinalSrc(src);
-          img.addEventListener(
-            "error",
-            () => {
-              img.src = src;
-            },
-            { once: true }
-          );
-          img.src = final;
-        } else {
-          img.src = src;
+          if (primary.startsWith("assets/images/projects/")) {
+            const final = toFinalSrc(primary);
+            img.addEventListener(
+              "error",
+              () => {
+                img.src = primary;
+              },
+              { once: true }
+            );
+            img.src = final;
+          } else {
+            img.src = primary;
+          }
+        } catch (_) {
+          img.src = FALLBACK_PRIMARY;
         }
+      });
 
-        tiles.push({ tile, img });
-        frag.appendChild(tile);
-        count += 1;
+      // Hint for the first couple tiles.
+      if (idx < 3) {
+        img.setAttribute("fetchpriority", "high");
       }
-    }
+
+      tiles.push({ tile, img });
+      frag.appendChild(tile);
+    });
 
     grid.appendChild(frag);
 
