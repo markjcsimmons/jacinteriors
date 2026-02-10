@@ -20,7 +20,7 @@
     <script src="assets/js/r2-config.js?v=20260209-2"></script>
     <script defer src="assets/js/r2-images.js?v=20260209-2"></script>
     <script src="assets/js/load-navbar.js?v=20260209-1" defer></script>
-    <script src="assets/js/gallery.js?v=20260210-5" defer></script>
+    <script src="assets/js/gallery.js?v=20260210-7" defer></script>
   </head>
   <body>
     <main>
@@ -40,13 +40,19 @@
             >
               Gallery
             </h1>
-            <div class="project-callouts scroll-fade-in" aria-label="Gallery overview">
-              <span class="project-callout">All Projects</span>
-              <span class="project-callout">Interiors</span>
-              <span class="project-callout-break" aria-hidden="true"></span>
-              <span class="project-callout">Los Angeles</span>
-              <span class="project-callout">South Florida</span>
-            </div>
+            <p
+              class="scroll-fade-in"
+              style="
+                font-size: 16px;
+                color: #ccc;
+                line-height: 1.6;
+                font-weight: 400;
+                max-width: 700px;
+                margin: 1rem 0 0 0;
+              "
+            >
+              Click any image to see the project
+            </p>
           </div>
         </div>
       </section>
@@ -59,6 +65,12 @@
                 Please enable JavaScript to view the gallery.
               </p>
             </noscript>
+          </div>
+
+          <div style="display: flex; justify-content: center; margin-top: 2.75rem;">
+            <button id="galleryLoadMore" class="btn btn-primary" type="button" style="padding: 0.95rem 2.25rem;">
+              Load more
+            </button>
           </div>
         </div>
       </section>
