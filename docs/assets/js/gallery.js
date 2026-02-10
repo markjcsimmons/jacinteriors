@@ -141,6 +141,11 @@
     img.loading = eager ? "eager" : "lazy";
     img.decoding = "async";
     img.src = PLACEHOLDER_SRC;
+    // Prevent the shared masonry script from hiding tiles on the first 404
+    // while we cycle through candidate URLs.
+    img.dataset.r2Managed = "1";
+    img.dataset.r2Space = "gallery";
+    img.dataset.r2Final = "0";
 
     container.appendChild(img);
     tile.appendChild(container);
@@ -199,6 +204,15 @@
       }
       img.src = list[idx++];
     }
+
+    img.addEventListener(
+      "load",
+      () => {
+        // We’ve landed on a working candidate.
+        img.dataset.r2Final = "1";
+      },
+      { once: true, passive: true }
+    );
 
     img.addEventListener(
       "error",
@@ -261,6 +275,7 @@
         try {
           const primary = await fetchPrimaryProjectImage(p.absHref);
           if (!primary) {
+            img.dataset.r2Final = "1";
             img.src = FALLBACK_PRIMARY;
             return;
           }
@@ -274,11 +289,14 @@
               },
               { once: true }
             );
+            img.dataset.r2Final = "1";
             img.src = final;
           } else {
+            img.dataset.r2Final = "1";
             img.src = primary;
           }
         } catch (_) {
+          img.dataset.r2Final = "1";
           img.src = FALLBACK_PRIMARY;
         }
       });
