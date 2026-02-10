@@ -130,10 +130,14 @@
   }
 
   function createMasonryTile({ href, label, altSuffix, eager }) {
-    const a = document.createElement("a");
-    a.className = "parallax-image scale-in-image hover-zoom-image";
-    a.href = href;
-    a.setAttribute("aria-label", `View project: ${label}`);
+    // Match project pages: tiles are blocks in the masonry grid.
+    // Still make them navigable like a tile (click + keyboard).
+    const tile = document.createElement("div");
+    tile.className = "parallax-image scale-in-image hover-zoom-image";
+    tile.setAttribute("role", "link");
+    tile.setAttribute("tabindex", "0");
+    tile.setAttribute("aria-label", `View project: ${label}`);
+    tile.dataset.href = href;
 
     const container = document.createElement("div");
     container.className = "image-container";
@@ -146,8 +150,24 @@
     img.src = PLACEHOLDER_SRC;
 
     container.appendChild(img);
-    a.appendChild(container);
-    return { tile: a, img };
+    tile.appendChild(container);
+
+    function go() {
+      const h = tile.dataset.href || "";
+      if (!h) return;
+      window.location.href = h;
+    }
+
+    tile.addEventListener("click", go);
+    tile.addEventListener("keydown", (e) => {
+      const k = e && e.key;
+      if (k === "Enter" || k === " ") {
+        e.preventDefault();
+        go();
+      }
+    });
+
+    return { tile, img };
   }
 
   async function boot() {
