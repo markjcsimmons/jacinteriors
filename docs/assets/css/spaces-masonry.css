@@ -40,6 +40,12 @@
   box-sizing: border-box;
 }
 
+/* Prevent lazy-load deadlock for absolutely-positioned masonry tiles */
+.image-gallery-grid.gallery-masonry-grid .image-container {
+  min-height: 220px;
+  background: rgba(0, 0, 0, 0.03);
+}
+
 .image-gallery-grid .image-container img {
   width: 100% !important;
   max-width: 100% !important;

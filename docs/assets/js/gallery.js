@@ -129,7 +129,7 @@
     return out;
   }
 
-  function createMasonryTile({ href, label, altSuffix }) {
+  function createMasonryTile({ href, label, altSuffix, eager }) {
     const a = document.createElement("a");
     a.className = "parallax-image scale-in-image hover-zoom-image";
     a.href = href;
@@ -141,7 +141,7 @@
     const img = document.createElement("img");
     const suffix = altSuffix ? ` — ${altSuffix}` : "";
     img.alt = label ? `${label}${suffix} — JAC Interiors project` : "JAC Interiors project";
-    img.loading = "lazy";
+    img.loading = eager ? "eager" : "lazy";
     img.decoding = "async";
     img.src = PLACEHOLDER_SRC;
 
@@ -206,6 +206,7 @@
     const frag = document.createDocumentFragment();
     const tiles = [];
 
+    let count = 0;
     for (let round = 0; round < maxLen; round += 1) {
       for (let pIdx = 0; pIdx < projects.length; pIdx += 1) {
         const p = projects[pIdx];
@@ -216,6 +217,7 @@
           href: p.rawHref,
           label: p.label,
           altSuffix: `Image ${round + 1}`,
+          eager: count < 10,
         });
 
         // Local project image: load from CDN with local fallback.
@@ -235,6 +237,7 @@
 
         tiles.push({ tile, img });
         frag.appendChild(tile);
+        count += 1;
       }
     }
 
