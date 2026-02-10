@@ -24,10 +24,17 @@
 
   function prepareItem(item, columnWidth) {
     item.style.position = "absolute";
+    item.style.display = "block";
     item.style.width = columnWidth + "px";
     item.style.maxWidth = columnWidth + "px";
     item.style.margin = "0";
     item.style.boxSizing = "border-box";
+
+    // If tiles are links (e.g. Gallery), remove default link styles.
+    if (item.tagName === "A") {
+      item.style.textDecoration = "none";
+      item.style.color = "inherit";
+    }
 
     const container = item.querySelector(".image-container");
     if (container) {

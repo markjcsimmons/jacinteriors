@@ -19,9 +19,16 @@
 }
 
 .image-gallery-grid > * {
+  display: block;
   position: absolute;
   box-sizing: border-box;
   transition: transform 0.3s ease;
+}
+
+/* If tiles are links (Gallery), remove default underline */
+.image-gallery-grid > a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .image-gallery-grid .image-container {
