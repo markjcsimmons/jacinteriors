@@ -10,6 +10,12 @@
   const PLACEHOLDER_SRC =
     "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
+  // Hide duplicate tiles if two videos share the same thumbnail.
+  const seenThumbSrc = new Set();
+  // Optional: hide specific video numbers if needed (e.g. duplicates).
+  // Example: const SKIP_INDEXES = new Set([12]);
+  const SKIP_INDEXES = new Set();
+
   function r2VideoBase() {
     // Prefer explicit video base; otherwise use the default videos domain.
     // (Do NOT fall back to R2_IMAGE_BASE — that points to the images bucket.)
@@ -226,6 +232,71 @@
     tryNext();
   }
 
+  function openVideoModal(label, index) {
+    const idx = Number(index);
+    if (!Number.isFinite(idx)) return;
+
+    const overlay = document.createElement("div");
+    overlay.className = "video-modal-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", label || "Video player");
+
+    const modal = document.createElement("div");
+    modal.className = "video-modal";
+
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "video-modal-close";
+    closeBtn.setAttribute("aria-label", "Close video");
+    closeBtn.textContent = "×";
+
+    const video = document.createElement("video");
+    video.controls = true;
+    video.preload = "metadata";
+    video.playsInline = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("aria-label", label || `Fox Hills video ${idx}`);
+    video.dataset.r2Managed = "1";
+    video.dataset.r2Space = "videos";
+    video.dataset.r2Final = "0";
+
+    const candidates = buildVideoCandidates(idx);
+    if (candidates.length) setVideoWithFallback(video, candidates);
+
+    const cleanup = () => {
+      document.body.classList.remove("modal-open");
+      window.removeEventListener("keydown", onKeyDown);
+      try {
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
+      } catch (_) {}
+      overlay.remove();
+    };
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") cleanup();
+    };
+
+    closeBtn.addEventListener("click", cleanup);
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) cleanup();
+    });
+
+    modal.appendChild(closeBtn);
+    modal.appendChild(video);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    document.body.classList.add("modal-open");
+    window.addEventListener("keydown", onKeyDown);
+
+    // Autoplay best-effort.
+    try {
+      video.play();
+    } catch (_) {}
+  }
+
   function createVideoTile(label, index) {
     const tile = document.createElement("div");
     tile.className = "scale-in-image hover-zoom-image video-tile";
@@ -287,33 +358,8 @@
     };
 
     overlay.addEventListener("click", () => {
-      hideOverlay();
-
-      // Swap thumbnail for an inline video (keeps mosaic aspect ratio).
-      const video = document.createElement("video");
-      video.controls = true;
-      video.preload = "metadata";
-      video.playsInline = true;
-      video.muted = false;
-      video.setAttribute("playsinline", "");
-      video.setAttribute("aria-label", label);
-      video.className = "video-player";
-      video.dataset.r2Managed = "1";
-      video.dataset.r2Space = "videos";
-      video.dataset.r2Final = "0";
-
-      const idx = Number(index);
-      const candidates = Number.isFinite(idx) ? buildVideoCandidates(idx) : [];
-      if (candidates.length) setVideoWithFallback(video, candidates);
-
-      // Replace thumb with player
-      frame.innerHTML = "";
-      frame.appendChild(video);
-
-      // Try to play; if blocked, user can hit play in controls.
-      try {
-        video.play();
-      } catch (_) {}
+      // Keep the mosaic grid stable and open a near full-screen player.
+      openVideoModal(label, index);
     });
 
     frame.appendChild(thumb);
@@ -331,7 +377,7 @@
       });
     }
 
-    return { tile };
+    return { tile, thumb };
   }
 
   function hideTile(tile) {
@@ -344,8 +390,28 @@
     const batchEnd = startIndex + count - 1;
 
     for (let i = startIndex; i <= batchEnd; i += 1) {
-      const { tile } = createVideoTile(`Fox Hills video ${i}`, i);
+      if (SKIP_INDEXES.has(i)) continue;
+      const { tile, thumb } = createVideoTile(`Fox Hills video ${i}`, i);
       grid.appendChild(tile);
+
+      // De-dupe once a real thumbnail loads (not the placeholder).
+      if (thumb) {
+        thumb.addEventListener(
+          "load",
+          () => {
+            const src = String(thumb.currentSrc || thumb.src || "");
+            if (!src || src === PLACEHOLDER_SRC) return;
+            if (seenThumbSrc.has(src)) {
+              tile.dataset.masonryHidden = "1";
+              tile.style.display = "none";
+              document.dispatchEvent(new Event("spaces:gallery-updated"));
+              return;
+            }
+            seenThumbSrc.add(src);
+          },
+          { once: true, passive: true }
+        );
+      }
     }
 
     document.dispatchEvent(new Event("spaces:gallery-updated"));
