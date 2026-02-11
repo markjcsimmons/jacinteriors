@@ -45,6 +45,30 @@
       container.style.boxSizing = "border-box";
     }
 
+    // Special-case video mosaic tiles: their media lives inside a fixed aspect-ratio frame.
+    const videoFrame = item.querySelector(".video-thumb-frame");
+    if (videoFrame) {
+      const img = videoFrame.querySelector("img");
+      if (img) {
+        img.style.setProperty("width", "100%", "important");
+        img.style.setProperty("max-width", "100%", "important");
+        img.style.setProperty("height", "100%", "important");
+        img.style.setProperty("display", "block", "important");
+        img.style.setProperty("object-fit", "cover", "important");
+        img.style.setProperty("box-sizing", "border-box", "important");
+      }
+      const vid = videoFrame.querySelector("video");
+      if (vid) {
+        vid.style.setProperty("width", "100%", "important");
+        vid.style.setProperty("max-width", "100%", "important");
+        vid.style.setProperty("height", "100%", "important");
+        vid.style.setProperty("display", "block", "important");
+        vid.style.setProperty("object-fit", "contain", "important");
+        vid.style.setProperty("box-sizing", "border-box", "important");
+      }
+      return;
+    }
+
     const media = item.querySelector("img, video");
     if (media) {
       media.style.setProperty("width", "100%", "important");

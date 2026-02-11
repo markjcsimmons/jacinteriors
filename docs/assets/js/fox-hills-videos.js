@@ -175,6 +175,57 @@
     tryNext();
   }
 
+  function probeAspectRatio(index, candidates, onAspect) {
+    const list = Array.isArray(candidates) ? candidates.filter(Boolean) : [];
+    if (!list.length) return;
+
+    let i = 0;
+    const v = document.createElement("video");
+    v.preload = "metadata";
+    v.muted = true;
+    v.playsInline = true;
+    v.setAttribute("playsinline", "");
+
+    const cleanup = () => {
+      try {
+        v.removeAttribute("src");
+        v.load();
+      } catch (_) {}
+    };
+
+    const tryNext = () => {
+      if (i >= list.length) {
+        cleanup();
+        return;
+      }
+      v.src = list[i++];
+      try {
+        v.load();
+      } catch (_) {}
+    };
+
+    v.addEventListener(
+      "loadedmetadata",
+      () => {
+        const w = Number(v.videoWidth || 0);
+        const h = Number(v.videoHeight || 0);
+        if (w > 0 && h > 0) onAspect(w, h);
+        cleanup();
+      },
+      { once: true, passive: true }
+    );
+
+    v.addEventListener(
+      "error",
+      () => {
+        tryNext();
+      },
+      { passive: true }
+    );
+
+    tryNext();
+  }
+
   function createVideoTile(label, index) {
     const tile = document.createElement("div");
     tile.className = "scale-in-image hover-zoom-image video-tile";
@@ -183,31 +234,37 @@
     const container = document.createElement("div");
     container.className = "image-container";
 
-    const video = document.createElement("video");
-    // We'll show a centered play overlay for the "thumbnail" state.
-    // Controls appear once playback starts.
-    video.controls = false;
-    // Avoid large network pulls on initial render; users will click play.
-    // This also avoids "metadata load failed" behavior on non-faststart MP4s.
-    video.preload = "none";
-    video.playsInline = true;
-    video.muted = true;
-    video.setAttribute("playsinline", "");
-    video.setAttribute("aria-label", label);
+    // Frame that controls tile height (mosaic) using aspect-ratio.
+    const frame = document.createElement("div");
+    frame.className = "video-thumb-frame";
+    frame.style.aspectRatio = "16 / 9";
 
-    // Treat as managed so masonry doesn't hide while we cycle fallbacks.
-    video.dataset.r2Managed = "1";
-    video.dataset.r2Space = "videos";
-    // Keep r2Final unset/falsey so masonry doesn't hide on transient errors.
-    video.dataset.r2Final = "0";
+    const thumb = document.createElement("img");
+    thumb.alt = label;
+    thumb.loading = "lazy";
+    thumb.decoding = "async";
+    thumb.src = PLACEHOLDER_SRC;
+    thumb.className = "video-thumb";
+    thumb.dataset.r2Managed = "1";
+    thumb.dataset.r2Space = "videos";
+    thumb.dataset.r2Final = "0";
 
-    // A tiny placeholder "poster" so the element has size early.
-    video.poster = PLACEHOLDER_SRC;
-
-    // Prefer poster thumbnails (upload alongside videos):
-    // `fox-hills/fox-hills-16.jpg` or `fox-hills/fox-hills-16-thumb.jpg` etc.
     if (Number.isFinite(Number(index))) {
-      trySetPoster(video, buildPosterCandidates(Number(index)));
+      // Set poster image via candidate probing.
+      const candidates = buildPosterCandidates(Number(index));
+      // Reuse the existing probe logic to pick the first available image.
+      trySetPoster(
+        /** @type {HTMLVideoElement} */ ({
+          dataset: thumb.dataset,
+          poster: "",
+          set poster(url) {
+            thumb.src = url;
+            thumb.dataset.r2Final = "1";
+            document.dispatchEvent(new Event("spaces:gallery-updated"));
+          },
+        }),
+        candidates
+      );
     }
 
     const overlay = document.createElement("button");
@@ -231,24 +288,50 @@
 
     overlay.addEventListener("click", () => {
       hideOverlay();
-      // Enable controls on intent to play.
+
+      // Swap thumbnail for an inline video (keeps mosaic aspect ratio).
+      const video = document.createElement("video");
       video.controls = true;
+      video.preload = "metadata";
+      video.playsInline = true;
+      video.muted = false;
+      video.setAttribute("playsinline", "");
+      video.setAttribute("aria-label", label);
+      video.className = "video-player";
+      video.dataset.r2Managed = "1";
+      video.dataset.r2Space = "videos";
+      video.dataset.r2Final = "0";
+
+      const idx = Number(index);
+      const candidates = Number.isFinite(idx) ? buildVideoCandidates(idx) : [];
+      if (candidates.length) setVideoWithFallback(video, candidates);
+
+      // Replace thumb with player
+      frame.innerHTML = "";
+      frame.appendChild(video);
+
+      // Try to play; if blocked, user can hit play in controls.
       try {
-        // Ensure the browser has a chance to start buffering.
-        video.preload = "metadata";
         video.play();
       } catch (_) {}
     });
 
-    // Keep overlay in sync with playback state.
-    video.addEventListener("play", hideOverlay, { passive: true });
-    video.addEventListener("pause", showOverlay, { passive: true });
-    video.addEventListener("ended", showOverlay, { passive: true });
-
-    container.appendChild(video);
-    container.appendChild(overlay);
+    frame.appendChild(thumb);
+    frame.appendChild(overlay);
+    container.appendChild(frame);
     tile.appendChild(container);
-    return { tile, video };
+
+    // Probe the real video aspect ratio to make the mosaic tiles match portrait/landscape.
+    if (Number.isFinite(Number(index))) {
+      const idx = Number(index);
+      const candidates = buildVideoCandidates(idx);
+      probeAspectRatio(idx, candidates.slice(0, 2), (w, h) => {
+        frame.style.aspectRatio = `${w} / ${h}`;
+        document.dispatchEvent(new Event("spaces:gallery-updated"));
+      });
+    }
+
+    return { tile };
   }
 
   function hideTile(tile) {
@@ -261,16 +344,8 @@
     const batchEnd = startIndex + count - 1;
 
     for (let i = startIndex; i <= batchEnd; i += 1) {
-      const { tile, video } = createVideoTile(`Fox Hills video ${i}`, i);
+      const { tile } = createVideoTile(`Fox Hills video ${i}`, i);
       grid.appendChild(tile);
-
-      const candidates = buildVideoCandidates(i);
-      if (!candidates.length) {
-        // Keep placeholder visible; nothing to load.
-        continue;
-      }
-
-      setVideoWithFallback(video, candidates);
     }
 
     document.dispatchEvent(new Event("spaces:gallery-updated"));
