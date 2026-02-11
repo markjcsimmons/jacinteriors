@@ -357,45 +357,9 @@
 
     grid.innerHTML = "";
 
-    const loadMoreBtn = document.getElementById("videosLoadMore");
-    const statusEl = document.getElementById("videosStatus");
-
-    let nextIndex = 1;
-    const BATCH_SIZE = 12;
     const MAX_INDEX = 25;
-
-    async function loadMore() {
-      if (!loadMoreBtn) return;
-      const start = nextIndex;
-      if (start > MAX_INDEX) {
-        loadMoreBtn.disabled = true;
-        if (statusEl) statusEl.textContent = "No more videos to load.";
-        return;
-      }
-
-      loadMoreBtn.disabled = true;
-      const prevLabel = loadMoreBtn.textContent;
-      loadMoreBtn.textContent = "Loading…";
-      if (statusEl) statusEl.textContent = "";
-
-      await appendBatch(grid, start, BATCH_SIZE);
-      nextIndex = start + BATCH_SIZE;
-
-      loadMoreBtn.disabled = false;
-      loadMoreBtn.textContent = prevLabel || "Load more";
-    }
-
-    if (loadMoreBtn) {
-      loadMoreBtn.addEventListener("click", loadMore);
-    }
-
-    // Initial load
-    loadMore().catch(() => {
-      if (statusEl) {
-        statusEl.textContent =
-          "We couldn’t load videos yet. If you just connected the custom domain, wait for it to become Active, then refresh.";
-      }
-      if (loadMoreBtn) loadMoreBtn.disabled = false;
+    appendBatch(grid, 1, MAX_INDEX).catch(() => {
+      // Keep silent; tiles will simply remain as placeholders if assets are unavailable.
     });
   }
 

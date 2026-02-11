@@ -12,9 +12,12 @@
 
   let relayoutTimer = null;
 
-  function getColumns() {
+  function getColumnsForGrid(grid) {
+    // Default behavior for images/spaces/gallery: 3 desktop, 2 tablet, 1 mobile.
+    // Videos page requests 2 across on desktop.
+    const prefersTwoDesktop = !!grid?.classList?.contains("masonry--two-desktop");
     if (window.innerWidth <= MOBILE_MAX) return 1;
-    if (window.innerWidth >= DESKTOP_MIN) return 3;
+    if (window.innerWidth >= DESKTOP_MIN) return prefersTwoDesktop ? 2 : 3;
     return 2;
   }
 
@@ -87,7 +90,7 @@
     const containerWidth = grid.offsetWidth;
     if (!containerWidth) return;
 
-    const columns = getColumns();
+    const columns = getColumnsForGrid(grid);
     const columnWidth = (containerWidth - GAP * (columns - 1)) / columns;
 
     grid.style.position = "relative";
