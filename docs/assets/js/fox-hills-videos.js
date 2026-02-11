@@ -77,7 +77,15 @@
     if (!base) return [];
 
     const n2 = String(n).padStart(2, "0");
-    const dirs = [`${PROJECT_SLUG}`, `jac-videos/${PROJECT_SLUG}`];
+    // Support posters living either alongside videos OR in a dedicated thumbnails folder.
+    // Current R2 layout reported:
+    // - jac-videos/fox-hills/fox-hills-thumbnails/fox-hills-16.jpg
+    const dirs = [
+      `${PROJECT_SLUG}`,
+      `${PROJECT_SLUG}/fox-hills-thumbnails`,
+      `jac-videos/${PROJECT_SLUG}`,
+      `jac-videos/${PROJECT_SLUG}/fox-hills-thumbnails`,
+    ];
     const exts = ["jpg", "jpeg", "webp", "png", "JPG", "JPEG", "WEBP", "PNG"];
     const stems = [
       `${PROJECT_SLUG}-${n}`,
@@ -176,7 +184,9 @@
     container.className = "image-container";
 
     const video = document.createElement("video");
-    video.controls = true;
+    // We'll show a centered play overlay for the "thumbnail" state.
+    // Controls appear once playback starts.
+    video.controls = false;
     // Avoid large network pulls on initial render; users will click play.
     // This also avoids "metadata load failed" behavior on non-faststart MP4s.
     video.preload = "none";
@@ -200,7 +210,43 @@
       trySetPoster(video, buildPosterCandidates(Number(index)));
     }
 
+    const overlay = document.createElement("button");
+    overlay.type = "button";
+    overlay.className = "video-play-overlay";
+    overlay.setAttribute("aria-label", "Play video");
+    overlay.innerHTML = `
+      <span class="video-play-overlay__circle" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="video-play-overlay__icon" aria-hidden="true" focusable="false">
+          <path d="M8 5v14l11-7L8 5z"></path>
+        </svg>
+      </span>
+    `.trim();
+
+    const showOverlay = () => {
+      overlay.dataset.state = "shown";
+    };
+    const hideOverlay = () => {
+      overlay.dataset.state = "hidden";
+    };
+
+    overlay.addEventListener("click", () => {
+      hideOverlay();
+      // Enable controls on intent to play.
+      video.controls = true;
+      try {
+        // Ensure the browser has a chance to start buffering.
+        video.preload = "metadata";
+        video.play();
+      } catch (_) {}
+    });
+
+    // Keep overlay in sync with playback state.
+    video.addEventListener("play", hideOverlay, { passive: true });
+    video.addEventListener("pause", showOverlay, { passive: true });
+    video.addEventListener("ended", showOverlay, { passive: true });
+
     container.appendChild(video);
+    container.appendChild(overlay);
     tile.appendChild(container);
     return { tile, video };
   }

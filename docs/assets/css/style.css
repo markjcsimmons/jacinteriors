@@ -1891,6 +1891,58 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     transform: scale(1.08);
 }
 
+/* Video tile play overlay (Fox Hills Videos) */
+.video-tile .image-container {
+    position: relative;
+}
+
+.video-tile video {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #000;
+}
+
+.video-tile .video-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.video-tile .video-play-overlay[data-state="hidden"] {
+    display: none;
+}
+
+.video-tile .video-play-overlay__circle {
+    width: 74px;
+    height: 74px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.video-tile .video-play-overlay:hover .video-play-overlay__circle {
+    transform: scale(1.04);
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.video-tile .video-play-overlay__icon {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+    transform: translateX(1px);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .navbar .logo-img { filter: none; }
