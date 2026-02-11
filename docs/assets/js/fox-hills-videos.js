@@ -71,6 +71,55 @@
     return urls;
   }
 
+  function buildPosterCandidates(index) {
+    const base = r2VideoBase();
+    const n = Math.max(1, Number(index) || 1);
+    if (!base) return [];
+
+    const n2 = String(n).padStart(2, "0");
+    const dirs = [`${PROJECT_SLUG}`, `jac-videos/${PROJECT_SLUG}`];
+    const exts = ["jpg", "jpeg", "webp", "png", "JPG", "JPEG", "WEBP", "PNG"];
+    const stems = [
+      `${PROJECT_SLUG}-${n}`,
+      `${PROJECT_SLUG}-${n2}`,
+      `${PROJECT_SLUG}-${n}-thumb`,
+      `${PROJECT_SLUG}-${n2}-thumb`,
+      `${n}`,
+      `${n2}`,
+    ];
+
+    const out = [];
+    for (const dir of dirs) {
+      for (const stem of stems) {
+        for (const ext of exts) {
+          out.push(`${base}/${dir}/${encodeName(`${stem}.${ext}`)}`);
+        }
+      }
+    }
+    return out;
+  }
+
+  function trySetPoster(video, candidates) {
+    const list = Array.isArray(candidates) ? candidates.filter(Boolean) : [];
+    if (!video || !list.length) return;
+    if (video.dataset.posterAttempted === "1") return;
+    video.dataset.posterAttempted = "1";
+
+    let i = 0;
+    const probe = () => {
+      if (i >= list.length) return;
+      const url = list[i++];
+      const img = new Image();
+      img.onload = () => {
+        // Setting poster to a cross-origin image is fine for <video>.
+        video.poster = url;
+      };
+      img.onerror = () => probe();
+      img.src = url;
+    };
+    probe();
+  }
+
   function setVideoWithFallback(video, candidates) {
     const list = Array.isArray(candidates) ? candidates.filter(Boolean) : [];
     let idx = 0;
@@ -86,39 +135,41 @@
       return true;
     }
 
-    return new Promise((resolve) => {
-      video.addEventListener(
-        "error",
-        () => {
-          const ok = tryNext();
-          if (!ok) {
-            // Exhausted: mark final and let caller decide to hide tile.
-            video.dataset.r2Final = "1";
-            resolve(false);
-          }
-        },
-        { passive: true }
-      );
-
-      // Mark final once metadata loads.
-      video.addEventListener(
-        "loadedmetadata",
-        () => {
-          video.dataset.r2Final = "1";
+    // IMPORTANT:
+    // Many MP4s will fail `preload=metadata` if they're not "fast start" (moov atom at end),
+    // or if the file is very large and the connection is slow. If we mark these as "final",
+    // the masonry script may hide the entire tile after an error.
+    //
+    // So for videos: never set `data-r2-final="1"` here. We keep tiles visible even if
+    // metadata fails, and we only try a small set of fallback filenames.
+    video.addEventListener(
+      "error",
+      () => {
+        const ok = tryNext();
+        if (!ok) {
+          video.dataset.r2Exhausted = "1";
           document.dispatchEvent(new Event("spaces:gallery-updated"));
-          resolve(true);
-        },
-        { once: true, passive: true }
-      );
+        }
+      },
+      { passive: true }
+    );
 
-      tryNext();
-    });
+    // Relayout once we have intrinsic dimensions.
+    video.addEventListener(
+      "loadedmetadata",
+      () => {
+        video.dataset.r2Loaded = "1";
+        document.dispatchEvent(new Event("spaces:gallery-updated"));
+      },
+      { once: true, passive: true }
+    );
 
+    tryNext();
   }
 
-  function createVideoTile(label) {
+  function createVideoTile(label, index) {
     const tile = document.createElement("div");
-    tile.className = "scale-in-image hover-zoom-image";
+    tile.className = "scale-in-image hover-zoom-image video-tile";
     tile.classList.add("visible");
 
     const container = document.createElement("div");
@@ -126,7 +177,9 @@
 
     const video = document.createElement("video");
     video.controls = true;
-    video.preload = "metadata";
+    // Avoid large network pulls on initial render; users will click play.
+    // This also avoids "metadata load failed" behavior on non-faststart MP4s.
+    video.preload = "none";
     video.playsInline = true;
     video.muted = true;
     video.setAttribute("playsinline", "");
@@ -135,10 +188,17 @@
     // Treat as managed so masonry doesn't hide while we cycle fallbacks.
     video.dataset.r2Managed = "1";
     video.dataset.r2Space = "videos";
+    // Keep r2Final unset/falsey so masonry doesn't hide on transient errors.
     video.dataset.r2Final = "0";
 
     // A tiny placeholder "poster" so the element has size early.
     video.poster = PLACEHOLDER_SRC;
+
+    // Prefer poster thumbnails (upload alongside videos):
+    // `fox-hills/fox-hills-16.jpg` or `fox-hills/fox-hills-16-thumb.jpg` etc.
+    if (Number.isFinite(Number(index))) {
+      trySetPoster(video, buildPosterCandidates(Number(index)));
+    }
 
     container.appendChild(video);
     tile.appendChild(container);
@@ -153,28 +213,20 @@
 
   async function appendBatch(grid, startIndex, count) {
     const batchEnd = startIndex + count - 1;
-    const tasks = [];
 
     for (let i = startIndex; i <= batchEnd; i += 1) {
-      const { tile, video } = createVideoTile(`Fox Hills video ${i}`);
+      const { tile, video } = createVideoTile(`Fox Hills video ${i}`, i);
       grid.appendChild(tile);
 
       const candidates = buildVideoCandidates(i);
       if (!candidates.length) {
-        video.dataset.r2Final = "1";
-        hideTile(tile);
+        // Keep placeholder visible; nothing to load.
         continue;
       }
 
-      tasks.push(
-        setVideoWithFallback(video, candidates).then((ok) => {
-          if (!ok) hideTile(tile);
-        })
-      );
+      setVideoWithFallback(video, candidates);
     }
 
-    // Wait for the batch to settle so masonry can lay out predictably.
-    await Promise.allSettled(tasks);
     document.dispatchEvent(new Event("spaces:gallery-updated"));
   }
 
