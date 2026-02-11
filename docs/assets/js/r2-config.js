@@ -8,3 +8,7 @@
 // If you later add a subdomain like https://cdn.jacinteriorscdn.com, update here.
 window.R2_IMAGE_BASE = "https://jacinteriorscdn.com";
 
+// Videos bucket custom domain (R2 bucket: jac-videos)
+// No trailing slash.
+window.R2_VIDEO_BASE = "https://videos.jacinteriorscdn.com";
+

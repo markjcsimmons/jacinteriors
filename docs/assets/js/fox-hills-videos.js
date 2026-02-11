@@ -11,8 +11,9 @@
     "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
   function r2VideoBase() {
-    // Prefer explicit video base, then fall back to image base (older config), then default.
-    const raw = window.R2_VIDEO_BASE || window.R2_IMAGE_BASE || DEFAULT_VIDEO_BASE;
+    // Prefer explicit video base; otherwise use the default videos domain.
+    // (Do NOT fall back to R2_IMAGE_BASE — that points to the images bucket.)
+    const raw = window.R2_VIDEO_BASE || DEFAULT_VIDEO_BASE;
     return String(raw || "").replace(/\/+$/, "");
   }
 

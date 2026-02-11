@@ -26,21 +26,28 @@
     <main>
       <section style="padding: 3rem 0; background: #1a1a1a; color: white; margin-top: 0;">
         <div class="container" style="max-width: 1340px;">
-          <h1
-            style="
-              font-size: 3.5rem;
-              font-weight: 500;
-              margin: 0 0 1rem 0;
-              letter-spacing: -1.5px;
-              line-height: 1.1;
-              color: white;
-            "
-          >
-            Gallery
-          </h1>
-          <p style="font-size: 16px; color: #ccc; line-height: 1.6; font-weight: 400; max-width: 700px;">
-            Click any image to see the project.
-          </p>
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 1.25rem; flex-wrap: wrap;">
+            <div style="min-width: min(620px, 100%);">
+              <h1
+                style="
+                  font-size: 3.5rem;
+                  font-weight: 500;
+                  margin: 0 0 1rem 0;
+                  letter-spacing: -1.5px;
+                  line-height: 1.1;
+                  color: white;
+                "
+              >
+                Gallery
+              </h1>
+              <p style="font-size: 16px; color: #ccc; line-height: 1.6; font-weight: 400; max-width: 700px; margin: 0;">
+                Click any image to see the project.
+              </p>
+            </div>
+            <a class="btn btn-secondary" href="fox-hills-videos.html" style="padding: 0.95rem 2.25rem; white-space: nowrap;">
+              See videos
+            </a>
+          </div>
         </div>
       </section>
 
@@ -55,7 +62,6 @@
           </div>
 
           <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2.75rem;">
-            <a class="btn btn-secondary" href="fox-hills-videos.html" style="padding: 0.95rem 2.25rem;">See videos</a>
             <button id="galleryLoadMore" class="btn btn-primary" type="button" style="padding: 0.95rem 2.25rem;">
               Load more
             </button>
