@@ -108,7 +108,7 @@
             const isSpacesPage = [
                 'bathrooms.html',
                 'bedrooms.html',
-                'kitchens.html',
+                'kitchens-gallery.html',
                 'dining-rooms.html',
                 'living-spaces.html',
                 'office-spaces.html',
@@ -321,7 +321,7 @@
             const link = nav.querySelector('a[href*="portfolio.html"]');
             if (link) link.classList.add('active');
         } else if (filename.includes('bathrooms.html') || filename.includes('bedrooms.html') || 
-                   filename.includes('kitchens.html') || filename.includes('dining-rooms.html') ||
+                   filename.includes('kitchens-gallery.html') || filename.includes('dining-rooms.html') ||
                    filename.includes('living-spaces.html') || filename.includes('office-spaces.html') ||
                    filename.includes('entryways.html') || filename.includes('bar-area.html') ||
                    filename.includes('laundry-rooms.html') || filename.includes('outdoor-spaces.html')) {
@@ -329,7 +329,8 @@
             if (link) link.classList.add('active');
         } else if (filename === 'services.html' || filename.includes('residential-design.html') ||
                    filename.includes('commercial-design.html') || filename.includes('interior-styling.html') ||
-                   filename.includes('space-planning.html') || filename.includes('cities-we-serve.html')) {
+                   filename.includes('space-planning.html') || filename.includes('cities-we-serve.html') ||
+                   filename.includes('kitchens.html') || filename.includes('kitchen-design.html')) {
             const link = nav.querySelector('a[href*="services.html"]');
             if (link) link.classList.add('active');
         } else if (filename === 'about.html' || filename === 'blog.html' || currentPath.includes('/blog/')) {
@@ -434,7 +435,7 @@
                     <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column;">
                         <a href="${getPath('bathrooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Bathrooms</a>
                         <a href="${getPath('bedrooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Bedrooms</a>
-                        <a href="${getPath('kitchens.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Kitchens</a>
+                        <a href="${getPath('kitchens-gallery.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Kitchens</a>
                         <a href="${getPath('dining-rooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Dining Rooms</a>
                         <a href="${getPath('living-spaces.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Living Spaces</a>
                         <a href="${getPath('office-spaces.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Office Spaces</a>
@@ -1497,7 +1498,7 @@
         <h4>Services</h4>
         <ul>
           <li><a href="${getPath('residential-design.html')}">Residential Interior Design</a></li>
-          <li><a href="${getPath('kitchen-design.html')}">Kitchen Design</a></li>
+          <li><a href="${getPath('kitchens.html')}">Kitchen Design</a></li>
           <li><a href="${getPath('commercial-design.html')}">Commercial Interior Design</a></li>
           <li><a href="${getPath('interior-styling.html')}">Interior Styling &amp; Decor</a></li>
           <li><a href="${getPath('concept-design.html')}">Concept Design &amp; Visualization</a></li>

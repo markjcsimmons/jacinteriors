@@ -1970,9 +1970,9 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
 }
 
 .video-modal {
-    /* About ~50% of previous lightbox size on desktop */
-    width: min(600px, 92vw);
-    height: min(43vh, 410px);
+    /* Reduce playback lightbox size by ~25% */
+    width: min(450px, 92vw);
+    height: min(32vh, 308px);
     position: relative;
     display: grid;
     place-items: center;
