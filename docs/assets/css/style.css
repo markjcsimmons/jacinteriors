@@ -1969,8 +1969,9 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
 }
 
 .video-modal {
-    width: min(1200px, 92vw);
-    height: min(86vh, 820px);
+    /* About ~50% of previous lightbox size on desktop */
+    width: min(600px, 92vw);
+    height: min(43vh, 410px);
     position: relative;
     display: grid;
     place-items: center;
@@ -1982,6 +1983,8 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     background: #000;
     object-fit: contain;
     border-radius: 6px;
+    position: relative;
+    z-index: 1;
 }
 
 .video-modal-close {
@@ -1999,6 +2002,8 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     place-items: center;
     font-size: 22px;
     line-height: 1;
+    z-index: 2;
+    pointer-events: auto;
 }
 
 .video-modal-close:hover {

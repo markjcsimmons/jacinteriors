@@ -279,13 +279,17 @@
       if (e.key === "Escape") cleanup();
     };
 
-    closeBtn.addEventListener("click", cleanup);
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      cleanup();
+    });
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) cleanup();
     });
 
-    modal.appendChild(closeBtn);
     modal.appendChild(video);
+    modal.appendChild(closeBtn);
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
     document.body.classList.add("modal-open");

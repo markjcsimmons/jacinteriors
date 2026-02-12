@@ -62,6 +62,27 @@
     return variants.filter((v) => v !== original);
   }
 
+  function getNumericNameVariants(name, maxSteps) {
+    const steps = Math.max(1, Math.min(30, Number(maxSteps) || 10));
+    const m = String(name || "").match(/^(.*?)(\d+)(\.[a-z0-9]+)$/i);
+    if (!m) return [];
+    const prefix = m[1];
+    const numStr = m[2];
+    const suffix = m[3];
+    const width = numStr.length;
+    const n = Number(numStr);
+    if (!Number.isFinite(n)) return [];
+
+    const out = [];
+    for (let d = 1; d <= steps; d++) {
+      const up = n + d;
+      const down = n - d;
+      if (up > 0) out.push(`${prefix}${String(up).padStart(width, "0")}${suffix}`);
+      if (down > 0) out.push(`${prefix}${String(down).padStart(width, "0")}${suffix}`);
+    }
+    return out;
+  }
+
   function encodeName(name) {
     // Encode spaces and special chars safely; keep slashes if any (shouldn't be).
     return encodeURIComponent(name).replace(/%2F/g, "/");
@@ -202,6 +223,37 @@
             }
           }
 
+          // 1b) Known missing keys: allow explicit alias fallback for specific images.
+          // This keeps gallery pages resilient when a single numbered asset is missing in R2.
+          if (type === "spaces" && key) {
+            /** @type {Record<string, string[]>} */
+            const aliasMap =
+              key === "kitchens"
+                ? {
+                    // kitchens-22 is missing in R2; use the next available set.
+                    "kitchens-22.jpg": ["kitchens-35.jpg", "kitchens-36.jpg", "kitchens-37.jpg"],
+                  }
+                : {};
+
+            const aliases = aliasMap[name] || [];
+            if (aliases.length) {
+              const triedAliases = new Set(
+                (img.dataset.r2TriedAliases || "").split("|").filter(Boolean)
+              );
+              for (const a of aliases) {
+                if (triedAliases.has(a)) continue;
+                triedAliases.add(a);
+                img.dataset.r2TriedAliases = Array.from(triedAliases).join("|");
+                img.dataset.r2TargetName = a;
+                const aliasUrl = `${baseNow}/spaces/${key}/${encodeName(a)}${getBustSuffix(img)}`;
+                if (aliasUrl && img.getAttribute("src") !== aliasUrl) {
+                  img.setAttribute("src", aliasUrl);
+                  return;
+                }
+              }
+            }
+          }
+
           // 2) Spaces only: optionally try one nested folder based on the page H1
           if (type === "spaces") {
             const space = img.dataset.r2Space || "";
@@ -216,6 +268,29 @@
             if (!triedNested && nestedUrl && img.getAttribute("src") !== nestedUrl) {
               img.dataset.r2TriedNested = "1";
               img.setAttribute("src", nestedUrl);
+              return;
+            }
+          }
+
+          // 3) Numeric fallback for spaces/projects/cities (e.g. kitchens-22.jpg → kitchens-23.jpg).
+          // This prevents blank tiles when a single numbered asset is missing from R2.
+          const triedNumeric = new Set(
+            (img.dataset.r2TriedNumeric || "").split("|").filter(Boolean)
+          );
+          const numeric = getNumericNameVariants(name, 12);
+          for (const v of numeric) {
+            if (triedNumeric.has(v)) continue;
+            triedNumeric.add(v);
+            img.dataset.r2TriedNumeric = Array.from(triedNumeric).join("|");
+            img.dataset.r2TargetName = v;
+            const bust = getBustSuffix(img);
+
+            let altUrl = "";
+            if (type === "cities") altUrl = `${baseNow}/cities/${encodeName(v)}${bust}`;
+            else altUrl = type && key ? `${baseNow}/${type}/${key}/${encodeName(v)}${bust}` : "";
+
+            if (altUrl && img.getAttribute("src") !== altUrl) {
+              img.setAttribute("src", altUrl);
               return;
             }
           }
