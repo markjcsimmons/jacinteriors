@@ -123,8 +123,11 @@ body.invero-service-detail .hero-media.hero-media--pair .hero-media-pair {
   width: 100%;
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Stack landscape images vertically to reduce dead space */
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 10px;
+  height: 100%;
 }
 
 body.invero-service-detail .hero-media.hero-media--pair img {
@@ -137,7 +140,7 @@ body.invero-service-detail .hero-media.hero-media--pair img {
 }
 
 body.invero-service-detail .hero-media.hero-media--pair.is-portrait .hero-media-pair {
-  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
 }
 
 body.invero-service-detail .hero-media.hero-media--pair.is-portrait img:nth-child(2) {
