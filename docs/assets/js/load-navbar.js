@@ -1308,6 +1308,8 @@
     function ensureSiteCta() {
         if (!document.body) return;
         if (document.getElementById('siteCta')) return;
+        // If the page already has its own CTA section, don't inject a duplicate.
+        if (document.querySelector('.services-cta')) return;
 
         const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
 
