@@ -113,6 +113,37 @@ body.invero-service-detail .hero-media img {
   display: block;
 }
 
+/* Side media: 2-up images (auto-collapses for portrait) */
+body.invero-service-detail .hero-media.hero-media--pair {
+  display: flex;
+  padding: 10px;
+}
+
+body.invero-service-detail .hero-media.hero-media--pair .hero-media-pair {
+  width: 100%;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+body.invero-service-detail .hero-media.hero-media--pair img {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+body.invero-service-detail .hero-media.hero-media--pair.is-portrait .hero-media-pair {
+  grid-template-columns: 1fr;
+}
+
+body.invero-service-detail .hero-media.hero-media--pair.is-portrait img:nth-child(2) {
+  display: none;
+}
+
 /* Overview / body content */
 body.invero-service-detail .service-overview {
   padding: 0 0 4rem;
@@ -301,6 +332,11 @@ body.invero-service-detail .services-cta .cta-link svg {
   }
 
   body.invero-service-detail .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* On mobile, stack the 2-up images for legibility */
+  body.invero-service-detail .hero-media.hero-media--pair .hero-media-pair {
     grid-template-columns: 1fr;
   }
 
