@@ -71,6 +71,15 @@ body.invero-service-detail .service-hero .hero-grid {
   align-items: center;
 }
 
+@media (min-width: 981px) {
+  body.invero-service-detail .service-hero .hero-grid.hero-grid--reverse > :first-child {
+    order: 2;
+  }
+  body.invero-service-detail .service-hero .hero-grid.hero-grid--reverse > :nth-child(2) {
+    order: 1;
+  }
+}
+
 body.invero-service-detail .service-hero .lede {
   max-width: 70ch;
   margin-bottom: 1.25rem;
