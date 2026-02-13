@@ -195,9 +195,13 @@
         { once: true }
       );
 
-      img.addEventListener(
-        "error",
-        () => {
+      function handleError() {
+        // Prevent infinite loops once we've given up.
+        if (img.dataset.r2Final === "1") return;
+        // Avoid re-entrancy if setting src triggers immediate errors synchronously.
+        if (img.dataset.r2HandlingError === "1") return;
+        img.dataset.r2HandlingError = "1";
+        try {
           const type = img.dataset.r2Type || "";
           const key = img.dataset.r2Key || "";
           const name = img.dataset.r2TargetName || img.dataset.r2OriginalName || "";
@@ -300,14 +304,21 @@
           const localSrc = img.dataset.r2LocalSrc;
           if (localSrc) {
             img.setAttribute("src", localSrc);
+            img.dataset.r2Final = "1";
+            img.removeEventListener("error", handleError);
             return;
           }
 
           // If we have nothing to fall back to, mark as final so grids can handle it.
           img.dataset.r2Final = "1";
-        },
-        { once: true }
-      );
+          img.removeEventListener("error", handleError);
+        } finally {
+          img.dataset.r2HandlingError = "0";
+        }
+      }
+
+      // IMPORTANT: do not use { once: true } here — we may need multiple fallback attempts.
+      img.addEventListener("error", handleError);
 
       img.setAttribute("src", url);
     }

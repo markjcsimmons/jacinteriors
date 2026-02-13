@@ -15,19 +15,7 @@
 <script src="assets/js/load-navbar.js?v=20260204-4" defer></script>
 <script defer="" src="assets/js/spaces-masonry.js?v=20260118"></script>
 <script defer="" src="assets/js/r2-config.js?v=20260212-2"></script>
-<script defer>
-  // Cache-bust kitchen images after R2 replacements.
-  (function () {
-    const BUST = "20260213-kitchens";
-    try {
-      document
-        .querySelectorAll('img[data-r2-local-src*="assets/images/spaces/kitchens/"]')
-        .forEach((img) => {
-          if (!img.getAttribute("data-r2-bust")) img.setAttribute("data-r2-bust", BUST);
-        });
-    } catch (_) {}
-  })();
-</script>
+<script defer="" src="assets/js/kitchens-bust.js?v=20260213-1"></script>
 <script defer="" src="assets/js/r2-images.js?v=20260212-2"></script>
 
 </head>
