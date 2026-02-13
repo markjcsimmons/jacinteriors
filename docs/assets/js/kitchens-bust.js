@@ -3,7 +3,8 @@
 (function () {
   "use strict";
 
-  const BUST = "20260213-kitchens";
+  // Bump this value anytime kitchen images are re-uploaded to R2.
+  const BUST = "20260213-kitchens-2";
 
   function apply() {
     const imgs = document.querySelectorAll(
