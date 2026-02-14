@@ -1,6 +1,38 @@
 // Fixed Navbar Loader - Inline navbar HTML for instant loading (no XHR blocking)
 (function() {
     'use strict';
+
+    // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
+    // This avoids needing to bump the querystring on every HTML file.
+    (function ensureLatestNavbarScript() {
+        const LATEST_V = '20260214-2';
+        try {
+            // Prefer currentScript when available.
+            let src = (document.currentScript && document.currentScript.src) || '';
+            if (!src) {
+                // Fallback: find the script tag by partial match.
+                const s = Array.from(document.querySelectorAll('script[src]')).find(el =>
+                    String(el.getAttribute('src') || '').includes('assets/js/load-navbar.js')
+                );
+                src = (s && s.src) ? s.src : '';
+            }
+            if (!src || !src.includes('load-navbar.js')) return;
+
+            const url = new URL(src, window.location.href);
+            const v = url.searchParams.get('v') || '';
+            if (v === LATEST_V) return;
+
+            const upgraded = document.createElement('script');
+            url.searchParams.set('v', LATEST_V);
+            upgraded.src = url.toString();
+            upgraded.defer = true;
+            document.head.appendChild(upgraded);
+        } catch (_) {}
+
+        // IMPORTANT: Stop executing this older version.
+        // The upgraded script will run instead.
+        return;
+    })();
     
     const LOGO_SRC = 'assets/images/jac-interiors-logo-cropped.jpg';
     // Cropped logo allows a shorter navbar while staying legible.
@@ -451,6 +483,7 @@
                     <a href="${getPath('services.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">SERVICES</a>
                     <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column;">
                         <a href="${getPath('services.html#residential-design')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Residential Design</a>
+                        <a href="${getPath('kitchens.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Kitchen Design</a>
                         <a href="${getPath('services.html#interior-design-for-developers')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Interior Design for Developers</a>
                         <a href="${getPath('services.html#sourcing-and-purchasing-service')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Sourcing &amp; Purchasing</a>
                         <a href="${getPath('services.html#construction-supervision')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Construction Supervision</a>
