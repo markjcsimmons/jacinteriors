@@ -106,9 +106,7 @@
             const isCityPage = pathname.startsWith('/cities/') && file.endsWith('.html');
             const isProjectPage = pathname.startsWith('/projects/') && file.endsWith('.html');
             const isSpacesPage = [
-                // Kitchens landing page now lives at kitchens.html
-                'kitchens.html',
-                // Keep the legacy gallery page recognized as a Spaces page too
+                // Kitchens gallery lives here (masonry-first)
                 'kitchens-gallery.html',
                 'bathrooms.html',
                 'bedrooms.html',
@@ -323,7 +321,7 @@
         } else if (filename === 'portfolio.html' || currentPath.includes('/projects/')) {
             const link = nav.querySelector('a[href*="portfolio.html"]');
             if (link) link.classList.add('active');
-        } else if (filename.includes('kitchens.html') || filename.includes('kitchens-gallery.html') ||
+        } else if (filename.includes('kitchens-gallery.html') ||
                    filename.includes('bathrooms.html') || filename.includes('bedrooms.html') || 
                    filename.includes('dining-rooms.html') ||
                    filename.includes('living-spaces.html') || filename.includes('office-spaces.html') ||
@@ -334,7 +332,7 @@
         } else if (filename === 'services.html' || filename.includes('residential-design.html') ||
                    filename.includes('commercial-design.html') || filename.includes('interior-styling.html') ||
                    filename.includes('space-planning.html') || filename.includes('cities-we-serve.html') ||
-                   filename.includes('kitchen-design.html')) {
+                   filename.includes('kitchens.html') || filename.includes('kitchen-design.html')) {
             const link = nav.querySelector('a[href*="services.html"]');
             if (link) link.classList.add('active');
         } else if (filename === 'about.html' || filename === 'blog.html' || currentPath.includes('/blog/')) {
@@ -437,7 +435,7 @@
                 <div class="nav-dropdown" style="position: relative; display: inline-block;">
                     <a href="#" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">SPACES</a>
                     <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column;">
-                        <a href="${getPath('kitchens.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Kitchens</a>
+                        <a href="${getPath('kitchens-gallery.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Kitchens</a>
                         <a href="${getPath('bathrooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Bathrooms</a>
                         <a href="${getPath('bedrooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Bedrooms</a>
                         <a href="${getPath('dining-rooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Dining Rooms</a>
