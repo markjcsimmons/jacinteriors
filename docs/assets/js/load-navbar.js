@@ -4,35 +4,35 @@
 
     // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
     // This avoids needing to bump the querystring on every HTML file.
-    (function ensureLatestNavbarScript() {
-        const LATEST_V = '20260214-2';
-        try {
-            // Prefer currentScript when available.
-            let src = (document.currentScript && document.currentScript.src) || '';
-            if (!src) {
-                // Fallback: find the script tag by partial match.
-                const s = Array.from(document.querySelectorAll('script[src]')).find(el =>
-                    String(el.getAttribute('src') || '').includes('assets/js/load-navbar.js')
-                );
-                src = (s && s.src) ? s.src : '';
-            }
-            if (!src || !src.includes('load-navbar.js')) return;
-
+    const NAV_LATEST_V = '20260214-2';
+    try {
+        // Prefer currentScript when available.
+        let src = (document.currentScript && document.currentScript.src) || '';
+        if (!src) {
+            // Fallback: find the script tag by partial match.
+            const s = Array.from(document.querySelectorAll('script[src]')).find(el =>
+                String(el.getAttribute('src') || '').includes('assets/js/load-navbar.js')
+            );
+            src = (s && s.src) ? s.src : '';
+        }
+        if (src && src.includes('load-navbar.js')) {
             const url = new URL(src, window.location.href);
             const v = url.searchParams.get('v') || '';
-            if (v === LATEST_V) return;
-
-            const upgraded = document.createElement('script');
-            url.searchParams.set('v', LATEST_V);
-            upgraded.src = url.toString();
-            upgraded.defer = true;
-            document.head.appendChild(upgraded);
-        } catch (_) {}
-
-        // IMPORTANT: Stop executing this older version.
-        // The upgraded script will run instead.
-        return;
-    })();
+            if (v !== NAV_LATEST_V) {
+                // Avoid multiple upgrades on the same page.
+                if (window.__JAC_NAV_UPGRADED_TO !== NAV_LATEST_V) {
+                    window.__JAC_NAV_UPGRADED_TO = NAV_LATEST_V;
+                    const upgraded = document.createElement('script');
+                    url.searchParams.set('v', NAV_LATEST_V);
+                    upgraded.src = url.toString();
+                    upgraded.defer = true;
+                    document.head.appendChild(upgraded);
+                }
+                // IMPORTANT: stop executing this older version.
+                return;
+            }
+        }
+    } catch (_) {}
     
     const LOGO_SRC = 'assets/images/jac-interiors-logo-cropped.jpg';
     // Cropped logo allows a shorter navbar while staying legible.
