@@ -2,7 +2,7 @@
  * Load Spaces, Projects, and Cities images from Cloudflare R2.
  *
  * Supported HTML local paths (relative or ../relative):
- * - assets/images/spaces/<space>/<filename>   → {base}/spaces/<space>/<filename>
+ * - assets/images/spaces/<space>/<filename>   → {base}/jac-images/spaces/<space>/<filename>
  * - assets/images/projects/<project>/<filename> → {base}/projects/<project>/<filename>
  * - assets/images/cities/<filename>           → {base}/cities/<filename>
  *
@@ -219,7 +219,9 @@
 
             let altUrl = "";
             if (type === "cities") altUrl = `${baseNow}/cities/${encodeName(v)}${bust}`;
-            else altUrl = type && key ? `${baseNow}/${type}/${key}/${encodeName(v)}${bust}` : "";
+            else if (type === "spaces" && key) altUrl = `${baseNow}/jac-images/spaces/${key}/${encodeName(v)}${bust}`;
+            else if (type && key) altUrl = `${baseNow}/${type}/${key}/${encodeName(v)}${bust}`;
+            else altUrl = "";
 
             if (altUrl && img.getAttribute("src") !== altUrl) {
               img.setAttribute("src", altUrl);
@@ -249,7 +251,7 @@
                 triedAliases.add(a);
                 img.dataset.r2TriedAliases = Array.from(triedAliases).join("|");
                 img.dataset.r2TargetName = a;
-                const aliasUrl = `${baseNow}/spaces/${key}/${encodeName(a)}${getBustSuffix(img)}`;
+                const aliasUrl = `${baseNow}/jac-images/spaces/${key}/${encodeName(a)}${getBustSuffix(img)}`;
                 if (aliasUrl && img.getAttribute("src") !== aliasUrl) {
                   img.setAttribute("src", aliasUrl);
                   return;
@@ -266,7 +268,7 @@
             const nestedFolder = h1Text ? encodeName(h1Text) : "";
             const nestedUrl =
               space && name && nestedFolder
-                ? `${baseNow}/spaces/${space}/${nestedFolder}/${encodeName(name)}${getBustSuffix(img)}`
+                ? `${baseNow}/jac-images/spaces/${space}/${nestedFolder}/${encodeName(name)}${getBustSuffix(img)}`
                 : "";
 
             if (!triedNested && nestedUrl && img.getAttribute("src") !== nestedUrl) {
@@ -291,7 +293,9 @@
 
             let altUrl = "";
             if (type === "cities") altUrl = `${baseNow}/cities/${encodeName(v)}${bust}`;
-            else altUrl = type && key ? `${baseNow}/${type}/${key}/${encodeName(v)}${bust}` : "";
+            else if (type === "spaces" && key) altUrl = `${baseNow}/jac-images/spaces/${key}/${encodeName(v)}${bust}`;
+            else if (type && key) altUrl = `${baseNow}/${type}/${key}/${encodeName(v)}${bust}`;
+            else altUrl = "";
 
             if (altUrl && img.getAttribute("src") !== altUrl) {
               img.setAttribute("src", altUrl);
@@ -325,11 +329,11 @@
 
     if (!base) return;
 
-    // Apply per space
+    // Apply per space (R2 path: jac-images/spaces/<space>/)
     bySpace.forEach((entries, space) => {
       entries.forEach(({ img, originalName }) => {
         img.dataset.r2TargetName = originalName;
-        const url = `${base}/spaces/${space}/${encodeName(originalName)}${getBustSuffix(img)}`;
+        const url = `${base}/jac-images/spaces/${space}/${encodeName(originalName)}${getBustSuffix(img)}`;
         setFinalSrc(img, url);
       });
     });
