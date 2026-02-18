@@ -1679,14 +1679,9 @@
         setTimeout(() => clearInterval(interval), 5000);
     }
 
-    // Temporary image labels: when ?showNames=1, show filename on every image (all pages).
+    // Temporary image labels: show filename on every image (all pages). Remove this block when no longer needed.
     (function initShowImageLabels() {
-        var param = 'showNames';
-        function getShowNames() {
-            try {
-                return (new URLSearchParams(window.location.search)).get(param) === '1';
-            } catch (_) { return false; }
-        }
+        function getShowNames() { return true; }
         function filenameFromSrc(src) {
             if (!src || typeof src !== 'string') return '';
             try {
