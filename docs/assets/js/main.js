@@ -945,7 +945,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         const yPos = distFromCenter * speed;
                         
-                        img.style.transform = `translateY(${yPos}px) scale(1.15)`;
+                        img.style.transform = `translateY(${yPos}px)`;
                     }
                 });
             });

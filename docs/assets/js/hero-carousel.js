@@ -6,7 +6,7 @@
 (function () {
   "use strict";
 
-  const INTERVAL_MS = 3000;
+  const INTERVAL_MS = 2000;
 
   function init() {
     const carousel = document.getElementById("heroCarousel");
