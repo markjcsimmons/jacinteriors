@@ -7,10 +7,8 @@
   "use strict";
 
   const PROJECT_SLUG = "fox-hills";
-  // R2 bucket path jac-images/projects/fox-hills/. Try both URL shapes for CDN flexibility.
   const R2_PATHS = [
-    "jac-images/projects/" + PROJECT_SLUG + "/",
-    "projects/" + PROJECT_SLUG + "/"
+    "projects/" + PROJECT_SLUG + "/",
   ];
   const BUST = "?v=20260218";
   const MAX_IMAGES = 120;

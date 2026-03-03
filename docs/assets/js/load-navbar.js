@@ -996,7 +996,6 @@
                 'cover',
             ];
             const prefixes = [
-                `jac-images/cities/${slug}/`,
                 `cities/${slug}/`,
             ];
 
