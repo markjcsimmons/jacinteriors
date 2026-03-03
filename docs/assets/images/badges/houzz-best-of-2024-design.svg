@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-labelledby="title">
+  <title id="title">Best of Houzz 2024 Design</title>
+  <rect width="120" height="120" rx="8" fill="#2d2d2d"/>
+  <rect x="8" y="8" width="104" height="36" rx="4" fill="#7AC143"/>
+  <text x="60" y="32" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#fff" text-anchor="middle">BEST OF HOUZZ</text>
+  <text x="60" y="56" font-family="Arial, sans-serif" font-size="10" fill="#fff" text-anchor="middle">2024</text>
+  <text x="60" y="82" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">Design</text>
+</svg>

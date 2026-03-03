@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luxury interior design in Los Angeles and South Florida’s Florida Gold Coast. Full-service residential interiors, procurement, and white-glove installation.">
+    <meta name="description" content="Luxury interior design in Los Angeles and South Florida's Gold Coast. Full-service residential interiors, procurement, and white-glove installation.">
     <title>JAC Interiors | Luxury Interior Design Los Angeles + Florida</title>
     <link rel="canonical" href="https://jacinteriors.com/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jacinteriors.com/">
     <meta property="og:title" content="JAC Interiors | Luxury Interior Design Los Angeles + Florida">
-    <meta property="og:description" content="Luxury interior design in Los Angeles and South Florida's Florida Gold Coast. Full-service residential interiors, procurement, and white-glove installation.">
+    <meta property="og:description" content="Luxury interior design in Los Angeles and South Florida's Gold Coast. Full-service residential interiors, procurement, and white-glove installation.">
     <meta property="og:image" content="https://jacinteriorscdn.com/projects/fox-hills/fox-hills-1.jpg">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="JAC Interiors | Luxury Interior Design Los Angeles + Florida">
-    <meta name="twitter:description" content="Luxury interior design in Los Angeles and South Florida's Florida Gold Coast. Full-service residential interiors, procurement, and white-glove installation.">
+    <meta name="twitter:description" content="Luxury interior design in Los Angeles and South Florida's Gold Coast. Full-service residential interiors, procurement, and white-glove installation.">
     <meta name="twitter:image" content="https://jacinteriorscdn.com/projects/fox-hills/fox-hills-1.jpg">
     <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"LocalBusiness","name":"JAC Interiors","url":"https://jacinteriors.com","description":"Luxury interior design in Los Angeles and South Florida. Full-service residential and commercial interiors, procurement, and white-glove installation.","image":"https://jacinteriorscdn.com/projects/fox-hills/fox-hills-1.jpg","logo":"https://jacinteriors.com/assets/images/jac-interiors-logo-cropped.jpg","telephone":"+1-213-397-0206","email":"info@jacinteriors.com","address":{"@type":"PostalAddress","streetAddress":"8033 W Sunset Blvd #107","addressLocality":"Los Angeles","addressRegion":"CA","postalCode":"90046"},"areaServed":[{"@type":"City","name":"Los Angeles"},{"@type":"State","name":"California"},{"@type":"Place","name":"Florida Gold Coast"}]}
@@ -194,6 +194,19 @@
             line-height: 0;
         }
 
+        /* Carousel: each slide stacks absolutely; only the active one is visible */
+        .hero-carousel-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+        }
+        .hero-carousel-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         .hero-img {
             width: 100%;
             height: 100%;
@@ -205,6 +218,30 @@
             display: block;
             margin: 0;
             padding: 0;
+        }
+
+        /* Carousel dot indicators */
+        .hero-carousel-dots {
+            position: absolute;
+            bottom: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+        .hero-carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .hero-carousel-dot.active {
+            background: #fff;
         }
 
         /* 4. STICKY "PROCESS" SECTION */
@@ -559,6 +596,7 @@
     </style>
     <script src="assets/js/load-navbar.js?v=20260214-1" defer></script>
     <script src="assets/js/r2-config.js?v=20260212-2" defer></script>
+    <script src="assets/js/hero-carousel.js?v=20260218-1" defer></script>
     <script src="assets/js/home-portfolio-cards.js?v=20260208-2" defer></script>
     <script src="assets/js/reviews-data.js?v=20260131-1" defer></script>
     <script src="assets/js/reviews-carousel.js?v=20260202-1" defer></script>
@@ -579,16 +617,50 @@
                     <h1>Luxury interior design<br>los angeles</h1>
                 </div>
                 <div>
-                    <p>From concept to install, we create timeless homes for clients in Los Angeles and the Florida Gold Coast of South Florida.</p>
+                    <p>From concept to install, we create timeless homes for clients in Los Angeles and South Florida's Gold Coast.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. HERO IMAGE -->
+    <!-- 3. HERO IMAGE CAROUSEL -->
     <div class="hero-image-section">
-        <div class="hero-img-wrapper">
-            <img src="assets/images/projects/madison-club-hero-highres.jpg" alt="Hero" class="hero-img" id="heroZoomImg">
+        <div class="hero-img-wrapper" id="heroCarousel">
+
+            <!-- Slide 1 (active by default; src will be replaced by hero-carousel.js) -->
+            <div class="hero-carousel-slide active" data-hero-slide="0">
+                <img src="assets/images/projects/madison-club-hero-highres.jpg"
+                     alt="JAC Interiors — luxury interior design"
+                     class="hero-img"
+                     id="heroZoomImg"
+                     loading="eager"
+                     decoding="auto">
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="hero-carousel-slide" data-hero-slide="1">
+                <img src=""
+                     alt="JAC Interiors — refined residential design"
+                     class="hero-img"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="hero-carousel-slide" data-hero-slide="2">
+                <img src=""
+                     alt="JAC Interiors — luxury interiors Los Angeles"
+                     class="hero-img"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+
+            <!-- Dot indicators -->
+            <div class="hero-carousel-dots" aria-label="Carousel navigation">
+                <button class="hero-carousel-dot active" data-dot="0" aria-label="Image 1"></button>
+                <button class="hero-carousel-dot" data-dot="1" aria-label="Image 2"></button>
+                <button class="hero-carousel-dot" data-dot="2" aria-label="Image 3"></button>
+            </div>
         </div>
 
             <!-- Compact Reviews Box -->
@@ -676,7 +748,7 @@
     <!-- Location + services (SEO) -->
     <section style="padding: 6rem 0; border-top: 1px solid var(--stroke);">
         <div class="container">
-            <h2 style="max-width: 900px;">Serving Los Angeles + South Florida’s Florida Gold Coast</h2>
+            <h2 style="max-width: 900px;">Serving Los Angeles + South Florida's Gold Coast</h2>
             <p style="max-width: 980px; font-size: 1.05rem;">
                 From Century City to Beverly Hills, and from Boca Raton to Fort Lauderdale and Palm Beach, we design refined, livable homes with full-service support from concept through install.
             </p>
@@ -744,7 +816,7 @@
                     </div>
                 </div>
             </div>
-            <p style="margin-top: 1.5rem; font-size: 0.95rem;"><a href="kitchens.html" style="text-decoration: underline; font-weight: 600;">Kitchen design in Los Angeles</a> — layouts, cabinetry, finishes, and lighting.</p>
+            <p style="margin-top: 1.5rem; font-size: 0.95rem; color: rgba(255,255,255,0.85);"><a href="kitchens.html" style="color: #fff; text-decoration: underline; font-weight: 600;">Kitchen design in Los Angeles</a> — layouts, cabinetry, finishes, and lighting.</p>
         </div>
     </section>
 

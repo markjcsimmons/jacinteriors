@@ -1502,7 +1502,7 @@
           <img src="${getPath('assets/images/badges/houzz-best-of-2024-design.png')}" alt="Best of Houzz 2024 Design" loading="lazy" decoding="async">
         </a>
         <a class="footer-badge" href="https://www.houzz.com/professionals/interior-designers-and-decorators/jac-interiors-pfvwus-pf~914469284?" target="_blank" rel="noopener" aria-label="Best of Houzz 2024 Service">
-          <img src="${getPath('assets/images/badges/houzz-best-of-2024-service.png')}" alt="Best of Houzz 2024 Service" loading="lazy" decoding="async">
+          <img src="${getPath('assets/images/badges/houzz-best-of-2024-service.svg')}" alt="Best of Houzz 2024 Service" loading="lazy" decoding="async">
         </a>
       </div>
       <div class="footer-top-links">
