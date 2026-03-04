@@ -23,6 +23,7 @@
     'columbus-way': [ 6, 28, 27],
     'colette-way':  [ 5,  7, 19],
     'oakwood':      [ 2, 12,  3],
+    'wilshire':     [ 4,  7,  3],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
