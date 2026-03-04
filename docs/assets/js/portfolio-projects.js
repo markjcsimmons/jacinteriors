@@ -18,6 +18,7 @@
   // Images are loaded from R2: projects/{slug}/{slug}-{N}.jpg
   const IMAGE_OVERRIDES = {
     '22nd-street': [15, 18, 14],
+    'sunnyside':   [10,  8,  7],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
