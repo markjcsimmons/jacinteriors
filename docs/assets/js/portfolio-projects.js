@@ -21,6 +21,7 @@
     'sunnyside':    [10,  8,  7],
     'frances':      [ 2, 18, 22],
     'columbus-way': [ 6, 28, 27],
+    'colette-way':  [ 5,  7, 19],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
