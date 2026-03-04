@@ -13,6 +13,13 @@
   const DEFAULT_R2_BASE = 'https://jacinteriorscdn.com';
   const R2_BASE = (window.R2_IMAGE_BASE || DEFAULT_R2_BASE).replace(/\/+$/, '');
 
+  // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
+  const PORTFOLIO_CARD_EXCLUDE = new Set([
+    'projects/presson-place.html',
+    'projects/highland.html',
+    'projects/medio.html',
+  ]);
+
   // Fallback list in case navbar injection fails for any reason.
   // Keep in sync with the Portfolio dropdown in load-navbar.js.
   const FALLBACK_PROJECT_LINKS = [
@@ -79,7 +86,8 @@
         title: (a.textContent || '').trim(),
         href: a.getAttribute('href') || '',
       }))
-      .filter((x) => x.title && x.href);
+      .filter((x) => x.title && x.href)
+      .filter((x) => !PORTFOLIO_CARD_EXCLUDE.has(x.href.replace(/^.*projects\//, 'projects/')));
   }
 
   function slugFromHref(href) {
@@ -309,7 +317,8 @@
     if (!container) return false;
 
     const links = getProjectLinksFromNavbar();
-    const list = links.length ? links : FALLBACK_PROJECT_LINKS;
+    const list = (links.length ? links : FALLBACK_PROJECT_LINKS)
+      .filter((x) => !PORTFOLIO_CARD_EXCLUDE.has(x.href.replace(/^.*projects\//, 'projects/')));
     if (!list.length) return false;
 
     container.innerHTML = '';
