@@ -27,6 +27,7 @@
     'mulholland-drive': [ 5, 15, 12],
     'galewood':         [ 7,  1,  9],
     'ronda':            [ 8, 17, 16],
+    'alpine':           [ 3,  1,  8],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
