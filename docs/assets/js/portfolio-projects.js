@@ -28,6 +28,7 @@
     'galewood':         [ 7,  1,  9],
     'ronda':            [ 8, 17, 16],
     'alpine':           [ 3,  1,  8],
+    'peary-way':        [ 1,  6,  7],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
