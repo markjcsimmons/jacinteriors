@@ -31,6 +31,7 @@
     'peary-way':        [ 1,  6,  7],
     'monaco':           [ 3,  6,  1],
     'sherbourne':       [ 2,  7,  1],
+    'jamm-visual':      [ 1,  8,  4],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
