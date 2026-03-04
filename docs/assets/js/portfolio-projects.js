@@ -17,9 +17,10 @@
   // Format: slug -> [mainImageN, smallImage1N, smallImage2N]
   // Images are loaded from R2: projects/{slug}/{slug}-{N}.jpg
   const IMAGE_OVERRIDES = {
-    '22nd-street': [15, 18, 14],
-    'sunnyside':   [10,  8,  7],
-    'frances':     [ 2, 18, 22],
+    '22nd-street':  [15, 18, 14],
+    'sunnyside':    [10,  8,  7],
+    'frances':      [ 2, 18, 22],
+    'columbus-way': [ 6, 28, 27],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
