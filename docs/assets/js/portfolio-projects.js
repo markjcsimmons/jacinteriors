@@ -26,6 +26,7 @@
     'wilshire':         [ 4,  7,  3],
     'mulholland-drive': [ 5, 15, 12],
     'galewood':         [ 7,  1,  9],
+    'ronda':            [ 8, 17, 16],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
