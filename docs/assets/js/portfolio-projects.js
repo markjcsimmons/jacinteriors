@@ -30,6 +30,7 @@
     'alpine':           [ 3,  1,  8],
     'peary-way':        [ 1,  6,  7],
     'monaco':           [ 3,  6,  1],
+    'sherbourne':       [ 2,  7,  1],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
