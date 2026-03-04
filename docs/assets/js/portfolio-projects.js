@@ -19,6 +19,7 @@
   const IMAGE_OVERRIDES = {
     '22nd-street': [15, 18, 14],
     'sunnyside':   [10,  8,  7],
+    'frances':     [ 2, 18, 22],
   };
 
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
