@@ -13,6 +13,13 @@
   const DEFAULT_R2_BASE = 'https://jacinteriorscdn.com';
   const R2_BASE = (window.R2_IMAGE_BASE || DEFAULT_R2_BASE).replace(/\/+$/, '');
 
+  // Manual image overrides per project slug.
+  // Format: slug -> [mainImageN, smallImage1N, smallImage2N]
+  // Images are loaded from R2: projects/{slug}/{slug}-{N}.jpg
+  const IMAGE_OVERRIDES = {
+    '22nd-street': [15, 18, 14],
+  };
+
   // Projects hidden from the portfolio page cards (still appear in navbar dropdown).
   const PORTFOLIO_CARD_EXCLUDE = new Set([
     'projects/presson-place.html',
@@ -220,6 +227,17 @@
     const hover = cardEl.querySelector('img.hover-img');
     const secondary = cardEl.querySelector('.project-secondary-image img');
     if (!primary || !hover || !secondary) return;
+
+    const slug = cardEl.dataset.projectSlug || '';
+    const override = IMAGE_OVERRIDES[slug];
+
+    if (override) {
+      const [n1, n2, n3] = override;
+      primary.src   = `${R2_BASE}/projects/${slug}/${slug}-${n1}.jpg`;
+      hover.src     = `${R2_BASE}/projects/${slug}/${slug}-${n2}.jpg`;
+      secondary.src = `${R2_BASE}/projects/${slug}/${slug}-${n3}.jpg`;
+      return;
+    }
 
     try {
       const images = await fetchProjectImages(href);
