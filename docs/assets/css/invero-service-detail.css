@@ -148,6 +148,10 @@ body.invero-service-detail .hero-media.hero-media--pair img {
   border-radius: 8px;
 }
 
+body.invero-service-detail .hero-media.hero-media--pair.hero-media--triple .hero-media-pair {
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
 body.invero-service-detail .hero-media.hero-media--pair.is-portrait .hero-media-pair {
   grid-template-rows: 1fr;
 }
