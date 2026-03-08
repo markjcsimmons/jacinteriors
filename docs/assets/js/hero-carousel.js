@@ -39,21 +39,27 @@
     // Dot click navigation
     dots.forEach(function (dot, i) {
       dot.addEventListener("click", function () {
-        clearInterval(timer);
+        clearTimeout(timer);
         goTo(i);
-        timer = setInterval(advance, INTERVAL_MS);
+        scheduleNext();
       });
     });
 
     function advance() { goTo(current + 1); }
 
-    var timer = setInterval(advance, INTERVAL_MS);
+    function scheduleNext() {
+      timer = setTimeout(function () {
+        advance();
+        scheduleNext();
+      }, INTERVAL_MS);
+    }
+
+    var timer;
+    scheduleNext();
 
     // Pause on hover
-    carousel.addEventListener("mouseenter", function () { clearInterval(timer); });
-    carousel.addEventListener("mouseleave", function () {
-      timer = setInterval(advance, INTERVAL_MS);
-    });
+    carousel.addEventListener("mouseenter", function () { clearTimeout(timer); });
+    carousel.addEventListener("mouseleave", function () { scheduleNext(); });
   }
 
   if (document.readyState === "loading") {
