@@ -153,6 +153,12 @@
       if (img.dataset.r2Wired === "1") return;
       img.dataset.r2Wired = "1";
 
+      // Hero image (first-row-grid): high priority for faster LCP
+      if (img.closest(".first-row-grid")) {
+        img.setAttribute("fetchpriority", "high");
+        img.setAttribute("loading", "eager");
+      }
+
       img.dataset.r2LocalSrc = parsed.fallbackSrc;
       if (!img.getAttribute("data-r2-local-src")) {
         img.setAttribute("data-r2-local-src", parsed.fallbackSrc);

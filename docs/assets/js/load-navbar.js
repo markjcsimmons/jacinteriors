@@ -4,7 +4,7 @@
 
     // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
     // This avoids needing to bump the querystring on every HTML file.
-    const NAV_LATEST_V = '20260214-2';
+    const NAV_LATEST_V = '20260308-3';
     try {
         // Prefer currentScript when available.
         let src = (document.currentScript && document.currentScript.src) || '';
@@ -62,6 +62,22 @@
     const depth = Math.max(0, pathParts.length - 2);
     const pathPrefix = depth > 0 ? '../'.repeat(depth) : '';
     
+    // Build absolute URL for assets (badges, etc.) from script location so it works on any deployment
+    function getAssetUrl(assetPath) {
+      try {
+        const s = (document.currentScript && document.currentScript.src) || '';
+        const scriptSrc = s || (Array.from(document.querySelectorAll('script[src]')).find(el =>
+          String(el.getAttribute('src') || '').includes('load-navbar.js')
+        )?.src || '');
+        if (scriptSrc) {
+          const u = new URL(scriptSrc, window.location.href);
+          const base = u.origin + u.pathname.replace(/\/assets\/js\/load-navbar\.js.*$/i, '');
+          return base.replace(/\/$/, '') + '/' + assetPath.replace(/^\//, '');
+        }
+      } catch (_) {}
+      return (window.location.origin || '') + (basePath || '') + '/' + assetPath.replace(/^\//, '');
+    }
+
     // Helper to get correct path for links
     // Use absolute paths with basePath for root-level pages to ensure correct resolution
     function getPath(href) {
@@ -1497,11 +1513,11 @@
   <div class="container">
     <div class="footer-top" aria-label="Social links">
       <div class="footer-badges" aria-label="Awards">
-        <a class="footer-badge" href="https://www.houzz.com/professionals/interior-designers-and-decorators/jac-interiors-pfvwus-pf~914469284?" target="_blank" rel="noopener" aria-label="Best of Houzz 2024 Design">
-          <img src="${getPath('assets/images/badges/houzz-best-of-2024-design.svg')}" alt="Best of Houzz 2024 Design" loading="lazy" decoding="async">
+        <a class="footer-badge" href="https://www.houzz.com/professionals/interior-designers-and-decorators/jac-interiors-pfvwus-pf~914469284" target="_blank" rel="noopener" aria-label="Best of Houzz 2024 Design">
+          <img src="${getAssetUrl('assets/images/badges/houzz-best-of-2024-design.png')}" alt="Best of Houzz 2024 Design" loading="lazy" decoding="async">
         </a>
-        <a class="footer-badge" href="https://www.houzz.com/professionals/interior-designers-and-decorators/jac-interiors-pfvwus-pf~914469284?" target="_blank" rel="noopener" aria-label="Best of Houzz 2024 Service">
-          <img src="${getPath('assets/images/badges/houzz-best-of-2024-service.svg')}" alt="Best of Houzz 2024 Service" loading="lazy" decoding="async">
+        <a class="footer-badge" href="https://www.houzz.com/professionals/interior-designers-and-decorators/jac-interiors-pfvwus-pf~914469284" target="_blank" rel="noopener" aria-label="Best of Houzz 2024 Service">
+          <img src="${getAssetUrl('assets/images/badges/houzz-best-of-2024-service.png')}" alt="Best of Houzz 2024 Service" loading="lazy" decoding="async">
         </a>
       </div>
       <div class="footer-top-links">

@@ -15,7 +15,9 @@
 
   // Manual image overrides per project slug.
   // Format: slug -> [mainImageN, smallImage1N, smallImage2N]
-  // Images are loaded from R2: projects/{slug}/{slug}-{N}.jpg
+  // Images are loaded from R2: projects/{slug}/{filenamePrefix}-{N}.jpg
+  // Use FILENAME_PREFIX when R2 filenames differ from slug (e.g. jamm-visual -> jamm-1.jpg).
+  const FILENAME_PREFIX = { 'jamm-visual': 'jamm' };
   const IMAGE_OVERRIDES = {
     '22nd-street':  [15, 18, 14],
     'sunnyside':    [10,  8,  7],
@@ -26,7 +28,7 @@
     'wilshire':         [ 4,  7,  3],
     'mulholland-drive': [ 5, 15, 12],
     'galewood':         [ 7,  1,  9],
-    'ronda':            [ 8, 17, 16],
+    'ronda':            [ 2,  8, 16],
     'alpine':           [ 3,  1,  8],
     'peary-way':        [ 1,  6,  7],
     'monaco':           [ 3,  6,  1],
@@ -247,9 +249,10 @@
 
     if (override) {
       const [n1, n2, n3] = override;
-      primary.src   = `${R2_BASE}/projects/${slug}/${slug}-${n1}.jpg`;
-      hover.src     = `${R2_BASE}/projects/${slug}/${slug}-${n2}.jpg`;
-      secondary.src = `${R2_BASE}/projects/${slug}/${slug}-${n3}.jpg`;
+      const prefix = FILENAME_PREFIX[slug] || slug;
+      primary.src   = `${R2_BASE}/projects/${slug}/${prefix}-${n1}.jpg`;
+      hover.src     = `${R2_BASE}/projects/${slug}/${prefix}-${n2}.jpg`;
+      secondary.src = `${R2_BASE}/projects/${slug}/${prefix}-${n3}.jpg`;
       return;
     }
 

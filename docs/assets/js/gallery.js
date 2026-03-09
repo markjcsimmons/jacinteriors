@@ -151,6 +151,9 @@
     return { tile, img };
   }
 
+  // R2 filenames differ from slug for some projects (e.g. jamm-visual -> jamm-1.jpg).
+  const GALLERY_FILENAME_PREFIX = { "jamm-visual": "jamm" };
+
   function buildCdnCandidatesFromSlugAndIndex(slug, index) {
     const s = String(slug || "").trim();
     if (!s) return [];
@@ -158,13 +161,14 @@
     if (!base) return [];
 
     const n = Math.max(1, Number(index) || 1);
+    const prefix = GALLERY_FILENAME_PREFIX[s] || s;
 
-    // Prefer smaller-ish filenames if you add them later (e.g. "-1200").
-    // Typical R2 convention: "<slug>-<n>.*"
-    const stems = [`${s}-${n}-1200`, `${s}-${n}-900`, `${s}-${n}-600`, `${s}-${n}`];
+    // Try base filename first (matches R2), then size variants.
+    // Typical R2 convention: "<prefix>-<n>.*"
+    const stems = [`${prefix}-${n}`, `${prefix}-${n}-1200`, `${prefix}-${n}-900`, `${prefix}-${n}-600`];
 
     // First image can also exist as "primary" in some buckets.
-    if (n === 1) stems.push(`${s}-primary`);
+    if (n === 1) stems.push(`${prefix}-primary`);
 
     const exts = ["webp", "jpg", "jpeg", "png"];
     const urls = [];
