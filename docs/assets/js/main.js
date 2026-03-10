@@ -463,7 +463,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (dropdownLink) {
                 dropdownLink.addEventListener('click', function(e) {
                     // On mobile, toggle dropdown instead of navigating
-                    if (window.innerWidth <= 768) {
+                    if (window.innerWidth <= 980) {
                         e.preventDefault();
                         dropdown.classList.toggle('active');
                     }

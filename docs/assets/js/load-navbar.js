@@ -410,6 +410,48 @@
         });
     }
     
+    function initMobileMenu(nav) {
+        if (!nav) return;
+        const mobileMenuToggle = nav.querySelector('#mobileMenuToggle');
+        const navMenu = nav.querySelector('#navMenu');
+        if (!mobileMenuToggle || !navMenu) return;
+        
+        function closeMenu() {
+            navMenu.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+            nav.querySelectorAll('.nav-dropdown').forEach(dd => dd.classList.remove('active'));
+        }
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
+        });
+        
+        nav.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+            const dropdownLink = dropdown.querySelector('.nav-link');
+            if (dropdownLink) {
+                dropdownLink.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 980) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            }
+        });
+        
+        navMenu.querySelectorAll('.nav-link').forEach(link => {
+            if (link.closest('.nav-dropdown') && !link.closest('.nav-dropdown-content')) return;
+            link.addEventListener('click', closeMenu);
+        });
+        navMenu.querySelectorAll('.nav-dropdown-content a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeMenu();
+        });
+    }
+    
     // Force navbar styles
     function enforceNavbarStyles(nav) {
         if (!nav) return;
@@ -1636,6 +1678,7 @@
             if (nav) {
                 setActiveNav();
                 initDropdowns();
+                initMobileMenu(nav);
                 enforceNavbarStyles(nav);
                 setTimeout(() => enforceNavbarStyles(nav), 10);
             }
