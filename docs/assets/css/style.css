@@ -100,6 +100,13 @@ img {
     padding: 0 2rem;
 }
 
+@media (max-width: 480px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
 /* Container width modifiers (used to replace inline max-width overrides) */
 .container--1320 { max-width: 1320px; }
 .container--1340 { max-width: 1340px; }
@@ -2020,7 +2027,7 @@ body.modal-open {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .navbar .logo-img { filter: none; }
+    .navbar .logo-img { filter: none; height: 100px; width: auto; }
     .nav-menu {
         position: fixed;
         top: 0; left: 0; width: 100%; height: 100vh;
@@ -2036,6 +2043,21 @@ body.modal-open {
     .mobile-menu-toggle { display: flex; z-index: 1001; flex-direction: column; gap: 6px; }
     .mobile-menu-toggle span { display: block; width: 30px; height: 2px; background: white; }
     .navbar.scrolled .mobile-menu-toggle span { background: var(--color-secondary); }
+    
+    /* Mobile overlay: touch-friendly tap targets (min 44px) */
+    .nav-menu .nav-link {
+        min-height: 44px;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+    .nav-menu .nav-cta {
+        min-height: 44px;
+        padding: 1rem 1.5rem;
+        box-sizing: border-box;
+    }
     
     /* Mobile dropdown styles */
     .nav-dropdown {
@@ -2057,7 +2079,12 @@ body.modal-open {
     }
     .nav-dropdown-content a {
         color: white;
-        padding: 0.5rem 1rem;
+        min-height: 44px;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         font-size: 0.9rem;
     }
@@ -2095,6 +2122,25 @@ body.modal-open {
     
     .hero-title-mega { font-size: 3.5rem; }
     .hero-cta-group { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto; }
+    
+    /* Project/spaces pages: tighter spacing on small screens */
+    section[style*="padding: 3rem 0"][style*="background: #1a1a1a"] {
+        padding: 2rem 0 !important;
+    }
+    div.first-row-text[style*="padding: 2.5rem"] {
+        padding: 1.5rem 1rem !important;
+    }
+    
+    /* Touch-friendly primary actions */
+    .btn, .btn-primary, .btn-outline, .btn-outline-white, .site-cta-button, a[class*="btn"], .view-project-btn {
+        min-height: 44px;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 /* -----------------------------

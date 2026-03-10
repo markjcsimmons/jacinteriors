@@ -75,7 +75,7 @@
         }
 
         h1 {
-            font-size: 80px;
+            font-size: clamp(2.5rem, 8vw, 80px);
             line-height: 1.1em;
             letter-spacing: -4px;
             font-weight: 500;
@@ -598,6 +598,31 @@
             .trust-badges-inline { gap: 1rem; flex-wrap: wrap; }
             .testimonial-text { font-size: 0.9rem; }
             .reviews-compact-box { padding: 1rem 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .top-headline-section { padding: 1.5rem 0; }
+            .top-headline-section h1 { font-size: clamp(2rem, 7vw, 3rem); letter-spacing: -2px; }
+            .top-headline-section p { font-size: 1rem; }
+            .hero-img-wrapper { height: 45vh; min-height: 280px; }
+            .sticky-process-section { padding: 3rem 0; }
+            .sticky-grid { gap: 2rem; }
+            .services-section { padding: 3rem 0; }
+            .stats-flex { gap: 2rem; }
+            .reviews-compact-box { padding: 0.875rem 1rem; }
+            .hero-carousel-dots { bottom: 0.75rem; }
+            .hero-carousel-dot { width: 8px; height: 8px; }
+        }
+
+        @media (max-width: 480px) {
+            .top-headline-section { padding: 1.25rem 0; }
+            .top-headline-section h1 { font-size: clamp(1.75rem, 8vw, 2.5rem); }
+            .stats-flex { grid-template-columns: 1fr; gap: 1.5rem; }
+            .hero-img-wrapper { height: 40vh; min-height: 240px; }
+            .sticky-process-section { padding: 2.5rem 0; }
+            .services-section { padding: 2.5rem 0; }
+            .reviews-compact-box { padding: 0.75rem 1rem; }
+            .trust-badges-inline { flex-direction: column; align-items: center; }
         }
     </style>
     <script src="assets/js/load-navbar.js?v=20260214-1" defer></script>
