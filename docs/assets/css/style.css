@@ -761,19 +761,21 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     position: relative;
     display: inline-block;
 }
-/* Desktop: submenu is a full-height panel from top of screen, right side, scrollable */
+/* Desktop: submenu is strictly the right half of the screen, from top, scrollable */
 .nav-dropdown-content {
     display: none !important;
     position: fixed !important;
     top: 0 !important;
+    left: 50% !important;
     right: 0 !important;
-    left: auto !important;
-    width: 320px;
-    max-width: 90vw;
+    width: 50% !important;
+    max-width: none;
     height: 100vh !important;
+    min-height: 0;
     margin: 0 !important;
     padding: 5rem 0 2rem 0 !important;
     overflow-y: auto !important;
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch;
     background: white;
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
@@ -2271,14 +2273,18 @@ body.modal-open {
         display: flex !important;
         position: fixed !important;
         left: 50% !important;
+        right: 0 !important;
         top: 0 !important;
         width: 50% !important;
         height: 100vh !important;
+        min-height: 0;
         margin: 0 !important;
         padding: 5rem 1rem 2rem 1.5rem !important;
         background: #ffffff !important;
         border-left: 1px solid #e4e4e4;
-        overflow-y: auto;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch;
         flex-direction: column;
         align-items: stretch;
         justify-content: flex-start;
