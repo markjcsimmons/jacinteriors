@@ -752,21 +752,27 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
 .nav-link:hover { opacity: 1; color: var(--color-primary) !important; }
 
 /* Dropdown styles - ensure consistency */
+.navbar { overflow: visible !important; }
+.navbar .container { overflow: visible !important; }
+.navbar .nav-wrapper { overflow: visible !important; }
+.nav-menu { overflow: visible !important; }
+
 .nav-dropdown {
     position: relative;
     display: inline-block;
 }
 .nav-dropdown-content {
     display: none !important;
-    position: absolute;
-    top: 100%;
-    left: 0;
+    position: absolute !important;
+    top: 0 !important;
+    left: 100% !important;
+    margin-left: 4px;
+    margin-top: 0;
     background: white;
     min-width: 200px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 0.5rem 0;
-    margin-top: 0;
-    z-index: 1000;
+    z-index: 1001;
     border-radius: 4px;
     flex-direction: column;
     gap: 0;

@@ -4,7 +4,7 @@
 
     // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
     // This avoids needing to bump the querystring on every HTML file.
-    const NAV_LATEST_V = '20260311-2';
+    const NAV_LATEST_V = '20260311-3';
     try {
         // Prefer currentScript when available.
         let src = (document.currentScript && document.currentScript.src) || '';
@@ -392,19 +392,25 @@
         }
     }
     
-    // Initialize dropdown hover behavior
+    // Initialize dropdown hover behavior (desktop) - use setProperty with important so it wins over inline styles on all pages
     function initDropdowns() {
         const dropdowns = document.querySelectorAll('.nav-dropdown');
         dropdowns.forEach(dropdown => {
             const link = dropdown.querySelector('.nav-link');
             const content = dropdown.querySelector('.nav-dropdown-content');
-            
+
             if (link && content) {
+                // Prevent # from jumping when clicking dropdown trigger on desktop
+                link.addEventListener('click', function(e) {
+                    if (window.innerWidth > 980 && link.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
+                });
                 dropdown.addEventListener('mouseenter', () => {
-                    content.style.display = 'flex';
+                    content.style.setProperty('display', 'flex', 'important');
                 });
                 dropdown.addEventListener('mouseleave', () => {
-                    content.style.display = 'none';
+                    content.style.setProperty('display', 'none', 'important');
                 });
             }
         });
