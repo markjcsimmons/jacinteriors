@@ -433,6 +433,9 @@
                 dropdownLink.addEventListener('click', function(e) {
                     if (window.innerWidth <= 980) {
                         e.preventDefault();
+                        nav.querySelectorAll('.nav-dropdown').forEach(dd => {
+                            if (dd !== dropdown) dd.classList.remove('active');
+                        });
                         dropdown.classList.toggle('active');
                     }
                 });
