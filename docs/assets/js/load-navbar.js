@@ -4,7 +4,7 @@
 
     // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
     // This avoids needing to bump the querystring on every HTML file.
-    const NAV_LATEST_V = '20260311-3';
+    const NAV_LATEST_V = '20260311-4';
     try {
         // Prefer currentScript when available.
         let src = (document.currentScript && document.currentScript.src) || '';
@@ -19,7 +19,7 @@
             const url = new URL(src, window.location.href);
             const v = url.searchParams.get('v') || '';
             if (v !== NAV_LATEST_V) {
-                // Avoid multiple upgrades on the same page.
+                // Upgrade cache for next visit; do NOT return - always run init so menu works on every page.
                 if (window.__JAC_NAV_UPGRADED_TO !== NAV_LATEST_V) {
                     window.__JAC_NAV_UPGRADED_TO = NAV_LATEST_V;
                     const upgraded = document.createElement('script');
@@ -28,8 +28,6 @@
                     upgraded.defer = true;
                     document.head.appendChild(upgraded);
                 }
-                // IMPORTANT: stop executing this older version.
-                return;
             }
         }
     } catch (_) {}
@@ -406,10 +404,23 @@
                         e.preventDefault();
                     }
                 });
+                let hideTimer = null;
                 dropdown.addEventListener('mouseenter', () => {
+                    if (hideTimer) clearTimeout(hideTimer);
+                    hideTimer = null;
                     content.style.setProperty('display', 'flex', 'important');
                 });
                 dropdown.addEventListener('mouseleave', () => {
+                    hideTimer = setTimeout(() => {
+                        content.style.setProperty('display', 'none', 'important');
+                        hideTimer = null;
+                    }, 120);
+                });
+                content.addEventListener('mouseenter', () => {
+                    if (hideTimer) clearTimeout(hideTimer);
+                    hideTimer = null;
+                });
+                content.addEventListener('mouseleave', () => {
                     content.style.setProperty('display', 'none', 'important');
                 });
             }
