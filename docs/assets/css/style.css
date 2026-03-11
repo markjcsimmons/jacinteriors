@@ -2190,6 +2190,7 @@ body.modal-open {
         z-index: 1000;
         gap: 0 !important;
         align-items: stretch !important;
+        overflow: hidden !important;
     }
     .nav-menu::before {
         content: '';
@@ -2197,11 +2198,13 @@ body.modal-open {
         grid-row: 1 / -1;
         background: #ffffff;
         box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+        overflow-y: hidden;
     }
     .nav-menu.active { transform: translateX(0); }
     .nav-menu > * {
         grid-column: 1;
         z-index: 1;
+        overflow-y: hidden !important;
     }
     .mobile-menu-toggle {
         display: flex !important;
