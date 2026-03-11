@@ -559,7 +559,7 @@
                 </div>
                 <a href="${getPath('contact.html')}?intent=call#contactForm" class="nav-cta" aria-label="Book a 15-minute intro call" title="15-minute intro call" style="display:inline-flex; align-items:center; justify-content:center; padding:0.65rem 1rem; border-radius:999px; border:1px solid #222a26; background:#222a26; color:#fff; font-size:0.85rem; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; text-decoration:none;">Book a call</a>
             </div>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" style="display: none;">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
                 <span></span><span></span><span></span>
             </button>
         </div>

@@ -175,13 +175,15 @@
 
         /* 2. TOP HEADLINE AREA */
         .top-headline-section {
-            padding: 2rem 0 2.5rem;
+            padding: 1.25rem 0 1.5rem;
             margin-bottom: 0;
         }
         .top-headline-section h1 {
-            text-transform: uppercase;
+            text-transform: none;
             font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-            word-spacing: 0.25em;
+            word-spacing: 0.05em;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
         .top-headline-grid {
@@ -190,6 +192,7 @@
             gap: 5rem;
             align-items: end;
             margin-top: 0;
+            row-gap: 1rem;
         }
 
         /* 3. HERO IMAGE */
@@ -595,7 +598,7 @@
         }
 
         @media (max-width: 900px) {
-            .top-headline-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .top-headline-grid { grid-template-columns: 1fr; gap: 1.25rem; row-gap: 0.75rem; }
             .sticky-grid { grid-template-columns: 1fr; }
             .sticky-left { position: static; margin-bottom: 3rem; }
             .services-grid { grid-template-columns: 1fr; border-left: none; }
@@ -613,9 +616,10 @@
 
         @media (max-width: 768px) {
             .container { padding-left: var(--container-pad-tablet); padding-right: var(--container-pad-tablet); }
-            .top-headline-section { padding: 2.25rem 0 2rem; margin-bottom: 0; }
-            .top-headline-section h1 { font-size: clamp(2.5rem, 8vw, 3.75rem); letter-spacing: -2px; line-height: 1.12; }
-            .top-headline-section p { font-size: 1.0625rem; line-height: 1.5; }
+            .top-headline-section { padding: 1rem 0 1.25rem; margin-bottom: 0; }
+            .top-headline-section h1 { font-size: clamp(2.25rem, 7.5vw, 3.5rem); letter-spacing: -0.02em; line-height: 1.25; word-spacing: 0; }
+            .top-headline-section p { font-size: 1.0625rem; line-height: 1.5; margin-bottom: 0; }
+            .top-headline-grid { gap: 0.75rem; }
             .hero-image-section { margin-top: 0; padding: 0 var(--container-pad-tablet); }
             .hero-img-wrapper { height: 50vh; min-height: 280px; }
             .hero-img { object-fit: cover; object-position: center center; }
@@ -648,8 +652,9 @@
         @media (max-width: 600px) {
             .container { padding-left: 1.125rem; padding-right: 1.125rem; }
             .hero-image-section { padding: 0 1.125rem; }
-            .top-headline-section { padding: 2rem 0 1.75rem; }
-            .top-headline-section h1 { font-size: clamp(2.35rem, 8.5vw, 3.5rem); }
+            .top-headline-section { padding: 0.875rem 0 1rem; }
+            .top-headline-section h1 { font-size: clamp(2rem, 8vw, 3.25rem); line-height: 1.25; }
+            .top-headline-grid { gap: 0.5rem; }
             section[style*="padding: 6rem"] { padding: 3.5rem 0 !important; }
             .sticky-process-section { padding: 3.5rem 0; }
             .services-section { padding: 3.5rem 0 !important; }
@@ -659,9 +664,10 @@
 
         @media (max-width: 480px) {
             .container { padding-left: var(--container-pad-mobile); padding-right: var(--container-pad-mobile); }
-            .top-headline-section { padding: 1.75rem 0 1.75rem; margin-bottom: 0; }
-            .top-headline-section h1 { font-size: clamp(2.25rem, 9vw, 3.25rem); letter-spacing: -1.5px; }
+            .top-headline-section { padding: 0.75rem 0 1rem; margin-bottom: 0; }
+            .top-headline-section h1 { font-size: clamp(1.875rem, 8.5vw, 3rem); letter-spacing: -0.02em; line-height: 1.25; }
             .top-headline-section p { font-size: 1rem; line-height: 1.5; }
+            .top-headline-grid { gap: 0.5rem; }
             .hero-image-section { margin-top: 0; padding: 0 var(--container-pad-mobile); }
             .stats-flex { grid-template-columns: 1fr; gap: 1.5rem; }
             .hero-img-wrapper { height: 45vh; min-height: 240px; }
@@ -699,7 +705,7 @@
             <!-- Headline Grid -->
             <div class="top-headline-grid">
                 <div>
-                    <h1>luxury interior design<br>los angeles style</h1>
+                    <h1>Luxury interior design<br>Los Angeles style</h1>
                 </div>
                 <div>
                     <p>From first sketch to final styling, we craft beautiful spaces from Southern California to South Florida.</p>
