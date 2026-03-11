@@ -4,7 +4,7 @@
 
     // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
     // This avoids needing to bump the querystring on every HTML file.
-    const NAV_LATEST_V = '20260311-5';
+    const NAV_LATEST_V = '20260311-6';
     try {
         // Prefer currentScript when available.
         let src = (document.currentScript && document.currentScript.src) || '';
@@ -1730,6 +1730,22 @@
     
     // Always re-run when DOM is ready so menu works on every page (Portfolio, About, etc.)
     document.addEventListener('DOMContentLoaded', function() {
+        if (!document.body) return;
+        var nav = document.querySelector('nav.navbar');
+        if (!nav) {
+            loadNavbar();
+            return;
+        }
+        if (nav.dataset.jacNavInited) return;
+        nav.dataset.jacNavInited = '1';
+        setActiveNav();
+        initDropdowns();
+        initMobileMenu(nav);
+        enforceNavbarStyles(nav);
+    });
+
+    // Guarantee navbar is present and menu works on Portfolio and all pages (runs after everything has loaded)
+    window.addEventListener('load', function() {
         if (!document.body) return;
         var nav = document.querySelector('nav.navbar');
         if (!nav) {
