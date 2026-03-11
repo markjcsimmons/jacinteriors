@@ -4,7 +4,7 @@
 
     // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
     // This avoids needing to bump the querystring on every HTML file.
-    const NAV_LATEST_V = '20260311-1';
+    const NAV_LATEST_V = '20260311-2';
     try {
         // Prefer currentScript when available.
         let src = (document.currentScript && document.currentScript.src) || '';
@@ -492,7 +492,7 @@
             <a href="${getPath('index.html')}" class="logo" aria-label="Home" style="font-size: 1.5rem; font-weight: 500; letter-spacing: -1px; text-transform: uppercase; text-decoration: none; color: #222a26; font-family: 'Plus Jakarta Sans', sans-serif; display: inline-flex; align-items: center;">
                 <img class="logo-img" src="${getPath(LOGO_SRC)}" alt="JAC Interiors" style="height: ${LOGO_HEIGHT_PX}px; width: auto; display: block;"/>
             </a>
-            <div class="nav-menu" id="navMenu" style="display: flex; gap: 2.5rem; align-items: center;">
+            <div class="nav-menu" id="navMenu">
                 <a href="${getPath('index.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">HOME</a>
                 <a href="${getPath('gallery.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">GALLERY</a>
                 <a href="${getPath('portfolio.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">PORTFOLIO</a>
