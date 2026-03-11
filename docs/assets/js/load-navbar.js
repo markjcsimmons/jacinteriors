@@ -4,7 +4,7 @@
 
     // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
     // This avoids needing to bump the querystring on every HTML file.
-    const NAV_LATEST_V = '20260310-1';
+    const NAV_LATEST_V = '20260311-1';
     try {
         // Prefer currentScript when available.
         let src = (document.currentScript && document.currentScript.src) || '';
@@ -1618,7 +1618,7 @@
         if (document.getElementById('mobileCtaBar')) return;
 
         const phoneDisplay = '213-397-0206';
-        const phoneE164 = '+12133970206';
+        const phoneTel = 'tel:+12133970206';
         const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
 
         const bar = document.createElement('div');
@@ -1627,8 +1627,7 @@
         bar.setAttribute('role', 'navigation');
         bar.setAttribute('aria-label', 'Quick contact');
         bar.innerHTML = `
-          <a class="mobile-cta-btn mobile-cta-btn--ghost" href="sms:${phoneE164}" aria-label="Text us">Text</a>
-          <a class="mobile-cta-btn mobile-cta-btn--primary" href="tel:${phoneDisplay}" aria-label="Call us">Call</a>
+          <a class="mobile-cta-btn mobile-cta-btn--primary" href="${phoneTel}" aria-label="Call ${phoneDisplay}">Call</a>
           <a class="mobile-cta-btn mobile-cta-btn--ghost" href="${contactHref}" aria-label="Book a call">Book</a>
         `.trim();
 
