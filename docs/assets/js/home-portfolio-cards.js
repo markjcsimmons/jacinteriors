@@ -36,18 +36,28 @@
       const a = d.querySelector('a[href*="portfolio.html"]');
       return Boolean(a);
     });
-    if (!portfolioDropdown) return [];
+    if (portfolioDropdown) {
+      const links = Array.from(
+        portfolioDropdown.querySelectorAll('.nav-dropdown-content a[href*="projects/"]')
+      );
+      return links
+        .map((a) => ({
+          title: (a.textContent || '').trim(),
+          href: a.getAttribute('href') || '',
+        }))
+        .filter((x) => x.title && x.href);
+    }
 
-    const links = Array.from(
-      portfolioDropdown.querySelectorAll('.nav-dropdown-content a[href*="projects/"]')
-    );
-
-    return links
-      .map((a) => ({
-        title: (a.textContent || '').trim(),
-        href: a.getAttribute('href') || '',
-      }))
-      .filter((x) => x.title && x.href);
+    // Fallback when Portfolio is a direct link (no dropdown): use first few projects for home cards
+    const pathParts = (window.location.pathname || '').split('/').filter(Boolean);
+    const depth = pathParts.length > 1 ? pathParts.length - 2 : 0;
+    const pathPrefix = depth > 0 ? '../'.repeat(depth) : '';
+    const projectPath = pathPrefix + (pathPrefix ? 'projects/' : 'projects/');
+    return [
+      { title: 'Fox Hills', href: projectPath + 'fox-hills.html' },
+      { title: '22nd Street', href: projectPath + '22nd-street.html' },
+      { title: 'Sunnyside', href: projectPath + 'sunnyside.html' },
+    ];
   }
 
   function slugFromHref(href) {

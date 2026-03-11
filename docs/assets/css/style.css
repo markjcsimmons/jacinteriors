@@ -2093,8 +2093,12 @@ body.modal-open {
     }
     .navbar.scrolled .mobile-menu-toggle span { background: #222a26; }
     
-    /* Mobile overlay: touch-friendly tap targets (min 44px) */
+    /* Mobile overlay: high-contrast white text so menu is clearly visible */
     .nav-menu .nav-link {
+        color: #ffffff !important;
+        font-size: 1.05rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
         min-height: 44px;
         padding: 1rem 1.5rem;
         display: flex;
@@ -2103,9 +2107,13 @@ body.modal-open {
         box-sizing: border-box;
     }
     .nav-menu .nav-cta {
+        color: #222a26 !important;
+        background: #ffffff !important;
+        border-color: #ffffff !important;
         min-height: 44px;
         padding: 1rem 1.5rem;
         box-sizing: border-box;
+        font-weight: 700;
     }
     
     /* Mobile dropdown styles */
@@ -2126,20 +2134,21 @@ body.modal-open {
     .nav-dropdown.active .nav-dropdown-content {
         display: flex;
     }
-    .nav-dropdown-content a {
-        color: white;
+    .nav-menu .nav-dropdown-content a {
+        color: #ffffff !important;
+        font-size: 0.95rem;
+        font-weight: 500;
         min-height: 44px;
         padding: 1rem 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
         box-sizing: border-box;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .nav-dropdown-content a:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
+    .nav-menu .nav-dropdown-content a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff !important;
     }
     
     .sticky-grid { grid-template-columns: 1fr; gap: 3rem; }

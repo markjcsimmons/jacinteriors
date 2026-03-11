@@ -47,6 +47,7 @@
             --section-spacing-tablet: 4rem;
             --section-spacing-mobile: 3rem;
             --section-spacing-small: 2.5rem;
+            --section-spacing-tight: 2rem;
             --container-pad-tablet: 1.25rem;
             --container-pad-mobile: 1rem;
         }
@@ -623,8 +624,9 @@
             .hero-image-section { margin-top: 0; padding: 0 var(--container-pad-tablet); }
             .hero-img-wrapper { height: 50vh; min-height: 280px; }
             .hero-img { object-fit: cover; object-position: center center; }
-            .sticky-process-section { padding: var(--section-spacing-tablet) 0; }
+            .sticky-process-section { padding: 2.5rem 0; }
             .sticky-grid { gap: 2.25rem; }
+            .process-list { gap: 2rem; }
             .process-media { aspect-ratio: 4/3; overflow: hidden; }
             .process-media img { object-fit: cover; object-position: center center; }
             .process-item-header { flex-wrap: wrap; gap: 1rem; }
@@ -643,9 +645,11 @@
             .hero-carousel-dots { bottom: 0.75rem; }
             .hero-carousel-dot { width: 8px; height: 8px; }
             section[style*="padding: 6rem"] { padding: var(--section-spacing-tablet) 0 !important; }
+            .location-section { padding: 2rem 0 !important; }
+            .location-section h2 { font-size: clamp(1.5rem, 5vw, 2.25rem); line-height: 1.2; margin-bottom: 0.5rem; }
+            .location-section p { font-size: 1rem; line-height: 1.55; margin-bottom: 0.5rem; }
+            .location-section p:last-of-type { margin-bottom: 0; }
             .faq-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-            .location-section h2 { font-size: clamp(1.5rem, 5vw, 2.25rem); line-height: 1.2; }
-            .location-section p { font-size: 1rem; line-height: 1.55; }
             .faq-section h2 { margin-bottom: 2rem; }
         }
 
@@ -655,11 +659,14 @@
             .top-headline-section { padding: 0.875rem 0 1rem; }
             .top-headline-section h1 { font-size: clamp(2rem, 8vw, 3.25rem); line-height: 1.25; }
             .top-headline-grid { gap: 0.5rem; }
-            section[style*="padding: 6rem"] { padding: 3.5rem 0 !important; }
-            .sticky-process-section { padding: 3.5rem 0; }
-            .services-section { padding: 3.5rem 0 !important; }
-            .stats-section { padding: 3.5rem 0; }
+            section[style*="padding: 6rem"] { padding: 3rem 0 !important; }
+            .sticky-process-section { padding: 2rem 0; }
+            .services-section { padding: 3rem 0 !important; }
+            .stats-section { padding: 3rem 0; }
             .hero-img-wrapper { min-height: 260px; }
+            .location-section { padding: 1.75rem 0 !important; }
+            .location-section h2 { margin-bottom: 0.5rem; }
+            .process-list { gap: 1.5rem; }
         }
 
         @media (max-width: 480px) {
@@ -671,8 +678,9 @@
             .hero-image-section { margin-top: 0; padding: 0 var(--container-pad-mobile); }
             .stats-flex { grid-template-columns: 1fr; gap: 1.5rem; }
             .hero-img-wrapper { height: 45vh; min-height: 240px; }
-            .sticky-process-section { padding: var(--section-spacing-mobile) 0; }
-            .sticky-grid { gap: 1.75rem; }
+            .sticky-process-section { padding: 1.75rem 0; }
+            .sticky-grid { gap: 1.5rem; }
+            .process-list { gap: 1.25rem; }
             .services-section { padding: var(--section-spacing-mobile) 0 !important; }
             .service-card { padding: 1.5rem 1rem !important; }
             .stats-section { padding: var(--section-spacing-mobile) 0; }
@@ -680,8 +688,9 @@
             .reviews-compact-box { padding: 0.75rem 1rem; }
             .trust-badges-inline { flex-direction: column; align-items: center; gap: 0.75rem; }
             section[style*="padding: 6rem"] { padding: var(--section-spacing-mobile) 0 !important; }
+            .location-section { padding: 1.5rem 0 !important; }
+            .location-section h2 { font-size: clamp(1.35rem, 6vw, 2rem); margin-bottom: 0.4rem; }
             .faq-grid { gap: 1.25rem !important; }
-            .location-section h2 { font-size: clamp(1.35rem, 6vw, 2rem); }
             .faq-section h2 { margin-bottom: 1.5rem; }
         }
     </style>
@@ -829,7 +838,7 @@
     </section>
 
     <!-- Location + services (SEO) -->
-    <section class="location-section" style="padding: 6rem 0; border-top: 1px solid var(--stroke);">
+    <section class="location-section" style="padding: 4rem 0; border-top: 1px solid var(--stroke);">
         <div class="container">
             <h2 style="max-width: 900px;">From Pasadena to the Palisades. From Miami Beach to Palm Beach.</h2>
             <p style="max-width: 980px; font-size: 1.05rem;">
