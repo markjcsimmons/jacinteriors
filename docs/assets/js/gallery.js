@@ -7,6 +7,32 @@
   const PLACEHOLDER_SRC =
     "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
 
+  // Fallback when Portfolio is a direct link (no dropdown) — e.g. mobile or simplified nav.
+  const FALLBACK_PROJECT_LINKS = [
+    { title: "Fox Hills", href: "projects/fox-hills.html" },
+    { title: "22nd Street", href: "projects/22nd-street.html" },
+    { title: "Sunnyside", href: "projects/sunnyside.html" },
+    { title: "Frances", href: "projects/frances.html" },
+    { title: "Columbus Way", href: "projects/columbus-way.html" },
+    { title: "Colette Way", href: "projects/colette-way.html" },
+    { title: "River Homestead", href: "projects/river-homestead.html" },
+    { title: "Oakwood", href: "projects/oakwood.html" },
+    { title: "Wilshire", href: "projects/wilshire.html" },
+    { title: "Mulholland Drive", href: "projects/mulholland-drive.html" },
+    { title: "Via Pisa", href: "projects/via-pisa.html" },
+    { title: "Galewood", href: "projects/galewood.html" },
+    { title: "Monaco", href: "projects/monaco.html" },
+    { title: "Ronda", href: "projects/ronda.html" },
+    { title: "Sherbourne", href: "projects/sherbourne.html" },
+    { title: "Alpine", href: "projects/alpine.html" },
+    { title: "Peary Place", href: "projects/peary-way.html" },
+    { title: "Valley Vista", href: "projects/valley-vista.html" },
+    { title: "Colby", href: "projects/colby.html" },
+    { title: "Vale Crest", href: "projects/vale-crest.html" },
+    { title: "Brown Deer Park", href: "projects/brown-deer-park.html" },
+    { title: "JAMM Agency Office", href: "projects/jamm-visual.html" },
+  ];
+
   function r2Base() {
     return String(window.R2_IMAGE_BASE || DEFAULT_R2_BASE).replace(/\/+$/, "");
   }
@@ -25,11 +51,32 @@
 
     const portfolioLink = nav.querySelector('a.nav-link[href*="portfolio.html"]');
     const portfolioDropdown = portfolioLink ? portfolioLink.closest(".nav-dropdown") : null;
-    if (!portfolioDropdown) return [];
+    if (portfolioDropdown) {
+      return Array.from(
+        portfolioDropdown.querySelectorAll('.nav-dropdown-content a[href*="projects/"]')
+      );
+    }
+    return [];
+  }
 
-    return Array.from(
-      portfolioDropdown.querySelectorAll('.nav-dropdown-content a[href*="projects/"]')
-    );
+  function getGalleryProjectList() {
+    const links = findPortfolioProjectLinks();
+    if (links.length) {
+      return links.map((link) => ({
+        label: humanize(link.textContent),
+        rawHref: link.getAttribute("href") || "",
+      }));
+    }
+    const pathPrefix = (() => {
+      const path = window.location.pathname || "";
+      const parts = path.split("/").filter(Boolean);
+      const depth = parts.length > 1 ? parts.length - 2 : 0;
+      return depth > 0 ? "../".repeat(depth) : "";
+    })();
+    return FALLBACK_PROJECT_LINKS.map((p) => ({
+      label: p.title,
+      rawHref: pathPrefix + p.href,
+    }));
   }
 
   function normalizeProjectHref(href) {
@@ -153,6 +200,8 @@
 
   // R2 filenames differ from slug for some projects (e.g. jamm-visual -> jamm-1.jpg).
   const GALLERY_FILENAME_PREFIX = { "jamm-visual": "jamm" };
+  // R2 bucket folder may differ from slug (e.g. jamm-visual -> path "jamm").
+  const GALLERY_PROJECT_PATH = { "jamm-visual": "jamm" };
 
   function buildCdnCandidatesFromSlugAndIndex(slug, index) {
     const s = String(slug || "").trim();
@@ -162,6 +211,7 @@
 
     const n = Math.max(1, Number(index) || 1);
     const prefix = GALLERY_FILENAME_PREFIX[s] || s;
+    const pathSegment = GALLERY_PROJECT_PATH[s] || s;
 
     // Try base filename first (matches R2), then size variants.
     // Typical R2 convention: "<prefix>-<n>.*"
@@ -174,7 +224,7 @@
     const urls = [];
     for (const stem of stems) {
       for (const ext of exts) {
-        urls.push(`${base}/projects/${encodeURIComponent(s)}/${encodeURIComponent(stem)}.${ext}`);
+        urls.push(`${base}/projects/${encodeURIComponent(pathSegment)}/${encodeURIComponent(stem)}.${ext}`);
       }
     }
     return urls;
@@ -218,14 +268,14 @@
 
     const loadMoreBtn = document.getElementById("galleryLoadMore");
 
-    // Wait for navbar injection so dropdown links exist.
+    // Wait for navbar injection so dropdown links exist (when nav has Portfolio dropdown).
     for (let i = 0; i < 80; i += 1) {
       if (findPortfolioProjectLinks().length) break;
       await sleep(50);
     }
 
-    const links = findPortfolioProjectLinks();
-    if (!links.length) {
+    const projectList = getGalleryProjectList();
+    if (!projectList.length) {
       grid.innerHTML =
         '<p style="color: rgba(34, 42, 38, 0.75); font-size: 1rem; line-height: 1.6">Gallery is loading. Please refresh if it does not appear.</p>';
       return;
@@ -233,17 +283,22 @@
 
     grid.innerHTML = "";
 
-    const projects = links
-      .map((link) => {
-      const rawHref = link.getAttribute("href") || "";
-      const slug = slugFromHref(rawHref);
-      if (!slug) return null;
-
-      const label = humanize(link.textContent) || humanize(slug.replace(/-/g, " "));
-      const absHref = normalizeProjectHref(rawHref);
-      return { rawHref, absHref, label, slug };
-    })
+    const projects = projectList
+      .map((item) => {
+        const rawHref = item.rawHref || "";
+        const slug = slugFromHref(rawHref);
+        if (!slug) return null;
+        const label = humanize(item.label) || humanize(slug.replace(/-/g, " "));
+        const absHref = normalizeProjectHref(rawHref);
+        return { rawHref, absHref, label, slug };
+      })
       .filter(Boolean);
+
+    if (!projects.length) {
+      grid.innerHTML =
+        '<p style="color: rgba(34, 42, 38, 0.75); font-size: 1rem; line-height: 1.6">No projects to show. Please refresh.</p>';
+      return;
+    }
 
     let currentIndex = 0;
 

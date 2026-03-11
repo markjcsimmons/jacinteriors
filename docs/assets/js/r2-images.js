@@ -126,6 +126,9 @@
     return (window.R2_IMAGE_BASE || "").toString().replace(/\/+$/, "");
   }
 
+  // R2 bucket path may differ from project slug (e.g. jamm-visual -> folder "jamm").
+  const PROJECT_R2_PATH_OVERRIDE = { "jamm-visual": "jamm" };
+
   function selectImages(root) {
     const selector =
       'img[data-r2-local-src*="assets/images/spaces/"], img[src*="assets/images/spaces/"], ' +
@@ -210,6 +213,7 @@
         try {
           const type = img.dataset.r2Type || "";
           const key = img.dataset.r2Key || "";
+          const projectPath = (type === "projects" && key) ? (PROJECT_R2_PATH_OVERRIDE[key] || key) : key;
           const name = img.dataset.r2TargetName || img.dataset.r2OriginalName || "";
 
           // 1) Try extension/case variants first (spaces + projects + cities)
@@ -226,7 +230,7 @@
             let altUrl = "";
             if (type === "cities") altUrl = `${baseNow}/cities/${encodeName(v)}${bust}`;
             else if (type === "spaces" && key) altUrl = `${baseNow}/spaces/${key}/${encodeName(v)}${bust}`;
-            else if (type && key) altUrl = `${baseNow}/${type}/${key}/${encodeName(v)}${bust}`;
+            else if (type && key) altUrl = `${baseNow}/${type}/${projectPath}/${encodeName(v)}${bust}`;
             else altUrl = "";
 
             if (altUrl && img.getAttribute("src") !== altUrl) {
@@ -235,7 +239,19 @@
             }
           }
 
-          // 1b) Known missing keys: allow explicit alias fallback for specific images.
+          // 1b) Projects with path override (e.g. R2 folder "jamm" for slug "jamm-visual"): try alternate path.
+          const altPath = type === "projects" && key ? PROJECT_R2_PATH_OVERRIDE[key] : null;
+          if (altPath && !(img.dataset.r2TriedAltPath === "1")) {
+            img.dataset.r2TriedAltPath = "1";
+            const bust = getBustSuffix(img);
+            const altUrl = `${baseNow}/projects/${altPath}/${encodeName(name)}${bust}`;
+            if (altUrl && img.getAttribute("src") !== altUrl) {
+              img.setAttribute("src", altUrl);
+              return;
+            }
+          }
+
+          // 1c) Known missing keys: allow explicit alias fallback for specific images.
           // This keeps gallery pages resilient when a single numbered asset is missing in R2.
           if (type === "spaces" && key) {
             /** @type {Record<string, string[]>} */
@@ -300,7 +316,7 @@
             let altUrl = "";
             if (type === "cities") altUrl = `${baseNow}/cities/${encodeName(v)}${bust}`;
             else if (type === "spaces" && key) altUrl = `${baseNow}/spaces/${key}/${encodeName(v)}${bust}`;
-            else if (type && key) altUrl = `${baseNow}/${type}/${key}/${encodeName(v)}${bust}`;
+            else if (type && key) altUrl = `${baseNow}/${type}/${projectPath}/${encodeName(v)}${bust}`;
             else altUrl = "";
 
             if (altUrl && img.getAttribute("src") !== altUrl) {
@@ -344,7 +360,7 @@
       });
     });
 
-    // Apply per project
+    // Apply per project (use project slug; path override is tried in error handler)
     byProject.forEach((entries, project) => {
       entries.forEach(({ img, originalName }) => {
         img.dataset.r2TargetName = originalName;

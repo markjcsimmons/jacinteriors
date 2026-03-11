@@ -4,7 +4,7 @@
 
     // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
     // This avoids needing to bump the querystring on every HTML file.
-    const NAV_LATEST_V = '20260311-4';
+    const NAV_LATEST_V = '20260311-5';
     try {
         // Prefer currentScript when available.
         let src = (document.currentScript && document.currentScript.src) || '';
@@ -408,7 +408,7 @@
                 dropdown.addEventListener('mouseenter', () => {
                     if (hideTimer) clearTimeout(hideTimer);
                     hideTimer = null;
-                    content.style.setProperty('display', 'flex', 'important');
+                    content.style.setProperty('display', 'block', 'important');
                 });
                 dropdown.addEventListener('mouseleave', () => {
                     hideTimer = setTimeout(() => {
@@ -1670,6 +1670,7 @@
                 initDropdowns();
                 initMobileMenu(nav);
                 enforceNavbarStyles(nav);
+                nav.dataset.jacNavInited = '1';
                 setTimeout(() => enforceNavbarStyles(nav), 10);
             }
             ensureMobileCtaBar();
@@ -1726,6 +1727,22 @@
         // Stop trying after 5 seconds
         setTimeout(() => clearInterval(interval), 5000);
     }
+    
+    // Always re-run when DOM is ready so menu works on every page (Portfolio, About, etc.)
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!document.body) return;
+        var nav = document.querySelector('nav.navbar');
+        if (!nav) {
+            loadNavbar();
+            return;
+        }
+        if (nav.dataset.jacNavInited) return;
+        nav.dataset.jacNavInited = '1';
+        setActiveNav();
+        initDropdowns();
+        initMobileMenu(nav);
+        enforceNavbarStyles(nav);
+    });
 
     // Temporary image labels: show filename on every image (all pages). Remove this block when no longer needed.
     (function initShowImageLabels() {
