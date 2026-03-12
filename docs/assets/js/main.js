@@ -445,24 +445,25 @@ const SPANav = {
 //     }, 100);
 // });
 
-// Mobile Menu Toggle
+// Mobile Menu Toggle (skip if load-navbar.js already inited the nav to avoid double-binding)
 document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar');
+    const navAlreadyInited = navbar && navbar.dataset && navbar.dataset.jacNavInited === '1';
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const navMenu = document.getElementById('navMenu');
-    
-    if (mobileMenuToggle && navMenu) {
+
+    if (mobileMenuToggle && navMenu && !navAlreadyInited) {
         mobileMenuToggle.addEventListener('click', function() {
             navMenu.classList.toggle('active');
             mobileMenuToggle.classList.toggle('active');
         });
-        
+
         // Handle dropdown toggle on mobile
         const navDropdowns = navMenu.querySelectorAll('.nav-dropdown');
         navDropdowns.forEach(dropdown => {
             const dropdownLink = dropdown.querySelector('.nav-link');
             if (dropdownLink) {
                 dropdownLink.addEventListener('click', function(e) {
-                    // On mobile, toggle dropdown instead of navigating
                     if (window.innerWidth <= 980) {
                         e.preventDefault();
                         dropdown.classList.toggle('active');
@@ -470,23 +471,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
-        
+
         // Close mobile menu when clicking on a link (but not dropdown parent)
         const navLinks = navMenu.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
-            // Skip if this link is a dropdown trigger
-            if (link.closest('.nav-dropdown') && !link.closest('.nav-dropdown-content')) {
-                return; // Dropdown triggers are handled above
-            }
+            if (link.closest('.nav-dropdown') && !link.closest('.nav-dropdown-content')) return;
             link.addEventListener('click', function() {
                 navMenu.classList.remove('active');
                 mobileMenuToggle.classList.remove('active');
-                // Close all dropdowns
                 navDropdowns.forEach(dd => dd.classList.remove('active'));
             });
         });
-        
-        // Close dropdown menu items
+
         const dropdownLinks = navMenu.querySelectorAll('.nav-dropdown-content a');
         dropdownLinks.forEach(link => {
             link.addEventListener('click', function() {
@@ -496,9 +492,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
+
     // Navbar scroll effect
-    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
     if (!navbar) return;
     
     // Detect page type

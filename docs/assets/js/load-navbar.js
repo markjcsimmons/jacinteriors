@@ -4,7 +4,7 @@
 
     // Ensure older cached `load-navbar.js?v=...` URLs upgrade automatically.
     // This avoids needing to bump the querystring on every HTML file.
-    const NAV_LATEST_V = '20260311-6';
+    const NAV_LATEST_V = '20260311-7';
     try {
         // Prefer currentScript when available.
         let src = (document.currentScript && document.currentScript.src) || '';
@@ -1757,6 +1757,26 @@
         initDropdowns();
         initMobileMenu(nav);
         enforceNavbarStyles(nav);
+    });
+
+    // Delayed retries so menu works even if nav was injected late (e.g. Portfolio, slow connections)
+    function ensureNavInited() {
+        if (!document.body) return;
+        var nav = document.querySelector('nav.navbar');
+        if (!nav) { loadNavbar(); return; }
+        if (nav.dataset.jacNavInited) return;
+        nav.dataset.jacNavInited = '1';
+        setActiveNav();
+        initDropdowns();
+        initMobileMenu(nav);
+        enforceNavbarStyles(nav);
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(ensureNavInited, 100);
+        setTimeout(ensureNavInited, 400);
+    });
+    window.addEventListener('load', function() {
+        setTimeout(ensureNavInited, 50);
     });
 
     // Temporary image labels: show filename on every image (all pages). Remove this block when no longer needed.
