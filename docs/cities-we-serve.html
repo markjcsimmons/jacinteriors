@@ -10,21 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        .cities-region-card {
-            width: 100%;
-            padding: 2.5rem 0;
-            border-bottom: 1px solid #e4e4e4;
-        }
-        .cities-region-card:last-of-type {
-            border-bottom: none;
-        }
-        .cities-region-title {
-            font-size: 1.75rem;
-            font-weight: 500;
-            margin: 0 0 1.25rem 0;
-            letter-spacing: -0.5px;
-            color: #1a1a1a;
-        }
         .city-tag {
             display: inline-block;
             padding: 0.5rem 1rem;
@@ -48,132 +33,266 @@
             gap: 0.25rem;
             align-items: center;
         }
+        /* Desktop: show one region image per card */
+        .cities-we-serve-page .project-list-image img {
+            display: none;
+        }
+        .cities-we-serve-page .project-list-image img.region-img.active,
+        .cities-we-serve-page .project-list-image img.region-img:first-child {
+            display: block;
+        }
+        /* Mobile-only header title (hidden on desktop) */
+        .cities-mobile-title { display: none; }
     </style>
-    <script src="assets/js/load-navbar.js?v=20260311-7" defer></script>
 </head>
-<body>
+<body class="cities-we-serve-page">
 
-    <!-- Header: title only, same compact height as Gallery/Portfolio -->
+    <script src="assets/js/load-navbar.js?v=20260311-7"></script>
+
+    <!-- Header: full title + subtitle on desktop; "Cities" only on mobile (via CSS) -->
     <section style="padding: 3rem 0; background: #1a1a1a; color: white; margin-top: 0;">
         <div class="container" style="max-width: 1340px;">
-            <h1 style="font-size: 3.5rem; font-weight: 500; margin: 0; letter-spacing: -1.5px; line-height: 1.1; color: white;">Cities</h1>
+            <h1 class="cities-mobile-title" style="font-size: 3.5rem; font-weight: 500; margin: 0; letter-spacing: -1.5px; line-height: 1.1; color: white;">Cities</h1>
+            <h1 class="cities-desktop-title" style="font-size: 3.5rem; font-weight: 500; margin: 0 0 1rem 0; letter-spacing: -1.5px; line-height: 1.1; color: white;">Cities We Serve</h1>
+            <p class="cities-desktop-subtitle" style="font-size: 16px; color: #ccc; line-height: 1.6; font-weight: 400; max-width: 700px;">JAC Interiors provides expert interior design services throughout Los Angeles and South Florida. We've even done a project in Montana. Explore our service areas by region.</p>
         </div>
     </section>
 
-    <!-- Regions: full-width cards, title + city buttons, no images -->
-    <section style="padding: 4rem 0;">
+    <!-- Regions List: image + content cards on desktop; content-only list on mobile (via CSS) -->
+    <section style="padding: 6rem 0;">
         <div class="container" style="max-width: 1340px;">
-            
-            <div class="cities-region-card">
-                <h2 class="cities-region-title">Beverly Hills & Westside</h2>
-                <div class="city-tags-container">
-                    <a href="cities/bel-air.html" class="city-tag">Bel Air</a>
-                    <a href="cities/beverly-hills.html" class="city-tag">Beverly Hills</a>
-                    <a href="cities/brentwood.html" class="city-tag">Brentwood</a>
-                    <a href="cities/westwood.html" class="city-tag">Westwood</a>
-                    <a href="cities/culver-city.html" class="city-tag">Culver City</a>
-                    <a href="cities/mar-vista.html" class="city-tag">Mar Vista</a>
-                    <a href="cities/west-hollywood.html" class="city-tag">West Hollywood</a>
-                    <a href="cities/pacific-palisades.html" class="city-tag">Pacific Palisades</a>
-                    <a href="cities/playa-del-rey.html" class="city-tag">Playa del Rey</a>
-                    <a href="cities/playa-vista.html" class="city-tag">Playa Vista</a>
-                    <a href="cities/el-segundo.html" class="city-tag">El Segundo</a>
+
+            <!-- Beverly Hills & Westside -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/medio/medio-1.jpg" alt="Beverly Hills &amp; Westside" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">SoCal</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Beverly Hills & Westside</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/bel-air.html" class="city-tag">Bel Air</a>
+                            <a href="cities/beverly-hills.html" class="city-tag">Beverly Hills</a>
+                            <a href="cities/brentwood.html" class="city-tag">Brentwood</a>
+                            <a href="cities/westwood.html" class="city-tag">Westwood</a>
+                            <a href="cities/culver-city.html" class="city-tag">Culver City</a>
+                            <a href="cities/mar-vista.html" class="city-tag">Mar Vista</a>
+                            <a href="cities/west-hollywood.html" class="city-tag">West Hollywood</a>
+                            <a href="cities/pacific-palisades.html" class="city-tag">Pacific Palisades</a>
+                            <a href="cities/playa-del-rey.html" class="city-tag">Playa del Rey</a>
+                            <a href="cities/playa-vista.html" class="city-tag">Playa Vista</a>
+                            <a href="cities/el-segundo.html" class="city-tag">El Segundo</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="cities-region-card">
-                <h2 class="cities-region-title">Beach Cities</h2>
-                <div class="city-tags-container">
-                    <a href="cities/santa-monica.html" class="city-tag">Santa Monica</a>
-                    <a href="cities/venice.html" class="city-tag">Venice</a>
-                    <a href="cities/marina-del-rey.html" class="city-tag">Marina Del Rey</a>
-                    <a href="cities/manhattan-beach.html" class="city-tag">Manhattan Beach</a>
-                    <a href="cities/hermosa-beach.html" class="city-tag">Hermosa Beach</a>
-                    <a href="cities/redondo-beach.html" class="city-tag">Redondo Beach</a>
-                    <a href="cities/palos-verdes.html" class="city-tag">Palos Verdes</a>
-                    <a href="cities/pacific-palisades.html" class="city-tag">Pacific Palisades</a>
-                    <a href="cities/malibu.html" class="city-tag">Malibu</a>
-                    <a href="projects/monaco.html" class="city-tag">Irvine Cove</a>
+            <!-- Beach Cities -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-1.jpg" alt="Santa Monica" class="region-img active">
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-2.jpg" alt="Santa Monica" class="region-img">
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-3.jpg" alt="Santa Monica" class="region-img">
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-4.jpg" alt="Santa Monica" class="region-img">
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-5.jpg" alt="Santa Monica" class="region-img">
+                        <img src="assets/images/projects/santa-monica-modern-spanish/santa-monica-modern-spanish-6.jpg" alt="Santa Monica" class="region-img">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-1.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-2.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-3.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-4.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-5.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-beach-house/venice-beach-house-6.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-boho-house/venice-boho-house-1.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-boho-house/venice-boho-house-2.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-boho-house/venice-boho-house-3.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-boho-house/venice-boho-house-4.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-boho-house/venice-boho-house-5.jpg" alt="Venice" class="region-img">
+                        <img src="assets/images/projects/venice-boho-house/venice-boho-house-6.jpg" alt="Venice" class="region-img">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">SoCal</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Beach Cities</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/santa-monica.html" class="city-tag">Santa Monica</a>
+                            <a href="cities/venice.html" class="city-tag">Venice</a>
+                            <a href="cities/marina-del-rey.html" class="city-tag">Marina Del Rey</a>
+                            <a href="cities/manhattan-beach.html" class="city-tag">Manhattan Beach</a>
+                            <a href="cities/hermosa-beach.html" class="city-tag">Hermosa Beach</a>
+                            <a href="cities/redondo-beach.html" class="city-tag">Redondo Beach</a>
+                            <a href="cities/palos-verdes.html" class="city-tag">Palos Verdes</a>
+                            <a href="cities/pacific-palisades.html" class="city-tag">Pacific Palisades</a>
+                            <a href="cities/malibu.html" class="city-tag">Malibu</a>
+                            <a href="projects/monaco.html" class="city-tag">Irvine Cove</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="cities-region-card">
-                <h2 class="cities-region-title">San Fernando Valley</h2>
-                <div class="city-tags-container">
-                    <a href="cities/calabasas.html" class="city-tag">Calabasas</a>
-                    <a href="cities/encino.html" class="city-tag">Encino</a>
-                    <a href="cities/sherman-oaks.html" class="city-tag">Sherman Oaks</a>
-                    <a href="cities/studio-city.html" class="city-tag">Studio City</a>
-                    <a href="cities/burbank.html" class="city-tag">Burbank</a>
-                    <a href="cities/north-hollywood.html" class="city-tag">North Hollywood</a>
-                    <a href="cities/valley-village.html" class="city-tag">Valley Village</a>
-                    <a href="cities/van-nuys.html" class="city-tag">Van Nuys</a>
-                    <a href="cities/tarzana.html" class="city-tag">Tarzana</a>
-                    <a href="cities/topanga.html" class="city-tag">Topanga</a>
-                    <a href="cities/universal-city.html" class="city-tag">Universal City</a>
+            <!-- San Fernando Valley -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-1.jpg" alt="Calabasas" class="region-img active">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-2.jpg" alt="Calabasas" class="region-img">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-3.jpg" alt="Calabasas" class="region-img">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-4.jpg" alt="Calabasas" class="region-img">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-5.jpg" alt="Calabasas" class="region-img">
+                        <img src="assets/images/projects/calabasas-residence/calabasas-residence-6.jpg" alt="Calabasas" class="region-img">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">SoCal</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">San Fernando Valley</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/calabasas.html" class="city-tag">Calabasas</a>
+                            <a href="cities/encino.html" class="city-tag">Encino</a>
+                            <a href="cities/sherman-oaks.html" class="city-tag">Sherman Oaks</a>
+                            <a href="cities/studio-city.html" class="city-tag">Studio City</a>
+                            <a href="cities/burbank.html" class="city-tag">Burbank</a>
+                            <a href="cities/north-hollywood.html" class="city-tag">North Hollywood</a>
+                            <a href="cities/valley-village.html" class="city-tag">Valley Village</a>
+                            <a href="cities/van-nuys.html" class="city-tag">Van Nuys</a>
+                            <a href="cities/tarzana.html" class="city-tag">Tarzana</a>
+                            <a href="cities/topanga.html" class="city-tag">Topanga</a>
+                            <a href="cities/universal-city.html" class="city-tag">Universal City</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="cities-region-card">
-                <h2 class="cities-region-title">Greater Los Angeles</h2>
-                <div class="city-tags-container">
-                    <a href="cities/hollywood-hills.html" class="city-tag">Hollywood Hills</a>
-                    <a href="cities/hancock-park.html" class="city-tag">Hancock Park</a>
-                    <a href="cities/pasadena.html" class="city-tag">Pasadena</a>
+            <!-- Greater Los Angeles -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/cities/pasadena-hero.jpg" alt="Greater Los Angeles" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">SoCal</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Greater Los Angeles</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/hollywood-hills.html" class="city-tag">Hollywood Hills</a>
+                            <a href="cities/hancock-park.html" class="city-tag">Hancock Park</a>
+                            <a href="cities/pasadena.html" class="city-tag">Pasadena</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="cities-region-card">
-                <h2 class="cities-region-title">Coachella Valley</h2>
-                <div class="city-tags-container">
-                    <a href="cities/palm-desert.html" class="city-tag">Palm Desert</a>
-                    <a href="cities/la-quinta.html" class="city-tag">La Quinta</a>
-                    <a href="cities/indian-wells.html" class="city-tag">Indian Wells</a>
+            <!-- Coachella Valley -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/cities/coachella-valley-hero.png" alt="Coachella Valley" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">SoCal</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Coachella Valley</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/palm-desert.html" class="city-tag">Palm Desert</a>
+                            <a href="cities/la-quinta.html" class="city-tag">La Quinta</a>
+                            <a href="cities/indian-wells.html" class="city-tag">Indian Wells</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="cities-region-card">
-                <h2 class="cities-region-title">Montana</h2>
-                <div class="city-tags-container">
-                    <a href="projects/river-homestead.html" class="city-tag">Big Sky</a>
+            <!-- Montana -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/projects/river-homestead/river-homestead-1.jpg" alt="Montana" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Montana</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Montana</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="projects/river-homestead.html" class="city-tag">Big Sky</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="cities-region-card">
-                <h2 class="cities-region-title">Palm Beach County</h2>
-                <div class="city-tags-container">
-                    <a href="cities/boca-raton.html" class="city-tag">Boca Raton</a>
-                    <a href="cities/delray-beach.html" class="city-tag">Delray Beach</a>
+            <!-- Palm Beach County -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/cities/palm-beach-county-hero.png" alt="Palm Beach County" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Florida</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Palm Beach County</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/boca-raton.html" class="city-tag">Boca Raton</a>
+                            <a href="cities/delray-beach.html" class="city-tag">Delray Beach</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="cities-region-card">
-                <h2 class="cities-region-title">Broward County</h2>
-                <div class="city-tags-container">
-                    <a href="cities/fort-lauderdale.html" class="city-tag">Fort Lauderdale</a>
-                    <a href="cities/las-olas-victoria-park.html" class="city-tag">Las Olas / Victoria Park</a>
-                    <a href="cities/hollywood-fl.html" class="city-tag">Hollywood</a>
-                    <a href="cities/pembroke-pines.html" class="city-tag">Pembroke Pines</a>
-                    <a href="cities/weston.html" class="city-tag">Weston</a>
-                    <a href="cities/pompano-beach.html" class="city-tag">Pompano Beach</a>
-                    <a href="cities/deerfield-beach.html" class="city-tag">Deerfield Beach</a>
-                    <a href="cities/plantation.html" class="city-tag">Plantation</a>
-                    <a href="cities/coral-springs.html" class="city-tag">Coral Springs</a>
+            <!-- Broward County -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/cities/fort-lauderdale-aerial.jpg" alt="Broward County" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Florida</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Broward County</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/fort-lauderdale.html" class="city-tag">Fort Lauderdale</a>
+                            <a href="cities/las-olas-victoria-park.html" class="city-tag">Las Olas / Victoria Park</a>
+                            <a href="cities/hollywood-fl.html" class="city-tag">Hollywood</a>
+                            <a href="cities/pembroke-pines.html" class="city-tag">Pembroke Pines</a>
+                            <a href="cities/weston.html" class="city-tag">Weston</a>
+                            <a href="cities/pompano-beach.html" class="city-tag">Pompano Beach</a>
+                            <a href="cities/deerfield-beach.html" class="city-tag">Deerfield Beach</a>
+                            <a href="cities/plantation.html" class="city-tag">Plantation</a>
+                            <a href="cities/coral-springs.html" class="city-tag">Coral Springs</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="cities-region-card">
-                <h2 class="cities-region-title">Miami-Dade County</h2>
-                <div class="city-tags-container">
-                    <a href="cities/coral-gables.html" class="city-tag">Coral Gables</a>
-                    <a href="cities/coconut-grove.html" class="city-tag">Coconut Grove</a>
-                    <a href="cities/brickell.html" class="city-tag">Brickell / Downtown Miami</a>
-                    <a href="cities/wynwood.html" class="city-tag">Wynwood &amp; Edgewater</a>
-                    <a href="cities/key-biscayne.html" class="city-tag">Key Biscayne</a>
-                    <a href="cities/hialeah.html" class="city-tag">Hialeah</a>
-                    <a href="cities/doral.html" class="city-tag">Doral</a>
-                    <a href="cities/aventura.html" class="city-tag">Aventura</a>
-                    <a href="cities/bal-harbour.html" class="city-tag">Bal Harbour / Bay Harbor Islands</a>
+            <!-- Miami-Dade County -->
+            <div class="project-list-item">
+                <div style="display: flex; width: 100%;">
+                    <div class="project-list-image">
+                        <img src="assets/images/cities/miami-hero.jpg" alt="Miami-Dade County" class="region-img active">
+                    </div>
+                    <div class="project-list-content">
+                        <div style="margin-bottom: 2rem;">
+                            <span class="project-date">Florida</span>
+                            <h3 style="font-size: 2.5rem; font-weight: 500; margin: 0.5rem 0 1rem 0; letter-spacing: -1px;">Miami-Dade County</h3>
+                        </div>
+                        <div class="city-tags-container">
+                            <a href="cities/coral-gables.html" class="city-tag">Coral Gables</a>
+                            <a href="cities/coconut-grove.html" class="city-tag">Coconut Grove</a>
+                            <a href="cities/brickell.html" class="city-tag">Brickell / Downtown Miami</a>
+                            <a href="cities/wynwood.html" class="city-tag">Wynwood &amp; Edgewater</a>
+                            <a href="cities/key-biscayne.html" class="city-tag">Key Biscayne</a>
+                            <a href="cities/hialeah.html" class="city-tag">Hialeah</a>
+                            <a href="cities/doral.html" class="city-tag">Doral</a>
+                            <a href="cities/aventura.html" class="city-tag">Aventura</a>
+                            <a href="cities/bal-harbour.html" class="city-tag">Bal Harbour / Bay Harbor Islands</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -211,5 +330,6 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
+
 </body>
 </html>

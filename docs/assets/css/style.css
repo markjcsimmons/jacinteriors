@@ -1781,6 +1781,40 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     }
 }
 
+/* Cities We Serve: mobile-only simplified layout (compact header "Cities", no images, list-style cards) */
+@media (max-width: 980px) {
+    body.cities-we-serve-page .cities-mobile-title {
+        display: block !important;
+    }
+    body.cities-we-serve-page .cities-desktop-title,
+    body.cities-we-serve-page .cities-desktop-subtitle {
+        display: none !important;
+    }
+    body.cities-we-serve-page .project-list-image {
+        display: none !important;
+    }
+    body.cities-we-serve-page .project-list-item > div {
+        flex-direction: column;
+        width: 100%;
+    }
+    body.cities-we-serve-page .project-list-content {
+        width: 100%;
+        padding: 2.5rem 0 !important;
+        padding-left: 0 !important;
+        border-bottom: 1px solid #e4e4e4;
+    }
+    body.cities-we-serve-page .project-list-item:last-child .project-list-content {
+        border-bottom: none;
+    }
+    body.cities-we-serve-page .project-list-content .project-date {
+        display: none;
+    }
+    body.cities-we-serve-page .project-list-content h3 {
+        font-size: 1.75rem !important;
+        margin: 0 0 1.25rem 0 !important;
+    }
+}
+
 /* Home "Our work" section: same as Portfolio page — one image full width, text below */
 .project-cards-portfolio-layout .project-list-item {
     flex-direction: column !important;

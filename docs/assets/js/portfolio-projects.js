@@ -18,8 +18,8 @@
   // Manual image overrides per project slug.
   // Format: slug -> [mainImageN, smallImage1N, smallImage2N]
   // Images are loaded from R2: projects/{slug}/{filenamePrefix}-{N}.jpg
-  // Use FILENAME_PREFIX when R2 filenames differ from slug (e.g. jamm-visual -> jamm-1.jpg).
-  const FILENAME_PREFIX = { 'jamm-visual': 'jamm' };
+  // Use FILENAME_PREFIX when R2 filenames differ from slug (e.g. jamm-visual -> jamm-visual-1.jpg).
+  const FILENAME_PREFIX = { 'jamm-visual': 'jamm-visual' };
   // R2 path may differ (e.g. jamm-visual -> jac-images/projects/JAMM-visual).
   const R2_PROJECT_PATH = { 'jamm-visual': 'jac-images/projects/JAMM-visual' };
 

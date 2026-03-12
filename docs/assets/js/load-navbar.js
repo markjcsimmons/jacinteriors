@@ -1581,13 +1581,14 @@
       <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="${getPath('residential-design.html')}">Residential Interior Design</a></li>
+          <li><a href="${getPath('services.html')}#residential-design">Residential Design</a></li>
           <li><a href="${getPath('kitchens.html')}">Kitchen Design</a></li>
-          <li><a href="${getPath('commercial-design.html')}">Commercial Interior Design</a></li>
-          <li><a href="${getPath('interior-styling.html')}">Interior Styling &amp; Decor</a></li>
-          <li><a href="${getPath('concept-design.html')}">Concept Design &amp; Visualization</a></li>
-          <li><a href="${getPath('furniture-sourcing.html')}">Furniture &amp; Object Sourcing</a></li>
-          <li><a href="${getPath('design-consulting.html')}">Design Consulting</a></li>
+          <li><a href="${getPath('services.html')}#interior-design-for-developers">Interior Design for Developers</a></li>
+          <li><a href="${getPath('services.html')}#sourcing-and-purchasing-service">Sourcing &amp; Purchasing</a></li>
+          <li><a href="${getPath('services.html')}#construction-supervision">Construction Supervision</a></li>
+          <li><a href="${getPath('services.html')}#space-planning-concept-design">Space Planning &amp; Concept Design</a></li>
+          <li><a href="${getPath('services.html')}#commercial-space-design">Commercial Space Design</a></li>
+          <li><a href="${getPath('cities-we-serve.html')}">Cities We Serve</a></li>
         </ul>
       </div>
 
@@ -1597,8 +1598,6 @@
           <li><a href="${getPath('about.html')}">Who We Are</a></li>
           <li><a href="${getPath('portfolio.html')}">Portfolio</a></li>
           <li><a href="${getPath('blog.html')}">Blog</a></li>
-          <li><a href="${getPath('cities-we-serve.html')}">Cities We Serve</a></li>
-          <li><a href="${getPath('services.html')}">Services</a></li>
           <li><a href="${getPath('contact.html')}">Contact</a></li>
         </ul>
       </div>

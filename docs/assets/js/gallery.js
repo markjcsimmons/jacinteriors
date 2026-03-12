@@ -198,8 +198,8 @@
     return { tile, img };
   }
 
-  // R2 filenames differ from slug for some projects (e.g. jamm-visual -> jamm-1.jpg).
-  const GALLERY_FILENAME_PREFIX = { "jamm-visual": "jamm" };
+  // R2 filenames differ from slug for some projects (e.g. jamm-visual -> jamm-visual-1.jpg).
+  const GALLERY_FILENAME_PREFIX = { "jamm-visual": "jamm-visual" };
   // R2 path: full path under CDN base (e.g. jamm-visual -> "jac-images/projects/JAMM-visual").
   const GALLERY_PROJECT_PATH = { "jamm-visual": "jac-images/projects/JAMM-visual" };
 
