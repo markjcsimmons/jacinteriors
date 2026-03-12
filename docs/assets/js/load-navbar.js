@@ -1686,13 +1686,21 @@
                 normalizeLegacyContainers();
                 normalizeLegacyHeroTypography();
             };
-            // Run now, then again after layout/scripts settle.
-            enforceCta();
+            // Defer CTA injection so it runs after DOM is parsed (footer exists). Otherwise on pages
+            // where load-navbar runs at start of body (e.g. Portfolio), CTA was inserted at body end
+            // before the rest of the page was parsed and appeared as the only content.
+            function scheduleCta() {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', enforceCta);
+                } else {
+                    setTimeout(enforceCta, 0);
+                }
+            }
             normalizeAll();
-            setTimeout(enforceCta, 0);
             setTimeout(normalizeAll, 0);
-            setTimeout(enforceCta, 250);
             setTimeout(normalizeAll, 250);
+            scheduleCta();
+            setTimeout(enforceCta, 250);
             setTimeout(enforceCta, 600);
             ensureFooter();
             normalizeContactButtons();

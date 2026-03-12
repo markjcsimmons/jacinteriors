@@ -11,7 +11,9 @@
 
   // Default to production CDN even if r2-config.js fails to load.
   const DEFAULT_R2_BASE = 'https://jacinteriorscdn.com';
-  const R2_BASE = (window.R2_IMAGE_BASE || DEFAULT_R2_BASE).replace(/\/+$/, '');
+  function getR2Base() {
+    return (window.R2_IMAGE_BASE || DEFAULT_R2_BASE).toString().replace(/\/+$/, '');
+  }
 
   // Manual image overrides per project slug.
   // Format: slug -> [mainImageN, smallImage1N, smallImage2N]
@@ -93,9 +95,10 @@
   function toFinalSrc(localSrc) {
     const parsed = parseProjectLocalSrc(localSrc);
     if (!parsed) return localSrc;
-    if (!R2_BASE) return localSrc;
+    const base = getR2Base();
+    if (!base) return localSrc;
     const path = getR2ProjectPath(parsed.project);
-    return `${R2_BASE}/${path}/${encodeName(parsed.name)}`;
+    return `${base}/${path}/${encodeName(parsed.name)}`;
   }
 
   function getProjectLinksFromNavbar() {
@@ -241,6 +244,14 @@
     return callouts.slice(0, 4);
   }
 
+  function defaultFirstImageUrl(slug) {
+    const base = getR2Base();
+    if (!base) return FALLBACK_PRIMARY;
+    const path = getR2ProjectPath(slug);
+    const prefix = FILENAME_PREFIX[slug] || slug;
+    return `${base}/${path}/${prefix}-1.jpg`;
+  }
+
   async function hydrateCardImages(cardEl) {
     const rawHref = cardEl.dataset.projectHref || '';
     const href = normalizeProjectHref(rawHref);
@@ -253,22 +264,26 @@
 
     const slug = cardEl.dataset.projectSlug || '';
     const override = IMAGE_OVERRIDES[slug];
+    const base = getR2Base();
 
     if (override) {
       const [n1, n2, n3] = override;
       const prefix = FILENAME_PREFIX[slug] || slug;
       const path = getR2ProjectPath(slug);
-      primary.src   = `${R2_BASE}/${path}/${prefix}-${n1}.jpg`;
-      hover.src     = `${R2_BASE}/${path}/${prefix}-${n2}.jpg`;
-      secondary.src = `${R2_BASE}/${path}/${prefix}-${n3}.jpg`;
+      primary.src   = `${base}/${path}/${prefix}-${n1}.jpg`;
+      hover.src     = `${base}/${path}/${prefix}-${n2}.jpg`;
+      secondary.src = `${base}/${path}/${prefix}-${n3}.jpg`;
       return;
     }
+
+    // Set first image immediately so card never stays blank (R2 base resolved at runtime)
+    primary.src = defaultFirstImageUrl(slug);
 
     try {
       const images = await fetchProjectImages(href);
       const a = images[0]
         ? (images[0].startsWith('assets/images/projects/') ? toFinalSrc(images[0]) : images[0])
-        : FALLBACK_PRIMARY;
+        : primary.src;
       const b = images[1]
         ? (images[1].startsWith('assets/images/projects/') ? toFinalSrc(images[1]) : images[1])
         : a;
@@ -280,9 +295,8 @@
       hover.src = b;
       secondary.src = c;
     } catch (_) {
-      primary.src = FALLBACK_PRIMARY;
-      hover.src = FALLBACK_HOVER;
-      secondary.src = FALLBACK_SECONDARY;
+      hover.src = hover.src || FALLBACK_HOVER;
+      secondary.src = secondary.src || FALLBACK_SECONDARY;
     }
   }
 
@@ -399,11 +413,22 @@
     setTimeout(() => tryRender(attempt + 1), 100);
   }
 
-  // Defer execution until deferred navbar script has had a chance to inject markup
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => tryRender(0));
-  } else {
+  // Wait for DOM so #projectsList exists; retry so we run after load-navbar has injected the nav (when using fallback list)
+  function boot() {
+    if (!document.getElementById('projectsList')) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => tryRender(0));
+      } else {
+        setTimeout(() => tryRender(0), 0);
+      }
+      return;
+    }
     tryRender(0);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
   }
 })();
 
