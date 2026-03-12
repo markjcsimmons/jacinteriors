@@ -200,8 +200,8 @@
 
   // R2 filenames differ from slug for some projects (e.g. jamm-visual -> jamm-1.jpg).
   const GALLERY_FILENAME_PREFIX = { "jamm-visual": "jamm" };
-  // R2 bucket folder may differ from slug (e.g. jamm-visual -> path "jamm").
-  const GALLERY_PROJECT_PATH = { "jamm-visual": "jamm" };
+  // R2 path: full path under CDN base (e.g. jamm-visual -> "jac-images/projects/JAMM-visual").
+  const GALLERY_PROJECT_PATH = { "jamm-visual": "jac-images/projects/JAMM-visual" };
 
   function buildCdnCandidatesFromSlugAndIndex(slug, index) {
     const s = String(slug || "").trim();
@@ -211,7 +211,7 @@
 
     const n = Math.max(1, Number(index) || 1);
     const prefix = GALLERY_FILENAME_PREFIX[s] || s;
-    const pathSegment = GALLERY_PROJECT_PATH[s] || s;
+    const pathSegment = GALLERY_PROJECT_PATH[s] || "projects/" + s;
 
     // Try base filename first (matches R2), then size variants.
     // Typical R2 convention: "<prefix>-<n>.*"
@@ -224,7 +224,7 @@
     const urls = [];
     for (const stem of stems) {
       for (const ext of exts) {
-        urls.push(`${base}/projects/${encodeURIComponent(pathSegment)}/${encodeURIComponent(stem)}.${ext}`);
+        urls.push(`${base}/${pathSegment}/${encodeURIComponent(stem)}.${ext}`);
       }
     }
     return urls;

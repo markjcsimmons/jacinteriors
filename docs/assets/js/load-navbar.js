@@ -49,15 +49,14 @@
     const filename = currentPath.split('/').pop() || 'index.html';
     
     // Extract base path for GitHub Pages project sites (e.g., '/jacinteriors').
-    // On localhost (or root deployment) the first segment is a filename like "index.html",
-    // so we treat that as "no base path".
+    // Only treat first segment as "site root" when it's a known repo name; otherwise we're in a subfolder (projects/, cities/).
     const pathParts = currentPath.split('/').filter(p => p);
-    const basePath = (pathParts.length > 0 && !pathParts[0].includes('.')) ? '/' + pathParts[0] : '';
+    const knownSiteRoot = 'jacinteriors';
+    const isUnderKnownRoot = pathParts[0] === knownSiteRoot;
+    const basePath = (pathParts.length > 0 && isUnderKnownRoot) ? '/' + pathParts[0] : '';
     
-    // Calculate depth for subdirectories (e.g., cities/, projects/)
-    // For root-level pages: /jacinteriors/page.html -> depth = 0
-    // For subfolder pages: /jacinteriors/cities/page.html -> depth = 1
-    const depth = Math.max(0, pathParts.length - 2);
+    // Depth: how many levels up to reach docs root. /projects/fox-hills.html -> 1; /jacinteriors/projects/fox-hills.html -> 1.
+    const depth = basePath ? Math.max(0, pathParts.length - 2) : Math.max(0, pathParts.length - 1);
     const pathPrefix = depth > 0 ? '../'.repeat(depth) : '';
     
     // Build absolute URL for assets (badges, etc.) from script location so it works on any deployment

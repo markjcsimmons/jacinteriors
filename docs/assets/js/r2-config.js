@@ -22,11 +22,11 @@ window.R2_VIDEO_BASE = "https://videos.jacinteriorscdn.com";
       document.head.appendChild(pc);
     }
     var file = (slug === "jamm-visual") ? "jamm-1.jpg" : slug + "-1.jpg";
-    var pathSegment = (slug === "jamm-visual") ? "jamm" : slug;
+    var pathSegment = (slug === "jamm-visual") ? "jac-images/projects/JAMM-visual" : "projects/" + slug;
     var link = document.createElement("link");
     link.rel = "preload";
     link.as = "image";
-    link.href = base + "/projects/" + encodeURIComponent(pathSegment) + "/" + encodeURIComponent(file);
+    link.href = base + "/" + pathSegment + "/" + encodeURIComponent(file);
     document.head.appendChild(link);
   } catch (_) {}
 })();

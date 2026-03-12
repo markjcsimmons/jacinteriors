@@ -18,6 +18,12 @@
   // Images are loaded from R2: projects/{slug}/{filenamePrefix}-{N}.jpg
   // Use FILENAME_PREFIX when R2 filenames differ from slug (e.g. jamm-visual -> jamm-1.jpg).
   const FILENAME_PREFIX = { 'jamm-visual': 'jamm' };
+  // R2 path may differ (e.g. jamm-visual -> jac-images/projects/JAMM-visual).
+  const R2_PROJECT_PATH = { 'jamm-visual': 'jac-images/projects/JAMM-visual' };
+
+  function getR2ProjectPath(projectSlug) {
+    return R2_PROJECT_PATH[projectSlug] || 'projects/' + projectSlug;
+  }
   const IMAGE_OVERRIDES = {
     '22nd-street':  [15, 18, 14],
     'sunnyside':    [10,  8,  7],
@@ -88,7 +94,8 @@
     const parsed = parseProjectLocalSrc(localSrc);
     if (!parsed) return localSrc;
     if (!R2_BASE) return localSrc;
-    return `${R2_BASE}/projects/${parsed.project}/${encodeName(parsed.name)}`;
+    const path = getR2ProjectPath(parsed.project);
+    return `${R2_BASE}/${path}/${encodeName(parsed.name)}`;
   }
 
   function getProjectLinksFromNavbar() {
@@ -250,9 +257,10 @@
     if (override) {
       const [n1, n2, n3] = override;
       const prefix = FILENAME_PREFIX[slug] || slug;
-      primary.src   = `${R2_BASE}/projects/${slug}/${prefix}-${n1}.jpg`;
-      hover.src     = `${R2_BASE}/projects/${slug}/${prefix}-${n2}.jpg`;
-      secondary.src = `${R2_BASE}/projects/${slug}/${prefix}-${n3}.jpg`;
+      const path = getR2ProjectPath(slug);
+      primary.src   = `${R2_BASE}/${path}/${prefix}-${n1}.jpg`;
+      hover.src     = `${R2_BASE}/${path}/${prefix}-${n2}.jpg`;
+      secondary.src = `${R2_BASE}/${path}/${prefix}-${n3}.jpg`;
       return;
     }
 

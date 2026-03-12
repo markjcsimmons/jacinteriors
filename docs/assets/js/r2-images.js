@@ -126,8 +126,15 @@
     return (window.R2_IMAGE_BASE || "").toString().replace(/\/+$/, "");
   }
 
-  // R2 bucket path may differ from project slug (e.g. jamm-visual -> folder "jamm").
+  // R2 bucket path may differ from project slug. Use full path override when R2 uses a different prefix (e.g. jac-images/projects/JAMM-visual).
   const PROJECT_R2_PATH_OVERRIDE = { "jamm-visual": "jamm" };
+  const PROJECT_R2_FULL_PATH_OVERRIDE = { "jamm-visual": "jac-images/projects/JAMM-visual" };
+
+  function getProjectR2Path(projectKey) {
+    const full = PROJECT_R2_FULL_PATH_OVERRIDE[projectKey];
+    if (full) return full;
+    return "projects/" + (PROJECT_R2_PATH_OVERRIDE[projectKey] || projectKey);
+  }
 
   function selectImages(root) {
     const selector =
@@ -213,7 +220,7 @@
         try {
           const type = img.dataset.r2Type || "";
           const key = img.dataset.r2Key || "";
-          const projectPath = (type === "projects" && key) ? (PROJECT_R2_PATH_OVERRIDE[key] || key) : key;
+          const projectPath = (type === "projects" && key) ? getProjectR2Path(key) : (type === "projects" ? key : key);
           const name = img.dataset.r2TargetName || img.dataset.r2OriginalName || "";
 
           // 1) Try extension/case variants first (spaces + projects + cities)
@@ -230,7 +237,8 @@
             let altUrl = "";
             if (type === "cities") altUrl = `${baseNow}/cities/${encodeName(v)}${bust}`;
             else if (type === "spaces" && key) altUrl = `${baseNow}/spaces/${key}/${encodeName(v)}${bust}`;
-            else if (type && key) altUrl = `${baseNow}/${type}/${projectPath}/${encodeName(v)}${bust}`;
+            else if (type === "projects" && key) altUrl = `${baseNow}/${projectPath}/${encodeName(v)}${bust}`;
+            else if (type && key) altUrl = `${baseNow}/${type}/${key}/${encodeName(v)}${bust}`;
             else altUrl = "";
 
             if (altUrl && img.getAttribute("src") !== altUrl) {
@@ -239,12 +247,12 @@
             }
           }
 
-          // 1b) Projects with path override (e.g. R2 folder "jamm" for slug "jamm-visual"): try alternate path.
+          // 1b) Projects with path override (e.g. R2 folder "jamm" or full path "jac-images/projects/JAMM-visual"): try alternate path.
           const altPath = type === "projects" && key ? PROJECT_R2_PATH_OVERRIDE[key] : null;
           if (altPath && !(img.dataset.r2TriedAltPath === "1")) {
             img.dataset.r2TriedAltPath = "1";
             const bust = getBustSuffix(img);
-            const altUrl = `${baseNow}/projects/${altPath}/${encodeName(name)}${bust}`;
+            const altUrl = `${baseNow}/${getProjectR2Path(key)}/${encodeName(name)}${bust}`;
             if (altUrl && img.getAttribute("src") !== altUrl) {
               img.setAttribute("src", altUrl);
               return;
@@ -316,7 +324,8 @@
             let altUrl = "";
             if (type === "cities") altUrl = `${baseNow}/cities/${encodeName(v)}${bust}`;
             else if (type === "spaces" && key) altUrl = `${baseNow}/spaces/${key}/${encodeName(v)}${bust}`;
-            else if (type && key) altUrl = `${baseNow}/${type}/${projectPath}/${encodeName(v)}${bust}`;
+            else if (type === "projects" && key) altUrl = `${baseNow}/${projectPath}/${encodeName(v)}${bust}`;
+            else if (type && key) altUrl = `${baseNow}/${type}/${key}/${encodeName(v)}${bust}`;
             else altUrl = "";
 
             if (altUrl && img.getAttribute("src") !== altUrl) {
@@ -360,11 +369,12 @@
       });
     });
 
-    // Apply per project (use project slug; path override is tried in error handler)
+    // Apply per project (use project slug; path override or full path is tried in error handler)
     byProject.forEach((entries, project) => {
       entries.forEach(({ img, originalName }) => {
         img.dataset.r2TargetName = originalName;
-        const url = `${base}/projects/${project}/${encodeName(originalName)}${getBustSuffix(img)}`;
+        const pathSegment = getProjectR2Path(project);
+        const url = `${base}/${pathSegment}/${encodeName(originalName)}${getBustSuffix(img)}`;
         setFinalSrc(img, url);
       });
     });
