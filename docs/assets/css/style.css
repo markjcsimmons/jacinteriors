@@ -1790,6 +1790,13 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     body.cities-we-serve-page .cities-desktop-subtitle {
         display: none !important;
     }
+    /* Match Gallery page: same gap between black bar and first content (4rem) */
+    body.cities-we-serve-page .cities-regions-section {
+        padding-top: 4rem !important;
+    }
+    body.cities-we-serve-page .project-list-item:first-child .project-list-content {
+        padding-top: 0 !important;
+    }
     body.cities-we-serve-page .project-list-image {
         display: none !important;
     }
