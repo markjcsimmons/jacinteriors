@@ -1677,32 +1677,32 @@
             applyCityR2Images();
             applyCityFeaturedProject();
             ensureAnalytics();
-            const enforceCta = () => {
-                removeLegacyBottomCtas();
-                ensureSiteCta();
-            };
             const normalizeAll = () => {
                 normalizeLegacyInlineSections();
                 normalizeLegacyContainers();
                 normalizeLegacyHeroTypography();
             };
-            // Defer CTA injection so it runs after DOM is parsed (footer exists). Otherwise on pages
-            // where load-navbar runs at start of body (e.g. Portfolio), CTA was inserted at body end
-            // before the rest of the page was parsed and appeared as the only content.
-            function scheduleCta() {
+            // Defer CTA and footer so they run after DOM is parsed. When load-navbar runs at start
+            // of body (e.g. Portfolio), body only has [nav, script] — if we inject footer/CTA now,
+            // they appear before the page's real content and the black bar + project list disappear.
+            function runWhenDomReady(fn) {
                 if (document.readyState === 'loading') {
-                    document.addEventListener('DOMContentLoaded', enforceCta);
+                    document.addEventListener('DOMContentLoaded', fn);
                 } else {
-                    setTimeout(enforceCta, 0);
+                    setTimeout(fn, 0);
                 }
+            }
+            function deferredBody() {
+                ensureFooter();
+                removeLegacyBottomCtas();
+                ensureSiteCta();
             }
             normalizeAll();
             setTimeout(normalizeAll, 0);
             setTimeout(normalizeAll, 250);
-            scheduleCta();
-            setTimeout(enforceCta, 250);
-            setTimeout(enforceCta, 600);
-            ensureFooter();
+            runWhenDomReady(deferredBody);
+            setTimeout(deferredBody, 250);
+            setTimeout(deferredBody, 600);
             normalizeContactButtons();
             ensureSeoMeta();
         }
