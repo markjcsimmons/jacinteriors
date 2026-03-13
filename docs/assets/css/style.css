@@ -1800,13 +1800,18 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     body.cities-we-serve-page .project-list-image {
         display: none !important;
     }
+    /* Remove item padding so only content padding defines gap (avoids double spacing + 2-line look) */
+    body.cities-we-serve-page .project-list-item {
+        padding: 0 !important;
+        border-top: none !important;
+    }
     body.cities-we-serve-page .project-list-item > div {
         flex-direction: column;
         width: 100%;
     }
     body.cities-we-serve-page .project-list-content {
         width: 100%;
-        padding: 2.5rem 0 !important;
+        padding: 0.75rem 0 !important;
         padding-left: 0 !important;
         border-bottom: 1px solid #e4e4e4;
     }
