@@ -127,8 +127,8 @@
   }
 
   // R2 bucket path may differ from project slug. Use full path override when R2 uses a different prefix (e.g. jac-images/projects/JAMM-visual).
-  const PROJECT_R2_PATH_OVERRIDE = { "jamm-visual": "jamm" };
-  const PROJECT_R2_FULL_PATH_OVERRIDE = { "jamm-visual": "jac-images/projects/JAMM-visual" };
+  const PROJECT_R2_PATH_OVERRIDE = {};
+  const PROJECT_R2_FULL_PATH_OVERRIDE = { "jamm-visual": "projects/JAMM-visual" };
 
   function getProjectR2Path(projectKey) {
     const full = PROJECT_R2_FULL_PATH_OVERRIDE[projectKey];
@@ -253,7 +253,7 @@
             const bust = getBustSuffix(img);
             const nameEnc = encodeName(name);
             // Try lowercase path in case CDN or R2 normalizes to lowercase.
-            const altUrl = `${baseNow}/jac-images/projects/jamm-visual/${nameEnc}${bust}`;
+            const altUrl = `${baseNow}/projects/jamm-visual/${nameEnc}${bust}`;
             if (altUrl && img.getAttribute("src") !== altUrl) {
               img.setAttribute("src", altUrl);
               return;
