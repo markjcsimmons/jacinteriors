@@ -769,13 +769,13 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
 .nav-dropdown-content {
     display: none !important;
     position: fixed !important;
-    top: 56px !important; /* below the navbar (navbar is ~56px tall) */
+    top: 151px !important; /* below the navbar: logo 135px + 2×8px padding */
     left: 50% !important;
     right: 0 !important;
     width: 50% !important;
     max-width: none;
-    height: calc(100vh - 56px) !important;
-    max-height: calc(100vh - 56px) !important;
+    height: calc(100vh - 151px) !important;
+    max-height: calc(100vh - 151px) !important;
     min-height: 0;
     margin: 0 !important;
     padding: 5rem 0 2rem 0 !important;
@@ -2356,10 +2356,10 @@ body.modal-open {
         position: fixed !important;
         left: 50% !important;
         right: 0 !important;
-        top: 56px !important;
+        top: 151px !important;
         width: 50% !important;
-        height: calc(100vh - 56px) !important;
-        max-height: calc(100vh - 56px) !important;
+        height: calc(100vh - 151px) !important;
+        max-height: calc(100vh - 151px) !important;
         min-height: 0;
         margin: 0 !important;
         padding: 1rem 1rem 6rem 1.25rem !important;
