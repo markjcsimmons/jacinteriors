@@ -500,6 +500,38 @@
         }
     }
     
+    // Portfolio dropdown: project links (keep in sync with portfolio-projects.js FALLBACK_PROJECT_LINKS)
+    const PORTFOLIO_PROJECT_LINKS = [
+        { title: 'Fox Hills', href: 'projects/fox-hills.html' },
+        { title: '22nd Street', href: 'projects/22nd-street.html' },
+        { title: 'Sunnyside', href: 'projects/sunnyside.html' },
+        { title: 'Frances', href: 'projects/frances.html' },
+        { title: 'Columbus Way', href: 'projects/columbus-way.html' },
+        { title: 'Colette Way', href: 'projects/colette-way.html' },
+        { title: 'River Homestead', href: 'projects/river-homestead.html' },
+        { title: 'Oakwood', href: 'projects/oakwood.html' },
+        { title: 'Wilshire', href: 'projects/wilshire.html' },
+        { title: 'Mulholland Drive', href: 'projects/mulholland-drive.html' },
+        { title: 'Via Pisa', href: 'projects/via-pisa.html' },
+        { title: 'Galewood', href: 'projects/galewood.html' },
+        { title: 'Highland', href: 'projects/highland.html' },
+        { title: 'Medio', href: 'projects/medio.html' },
+        { title: 'Monaco', href: 'projects/monaco.html' },
+        { title: 'Presson Place', href: 'projects/presson-place.html' },
+        { title: 'Ronda', href: 'projects/ronda.html' },
+        { title: 'Sherbourne', href: 'projects/sherbourne.html' },
+        { title: 'Alpine', href: 'projects/alpine.html' },
+        { title: 'Peary Place', href: 'projects/peary-way.html' },
+        { title: 'Valley Vista', href: 'projects/valley-vista.html' },
+        { title: 'Colby', href: 'projects/colby.html' },
+        { title: 'Vale Crest', href: 'projects/vale-crest.html' },
+        { title: 'Brown Deer Park', href: 'projects/brown-deer-park.html' },
+        { title: 'JAMM Agency Office', href: 'projects/jamm-visual.html' },
+    ];
+    const portfolioDropdownItems = PORTFOLIO_PROJECT_LINKS.map(function(p) {
+        return '<a href="' + getPath(p.href) + '" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: \'Plus Jakarta Sans\', sans-serif;">' + p.title + '</a>';
+    }).join('');
+
     // Navbar HTML - inlined for instant loading (no XHR)
     const navbarHTML = `
 <nav class="navbar" style="padding: 0.5rem 0; background: white; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e4e4e4; font-family: 'Plus Jakarta Sans', sans-serif;">
@@ -511,7 +543,13 @@
             <div class="nav-menu" id="navMenu">
                 <a href="${getPath('index.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">HOME</a>
                 <a href="${getPath('gallery.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">GALLERY</a>
-                <a href="${getPath('portfolio.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">PORTFOLIO</a>
+                <div class="nav-dropdown" style="position: relative; display: inline-block;">
+                    <a href="${getPath('portfolio.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">PORTFOLIO</a>
+                    <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column;">
+                        <a href="${getPath('portfolio.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Portfolio</a>
+                        ${portfolioDropdownItems}
+                    </div>
+                </div>
                 <div class="nav-dropdown" style="position: relative; display: inline-block;">
                     <a href="#" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">SPACES</a>
                     <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column;">
