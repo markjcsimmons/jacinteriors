@@ -765,17 +765,17 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     position: relative;
     display: inline-block;
 }
-/* Desktop: submenu is strictly the right half of the screen, from top, scrollable */
+/* Desktop: submenu is the right half of the screen, starting below the nav bar, scrollable */
 .nav-dropdown-content {
     display: none !important;
     position: fixed !important;
-    top: 0 !important;
+    top: 56px !important; /* below the navbar (navbar is ~56px tall) */
     left: 50% !important;
     right: 0 !important;
     width: 50% !important;
     max-width: none;
-    height: 100vh !important;
-    max-height: 100vh !important;
+    height: calc(100vh - 56px) !important;
+    max-height: calc(100vh - 56px) !important;
     min-height: 0;
     margin: 0 !important;
     padding: 5rem 0 2rem 0 !important;

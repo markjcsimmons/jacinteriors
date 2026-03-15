@@ -1829,9 +1829,9 @@
         setTimeout(ensureNavInited, 50);
     });
 
-    // Temporary image labels: show filename on every image (all pages). Remove this block when no longer needed.
+    // Temporary image labels: disabled so grey boxes do not appear below images on Services and other pages.
     (function initShowImageLabels() {
-        function getShowNames() { return true; }
+        function getShowNames() { return false; }
         function filenameFromSrc(src) {
             if (!src || typeof src !== 'string') return '';
             try {

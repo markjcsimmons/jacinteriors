@@ -21,7 +21,7 @@ window.R2_VIDEO_BASE = "https://videos.jacinteriorscdn.com";
       pc.setAttribute("crossorigin", "");
       document.head.appendChild(pc);
     }
-    var file = (slug === "jamm-visual") ? "jamm-visual-1.jpg" : slug + "-1.jpg";
+    var file = (slug === "jamm-visual") ? "jamm-visual-1.jpg" : (slug === "columbus-way") ? "columbus-way-8.jpg" : (slug === "sunnyside") ? "sunnyside-11.jpg" : (slug === "oakwood") ? "oakwood-3.jpg" : (slug === "wilshire") ? "wilshire-2.jpg" : (slug === "ronda") ? "ronda-8.jpg" : (slug === "monaco") ? "monaco-5.jpg" : (slug === "valley-vista") ? "valley-vista-5.jpg" : (slug === "brown-deer-park") ? "brown-deer-park-7.jpg" : slug + "-1.jpg";
     var pathSegment = (slug === "jamm-visual") ? "jac-images/projects/JAMM-visual" : "projects/" + slug;
     var link = document.createElement("link");
     link.rel = "preload";
