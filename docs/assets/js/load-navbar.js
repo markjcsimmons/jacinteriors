@@ -1115,9 +1115,14 @@
         }
 
         // 2) Cities We Serve cards: for each region card, try using the first city link's R2 hero.
+        // Cards 0 and 1 use fixed R2 images set in HTML; skip overwriting.
         if (filename === 'cities-we-serve.html') {
             const cards = Array.from(document.querySelectorAll('.project-list-item'));
-            cards.forEach((card) => {
+            cards.forEach((card, index) => {
+                if (index === 0) return; // Beverly Hills & Westside: 22nd-street-1.jpg from R2
+                if (index === 1) return; // Beach Cities: frances-4.jpg from R2
+                if (index === 2) return; // San Fernando Valley: colette-way-5.jpg from R2
+                if (index === 3) return; // Greater Los Angeles: mulholland-drive-5.jpg from R2
                 const firstCityLink = card.querySelector('.city-tags-container a.city-tag[href*="cities/"]');
                 const slug = firstCityLink ? slugifyCitySlugFromHref(firstCityLink.getAttribute('href') || '') : '';
                 if (!slug) return;
