@@ -199,9 +199,9 @@
   }
 
   // R2 filenames differ from slug for some projects (e.g. jamm-visual -> jamm-visual-1.jpg).
-  const GALLERY_FILENAME_PREFIX = { "jamm-visual": "jamm-visual" };
-  // R2 path: full path under CDN base (e.g. jamm-visual -> "jac-images/projects/JAMM-visual").
-  const GALLERY_PROJECT_PATH = { "jamm-visual": "jac-images/projects/JAMM-visual" };
+  const GALLERY_FILENAME_PREFIX = { "jamm-visual": "JAMM-visual" };
+  // R2 path: full path under CDN base (e.g. jamm-visual -> "projects/JAMM-visual").
+  const GALLERY_PROJECT_PATH = { "jamm-visual": "projects/JAMM-visual" };
 
   function buildCdnCandidatesFromSlugAndIndex(slug, index) {
     const s = String(slug || "").trim();
