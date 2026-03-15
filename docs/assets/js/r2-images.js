@@ -247,7 +247,18 @@
             }
           }
 
-          // 1b) Projects with path override (e.g. R2 folder "jamm" or full path "jac-images/projects/JAMM-visual"): try alternate path.
+          // 1b) Projects with path override (e.g. jamm-visual -> jac-images/projects/JAMM-visual): try alternate path and lowercase path.
+          if (type === "projects" && key === "jamm-visual" && !(img.dataset.r2TriedJammAlt === "1")) {
+            img.dataset.r2TriedJammAlt = "1";
+            const bust = getBustSuffix(img);
+            const nameEnc = encodeName(name);
+            // Try lowercase path in case CDN or R2 normalizes to lowercase.
+            const altUrl = `${baseNow}/jac-images/projects/jamm-visual/${nameEnc}${bust}`;
+            if (altUrl && img.getAttribute("src") !== altUrl) {
+              img.setAttribute("src", altUrl);
+              return;
+            }
+          }
           const altPath = type === "projects" && key ? PROJECT_R2_PATH_OVERRIDE[key] : null;
           if (altPath && !(img.dataset.r2TriedAltPath === "1")) {
             img.dataset.r2TriedAltPath = "1";
@@ -391,15 +402,34 @@
   }
 
   // Expose globally for SPA / dynamic content updates.
-  window.applyR2Images = function (root) {
-    // Clear per-call containers to avoid growing across calls.
+  window.applyR2Images = function (root, rewire) {
+    var doc = root || document;
+    if (rewire) {
+      selectImages(doc).forEach(function (img) {
+        delete img.dataset.r2Wired;
+        delete img.dataset.r2Final;
+        delete img.dataset.r2TargetName;
+        delete img.dataset.r2TriedAltPath;
+        delete img.dataset.r2TriedJammAlt;
+      });
+    }
     bySpace.clear();
     byProject.clear();
     cityImgs.length = 0;
-    wireImages(root || document);
+    wireImages(doc);
   };
 
-  // Run once on initial load.
-  window.applyR2Images(document);
+  // Run on DOM ready so images are present (e.g. after load-navbar or other scripts that modify DOM).
+  function run() {
+    window.applyR2Images(document);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+  window.addEventListener("load", function () {
+    window.applyR2Images(document, true);
+  });
 })();
 
