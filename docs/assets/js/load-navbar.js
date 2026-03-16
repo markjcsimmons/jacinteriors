@@ -1829,7 +1829,7 @@
     });
 
     (function initShowImageLabels() {
-        function getShowNames() { return true; }
+        function getShowNames() { return false; }
         function filenameFromSrc(src) {
             if (!src || typeof src !== 'string') return '';
             try {
