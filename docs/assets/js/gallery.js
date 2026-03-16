@@ -199,7 +199,7 @@
   }
 
   // R2 filenames differ from slug for some projects (e.g. jamm-visual -> jamm-visual-1.jpg).
-  const GALLERY_FILENAME_PREFIX = { "jamm-visual": "JAMM-visual" };
+  const GALLERY_FILENAME_PREFIX = { "jamm-visual": "JAMM-visual", "colette-way": "collette-way" };
   // R2 path: full path under CDN base (e.g. jamm-visual -> "projects/JAMM-visual").
   const GALLERY_PROJECT_PATH = { "jamm-visual": "projects/JAMM-visual" };
 
