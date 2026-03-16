@@ -83,14 +83,13 @@
     if (!base) return [];
 
     const n2 = String(n).padStart(2, "0");
-    // Support posters living either alongside videos OR in a dedicated thumbnails folder.
-    // Current R2 layout reported:
-    // - jac-videos/fox-hills/fox-hills-thumbnails/fox-hills-16.jpg
+    // Thumbnails live at: fox-hills/fox-hills-thumbnails/fox-hills-N.jpg
+    // Try the confirmed working path first to avoid unnecessary 404s.
     const dirs = [
+      `${PROJECT_SLUG}/${PROJECT_SLUG}-thumbnails`,
       `${PROJECT_SLUG}`,
-      `${PROJECT_SLUG}/fox-hills-thumbnails`,
+      `jac-videos/${PROJECT_SLUG}/${PROJECT_SLUG}-thumbnails`,
       `jac-videos/${PROJECT_SLUG}`,
-      `jac-videos/${PROJECT_SLUG}/fox-hills-thumbnails`,
     ];
     const exts = ["jpg", "jpeg", "webp", "png", "JPG", "JPEG", "WEBP", "PNG"];
     const stems = [
