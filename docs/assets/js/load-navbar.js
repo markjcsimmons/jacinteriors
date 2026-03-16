@@ -1828,9 +1828,8 @@
         setTimeout(ensureNavInited, 50);
     });
 
-    // Temporary image labels: disabled so grey boxes do not appear below images on Services and other pages.
     (function initShowImageLabels() {
-        function getShowNames() { return false; }
+        function getShowNames() { return true; }
         function filenameFromSrc(src) {
             if (!src || typeof src !== 'string') return '';
             try {
