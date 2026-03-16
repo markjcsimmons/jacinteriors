@@ -220,7 +220,8 @@
     // First image can also exist as "primary" in some buckets.
     if (n === 1) stems.push(`${prefix}-primary`);
 
-    const exts = ["webp", "jpg", "jpeg", "png"];
+    // jpg first — R2 bucket stores jpegs, so we avoid an unnecessary 404 on webp
+    const exts = ["jpg", "jpeg", "webp", "png"];
     const urls = [];
     for (const stem of stems) {
       for (const ext of exts) {
@@ -268,12 +269,8 @@
 
     const loadMoreBtn = document.getElementById("galleryLoadMore");
 
-    // Wait for navbar injection so dropdown links exist (when nav has Portfolio dropdown).
-    for (let i = 0; i < 80; i += 1) {
-      if (findPortfolioProjectLinks().length) break;
-      await sleep(50);
-    }
-
+    // Use fallback list immediately for fast first paint.
+    // Do NOT wait for the navbar - it's the same project list anyway.
     const projectList = getGalleryProjectList();
     if (!projectList.length) {
       grid.innerHTML =
@@ -340,8 +337,8 @@
         // Ensure injected tiles aren’t hidden by scroll-animation CSS.
         tile.classList.add("visible");
 
-        // Hint for the first couple tiles on first load only.
-        if (idxToLoad === 1 && pIdx < 3) img.setAttribute("fetchpriority", "high");
+        // High-priority fetch for the first visible row (~8 tiles).
+        if (idxToLoad === 1 && pIdx < 8) img.setAttribute("fetchpriority", "high");
 
         const cdnCandidates = buildCdnCandidatesFromSlugAndIndex(p.slug, idxToLoad);
         setImgWithFallback(img, cdnCandidates, async () => {
