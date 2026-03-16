@@ -427,10 +427,31 @@
 
     grid.innerHTML = "";
 
-    const MAX_INDEX = 25;
-    appendBatch(grid, 1, MAX_INDEX).catch(() => {
-      // Keep silent; tiles will simply remain as placeholders if assets are unavailable.
+    const SHOW_INDEXES = [6, 8, 10, 13, 21];
+    SHOW_INDEXES.forEach((i) => {
+      const { tile, thumb } = createVideoTile(`Fox Hills video ${i}`, i);
+      grid.appendChild(tile);
+
+      if (thumb) {
+        thumb.addEventListener(
+          "load",
+          () => {
+            const src = String(thumb.currentSrc || thumb.src || "");
+            if (!src || src === PLACEHOLDER_SRC) return;
+            if (seenThumbSrc.has(src)) {
+              tile.dataset.masonryHidden = "1";
+              tile.style.display = "none";
+              document.dispatchEvent(new Event("spaces:gallery-updated"));
+              return;
+            }
+            seenThumbSrc.add(src);
+          },
+          { once: true, passive: true }
+        );
+      }
     });
+
+    document.dispatchEvent(new Event("spaces:gallery-updated"));
   }
 
   if (document.readyState === "loading") {
