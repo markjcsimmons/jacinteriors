@@ -68,7 +68,6 @@
     { title: 'Galewood', href: 'projects/galewood.html' },
     { title: 'Highland', href: 'projects/highland.html' },
     { title: 'Monaco', href: 'projects/monaco.html' },
-    { title: 'Presson Place', href: 'projects/presson-place.html' },
     { title: 'Ronda', href: 'projects/ronda.html' },
     { title: 'Sherbourne', href: 'projects/sherbourne.html' },
     { title: 'Alpine', href: 'projects/alpine.html' },
@@ -77,6 +76,7 @@
     { title: 'Colby', href: 'projects/colby.html' },
     { title: 'Vale Crest', href: 'projects/vale-crest.html' },
     { title: 'Brown Deer Park', href: 'projects/brown-deer-park.html' },
+    { title: 'Presson Place', href: 'projects/presson-place.html' },
     { title: 'Medio', href: 'projects/medio.html' },
     { title: 'JAMM Agency Office', href: 'projects/jamm-visual.html' },
   ];
