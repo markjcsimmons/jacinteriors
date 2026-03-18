@@ -1781,6 +1781,58 @@ footer[style*="#1a1a1a"] div[style*="text-align: center"][style*="border-top: 1p
     }
 }
 
+/* Spaces landing page: mobile = single full-width image, no crop, text below */
+@media (max-width: 980px) {
+    .spaces-landing-page #spacesList .project-list-item > div {
+        flex-direction: column;
+        width: 100%;
+    }
+    .spaces-landing-page #spacesList .project-list-image {
+        width: calc(100% + 2.5rem);
+        max-width: calc(100% + 2.5rem);
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+        flex: 0 0 auto;
+        aspect-ratio: auto;
+        max-height: none;
+    }
+    .spaces-landing-page #spacesList .project-list-image img.primary-img {
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
+        object-fit: contain;
+        object-position: center top;
+    }
+    .spaces-landing-page #spacesList .project-list-image img.hover-img {
+        display: none !important;
+    }
+    .spaces-landing-page #spacesList .project-secondary-image {
+        display: none !important;
+    }
+    .spaces-landing-page #spacesList .project-list-content {
+        padding-top: 1.5rem;
+        padding-left: 0;
+    }
+    .spaces-landing-page #spacesList .project-bottom-row {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .spaces-landing-page #spacesList .project-list-item {
+        padding: 2rem 0;
+    }
+    .spaces-landing-page #spacesList .project-list-image {
+        width: calc(100% + 2rem);
+        max-width: calc(100% + 2rem);
+        margin-left: -1rem;
+        margin-right: -1rem;
+    }
+    .spaces-landing-page #spacesList .project-list-content h3 {
+        font-size: 1.75rem !important;
+    }
+}
+
 /* Cities We Serve: mobile-only simplified layout (compact header "Cities", no images, list-style cards) */
 @media (max-width: 980px) {
     body.cities-we-serve-page .cities-mobile-title {
