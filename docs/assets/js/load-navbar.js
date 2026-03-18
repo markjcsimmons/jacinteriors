@@ -151,6 +151,7 @@
             const isCityPage = pathname.startsWith('/cities/') && file.endsWith('.html');
             const isProjectPage = pathname.startsWith('/projects/') && file.endsWith('.html');
             const isSpacesPage = [
+                'spaces.html',
                 // Kitchens gallery lives here (masonry-first)
                 'kitchens-gallery.html',
                 'bathrooms.html',
@@ -366,7 +367,8 @@
         } else if (filename === 'portfolio.html' || currentPath.includes('/projects/')) {
             const link = nav.querySelector('a[href*="portfolio.html"]');
             if (link) link.classList.add('active');
-        } else if (filename.includes('kitchens-gallery.html') ||
+        } else if (filename === 'spaces.html' ||
+                   filename.includes('kitchens-gallery.html') ||
                    filename.includes('bathrooms.html') || filename.includes('bedrooms.html') || 
                    filename.includes('dining-rooms.html') ||
                    filename.includes('living-spaces.html') || filename.includes('office-spaces.html') ||
@@ -550,7 +552,7 @@
                     </div>
                 </div>
                 <div class="nav-dropdown" style="position: relative; display: inline-block;">
-                    <a href="#" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">SPACES</a>
+                    <a href="${getPath('spaces.html')}" class="nav-link" style="font-size: 0.95rem; font-weight: 500; color: #222a26; letter-spacing: -0.2px; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">SPACES</a>
                     <div class="nav-dropdown-content" style="display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); padding: 0.5rem 0; margin-top: 0; z-index: 1000; border-radius: 4px; flex-direction: column;">
                         <a href="${getPath('kitchens-gallery.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Kitchens</a>
                         <a href="${getPath('bathrooms.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; border-bottom: 1px solid #f0f0f0; font-family: 'Plus Jakarta Sans', sans-serif;">Bathrooms</a>
