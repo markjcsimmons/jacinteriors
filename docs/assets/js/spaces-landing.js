@@ -70,12 +70,14 @@
     }
   }
 
-  function buildCard(space) {
+  function buildCard(space, index) {
     const base = getR2Base();
     const primarySrc   = `${base}/${space.folder}/${space.images[0]}`;
     const hoverSrc     = `${base}/${space.folder}/${space.images[1]}`;
     const secondarySrc = `${base}/${space.folder}/${space.images[2]}`;
     const href = resolveHref(space.href);
+    // Eagerly load first 3 cards; lazy-load the rest.
+    const loadingAttr = index < 3 ? 'eager' : 'lazy';
 
     const el = document.createElement('div');
     el.className = 'project-list-item spaces-card';
@@ -83,7 +85,7 @@
     el.innerHTML = `
       <div style="display: flex; width: 100%;">
         <div class="project-list-image">
-          <img src="${PLACEHOLDER_SRC}" data-primary="${primarySrc}" alt="${space.title}" class="primary-img" loading="lazy">
+          <img src="${PLACEHOLDER_SRC}" data-primary="${primarySrc}" alt="${space.title}" class="primary-img" loading="${loadingAttr}">
           <img src="${PLACEHOLDER_SRC}" data-hover="${hoverSrc}" alt="${space.title}" class="hover-img" loading="lazy" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.3s;">
         </div>
         <div class="project-list-content">
@@ -155,8 +157,8 @@
     if (!container) return;
 
     container.innerHTML = '';
-    SPACES.forEach((space) => {
-      const card = buildCard(space);
+    SPACES.forEach((space, index) => {
+      const card = buildCard(space, index);
       container.appendChild(card);
       loadImages(card);
     });
