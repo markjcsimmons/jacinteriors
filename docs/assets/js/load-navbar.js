@@ -1452,7 +1452,7 @@
         </p>
       </div>
       <a class="site-cta-button" href="${contactHref}">
-        <span>Book a call</span><span class="site-cta-arrow" aria-hidden="true">→</span>
+        <span>Get in touch</span><span class="site-cta-arrow" aria-hidden="true">→</span>
       </a>
     </div>
   </div>
