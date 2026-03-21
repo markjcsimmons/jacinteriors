@@ -1447,6 +1447,9 @@
         <p class="site-cta-subtitle">
           Start with a 15‑minute intro call—so we can understand your goals and recommend the right next step.
         </p>
+        <p class="site-cta-phone">
+          or call <a href="tel:213-397-0206" style="color:rgba(255,255,255,0.9); font-weight:600; text-decoration:none;">213-397-0206</a>
+        </p>
       </div>
       <a class="site-cta-button" href="${contactHref}">
         <span>Book a call</span><span class="site-cta-arrow" aria-hidden="true">→</span>
