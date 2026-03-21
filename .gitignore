@@ -36,3 +36,7 @@ Temporary Items
 
 # Local-only high-res assets (do not commit)
 docs/assets/images/spaces/
+
+# Environment / credentials
+scripts/.env
+.env
