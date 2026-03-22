@@ -584,7 +584,7 @@
                         <a href="${getPath('blog.html')}" style="display: block; padding: 0.5rem 1.5rem; color: #333; font-size: 0.85rem; text-transform: none; letter-spacing: 0; text-decoration: none; font-family: 'Plus Jakarta Sans', sans-serif;">Blog</a>
                     </div>
                 </div>
-                <a href="${getPath('contact.html')}?intent=call#contactForm" class="nav-cta" aria-label="Book a 15-minute intro call" title="15-minute intro call" style="display:inline-flex; align-items:center; justify-content:center; padding:0.65rem 1rem; border-radius:999px; border:1px solid #222a26; background:#222a26; color:#fff; font-size:0.85rem; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; text-decoration:none;">Book a call</a>
+                <a href="${getPath('contact.html')}?intent=call#contactForm" class="nav-cta" aria-label="Get in touch" title="Get in touch" style="display:inline-flex; align-items:center; justify-content:center; padding:0.65rem 1rem; border-radius:999px; border:1px solid #222a26; background:#222a26; color:#fff; font-size:0.85rem; font-weight:700; letter-spacing:0.6px; text-transform:uppercase; text-decoration:none;">Get in touch</a>
             </div>
             <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
                 <span></span><span></span><span></span>
@@ -1654,7 +1654,7 @@
           <a href="tel:${FOOTER_PHONE_DISPLAY}">${FOOTER_PHONE_DISPLAY}</a><br>
           <a href="mailto:${FOOTER_EMAIL}">${FOOTER_EMAIL}</a>
         </p>
-        <a class="footer-cta" href="${contactHref}">Book a call</a>
+        <a class="footer-cta" href="${contactHref}">Get in touch</a>
       </div>
     </div>
 
@@ -1691,7 +1691,7 @@
         bar.setAttribute('aria-label', 'Quick contact');
         bar.innerHTML = `
           <a class="mobile-cta-btn mobile-cta-btn--primary" href="${phoneTel}" aria-label="Call ${phoneDisplay}">Call</a>
-          <a class="mobile-cta-btn mobile-cta-btn--ghost" href="${contactHref}" aria-label="Book a call">Book</a>
+          <a class="mobile-cta-btn mobile-cta-btn--ghost" href="${contactHref}" aria-label="Get in touch">Contact</a>
         `.trim();
 
         document.body.appendChild(bar);
