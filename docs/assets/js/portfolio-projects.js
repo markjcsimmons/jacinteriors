@@ -33,7 +33,7 @@
     'columbus-way': [ 6, 28, 27],
     'colette-way':      [ 5,  7, 19],
     'river-homestead':  [ 2,  8, 17],
-    'oakwood':      [ 3, 12,  2],
+    'oakwood':      [ 2, 12,  3],
     'wilshire':         [ 4,  7,  3],
     'mulholland-drive': [ 5, 15, 12],
     'galewood':         [ 7,  1,  9],
