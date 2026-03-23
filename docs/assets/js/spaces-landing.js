@@ -145,7 +145,7 @@
       }, 300);
     }
 
-    setTimeout(() => { setInterval(tick, 2000); }, cardIndex * 150);
+    setTimeout(() => { tick(); setInterval(tick, 2000); }, cardIndex * 75);
 
     card.addEventListener('mouseenter', () => { paused = true; });
     card.addEventListener('mouseleave', () => { paused = false; });
