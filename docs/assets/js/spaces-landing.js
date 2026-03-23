@@ -131,7 +131,7 @@
           if (paused) return;
           showingHover = !showingHover;
           hoverImg.style.opacity = showingHover ? '1' : '0';
-        }, 1000);
+        }, 2000);
       }, i * 150);
 
       // Pause on hover — hold the hover image while the cursor is over the card
