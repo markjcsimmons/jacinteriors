@@ -45,7 +45,7 @@
       title: 'Entryways',
       href: 'entryways.html',
       folder: 'spaces/entryways',
-      images: ['entryways-1.jpg', 'entryways-2.jpg', 'entryways-3.jpg'],
+      images: ['entryways-28.jpg', 'entryways-1.jpg', 'entryways-4.jpg'],
     },
     {
       title: 'Bar Area',
