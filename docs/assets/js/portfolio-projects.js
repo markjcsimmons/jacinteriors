@@ -43,6 +43,7 @@
     'peary-way':        [ 1,  7,  8],
     'monaco':           [ 4,  2,  6],
     'valley-vista':     [ 1,  2,  5],
+    'colby':            [ 1,  5,  7],
     'sherbourne':       [ 1,  7,  2],
     'jamm-visual':      [ 1,  8,  4],
   };
