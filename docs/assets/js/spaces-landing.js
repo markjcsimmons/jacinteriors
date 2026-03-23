@@ -121,24 +121,47 @@
   function startImageCycle(card, urls) {
     if (!urls || urls.length < 2) return;
     const primary = card.querySelector('img.primary-img');
-    if (!primary) return;
+    const hover   = card.querySelector('img.hover-img');
+    if (!primary || !hover) return;
 
     let cur    = 0;
     let paused = false;
+    let busy   = false;
     const cardIndex = parseInt(card.dataset.cardIndex || '0');
 
     primary.src = urls[0];
+    hover.style.opacity = '0';
+    hover.style.transition = 'opacity 0.6s ease';
 
-    // Preload all images so transitions are instant
-    urls.forEach(u => { const img = new Image(); img.src = u; });
+    // Preload all images into browser cache
+    const preloaded = new Set();
+    urls.forEach(u => {
+      const img = new Image();
+      img.src = u;
+      img.onload = () => preloaded.add(u);
+    });
 
-    setTimeout(() => {
-      setInterval(() => {
-        if (paused) return;
-        cur = (cur + 1) % urls.length;
-        primary.src = urls[cur];
-      }, 2000);
-    }, cardIndex * 75);
+    function tick() {
+      if (paused || busy) return;
+      const next = (cur + 1) % urls.length;
+      if (!preloaded.has(urls[next])) return;
+
+      busy = true;
+      hover.src = urls[next];
+      hover.style.opacity = '1';
+
+      setTimeout(() => {
+        primary.src = urls[next];
+        hover.style.transition = 'none';
+        hover.style.opacity = '0';
+        hover.offsetHeight;
+        hover.style.transition = 'opacity 0.6s ease';
+        cur = next;
+        busy = false;
+      }, 620);
+    }
+
+    setTimeout(() => { setInterval(tick, 2000); }, cardIndex * 75);
 
     card.addEventListener('mouseenter', () => { paused = true; });
     card.addEventListener('mouseleave', () => { paused = false; });
