@@ -32,7 +32,7 @@
     'frances':      [ 2, 18, 22],
     'columbus-way': [ 6, 28, 27],
     'colette-way':      [ 5,  7, 19],
-    'river-homestead':  [ 2,  8, 17],
+    'river-homestead':  [ 1,  4, 17],
     'oakwood':      [ 2, 12,  3],
     'wilshire':         [ 4,  7,  3],
     'mulholland-drive': [ 5, 15, 12],
