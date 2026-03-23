@@ -39,7 +39,7 @@
     'via-pisa':         [ 1,  2,  5],
     'galewood':         [ 1,  9,  2],
     'ronda':            [ 8,  9,  3],
-    'alpine':           [ 1,  3,  8],
+    'alpine':           [ 1,  5,  3],
     'peary-way':        [ 1,  6,  7],
     'monaco':           [ 1,  6,  3],
     'sherbourne':       [ 1,  7,  2],
