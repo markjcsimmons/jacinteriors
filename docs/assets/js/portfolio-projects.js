@@ -27,20 +27,20 @@
     return R2_PROJECT_PATH[projectSlug] || 'projects/' + projectSlug;
   }
   const IMAGE_OVERRIDES = {
-    '22nd-street':  [15, 18, 14],
-    'sunnyside':    [10,  8,  7],
-    'frances':      [ 2, 18, 22],
+    '22nd-street':  [ 5, 18, 14],
+    'sunnyside':    [11,  8,  7],
+    'frances':      [ 1, 18, 22],
     'columbus-way': [ 6, 28, 27],
-    'colette-way':  [ 5,  7, 19],
-    'oakwood':      [ 2, 12,  3],
+    'colette-way':  [ 1,  7, 19],
+    'oakwood':      [ 3, 12,  2],
     'wilshire':         [ 4,  7,  3],
     'mulholland-drive': [ 5, 15, 12],
     'galewood':         [ 7,  1,  9],
-    'ronda':            [ 2,  8, 16],
-    'alpine':           [ 3,  1,  8],
+    'ronda':            [ 8,  2, 16],
+    'alpine':           [ 1,  3,  8],
     'peary-way':        [ 1,  6,  7],
-    'monaco':           [ 3,  6,  1],
-    'sherbourne':       [ 2,  7,  1],
+    'monaco':           [ 1,  6,  3],
+    'sherbourne':       [ 1,  7,  2],
     'jamm-visual':      [ 1,  8,  4],
   };
 
