@@ -1447,6 +1447,7 @@
         <p class="site-cta-subtitle">
           Start with a 15‑minute intro call—so we can understand your goals and recommend the right next step.
         </p>
+        <p class="site-cta-phone">Or call us: <a href="tel:${FOOTER_PHONE_DISPLAY}">${FOOTER_PHONE_DISPLAY}</a></p>
       </div>
       <a class="site-cta-button" href="${contactHref}">
         <span>Email us</span><span class="site-cta-arrow" aria-hidden="true">→</span>

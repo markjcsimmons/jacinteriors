@@ -405,6 +405,18 @@ section[style*="padding: 6rem 0"][style*="background: #fafafa"][style*="text-ali
     font-size: 1.05rem;
     line-height: 1.6;
 }
+.site-cta-phone {
+    margin: 0.75rem 0 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.9rem;
+}
+.site-cta-phone a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+}
+.site-cta-phone a:hover {
+    color: #fff;
+}
 .site-cta-button {
     display: inline-flex;
     align-items: center;
