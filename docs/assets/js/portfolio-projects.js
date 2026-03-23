@@ -331,47 +331,31 @@
   }
 
   function initHoverAndScrollEffects() {
-    // Hover effect for images (desktop)
-    document.querySelectorAll('.project-list-item').forEach((item) => {
-      item.addEventListener('mouseenter', () => {
-        const hoverImg = item.querySelector('.hover-img');
-        if (hoverImg) hoverImg.style.opacity = '1';
+    document.querySelectorAll('.project-list-item').forEach((card, i) => {
+      const hoverImg = card.querySelector('.hover-img');
+      if (!hoverImg) return;
+
+      let showingHover = false;
+      let paused = false;
+
+      // Stagger each card's cycle start by 150 ms so they don't all flip at once
+      setTimeout(() => {
+        setInterval(() => {
+          if (paused) return;
+          showingHover = !showingHover;
+          hoverImg.style.opacity = showingHover ? '1' : '0';
+        }, 1000);
+      }, i * 150);
+
+      // Pause on hover — hold the hover image while the cursor is over the card
+      card.addEventListener('mouseenter', () => {
+        paused = true;
+        hoverImg.style.opacity = '1';
       });
-      item.addEventListener('mouseleave', () => {
-        const hoverImg = item.querySelector('.hover-img');
-        if (hoverImg) hoverImg.style.opacity = '0';
+      card.addEventListener('mouseleave', () => {
+        paused = false;
       });
     });
-
-    // Scroll-based image switching - only one card active at a time
-    const observerOptions = {
-      root: null,
-      rootMargin: '-40% 0px -40% 0px',
-      threshold: 0.1,
-    };
-
-    let currentActiveCard = null;
-
-    const cardObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > 0) {
-          if (currentActiveCard && currentActiveCard !== entry.target) {
-            const prevHoverImg = currentActiveCard.querySelector('.hover-img');
-            if (prevHoverImg) prevHoverImg.style.opacity = '0';
-          }
-
-          currentActiveCard = entry.target;
-          const hoverImg = entry.target.querySelector('.hover-img');
-          if (hoverImg) hoverImg.style.opacity = '1';
-        } else if (entry.target === currentActiveCard) {
-          const hoverImg = entry.target.querySelector('.hover-img');
-          if (hoverImg) hoverImg.style.opacity = '0';
-          currentActiveCard = null;
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.project-list-item').forEach((card) => cardObserver.observe(card));
   }
 
   function renderPortfolioFromNavbarDropdown() {

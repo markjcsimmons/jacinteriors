@@ -118,40 +118,31 @@
   }
 
   function initHoverAndScroll(container) {
-    container.querySelectorAll('.spaces-card').forEach((card) => {
+    container.querySelectorAll('.spaces-card').forEach((card, i) => {
+      const hoverImg = card.querySelector('.hover-img');
+      if (!hoverImg) return;
+
+      let showingHover = false;
+      let paused = false;
+
+      // Stagger each card's cycle start by 150 ms so they don't all flip at once
+      setTimeout(() => {
+        setInterval(() => {
+          if (paused) return;
+          showingHover = !showingHover;
+          hoverImg.style.opacity = showingHover ? '1' : '0';
+        }, 1000);
+      }, i * 150);
+
+      // Pause on hover — hold the hover image while the cursor is over the card
       card.addEventListener('mouseenter', () => {
-        const img = card.querySelector('.hover-img');
-        if (img) img.style.opacity = '1';
+        paused = true;
+        hoverImg.style.opacity = '1';
       });
       card.addEventListener('mouseleave', () => {
-        const img = card.querySelector('.hover-img');
-        if (img) img.style.opacity = '0';
+        paused = false;
       });
     });
-
-    let activeCard = null;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (activeCard && activeCard !== entry.target) {
-              const prev = activeCard.querySelector('.hover-img');
-              if (prev) prev.style.opacity = '0';
-            }
-            activeCard = entry.target;
-            const img = entry.target.querySelector('.hover-img');
-            if (img) img.style.opacity = '1';
-          } else if (entry.target === activeCard) {
-            const img = entry.target.querySelector('.hover-img');
-            if (img) img.style.opacity = '0';
-            activeCard = null;
-          }
-        });
-      },
-      { rootMargin: '-40% 0px -40% 0px', threshold: 0.1 }
-    );
-
-    container.querySelectorAll('.spaces-card').forEach((card) => observer.observe(card));
   }
 
   function render() {
