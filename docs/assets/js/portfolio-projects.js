@@ -37,7 +37,7 @@
     'wilshire':         [ 4,  3, 10],
     'mulholland-drive': [ 5,  4, 12],
     'via-pisa':         [ 1,  2,  5],
-    'galewood':         [ 7,  1,  9],
+    'galewood':         [ 1,  9,  2],
     'ronda':            [ 8,  2, 16],
     'alpine':           [ 1,  3,  8],
     'peary-way':        [ 1,  6,  7],
