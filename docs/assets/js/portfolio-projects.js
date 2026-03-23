@@ -238,7 +238,42 @@
       push(src);
     });
 
-    return candidates.slice(0, 3);
+    return candidates; // all images, not just first 3
+  }
+
+  // Cycle cardEl through all urls, crossfading every 2 seconds.
+  // urls[0] is shown first. Staggered by card index so cards don't all flip together.
+  function startImageCycle(cardEl, urls) {
+    if (!urls || urls.length < 2) return;
+    const primary = cardEl.querySelector('img.primary-img');
+    const hover   = cardEl.querySelector('img.hover-img');
+    if (!primary || !hover) return;
+
+    let cur    = 0;
+    let paused = false;
+    const cardIndex = parseInt(cardEl.dataset.cardIndex || '0');
+
+    primary.src = urls[0];
+    hover.src   = urls[1 % urls.length];
+    hover.style.opacity = '0';
+
+    function tick() {
+      if (paused) return;
+      const next = (cur + 1) % urls.length;
+      hover.src = urls[next];
+      hover.style.opacity = '1';
+      setTimeout(() => {
+        cur = next;
+        primary.src = urls[cur];
+        hover.style.opacity = '0';
+        hover.src = urls[(cur + 1) % urls.length];
+      }, 300);
+    }
+
+    setTimeout(() => { setInterval(tick, 2000); }, cardIndex * 150);
+
+    cardEl.addEventListener('mouseenter', () => { paused = true; });
+    cardEl.addEventListener('mouseleave', () => { paused = false; });
   }
 
   function extractProjectCallouts(doc) {
@@ -262,46 +297,72 @@
     const href = normalizeProjectHref(rawHref);
     if (!href) return;
 
-    const primary = cardEl.querySelector('img.primary-img');
-    const hover = cardEl.querySelector('img.hover-img');
+    const primary   = cardEl.querySelector('img.primary-img');
+    const hover     = cardEl.querySelector('img.hover-img');
     const secondary = cardEl.querySelector('.project-secondary-image img');
     if (!primary || !hover || !secondary) return;
 
-    const slug = cardEl.dataset.projectSlug || '';
+    const slug     = cardEl.dataset.projectSlug || '';
     const override = IMAGE_OVERRIDES[slug];
-    const base = getR2Base();
+    const base     = getR2Base();
+    const prefix   = FILENAME_PREFIX[slug] || slug;
+    const path     = getR2ProjectPath(slug);
 
+    // Set initial images immediately so card is never blank while fetch runs
     if (override) {
       const [n1, n2, n3] = override;
-      const prefix = FILENAME_PREFIX[slug] || slug;
-      const path = getR2ProjectPath(slug);
       primary.src   = `${base}/${path}/${prefix}-${n1}.jpg`;
       hover.src     = `${base}/${path}/${prefix}-${n2}.jpg`;
       secondary.src = `${base}/${path}/${prefix}-${n3}.jpg`;
-      return;
+    } else {
+      primary.src = defaultFirstImageUrl(slug);
     }
 
-    // Set first image immediately so card never stays blank (R2 base resolved at runtime)
-    primary.src = defaultFirstImageUrl(slug);
-
+    // Fetch ALL images from the project page for full cycling
     try {
       const images = await fetchProjectImages(href);
-      const a = images[0]
-        ? (images[0].startsWith('assets/images/projects/') ? toFinalSrc(images[0]) : images[0])
-        : primary.src;
-      const b = images[1]
-        ? (images[1].startsWith('assets/images/projects/') ? toFinalSrc(images[1]) : images[1])
-        : a;
-      const c = images[2]
-        ? (images[2].startsWith('assets/images/projects/') ? toFinalSrc(images[2]) : images[2])
-        : FALLBACK_SECONDARY;
+      if (!images.length) return;
 
-      primary.src = a;
-      hover.src = b;
-      secondary.src = c;
+      const allUrls = images.map(src =>
+        src.startsWith('assets/images/projects/') ? toFinalSrc(src) : src
+      );
+
+      if (!override) {
+        if (allUrls[0]) primary.src   = allUrls[0];
+        if (allUrls[1]) hover.src     = allUrls[1];
+        if (allUrls[2]) secondary.src = allUrls[2];
+        startImageCycle(cardEl, allUrls);
+        return;
+      }
+
+      // Rotate allUrls to start at the override's n1 image
+      const n1Url = `${base}/${path}/${prefix}-${override[0]}.jpg`;
+      const n1Idx = allUrls.findIndex(u => u === n1Url);
+      let cycleUrls;
+
+      if (n1Idx === -1) {
+        // n1 not in page HTML (uploaded directly to R2): lead with override images
+        const overrideUrls = override.map(n => `${base}/${path}/${prefix}-${n}.jpg`);
+        const rest = allUrls.filter(u => !overrideUrls.includes(u));
+        cycleUrls = [...overrideUrls, ...rest];
+      } else {
+        cycleUrls = n1Idx > 0
+          ? [...allUrls.slice(n1Idx), ...allUrls.slice(0, n1Idx)]
+          : allUrls;
+        // Append any override images not in the page HTML (e.g. manually uploaded to R2)
+        override.forEach(n => {
+          const url = `${base}/${path}/${prefix}-${n}.jpg`;
+          if (!cycleUrls.includes(url)) cycleUrls.push(url);
+        });
+      }
+
+      startImageCycle(cardEl, cycleUrls);
     } catch (_) {
-      hover.src = hover.src || FALLBACK_HOVER;
-      secondary.src = secondary.src || FALLBACK_SECONDARY;
+      // Fallback: cycle through just the override images
+      if (override) {
+        const overrideUrls = override.map(n => `${base}/${path}/${prefix}-${n}.jpg`);
+        startImageCycle(cardEl, overrideUrls);
+      }
     }
   }
 
@@ -331,31 +392,7 @@
   }
 
   function initHoverAndScrollEffects() {
-    document.querySelectorAll('.project-list-item').forEach((card, i) => {
-      const hoverImg = card.querySelector('.hover-img');
-      if (!hoverImg) return;
-
-      let showingHover = false;
-      let paused = false;
-
-      // Stagger each card's cycle start by 150 ms so they don't all flip at once
-      setTimeout(() => {
-        setInterval(() => {
-          if (paused) return;
-          showingHover = !showingHover;
-          hoverImg.style.opacity = showingHover ? '1' : '0';
-        }, 2000);
-      }, i * 150);
-
-      // Pause on hover — hold the hover image while the cursor is over the card
-      card.addEventListener('mouseenter', () => {
-        paused = true;
-        hoverImg.style.opacity = '1';
-      });
-      card.addEventListener('mouseleave', () => {
-        paused = false;
-      });
-    });
+    // Cycling is now set up per-card inside hydrateCardImages via startImageCycle.
   }
 
   function renderPortfolioFromNavbarDropdown() {
@@ -368,7 +405,11 @@
     if (!list.length) return false;
 
     container.innerHTML = '';
-    list.forEach((x) => container.appendChild(buildProjectItem(x)));
+    list.forEach((x, i) => {
+      const card = buildProjectItem(x);
+      card.dataset.cardIndex = i;
+      container.appendChild(card);
+    });
 
     initHoverAndScrollEffects();
 

@@ -117,32 +117,64 @@
     if (secondary) secondary.src = secondary.dataset.secondary || secondary.src;
   }
 
-  function initHoverAndScroll(container) {
-    container.querySelectorAll('.spaces-card').forEach((card, i) => {
-      const hoverImg = card.querySelector('.hover-img');
-      if (!hoverImg) return;
+  // Cycle card through all urls, crossfading every 2 seconds.
+  function startImageCycle(card, urls) {
+    if (!urls || urls.length < 2) return;
+    const primary = card.querySelector('img.primary-img');
+    const hover   = card.querySelector('img.hover-img');
+    if (!primary || !hover) return;
 
-      let showingHover = false;
-      let paused = false;
+    let cur    = 0;
+    let paused = false;
+    const cardIndex = parseInt(card.dataset.cardIndex || '0');
 
-      // Stagger each card's cycle start by 150 ms so they don't all flip at once
+    primary.src = urls[0];
+    hover.src   = urls[1 % urls.length];
+    hover.style.opacity = '0';
+
+    function tick() {
+      if (paused) return;
+      const next = (cur + 1) % urls.length;
+      hover.src = urls[next];
+      hover.style.opacity = '1';
       setTimeout(() => {
-        setInterval(() => {
-          if (paused) return;
-          showingHover = !showingHover;
-          hoverImg.style.opacity = showingHover ? '1' : '0';
-        }, 2000);
-      }, i * 150);
+        cur = next;
+        primary.src = urls[cur];
+        hover.style.opacity = '0';
+        hover.src = urls[(cur + 1) % urls.length];
+      }, 300);
+    }
 
-      // Pause on hover — hold the hover image while the cursor is over the card
-      card.addEventListener('mouseenter', () => {
-        paused = true;
-        hoverImg.style.opacity = '1';
+    setTimeout(() => { setInterval(tick, 2000); }, cardIndex * 150);
+
+    card.addEventListener('mouseenter', () => { paused = true; });
+    card.addEventListener('mouseleave', () => { paused = false; });
+  }
+
+  // Fetch all images for a space from its gallery page HTML.
+  async function fetchAllSpaceImages(href, folder) {
+    try {
+      const res = await fetch(href, { cache: 'no-store' });
+      if (!res.ok) return [];
+      const html = await res.text();
+      const doc  = new DOMParser().parseFromString(html, 'text/html');
+      const base = getR2Base();
+      const seen = new Set();
+      const urls = [];
+
+      doc.querySelectorAll('img[data-r2-local-src]').forEach(img => {
+        const localSrc = img.getAttribute('data-r2-local-src') || '';
+        const m = localSrc.match(/assets\/images\/spaces\/([^/]+)\/(.+)$/);
+        if (m && `spaces/${m[1]}` === folder) {
+          const url = `${base}/${folder}/${m[2]}${BUST}`;
+          if (!seen.has(url)) { seen.add(url); urls.push(url); }
+        }
       });
-      card.addEventListener('mouseleave', () => {
-        paused = false;
-      });
-    });
+
+      return urls;
+    } catch (_) {
+      return [];
+    }
   }
 
   function render() {
@@ -152,11 +184,25 @@
     container.innerHTML = '';
     SPACES.forEach((space, index) => {
       const card = buildCard(space, index);
+      card.dataset.cardIndex = index;
       container.appendChild(card);
-      loadImages(card);
-    });
+      loadImages(card); // set initial 3 images immediately
 
-    initHoverAndScroll(container);
+      // Fetch ALL images from the space page and start full cycle
+      const href = resolveHref(space.href);
+      fetchAllSpaceImages(href, space.folder).then(urls => {
+        if (!urls.length) return;
+
+        // Rotate so the chosen first image (space.images[0]) leads the cycle
+        const firstName = space.images[0];
+        const firstIdx  = urls.findIndex(u => u.includes('/' + firstName.split('?')[0]));
+        const ordered   = firstIdx > 0
+          ? [...urls.slice(firstIdx), ...urls.slice(0, firstIdx)]
+          : urls;
+
+        startImageCycle(card, ordered);
+      });
+    });
   }
 
   if (document.readyState === 'loading') {
