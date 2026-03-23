@@ -121,31 +121,24 @@
   function startImageCycle(card, urls) {
     if (!urls || urls.length < 2) return;
     const primary = card.querySelector('img.primary-img');
-    const hover   = card.querySelector('img.hover-img');
-    if (!primary || !hover) return;
+    if (!primary) return;
 
     let cur    = 0;
     let paused = false;
     const cardIndex = parseInt(card.dataset.cardIndex || '0');
 
     primary.src = urls[0];
-    hover.src   = urls[1 % urls.length];
-    hover.style.opacity = '0';
 
-    function tick() {
-      if (paused) return;
-      const next = (cur + 1) % urls.length;
-      hover.src = urls[next];
-      hover.style.opacity = '1';
-      setTimeout(() => {
-        cur = next;
+    // Preload all images so transitions are instant
+    urls.forEach(u => { const img = new Image(); img.src = u; });
+
+    setTimeout(() => {
+      setInterval(() => {
+        if (paused) return;
+        cur = (cur + 1) % urls.length;
         primary.src = urls[cur];
-        hover.style.opacity = '0';
-        hover.src = urls[(cur + 1) % urls.length];
-      }, 300);
-    }
-
-    setTimeout(() => { tick(); setInterval(tick, 2000); }, cardIndex * 75);
+      }, 2000);
+    }, cardIndex * 75);
 
     card.addEventListener('mouseenter', () => { paused = true; });
     card.addEventListener('mouseleave', () => { paused = false; });
