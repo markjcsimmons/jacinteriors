@@ -29,7 +29,7 @@
   const IMAGE_OVERRIDES = {
     '22nd-street':  [ 5,  2,  3],
     'sunnyside':    [10,  2,  3],
-    'frances':      [ 1, 18, 22],
+    'frances':      [ 2, 18, 22],
     'columbus-way': [ 6, 28, 27],
     'colette-way':  [ 1,  7, 19],
     'oakwood':      [ 3, 12,  2],
