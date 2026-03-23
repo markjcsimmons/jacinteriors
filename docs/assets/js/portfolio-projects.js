@@ -38,7 +38,7 @@
     'mulholland-drive': [ 5,  4, 12],
     'via-pisa':         [ 1,  2,  5],
     'galewood':         [ 1,  9,  2],
-    'ronda':            [ 8,  2, 16],
+    'ronda':            [ 8,  9,  3],
     'alpine':           [ 1,  3,  8],
     'peary-way':        [ 1,  6,  7],
     'monaco':           [ 1,  6,  3],
