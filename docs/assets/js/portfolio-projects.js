@@ -27,7 +27,7 @@
     return R2_PROJECT_PATH[projectSlug] || 'projects/' + projectSlug;
   }
   const IMAGE_OVERRIDES = {
-    '22nd-street':  [ 5,  2,  3],
+    '22nd-street':  [ 5,  1,  3],
     'sunnyside':    [10,  2,  3],
     'frances':      [ 2, 18, 22],
     'columbus-way': [ 6, 28, 27],
