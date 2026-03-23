@@ -44,6 +44,7 @@
     'monaco':           [ 4,  2,  6],
     'valley-vista':     [ 1,  2,  5],
     'colby':            [ 1,  5,  7],
+    'brown-deer-park':  [ 7,  9,  8],
     'sherbourne':       [ 1,  2,  8],
     'jamm-visual':      [ 1,  8,  4],
   };
