@@ -70,11 +70,13 @@
     }
   }
 
+  const BUST = '?v=20260322';
+
   function buildCard(space, index) {
     const base = getR2Base();
-    const primarySrc   = `${base}/${space.folder}/${space.images[0]}`;
-    const hoverSrc     = `${base}/${space.folder}/${space.images[1]}`;
-    const secondarySrc = `${base}/${space.folder}/${space.images[2]}`;
+    const primarySrc   = `${base}/${space.folder}/${space.images[0]}${BUST}`;
+    const hoverSrc     = `${base}/${space.folder}/${space.images[1]}${BUST}`;
+    const secondarySrc = `${base}/${space.folder}/${space.images[2]}${BUST}`;
     const href = resolveHref(space.href);
     // Eagerly load first 3 cards; lazy-load the rest.
     const loadingAttr = index < 3 ? 'eager' : 'lazy';
