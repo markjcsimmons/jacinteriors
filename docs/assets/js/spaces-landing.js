@@ -39,7 +39,7 @@
       title: 'Living Spaces',
       href: 'living-spaces.html',
       folder: 'spaces/living-spaces',
-      images: ['living-spaces-1.jpg', 'living-spaces-2.jpg', 'living-spaces-3.jpg'],
+      images: ['living-spaces-11.jpg', 'living-spaces-19.jpg', 'living-spaces-44.jpg'],
     },
     {
       title: 'Entryways',
@@ -57,7 +57,7 @@
       title: 'Outdoor Spaces',
       href: 'outdoor-spaces.html',
       folder: 'spaces/outdoor-spaces',
-      images: ['outdoor-spaces-1.jpg', 'outdoor-spaces-2.jpg', 'outdoor-spaces-3.jpg'],
+      images: ['outdoor-spaces-8.jpg', 'outdoor-spaces-7.jpg', 'outdoor-spaces-11.jpg'],
     },
   ];
 
