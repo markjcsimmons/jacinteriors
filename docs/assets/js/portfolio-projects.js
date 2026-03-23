@@ -41,7 +41,7 @@
     'ronda':            [ 8,  9,  3],
     'alpine':           [ 1,  5,  3],
     'peary-way':        [ 1,  7,  8],
-    'monaco':           [ 1,  6,  3],
+    'monaco':           [ 4,  2,  6],
     'sherbourne':       [ 1,  7,  2],
     'jamm-visual':      [ 1,  8,  4],
   };
