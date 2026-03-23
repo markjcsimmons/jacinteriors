@@ -31,7 +31,7 @@
     'sunnyside':    [11,  3, 10],
     'frances':      [ 1,  6, 14],
     'columbus-way': [ 6,  3,  5],
-    'colette-way':      [ 5,  7, 19],
+    'colette-way':      [ 5,  1, 17],
     'river-homestead':  [ 1,  4, 17],
     'oakwood':      [ 2, 12,  3],
     'wilshire':         [ 4,  7,  3],
