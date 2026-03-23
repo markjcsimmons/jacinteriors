@@ -30,7 +30,7 @@
     '22nd-street':  [ 5,  1,  3],
     'sunnyside':    [11,  3, 10],
     'frances':      [ 1,  6, 14],
-    'columbus-way': [ 6, 28, 27],
+    'columbus-way': [ 6,  3,  5],
     'colette-way':      [ 5,  7, 19],
     'river-homestead':  [ 1,  4, 17],
     'oakwood':      [ 2, 12,  3],
