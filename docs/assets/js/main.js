@@ -458,13 +458,15 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenuToggle.classList.toggle('active');
         });
 
-        // Handle dropdown toggle on mobile
+        // Handle dropdown toggle on mobile — navigate to landing page if link has a real href
         const navDropdowns = navMenu.querySelectorAll('.nav-dropdown');
         navDropdowns.forEach(dropdown => {
             const dropdownLink = dropdown.querySelector('.nav-link');
             if (dropdownLink) {
                 dropdownLink.addEventListener('click', function(e) {
                     if (window.innerWidth <= 980) {
+                        const href = dropdownLink.getAttribute('href') || '';
+                        if (href && href !== '#') return;
                         e.preventDefault();
                         dropdown.classList.toggle('active');
                     }

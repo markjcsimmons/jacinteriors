@@ -450,6 +450,11 @@
             if (dropdownLink) {
                 dropdownLink.addEventListener('click', function(e) {
                     if (window.innerWidth <= 980) {
+                        const href = dropdownLink.getAttribute('href') || '';
+                        if (href && href !== '#') {
+                            closeMenu();
+                            return;
+                        }
                         e.preventDefault();
                         nav.querySelectorAll('.nav-dropdown').forEach(dd => {
                             if (dd !== dropdown) dd.classList.remove('active');
