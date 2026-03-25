@@ -1,4 +1,5 @@
 // Gallery page: project-page mosaic tiles, one image per project (dropdown order).
+// Image order per project matches the project page (hero first, then grid in DOM order).
 (function () {
   "use strict";
 
@@ -35,10 +36,6 @@
 
   function r2Base() {
     return String(window.R2_IMAGE_BASE || DEFAULT_R2_BASE).replace(/\/+$/, "");
-  }
-
-  function sleep(ms) {
-    return new Promise((r) => setTimeout(r, ms));
   }
 
   function humanize(text) {
@@ -97,7 +94,6 @@
   }
 
   function parseProjectLocalSrc(localSrc) {
-    // assets/images/projects/<project>/<filename>
     const m = String(localSrc || "").match(/^assets\/images\/projects\/([^/]+)\/(.+)$/);
     if (!m) return null;
     return { project: m[1], name: m[2] };
@@ -124,55 +120,44 @@
     return s;
   }
 
-  async function fetchPrimaryProjectImage(projectHref) {
+  // ── Fetch the full ordered image list from a project page ──────────
+  // Returns an array of normalised local-src strings (hero first, then
+  // grid images in DOM order) — the exact order shown on the project page.
+  const projectImageCache = new Map();
+
+  async function fetchProjectImageList(projectHref) {
     const res = await fetch(projectHref, { cache: "no-store" });
     if (!res.ok) throw new Error(`Failed to fetch ${projectHref}`);
     const html = await res.text();
-
     const doc = new DOMParser().parseFromString(html, "text/html");
 
-    function push(raw) {
+    const images = [];
+    const seen = new Set();
+
+    function addImg(el) {
+      if (!el) return;
+      const raw = el.getAttribute("data-r2-local-src") || "";
       const norm = normalizeLocalSrc(raw);
-      if (!norm) return;
-
+      if (!norm || seen.has(norm)) return;
       const isLocal = norm.startsWith("assets/images/projects/");
-      const isCdnProject = /^https?:\/\//i.test(norm) && /\/projects\/[^/]+\//.test(norm);
-      if (!isLocal && !isCdnProject) return;
-
-      return norm;
+      const isCdn = /^https?:\/\//i.test(norm) && /\/projects\/[^/]+\//.test(norm);
+      if (!isLocal && !isCdn) return;
+      seen.add(norm);
+      images.push(norm);
     }
 
-    // Primary image should match project pages: the first-row hero image.
+    // Hero image (first-row-grid) — always first
     const hero = doc.querySelector(".first-row-grid img");
-    if (hero) {
-      const a = push(hero.getAttribute("data-r2-local-src") || "");
-      if (a) return a;
-      const src = hero.getAttribute("src") || "";
-      if (src && !src.startsWith("data:")) {
-        const b = push(src);
-        if (b) return b;
-      }
-    }
+    addImg(hero);
 
-    // Fallback: first project image we can find.
-    const any = doc.querySelector("img[data-r2-local-src], .image-gallery-grid img, img");
-    if (any) {
-      const a = push(any.getAttribute("data-r2-local-src") || "");
-      if (a) return a;
-      const src = any.getAttribute("src") || "";
-      if (src && !src.startsWith("data:")) {
-        const b = push(src);
-        if (b) return b;
-      }
-    }
+    // Grid images in DOM order
+    doc.querySelectorAll(".image-gallery-grid img").forEach(addImg);
 
-    return "";
+    return images;
   }
 
   function createMasonryTile({ href, label, altSuffix, eager }) {
-    // Use a real link so click + open-in-new-tab works.
     const tile = document.createElement("a");
-    // Avoid `.parallax-image` on Gallery: it can shift some wide images out of view.
     tile.className = "scale-in-image hover-zoom-image";
     tile.href = href;
     tile.setAttribute("aria-label", `View project: ${label}`);
@@ -186,8 +171,6 @@
     img.loading = eager ? "eager" : "lazy";
     img.decoding = "async";
     img.src = PLACEHOLDER_SRC;
-    // Prevent the shared masonry script from hiding tiles on the first 404
-    // while we cycle through candidate URLs.
     img.dataset.r2Managed = "1";
     img.dataset.r2Space = "gallery";
     img.dataset.r2Final = "0";
@@ -196,39 +179,6 @@
     tile.appendChild(container);
 
     return { tile, img };
-  }
-
-  // R2 filenames differ from slug for some projects (e.g. jamm-visual -> jamm-visual-1.jpg).
-  const GALLERY_FILENAME_PREFIX = { "jamm-visual": "JAMM-visual", "colette-way": "collette-way" };
-  // R2 path: full path under CDN base (e.g. jamm-visual -> "projects/JAMM-visual").
-  const GALLERY_PROJECT_PATH = { "jamm-visual": "projects/JAMM-visual" };
-
-  function buildCdnCandidatesFromSlugAndIndex(slug, index) {
-    const s = String(slug || "").trim();
-    if (!s) return [];
-    const base = r2Base();
-    if (!base) return [];
-
-    const n = Math.max(1, Number(index) || 1);
-    const prefix = GALLERY_FILENAME_PREFIX[s] || s;
-    const pathSegment = GALLERY_PROJECT_PATH[s] || "projects/" + s;
-
-    // Try base filename first (matches R2), then size variants.
-    // Typical R2 convention: "<prefix>-<n>.*"
-    const stems = [`${prefix}-${n}`, `${prefix}-${n}-1200`, `${prefix}-${n}-900`, `${prefix}-${n}-600`];
-
-    // First image can also exist as "primary" in some buckets.
-    if (n === 1) stems.push(`${prefix}-primary`);
-
-    // jpg first — R2 bucket stores jpegs, so we avoid an unnecessary 404 on webp
-    const exts = ["jpg", "jpeg", "webp", "png"];
-    const urls = [];
-    for (const stem of stems) {
-      for (const ext of exts) {
-        urls.push(`${base}/${pathSegment}/${encodeURIComponent(stem)}.${ext}`);
-      }
-    }
-    return urls;
   }
 
   function setImgWithFallback(img, candidates, onExhausted) {
@@ -246,7 +196,6 @@
     img.addEventListener(
       "load",
       () => {
-        // We’ve landed on a working candidate.
         img.dataset.r2Final = "1";
       },
       { once: true, passive: true }
@@ -263,14 +212,25 @@
     tryNext();
   }
 
+  // Build a CDN + local fallback chain for a single local-src path.
+  function buildCandidatesForLocalSrc(localSrc) {
+    const candidates = [];
+    const isLocal = localSrc.startsWith("assets/images/projects/");
+    if (isLocal) {
+      candidates.push(toFinalSrc(localSrc));
+      candidates.push(localSrc);
+    } else {
+      candidates.push(localSrc);
+    }
+    return candidates;
+  }
+
   async function boot() {
     const grid = document.getElementById("galleryGrid");
     if (!grid) return;
 
     const loadMoreBtn = document.getElementById("galleryLoadMore");
 
-    // Use fallback list immediately for fast first paint.
-    // Do NOT wait for the navbar - it's the same project list anyway.
     const projectList = getGalleryProjectList();
     if (!projectList.length) {
       grid.innerHTML =
@@ -297,7 +257,23 @@
       return;
     }
 
+    // Pre-fetch all project pages in parallel to get their image orders.
+    await Promise.allSettled(
+      projects.map(async (p) => {
+        try {
+          const images = await fetchProjectImageList(p.absHref);
+          projectImageCache.set(p.slug, images);
+        } catch (_) {
+          projectImageCache.set(p.slug, []);
+        }
+      })
+    );
+
     let currentIndex = 0;
+    const maxImages = Math.max(
+      ...projects.map((p) => (projectImageCache.get(p.slug) || []).length),
+      0
+    );
 
     function hideTile(tile) {
       if (!tile) return;
@@ -322,11 +298,23 @@
     async function appendNextIndex() {
       currentIndex += 1;
       const idxToLoad = currentIndex;
+      const imgArrayIdx = idxToLoad - 1;
+
+      if (imgArrayIdx >= maxImages) {
+        if (loadMoreBtn) {
+          loadMoreBtn.disabled = true;
+          loadMoreBtn.textContent = "No more images";
+        }
+        return 0;
+      }
 
       const frag = document.createDocumentFragment();
       let added = 0;
 
       projects.forEach((p, pIdx) => {
+        const imageList = projectImageCache.get(p.slug) || [];
+        const localSrc = imageList[imgArrayIdx];
+
         const { tile, img } = createMasonryTile({
           href: p.rawHref,
           label: p.label,
@@ -334,49 +322,25 @@
           eager: idxToLoad === 1 && pIdx < 6,
         });
 
-        // Ensure injected tiles aren’t hidden by scroll-animation CSS.
         tile.classList.add("visible");
 
-        // High-priority fetch for the first visible row (~8 tiles).
         if (idxToLoad === 1 && pIdx < 8) img.setAttribute("fetchpriority", "high");
 
-        const cdnCandidates = buildCdnCandidatesFromSlugAndIndex(p.slug, idxToLoad);
-        setImgWithFallback(img, cdnCandidates, async () => {
-          // For the initial index, fall back to parsing the project page hero image.
-          if (idxToLoad === 1) {
-            try {
-              const primary = await fetchPrimaryProjectImage(p.absHref);
-              if (!primary) {
-                img.dataset.r2Final = "1";
-                img.src = FALLBACK_PRIMARY;
-                return;
-              }
-
-              if (primary.startsWith("assets/images/projects/")) {
-                const final = toFinalSrc(primary);
-                img.addEventListener(
-                  "error",
-                  () => {
-                    img.src = primary;
-                  },
-                  { once: true }
-                );
-                img.dataset.r2Final = "1";
-                img.src = final;
-              } else {
-                img.dataset.r2Final = "1";
-                img.src = primary;
-              }
-            } catch (_) {
-              img.dataset.r2Final = "1";
-              img.src = FALLBACK_PRIMARY;
-            }
-            return;
-          }
-
-          // For subsequent indices, only show what exists in R2/CDN.
+        if (!localSrc) {
           hideTile(tile);
-          document.dispatchEvent(new Event("spaces:gallery-updated"));
+          frag.appendChild(tile);
+          return;
+        }
+
+        const candidates = buildCandidatesForLocalSrc(localSrc);
+        setImgWithFallback(img, candidates, () => {
+          img.dataset.r2Final = "1";
+          if (idxToLoad === 1) {
+            img.src = FALLBACK_PRIMARY;
+          } else {
+            hideTile(tile);
+            document.dispatchEvent(new Event("spaces:gallery-updated"));
+          }
         });
 
         wireRelayoutOnImg(img);
@@ -387,23 +351,16 @@
       grid.appendChild(frag);
       document.dispatchEvent(new Event("spaces:gallery-updated"));
 
-      // Disable only if this is a non-primary round and it yields no visible tiles.
-      // Allow a short delay for 404 cycling.
-      setTimeout(() => {
-        if (idxToLoad === 1) return;
-        const newlyAdded = Array.from(grid.children).slice(-projects.length).filter(
-          (el) => el && el.nodeType === 1 && el.style && el.style.display !== "none" && el.dataset?.masonryHidden !== "1"
-        );
-        if (newlyAdded.length === 0 && loadMoreBtn) {
-          loadMoreBtn.disabled = true;
-          loadMoreBtn.textContent = "No more images";
-        }
-      }, 1200);
+      // Disable "Load more" when all projects have shown all images.
+      if (idxToLoad >= maxImages && loadMoreBtn) {
+        loadMoreBtn.disabled = true;
+        loadMoreBtn.textContent = "No more images";
+      }
 
       return added;
     }
 
-    // Initial render (image #1 per project)
+    // Initial render (image #1 per project — the hero from each project page)
     await appendNextIndex();
 
     if (loadMoreBtn) {
@@ -429,4 +386,3 @@
     boot();
   }
 })();
-
