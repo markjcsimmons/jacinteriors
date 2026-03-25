@@ -493,6 +493,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Inject mobile "Back to portfolio" button on project pages
+    if (window.location.pathname.includes('/projects/')) {
+        const footer = document.querySelector('footer');
+        if (footer && !document.querySelector('.mobile-back-portfolio')) {
+            const wrap = document.createElement('div');
+            wrap.className = 'mobile-back-portfolio';
+            const btn = document.createElement('a');
+            btn.href = '../portfolio.html';
+            btn.className = 'mobile-back-portfolio-btn';
+            btn.textContent = 'Back to portfolio';
+            wrap.appendChild(btn);
+            footer.parentNode.insertBefore(wrap, footer);
+        }
+    }
+
     // Navbar scroll effect
     if (!navbar) return;
     if (!navbar) return;

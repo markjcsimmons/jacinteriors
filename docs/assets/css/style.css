@@ -2862,3 +2862,42 @@ body.invero-blog .journal-grid--related .journal-media {
         flex-direction: column;
     }
 }
+
+/* Mobile "Back to portfolio" button on project pages */
+.mobile-back-portfolio {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .mobile-back-portfolio {
+        display: flex;
+        justify-content: center;
+        padding: 2rem 1.25rem 3rem;
+    }
+
+    .mobile-back-portfolio-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 360px;
+        height: 50px;
+        border-radius: 999px;
+        border: 1.5px solid #222a26;
+        background: transparent;
+        color: #222a26;
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .mobile-back-portfolio-btn:active {
+        background: #222a26;
+        color: #fff;
+    }
+}

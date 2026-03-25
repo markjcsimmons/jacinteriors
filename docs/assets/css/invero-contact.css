@@ -215,6 +215,10 @@ body.invero-contact .form-success {
   font-weight: 600;
 }
 
+body.invero-contact .form-error[hidden] {
+  display: none;
+}
+
 body.invero-contact .form-error {
   margin-top: 1.25rem;
   padding: 1rem 1.1rem;
