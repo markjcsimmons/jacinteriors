@@ -64,7 +64,7 @@
     if (intent === 'call') {
       if (h2) h2.textContent = 'Schedule an intro call';
       if (muted) muted.textContent = 'Share a few details. We’ll reply within 1 business day and schedule a short intro call to align on scope, style, and timing.';
-      if (submitBtn) submitBtn.textContent = 'Request intro call';
+      if (submitBtn) submitBtn.textContent = 'Send';
     }
   }
 

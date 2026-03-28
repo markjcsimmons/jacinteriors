@@ -53,11 +53,8 @@
                     <h2>Request an intro call</h2>
                     <p class="muted">Tell us what you’re working on. We’ll respond with a few quick questions and schedule a short call to see if it’s a fit.</p>
                     
-                    <form id="contactFormForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="return handleFormSubmit(event)">
-                        <input type="hidden" name="form-name" value="contact">
-                        <p class="form-hidden">
-                            <label>Don’t fill this out if you’re human: <input name="bot-field"></label>
-                        </p>
+                    <form id="contactFormForm" name="contact" method="POST" action="https://formspree.io/f/xlgogakn" onsubmit="return handleFormSubmit(event)">
+                        <input type="hidden" name="_subject" value="New inquiry from jacinteriors.com">
                         
                         <div class="form-row">
                             <div class="form-group">
@@ -111,7 +108,7 @@
                         </div>
                         
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Request intro call</button>
+                            <button type="submit" class="btn btn-primary">Send</button>
                             <p class="form-note">No hard sell — just a quick, thoughtful first conversation.</p>
                         </div>
                     </form>
@@ -278,10 +275,12 @@
 
             const formData = new FormData(form);
 
-            fetch('/', {
+            fetch('https://formspree.io/f/xlgogakn', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formData).toString()
+                headers: { 'Accept': 'application/json' },
+                body: formData
+            }).then((res) => {
+                if (!res.ok) throw new Error('Form submission failed');
             }).then(() => {
                 form.reset();
                 success.hidden = false;
@@ -297,7 +296,7 @@
             }).finally(() => {
                 if (submitBtn) {
                     submitBtn.disabled = false;
-                    submitBtn.textContent = originalText || 'Submit';
+                    submitBtn.textContent = originalText || 'Send';
                 }
             });
 
