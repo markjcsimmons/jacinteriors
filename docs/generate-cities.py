@@ -82,7 +82,7 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
                     <a href="../services.html" class="nav-link">Services</a>
                     <a href="../contact.html" class="nav-link">Contact</a>
                     <div class="nav-contact">
-                        <a href="tel:213-397-0206" class="phone-link">213-397-0206</a>
+                        <a href="tel:+13104282645" class="phone-link">310-428-2645</a>
                     </div>
                 </div>
                 <button class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -191,7 +191,7 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
                     <div class="contact-info">
                         <p>10401 Venice Blvd Suite 257<br>
                         Los Angeles, CA 90034<br>
-                        <a href="tel:213-397-0206">213-397-0206</a><br>
+                        <a href="tel:+13104282645">310-428-2645</a><br>
                         <a href="mailto:info@jacinteriors.com">info@jacinteriors.com</a></p>
                     </div>
                 </div>

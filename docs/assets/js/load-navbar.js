@@ -40,7 +40,7 @@
         '8033 W Sunset Blvd #107',
         'Los Angeles, CA 90046'
     ];
-    const FOOTER_PHONE_DISPLAY = '213-397-0206';
+    const FOOTER_PHONE_DISPLAY = '310-428-2645';
     const FOOTER_EMAIL = 'info@jacinteriors.com';
     const INVERO_CITIES_CSS_HREF = 'assets/css/invero-cities.css?v=20260203-1';
     
@@ -292,7 +292,7 @@
             url: siteRoot,
             logo: ogImage,
             image: ogImage,
-            telephone: '+1-213-397-0206',
+            telephone: '+1-310-428-2645',
             email: 'info@jacinteriors.com',
             address: {
                 '@type': 'PostalAddress',
@@ -1234,7 +1234,7 @@
         }).join('\n');
 
         const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
-        const phoneHref = 'tel:+12133970206';
+        const phoneHref = 'tel:+13104282645';
         const emailHref = `mailto:${FOOTER_EMAIL}`;
 
         const metaGridHtml = meta.length
@@ -1452,7 +1452,7 @@
         <p class="site-cta-subtitle">
           Start with a 15‑minute intro call—so we can understand your goals and recommend the right next step.
         </p>
-        <p class="site-cta-phone"><a href="tel:+12133970206">${FOOTER_PHONE_DISPLAY}</a></p>
+        <p class="site-cta-phone"><a href="tel:+13104282645">${FOOTER_PHONE_DISPLAY}</a></p>
       </div>
       <a class="site-cta-button" href="${contactHref}">
         <span>Email us</span><span class="site-cta-arrow" aria-hidden="true">→</span>
@@ -1654,7 +1654,7 @@
         <h4>Contact</h4>
         <p class="footer-contact-lines">${addressHtml}</p>
         <p style="margin: 0 0 0.75rem;">
-          <a href="tel:+12133970206">${FOOTER_PHONE_DISPLAY}</a><br>
+          <a href="tel:+13104282645">${FOOTER_PHONE_DISPLAY}</a><br>
           <a href="mailto:${FOOTER_EMAIL}">${FOOTER_EMAIL}</a>
         </p>
         <a class="footer-cta" href="${contactHref}">Get in touch</a>
@@ -1683,8 +1683,8 @@
         if (!document.body) return;
         if (document.getElementById('mobileCtaBar')) return;
 
-        const phoneDisplay = '213-397-0206';
-        const phoneTel = 'tel:+12133970206';
+        const phoneDisplay = '310-428-2645';
+        const phoneTel = 'tel:+13104282645';
         const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
 
         const bar = document.createElement('div');
