@@ -1234,7 +1234,7 @@
         }).join('\n');
 
         const contactHref = `${getPath('contact.html')}?intent=call#contactForm`;
-        const phoneHref = `tel:${FOOTER_PHONE_DISPLAY}`;
+        const phoneHref = 'tel:+12133970206';
         const emailHref = `mailto:${FOOTER_EMAIL}`;
 
         const metaGridHtml = meta.length
@@ -1452,7 +1452,7 @@
         <p class="site-cta-subtitle">
           Start with a 15‑minute intro call—so we can understand your goals and recommend the right next step.
         </p>
-        <p class="site-cta-phone"><a href="tel:${FOOTER_PHONE_DISPLAY}">${FOOTER_PHONE_DISPLAY}</a></p>
+        <p class="site-cta-phone"><a href="tel:+12133970206">${FOOTER_PHONE_DISPLAY}</a></p>
       </div>
       <a class="site-cta-button" href="${contactHref}">
         <span>Email us</span><span class="site-cta-arrow" aria-hidden="true">→</span>
@@ -1654,7 +1654,7 @@
         <h4>Contact</h4>
         <p class="footer-contact-lines">${addressHtml}</p>
         <p style="margin: 0 0 0.75rem;">
-          <a href="tel:${FOOTER_PHONE_DISPLAY}">${FOOTER_PHONE_DISPLAY}</a><br>
+          <a href="tel:+12133970206">${FOOTER_PHONE_DISPLAY}</a><br>
           <a href="mailto:${FOOTER_EMAIL}">${FOOTER_EMAIL}</a>
         </p>
         <a class="footer-cta" href="${contactHref}">Get in touch</a>
