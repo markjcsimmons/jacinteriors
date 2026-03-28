@@ -245,6 +245,7 @@
   // urls[0] is shown first. Staggered by card index so cards don't all flip together.
   function startImageCycle(cardEl, urls) {
     if (!urls || urls.length < 2) return;
+    if (window.matchMedia('(max-width: 980px)').matches) return;
     const primary = cardEl.querySelector('img.primary-img');
     const hover   = cardEl.querySelector('img.hover-img');
     if (!primary || !hover) return;
