@@ -335,16 +335,20 @@
             .ov-steps { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
-        /* Prevent navbar dropdown panels from overlaying hero */
-        .nav-dropdown-content { display: none !important; }
-        .nav-dropdown:hover .nav-dropdown-content { display: none !important; }
-
         /* Hide sitewide CTA / footer injected by load-navbar on this page */
         .site-cta, footer.footer, footer.footer--dark { display: none !important; }
     </style>
 </head>
 <body>
     <script src="assets/js/load-navbar.js?v=20260311-7"></script>
+    <script>
+    (function(){
+        function strip(){document.querySelectorAll('.nav-dropdown-content').forEach(function(el){el.remove();})}
+        strip();
+        document.addEventListener('DOMContentLoaded',function(){strip();setTimeout(strip,100);setTimeout(strip,500);});
+        window.addEventListener('load',function(){strip();});
+    })();
+    </script>
 
     <!-- 1. HERO -->
     <section class="ov-hero">
