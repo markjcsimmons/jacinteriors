@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JAC Interiors — full-service luxury interior design for Los Angeles and South Florida. See our work, services, and process.">
+    <title>Overview | JAC Interiors</title>
+    <link rel="canonical" href="https://jacinteriors.com/overview.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jacinteriors.com/overview.html">
+    <meta property="og:title" content="JAC Interiors | Overview">
+    <meta property="og:description" content="Full-service luxury interior design for Los Angeles and South Florida.">
+    <meta property="og:image" content="https://jacinteriorscdn.com/projects/fox-hills/fox-hills-1.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://jacinteriorscdn.com" crossorigin>
+    <link rel="preload" as="image" href="https://jacinteriorscdn.com/projects/fox-hills/fox-hills-1.jpg">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --dark: #222a26;
+            --text: #333;
+            --muted: #666;
+            --gold: #c9a961;
+            --stroke: #e4e4e4;
+            --bg: #ffffff;
+            --bg-dark: #111;
+            --container: 1100px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font); color: var(--text); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        img { display: block; max-width: 100%; height: auto; }
+        a { color: inherit; }
+
+        .ov-container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- HERO --- */
+        .ov-hero {
+            position: relative;
+            height: 85vh;
+            min-height: 500px;
+            max-height: 900px;
+            overflow: hidden;
+        }
+        .ov-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+        }
+        .ov-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem 2rem;
+        }
+        .ov-hero-logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            height: 32px;
+            filter: brightness(0) invert(1);
+        }
+        .ov-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            max-width: 600px;
+        }
+        .ov-hero p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            margin-top: 0.75rem;
+            font-weight: 400;
+            max-width: 500px;
+        }
+
+        /* --- SECTION SPACING --- */
+        .ov-section { padding: 5rem 0; }
+        .ov-section--dark { background: var(--bg-dark); color: #fff; }
+        .ov-section--alt { background: #f9f9f9; }
+
+        /* --- KICKER --- */
+        .ov-kicker {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .ov-section--dark .ov-kicker { color: var(--gold); }
+
+        /* --- ABOUT --- */
+        .ov-about h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            color: var(--dark);
+        }
+        .ov-about p {
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 700px;
+            line-height: 1.7;
+        }
+        .ov-about p + p { margin-top: 1rem; }
+
+        /* --- PROJECTS GRID --- */
+        .ov-projects h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+            margin-bottom: 2.5rem;
+            color: var(--dark);
+        }
+        .ov-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .ov-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+            aspect-ratio: 4/3;
+            text-decoration: none;
+            display: block;
+        }
+        .ov-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .ov-card:hover img { transform: scale(1.03); }
+        .ov-card-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 1rem 1rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 100%);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: -0.2px;
+        }
+        .ov-card-label span {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.7);
+            margin-top: 0.15rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .ov-card--feature {
+            grid-column: 1 / -1;
+            aspect-ratio: 16/9;
+        }
+
+        /* --- SERVICES --- */
+        .ov-services h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+            margin-bottom: 2.5rem;
+        }
+        .ov-services-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .ov-svc {
+            padding: 1.75rem 0;
+            border-top: 1px solid rgba(255,255,255,0.12);
+        }
+        .ov-svc:nth-child(odd) { padding-right: 2rem; }
+        .ov-svc:nth-child(even) { padding-left: 2rem; border-left: 1px solid rgba(255,255,255,0.12); }
+        .ov-svc-num {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .ov-svc h3 {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+        .ov-svc p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* --- PROCESS --- */
+        .ov-process h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+            margin-bottom: 2.5rem;
+            color: var(--dark);
+        }
+        .ov-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .ov-step {
+            border-top: 2px solid var(--dark);
+            padding-top: 1.5rem;
+        }
+        .ov-step-num {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        .ov-step h3 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            letter-spacing: -0.3px;
+        }
+        .ov-step p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* --- PROOF --- */
+        .ov-proof { text-align: center; }
+        .ov-proof-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .ov-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .ov-badge-stars {
+            color: #ffb800;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+        .ov-badge-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+        .ov-quote {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .ov-quote-author {
+            font-size: 0.8rem;
+            font-style: normal;
+            color: var(--muted);
+            margin-top: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* --- CTA --- */
+        .ov-cta { text-align: center; }
+        .ov-cta h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+        .ov-cta p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2rem;
+        }
+        .ov-cta-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .ov-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 2rem;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.2s;
+            letter-spacing: -0.2px;
+        }
+        .ov-btn--solid { background: #fff; color: var(--dark); }
+        .ov-btn--solid:hover { background: #f0f0f0; }
+        .ov-btn--outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+        .ov-btn--outline:hover { border-color: #fff; }
+        .ov-cta-phone {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+        .ov-cta-phone a { color: #fff; text-decoration: none; font-weight: 500; }
+
+        /* --- FOOTER --- */
+        .ov-footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--stroke);
+            text-align: center;
+        }
+        .ov-footer-logo { height: 28px; margin: 0 auto 0.75rem; opacity: 0.5; }
+        .ov-footer p { font-size: 0.75rem; color: var(--muted); }
+        .ov-footer a { text-decoration: none; color: var(--muted); }
+        .ov-footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        .ov-footer-socials a { font-size: 0.75rem; font-weight: 500; transition: 0.2s; }
+        .ov-footer-socials a:hover { color: var(--dark); }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .ov-hero { height: 70vh; min-height: 400px; }
+            .ov-hero-overlay { padding: 2rem 1.5rem; }
+            .ov-hero-logo { top: 1.5rem; left: 1.5rem; height: 26px; }
+            .ov-section { padding: 3.5rem 0; }
+            .ov-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .ov-card--feature { aspect-ratio: 4/3; }
+            .ov-services-list { grid-template-columns: 1fr; }
+            .ov-svc:nth-child(odd) { padding-right: 0; }
+            .ov-svc:nth-child(even) { padding-left: 0; border-left: none; }
+            .ov-steps { grid-template-columns: 1fr; gap: 1.5rem; }
+            .ov-proof-badges { gap: 1.5rem; }
+        }
+
+        /* Hide sitewide CTA / footer injected by load-navbar on this page */
+        .site-cta, footer.footer, footer.footer--dark { display: none !important; }
+    </style>
+</head>
+<body>
+    <script src="assets/js/load-navbar.js?v=20260311-7"></script>
+
+    <!-- 1. HERO -->
+    <section class="ov-hero">
+        <img src="https://jacinteriorscdn.com/projects/fox-hills/fox-hills-1.jpg" alt="JAC Interiors — Fox Hills project" loading="eager" fetchpriority="high">
+        <div class="ov-hero-overlay">
+            <img class="ov-hero-logo" src="assets/images/jac-logo.png" alt="JAC Interiors">
+            <h1>Full-service interior design</h1>
+            <p>Los Angeles and South Florida</p>
+        </div>
+    </section>
+
+    <!-- 2. ABOUT -->
+    <section class="ov-section">
+        <div class="ov-container ov-about">
+            <span class="ov-kicker">Who We Are</span>
+            <h2>Design leadership with taste, intention, and spark.</h2>
+            <p>JAC Interiors is a full-service design studio founded in 2012 by Andrea Putman and Timothy Mersman. We collaborate closely with every client &#8212; never forcing a style &#8212; so your home reflects who you are, how you live, and what you value.</p>
+            <p>From concept through final installation, we handle every detail: space planning, sourcing, procurement, contractor coordination, and styling. Serving Los Angeles and South Florida&#8217;s Gold Coast.</p>
+        </div>
+    </section>
+
+    <!-- 3. FEATURED PROJECTS -->
+    <section class="ov-section ov-section--alt ov-projects">
+        <div class="ov-container">
+            <span class="ov-kicker">Selected Work</span>
+            <h2>Recent projects</h2>
+            <div class="ov-grid">
+                <a class="ov-card ov-card--feature" href="projects/fox-hills.html">
+                    <img src="https://jacinteriorscdn.com/projects/fox-hills/fox-hills-1.jpg" alt="Fox Hills" loading="lazy">
+                    <div class="ov-card-label">Fox Hills <span>Los Angeles</span></div>
+                </a>
+                <a class="ov-card" href="projects/22nd-street.html">
+                    <img src="https://jacinteriorscdn.com/projects/22nd-street/22nd-street-5.jpg" alt="22nd Street" loading="lazy">
+                    <div class="ov-card-label">22nd Street <span>Los Angeles</span></div>
+                </a>
+                <a class="ov-card" href="projects/sunnyside.html">
+                    <img src="https://jacinteriorscdn.com/projects/sunnyside/sunnyside-11.jpg" alt="Sunnyside" loading="lazy">
+                    <div class="ov-card-label">Sunnyside <span>Los Angeles</span></div>
+                </a>
+                <a class="ov-card" href="projects/mulholland-drive.html">
+                    <img src="https://jacinteriorscdn.com/projects/mulholland-drive/mulholland-drive-5.jpg" alt="Mulholland Drive" loading="lazy">
+                    <div class="ov-card-label">Mulholland Drive <span>Los Angeles</span></div>
+                </a>
+                <a class="ov-card" href="projects/frances.html">
+                    <img src="https://jacinteriorscdn.com/projects/frances/frances-1.jpg" alt="Frances" loading="lazy">
+                    <div class="ov-card-label">Frances <span>Los Angeles</span></div>
+                </a>
+                <a class="ov-card" href="projects/colette-way.html">
+                    <img src="https://jacinteriorscdn.com/projects/colette-way/collette-way-5.jpg" alt="Colette Way" loading="lazy">
+                    <div class="ov-card-label">Colette Way <span>Los Angeles</span></div>
+                </a>
+                <a class="ov-card" href="projects/river-homestead.html">
+                    <img src="https://jacinteriorscdn.com/projects/river-homestead/river-homestead-1.jpg" alt="River Homestead" loading="lazy">
+                    <div class="ov-card-label">River Homestead <span>Montana</span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SERVICES -->
+    <section class="ov-section ov-section--dark ov-services">
+        <div class="ov-container">
+            <span class="ov-kicker">What We Do</span>
+            <h2>Services</h2>
+            <div class="ov-services-list">
+                <div class="ov-svc">
+                    <span class="ov-svc-num">01</span>
+                    <h3>Residential Design</h3>
+                    <p>Full-service interiors from first drawings to final installation &#8212; spaces that work for the way you actually live.</p>
+                </div>
+                <div class="ov-svc">
+                    <span class="ov-svc-num">02</span>
+                    <h3>Developer Interiors</h3>
+                    <p>Market-driven design that captures attention and accelerates sales for developers and investors.</p>
+                </div>
+                <div class="ov-svc">
+                    <span class="ov-svc-num">03</span>
+                    <h3>Sourcing &amp; Purchasing</h3>
+                    <p>End-to-end procurement &#8212; sourcing, purchasing, delivery, quality control, and white-glove installation.</p>
+                </div>
+                <div class="ov-svc">
+                    <span class="ov-svc-num">04</span>
+                    <h3>Construction Supervision</h3>
+                    <p>On-site oversight to ensure every detail is executed with precision and craftsmanship.</p>
+                </div>
+                <div class="ov-svc">
+                    <span class="ov-svc-num">05</span>
+                    <h3>Space Planning &amp; Concept</h3>
+                    <p>Layouts, moodboards, and visual direction to define the look and feel before anything is ordered.</p>
+                </div>
+                <div class="ov-svc">
+                    <span class="ov-svc-num">06</span>
+                    <h3>Commercial Design</h3>
+                    <p>Offices, retail, and hospitality spaces designed for brand alignment and productivity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PROCESS -->
+    <section class="ov-section ov-process">
+        <div class="ov-container">
+            <span class="ov-kicker">How We Work</span>
+            <h2>A clear, guided process</h2>
+            <div class="ov-steps">
+                <div class="ov-step">
+                    <span class="ov-step-num">01</span>
+                    <h3>Discover</h3>
+                    <p>We start with a conversation to understand your goals, style, timeline, and budget. Then we visit your space and develop the creative direction.</p>
+                </div>
+                <div class="ov-step">
+                    <span class="ov-step-num">02</span>
+                    <h3>Design</h3>
+                    <p>Layouts, renderings, materials, and furnishings &#8212; all presented for your review. We refine until every detail feels right.</p>
+                </div>
+                <div class="ov-step">
+                    <span class="ov-step-num">03</span>
+                    <h3>Deliver</h3>
+                    <p>We manage procurement, coordinate contractors, and oversee installation. You walk into a finished space &#8212; no loose ends.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SOCIAL PROOF -->
+    <section class="ov-section ov-section--alt ov-proof">
+        <div class="ov-container">
+            <div class="ov-proof-badges">
+                <div class="ov-badge">
+                    <span class="ov-badge-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span class="ov-badge-label">5.0 on Google</span>
+                </div>
+                <div class="ov-badge">
+                    <span class="ov-badge-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span class="ov-badge-label">5.0 on Houzz</span>
+                </div>
+                <div class="ov-badge">
+                    <span class="ov-badge-label" style="font-size: 1rem;">20x Best of Houzz</span>
+                </div>
+            </div>
+            <blockquote class="ov-quote">
+                &#8220;JAC made the entire process seamless. They listened to what we wanted, brought ideas we never would have thought of, and delivered a home that feels exactly like us.&#8221;
+                <cite class="ov-quote-author">&#8212; Houzz review</cite>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- 7. CTA -->
+    <section class="ov-section ov-section--dark ov-cta">
+        <div class="ov-container">
+            <span class="ov-kicker">Get Started</span>
+            <h2>Ready to begin?</h2>
+            <p>Start with a quick intro call &#8212; we&#8217;ll listen, ask a few questions, and recommend the right next step.</p>
+            <div class="ov-cta-links">
+                <a class="ov-btn ov-btn--solid" href="contact.html?intent=call#contactForm">Get in touch</a>
+                <a class="ov-btn ov-btn--outline" href="portfolio.html">View full portfolio</a>
+            </div>
+            <p class="ov-cta-phone">Or call <a href="tel:+13104282645">310-428-2645</a></p>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER -->
+    <footer class="ov-footer">
+        <div class="ov-container">
+            <img class="ov-footer-logo" src="assets/images/jac-logo.png" alt="JAC Interiors">
+            <p>8033 W Sunset Blvd #107, Los Angeles, CA 90046</p>
+            <div class="ov-footer-socials">
+                <a href="https://www.instagram.com/jacinteriorsdesign/" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://www.houzz.com/pro/jacinteriors/jac-interiors" target="_blank" rel="noopener">Houzz</a>
+                <a href="https://www.facebook.com/JacInteriors" target="_blank" rel="noopener">Facebook</a>
+            </div>
+            <p style="margin-top: 0.75rem;">&#169; 2026 JAC Interiors, LLC.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
