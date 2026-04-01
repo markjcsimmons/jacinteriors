@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://jacinteriorscdn.com" crossorigin>
-    <link rel="preload" as="image" href="https://jacinteriorscdn.com/projects/fox-hills/fox-hills-1.jpg">
+    <link rel="preload" as="image" href="https://jacinteriorscdn.com/projects/mulholland-drive/mulholland-drive-5.jpg">
     <link rel="stylesheet" href="assets/css/style.css?v=20260311-2">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -335,6 +335,10 @@
             .ov-steps { grid-template-columns: 1fr; gap: 1.5rem; }
         }
 
+        /* Prevent navbar dropdown panels from overlaying hero */
+        .nav-dropdown-content { display: none !important; }
+        .nav-dropdown:hover .nav-dropdown-content { display: none !important; }
+
         /* Hide sitewide CTA / footer injected by load-navbar on this page */
         .site-cta, footer.footer, footer.footer--dark { display: none !important; }
     </style>
@@ -344,7 +348,7 @@
 
     <!-- 1. HERO -->
     <section class="ov-hero">
-        <img src="https://jacinteriorscdn.com/projects/fox-hills/fox-hills-1.jpg" alt="JAC Interiors — Fox Hills project" loading="eager" fetchpriority="high">
+        <img src="https://jacinteriorscdn.com/projects/mulholland-drive/mulholland-drive-5.jpg" alt="JAC Interiors — Mulholland Drive project" loading="eager" fetchpriority="high">
         <div class="ov-hero-overlay">
             <img class="ov-hero-logo" src="assets/images/jac-logo.png" alt="JAC Interiors">
             <h1>Full-service interior design</h1>
