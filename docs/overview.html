@@ -258,46 +258,7 @@
             line-height: 1.6;
         }
 
-        /* --- PROOF --- */
-        .ov-proof { text-align: center; }
-        .ov-proof-badges {
-            display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-        .ov-badge {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.35rem;
-        }
-        .ov-badge-stars {
-            color: #ffb800;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-        }
-        .ov-badge-label {
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--muted);
-        }
-        .ov-quote {
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            font-style: italic;
-            color: var(--text);
-            line-height: 1.7;
-        }
-        .ov-quote-author {
-            font-size: 0.8rem;
-            font-style: normal;
-            color: var(--muted);
-            margin-top: 0.75rem;
-            font-weight: 500;
-        }
+
 
         /* --- CTA --- */
         .ov-cta { text-align: center; }
@@ -372,7 +333,6 @@
             .ov-svc:nth-child(odd) { padding-right: 0; }
             .ov-svc:nth-child(even) { padding-left: 0; border-left: none; }
             .ov-steps { grid-template-columns: 1fr; gap: 1.5rem; }
-            .ov-proof-badges { gap: 1.5rem; }
         }
 
         /* Hide sitewide CTA / footer injected by load-navbar on this page */
@@ -505,26 +465,30 @@
         </div>
     </section>
 
-    <!-- 6. SOCIAL PROOF -->
-    <section class="ov-section ov-section--alt ov-proof">
-        <div class="ov-container">
-            <div class="ov-proof-badges">
-                <div class="ov-badge">
-                    <span class="ov-badge-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                    <span class="ov-badge-label">5.0 on Google</span>
-                </div>
-                <div class="ov-badge">
-                    <span class="ov-badge-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                    <span class="ov-badge-label">5.0 on Houzz</span>
-                </div>
-                <div class="ov-badge">
-                    <span class="ov-badge-label" style="font-size: 1rem;">20x Best of Houzz</span>
-                </div>
+    <!-- 6. REVIEWS CAROUSEL -->
+    <section class="reviews-section" style="background: #f9f9f9;">
+        <div class="container">
+            <div class="reviews-header">
+                <h2>What our clients say.</h2>
             </div>
-            <blockquote class="ov-quote">
-                &#8220;JAC made the entire process seamless. They listened to what we wanted, brought ideas we never would have thought of, and delivered a home that feels exactly like us.&#8221;
-                <cite class="ov-quote-author">&#8212; Houzz review</cite>
-            </blockquote>
+
+            <div class="reviews-shell" data-reviews-carousel="1" data-reviews-limit="12">
+                <div class="reviews-trust-row" aria-label="Ratings">
+                    <span class="trust-pill"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>5.0 Google</span></span>
+                    <span class="trust-pill"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>5.0 Houzz</span></span>
+                    <span class="trust-pill"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>5.0 Yelp</span></span>
+                    <span class="trust-pill">20x Best of Houzz</span>
+                </div>
+                <div class="reviews-carousel">
+                    <button class="reviews-arrow prev" type="button" aria-label="Previous review">&#8249;</button>
+
+                    <div class="reviews-slides" aria-live="polite"></div>
+
+                    <button class="reviews-arrow next" type="button" aria-label="Next review">&#8250;</button>
+                </div>
+
+                <div class="reviews-dots" aria-label="Review navigation"></div>
+            </div>
         </div>
     </section>
 
@@ -556,6 +520,8 @@
         </div>
     </footer>
 
+    <script src="assets/js/reviews-data.js?v=20260131-1"></script>
+    <script src="assets/js/reviews-carousel.js?v=20260202-1"></script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>
