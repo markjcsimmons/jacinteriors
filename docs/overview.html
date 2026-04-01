@@ -57,7 +57,7 @@
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
         }
-        .ov-hero img {
+        .ov-hero > img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -73,11 +73,7 @@
             padding: 3rem 2rem;
         }
         .ov-hero-logo {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            height: 32px;
-            filter: brightness(0) invert(1);
+            display: none;
         }
         .ov-hero h1 {
             font-size: clamp(2rem, 5vw, 3.5rem);
@@ -425,7 +421,6 @@
     <section class="ov-hero">
         <img src="https://jacinteriorscdn.com/projects/oakwood/oakwood-1.jpg" alt="JAC Interiors — Oakwood project" loading="eager" fetchpriority="high">
         <div class="ov-hero-overlay">
-            <img class="ov-hero-logo" src="assets/images/jac-logo.png" alt="JAC Interiors">
             <h1>Full-service interior design</h1>
             <p>Los Angeles and South Florida</p>
         </div>
