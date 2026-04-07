@@ -56,7 +56,11 @@
     const basePath = (pathParts.length > 0 && isUnderKnownRoot) ? '/' + pathParts[0] : '';
     
     // Depth: how many levels up to reach docs root. /projects/fox-hills.html -> 1; /jacinteriors/projects/fox-hills.html -> 1.
-    const depth = basePath ? Math.max(0, pathParts.length - 2) : Math.max(0, pathParts.length - 1);
+    const rawDepth = basePath ? Math.max(0, pathParts.length - 2) : Math.max(0, pathParts.length - 1);
+    // Directory-style clean URLs (/overview/, /cities/pacific-palisades/) need +1
+    // because the last segment is a directory, not a file.
+    const isDirectoryUrl = currentPath.endsWith('/') && pathParts.length > 0;
+    const depth = rawDepth + (isDirectoryUrl ? 1 : 0);
     const pathPrefix = depth > 0 ? '../'.repeat(depth) : '';
     
     // Build absolute URL for assets (badges, etc.) from script location so it works on any deployment
@@ -148,8 +152,8 @@
             const h1Text = (h1 && h1.textContent) ? h1.textContent.replace(/\s+/g, ' ').trim() : '';
 
             const isBlogPost = pathname.startsWith('/blog/') && file.endsWith('.html') && file !== 'blog.html';
-            const isCityPage = pathname.startsWith('/cities/') && file.endsWith('.html');
-            const isProjectPage = pathname.startsWith('/projects/') && file.endsWith('.html');
+            const isCityPage = pathname.startsWith('/cities/') && (file.endsWith('.html') || pathname.match(/\/cities\/[^/]+\/$/));
+            const isProjectPage = pathname.startsWith('/projects/') && (file.endsWith('.html') || pathname.match(/\/projects\/[^/]+\/$/));
             const isSpacesPage = [
                 'spaces.html',
                 // Kitchens gallery lives here (masonry-first)
