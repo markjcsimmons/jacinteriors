@@ -260,6 +260,93 @@
 
 
 
+        /* --- PRICING --- */
+        .ov-pricing h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+            margin-bottom: 2.5rem;
+            color: var(--dark);
+        }
+        .ov-pricing-card {
+            background: #fff;
+            border: 1px solid var(--stroke);
+            border-radius: 8px;
+            padding: 2.5rem;
+            max-width: 720px;
+        }
+        .ov-pricing-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.3px;
+        }
+        .ov-rates {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.6rem 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--stroke);
+        }
+        .ov-rates dt {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        .ov-rates dd {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark);
+            text-align: right;
+        }
+        .ov-pricing-details > li {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--stroke);
+            list-style: none;
+        }
+        .ov-pricing-details > li:last-child { border-bottom: none; }
+        .ov-pricing-details > li > strong {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+        .ov-pricing-details > li > span,
+        .ov-pricing-details > li > p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .ov-payment-group { margin-top: 1rem; }
+        .ov-payment-group h4 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark);
+            margin-bottom: 0.4rem;
+        }
+        .ov-payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            list-style: none;
+        }
+        .ov-payment-methods li {
+            font-size: 0.85rem;
+            color: var(--muted);
+            padding: 0.3rem 0.7rem;
+            border: 1px solid var(--stroke);
+            border-radius: 999px;
+        }
+        @media (max-width: 768px) {
+            .ov-pricing-card { padding: 1.5rem; }
+            .ov-rates { gap: 0.5rem 1rem; }
+        }
+
         /* --- CTA --- */
         .ov-cta { text-align: center; }
         .ov-cta h2 {
@@ -539,7 +626,55 @@
         </div>
     </section>
 
-    <!-- 6. REVIEWS CAROUSEL -->
+    <!-- 6. PRICING -->
+    <section class="ov-section ov-section--alt ov-pricing">
+        <div class="ov-container">
+            <span class="ov-kicker">Investment</span>
+            <h2>Design fees</h2>
+            <div class="ov-pricing-card">
+                <h3>Hourly fee basis</h3>
+                <dl class="ov-rates">
+                    <dt>Managing Principal Designer</dt>
+                    <dd>$215/hr</dd>
+                    <dt>Drafting / Purchasing</dt>
+                    <dd>$130/hr</dd>
+                    <dt>Blended Rate (2+ Designers)</dt>
+                    <dd>$295/hr</dd>
+                </dl>
+                <ul class="ov-pricing-details">
+                    <li>
+                        <strong>Initial fee retainer</strong>
+                        <span>Typically 50% of the design proposal phase, applied against the first monthly invoice and any subsequent invoices as needed.</span>
+                    </li>
+                    <li>
+                        <strong>Billed monthly</strong>
+                        <span>With a detailed hourly invoice.</span>
+                    </li>
+                    <li>
+                        <strong>Flexible payment methods</strong>
+                        <div class="ov-payment-group">
+                            <h4>No additional fee</h4>
+                            <ul class="ov-payment-methods">
+                                <li>Check</li>
+                                <li>Zelle</li>
+                                <li>PayPal</li>
+                                <li>Direct Deposit</li>
+                            </ul>
+                        </div>
+                        <div class="ov-payment-group">
+                            <h4>3.5% processing fee</h4>
+                            <ul class="ov-payment-methods">
+                                <li>Mastercard</li>
+                                <li>Visa</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. REVIEWS CAROUSEL -->
     <section class="reviews-section" style="background: #f9f9f9;">
         <div class="container">
             <div class="reviews-header">
