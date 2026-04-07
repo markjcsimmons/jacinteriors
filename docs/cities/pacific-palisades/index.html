@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Pacific Palisades Interior Design & Wildfire Rebuild Services by JAC Interiors. Professional support for Palisades recovery."/>
+    <title>Pacific Palisades Interior Designer | JAC Interiors</title>
+    <link rel="canonical" href="https://jacinteriors.com/cities/pacific-palisades">
+    <link rel="stylesheet" href="../../assets/css/style.css?v=20260131-4"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="../../assets/js/load-navbar.js?v=20260204-4" defer></script>
+    <link rel="stylesheet" href="../../assets/css/invero-cities.css?v=20260203-1"/>
+    <style>
+        /* --- "What you can expect" dark grid (matches About page values-section) --- */
+        .pp-expect {
+            padding: 6rem 0;
+            background: #111;
+            color: #fff;
+            border-top: 1px solid rgba(255,255,255,0.14);
+            border-bottom: 1px solid rgba(255,255,255,0.14);
+        }
+        .pp-expect .rebuild-kicker,
+        .pp-expect h2,
+        .pp-expect h3 { color: #fff; }
+        .pp-expect p { color: rgba(255,255,255,0.7); }
+        .pp-expect-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            margin-top: 3rem;
+            border-left: 1px solid rgba(255,255,255,0.18);
+            border-top: 1px solid rgba(255,255,255,0.18);
+        }
+        .pp-expect-card {
+            padding: 2.75rem 2rem;
+            border-right: 1px solid rgba(255,255,255,0.18);
+            border-bottom: 1px solid rgba(255,255,255,0.18);
+            transition: background 0.25s ease;
+        }
+        .pp-expect-card:hover { background: rgba(255,255,255,0.04); }
+        .pp-expect-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.3px;
+        }
+        .pp-expect-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .pp-expect { padding: 4rem 0; }
+            .pp-expect-grid {
+                grid-template-columns: 1fr;
+                border-left: none;
+            }
+            .pp-expect-card { border-left: 1px solid rgba(255,255,255,0.18); }
+        }
+
+        /* --- Reviews carousel --- */
+        .reviews-section { padding: 6rem 0; color: #222a26; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.48px; }
+        .reviews-section h2 { color: #222a26; }
+        .reviews-section .kicker { display: none; }
+        .reviews-header { max-width: 900px; margin-bottom: 2.5rem; }
+        .reviews-trust-row { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-bottom: 1.15rem; }
+        .trust-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 0.7rem; border: 1px solid #e4e4e4; border-radius: 999px; background: #fff; color: #222a26; font-size: 0.92rem; line-height: 1; letter-spacing: -0.2px; font-weight: 500; }
+        .trust-pill .stars { color: #ffb800; letter-spacing: 0.1em; font-size: 0.98rem; line-height: 1; }
+        .reviews-shell { border: 3px solid #d6d6d6; border-radius: 4px; padding: 2.5rem; background: #fafafa; box-shadow: 0 28px 85px rgba(0,0,0,0.14); }
+        .reviews-carousel { position: relative; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; gap: 1rem; }
+        .reviews-arrow { appearance: none; border: 1px solid #e4e4e4; background: #fff; color: #222a26; width: 48px; height: 48px; border-radius: 999px; font-size: 1.75rem; line-height: 1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.25s ease; }
+        .reviews-arrow:hover { background: #f5f5f5; border-color: #d7d7d7; }
+        .reviews-slides { position: relative; min-height: 170px; }
+        .review-slide { opacity: 0; pointer-events: none; position: absolute; inset: 0; transition: opacity 0.35s ease; }
+        .review-slide.is-active { opacity: 1; pointer-events: auto; position: relative; }
+        .review-stars { color: #ffb800; letter-spacing: 0.1em; font-size: 0.95rem; margin-bottom: 0.9rem; }
+        .review-quote { color: #222a26; font-size: 20px !important; line-height: 1.4em !important; letter-spacing: -0.48px !important; font-weight: 500 !important; margin-bottom: 1.15rem; font-family: 'Plus Jakarta Sans', sans-serif; font-style: italic; }
+        .review-meta { font-size: 0.95rem !important; color: #555; font-weight: 600 !important; letter-spacing: -0.2px !important; }
+        .reviews-dots { display: flex; justify-content: center; gap: 0.65rem; margin-top: 1.25rem; }
+        .review-dot { width: 10px; height: 10px; border-radius: 999px; border: 1px solid #c9c9c9; background: #e6e6e6; cursor: pointer; transition: 0.25s ease; }
+        .review-dot.is-active { width: 28px; background: #222a26; border-color: #222a26; }
+        @media (max-width: 980px) {
+            .reviews-section { padding: 4.75rem 0; }
+            .reviews-shell { padding: 1.5rem 1.1rem; }
+            .reviews-trust-row { gap: 0.6rem; justify-content: flex-start; }
+            .trust-pill { font-size: 0.88rem; padding: 0.42rem 0.65rem; }
+            .reviews-carousel { grid-template-columns: 44px 1fr 44px; }
+            .reviews-slides { min-height: 210px; }
+        }
+    </style>
+</head>
+<body class="city-page">
+
+    <main class="city-main">
+
+    <!-- 1. City Headline -->
+    <section class="city-top">
+      <div class="container">
+        <div class="city-top-grid">
+          <div>
+            <span class="city-kicker">Cities we serve</span>
+            <h1>Pacific Palisades</h1>
+            <p>Supporting Palisades recovery with professional rebuild design and finish-spec services&#8212;structured, responsive, and built for speed without surprises.</p>
+            <a class="city-readabout" href="#rebuild-la" aria-label="Read about Rebuild LA">
+              Read about
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M5 12h12" stroke-linecap="round"></path>
+                <path d="M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </a>
+            <div class="city-meta-grid" aria-label="Project details">
+              <div class="city-meta-item"><span>Region</span><strong>Los Angeles</strong></div>
+              <div class="city-meta-item"><span>Service</span><strong>Wildfire Recovery</strong></div>
+              <div class="city-meta-item"><span>Status</span><strong>Accepting Projects</strong></div>
+            </div>
+          </div>
+          <div>
+            <p>Whether you&#8217;re a homeowner starting over, a developer filling critical housing gaps, or an architect/GC managing multiple rebuilds, JAC Interiors brings clarity and design excellence to every square foot.</p>
+            <div class="city-actions">
+              <a class="btn btn-primary" href="../../contact.html?intent=call#contactForm">Book a call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Hero Image -->
+    <section class="city-hero-media" aria-label="Pacific Palisades hero image">
+      <div class="container">
+        <div class="city-hero-img-wrapper">
+          <img id="cityHeroImg" alt="Pacific Palisades rebuild and interior design by JAC Interiors" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Rebuild LA Story -->
+    <section class="section" id="rebuild-la">
+      <div class="container">
+        <div class="story-blocks" aria-label="Rebuild story">
+          <div class="story-block" id="brief">
+            <div class="story-label">Brief</div>
+            <div class="story-content">
+              <span class="rebuild-kicker">Wildfire-recovery builds</span>
+              <h2 class="story-title">Rebuild LA, Re&#8209;Imagine Home</h2>
+              <p>Professional interior design &amp; finish-spec services for wildfire-recovery builds.</p>
+              <p>Los Angeles is still healing from recent wildfire seasons. Whether you&#8217;re a <strong>home-owner starting over</strong>, a <strong>developer filling critical housing gaps</strong>, or an <strong>architect/GC managing multiple rebuilds</strong>, JAC Interiors brings clarity and design excellence to every square foot. Our mission: help you <strong>rebuild faster</strong>, <strong>within budget</strong>, and <strong>more beautifully</strong>&#8212;without surprises.</p>
+            </div>
+          </div>
+
+          <div class="story-block" id="considerations">
+            <div class="story-label">Challenge</div>
+            <div class="story-content">
+              <h2 class="story-title">Considerations</h2>
+              <ul>
+                <li>Finish options that balance <strong>durability</strong>, <strong>wildfire resilience</strong>, and aesthetics</li>
+                <li>Prioritizing <strong>sustainable</strong>, <strong>low&#8209;VOC</strong>, and <strong>long&#8209;lead&#8209;proof</strong> materials</li>
+                <li>Securing inventory early through trusted vendor relationships</li>
+                <li>Coordinating directly with GCs and trades to resolve field questions fast</li>
+                <li>Milestone walk&#8209;throughs to keep schedules on track</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="story-block" id="solution">
+            <div class="story-label">Solution</div>
+            <div class="story-content">
+              <h2 class="story-title">What we deliver</h2>
+              <div class="phase-list" aria-label="Rebuild phases">
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">01</span>
+                    <h3>Assessment &amp; Scope</h3>
+                  </div>
+                  <ul>
+                    <li>Review project goals, timeline, and target budget</li>
+                    <li>Identify smart finish options that balance durability, wildfire resilience, and aesthetics</li>
+                  </ul>
+                </div>
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">02</span>
+                    <h3>Finish &amp; Fixture Design</h3>
+                  </div>
+                  <ul>
+                    <li>Source all interior hardscape: tile, flooring, countertops, backsplashes, ceilings, plumbing &amp; decorative lighting</li>
+                    <li>Prioritize sustainable, low&#8209;VOC, and long&#8209;lead&#8209;proof materials</li>
+                  </ul>
+                </div>
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">03</span>
+                    <h3>Procurement &amp; Logistics</h3>
+                  </div>
+                  <ul>
+                    <li>Leverage decade&#8209;long vendor relationships to secure inventory early</li>
+                    <li>Provide transparent purchase tracking&#8212;no hidden mark&#8209;ups</li>
+                  </ul>
+                </div>
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">04</span>
+                    <h3>On&#8209;Site Collaboration</h3>
+                  </div>
+                  <ul>
+                    <li>Coordinate directly with GCs and trades to resolve field questions fast</li>
+                    <li>Perform milestone walk&#8209;throughs to keep schedules on track</li>
+                  </ul>
+                </div>
+                <div class="service-card phase-card">
+                  <div class="phase-head">
+                    <span class="phase-num">05</span>
+                    <h3>Move&#8209;In Styling (optional)</h3>
+                  </div>
+                  <ul>
+                    <li>Furnishings, rugs, window treatments, art &amp; accessories selected to fit the new envelope&#8212;and your budget</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. What You Can Expect (dark grid, matches About page) -->
+    <section class="pp-expect">
+      <div class="container">
+        <span class="rebuild-kicker">Result</span>
+        <h2>What you can expect</h2>
+        <div class="pp-expect-grid">
+          <div class="pp-expect-card">
+            <h3>Quality you can see</h3>
+            <p>Detailed specifications, vetted vendors, and strict QA walkthroughs ensure every finish meets the highest standard.</p>
+          </div>
+          <div class="pp-expect-card">
+            <h3>On-budget assurance</h3>
+            <p>Up-front, per-square-foot pricing and real-time cost tracking keep surprises (and stress) off the table.</p>
+          </div>
+          <div class="pp-expect-card">
+            <h3>On-time delivery</h3>
+            <p>Tight scheduling, rapid issue-resolution, and priority supplier slots keep your build moving&#8212;no costly delays.</p>
+          </div>
+          <div class="pp-expect-card">
+            <h3>Great to work with</h3>
+            <p>Clear communication, quick turnarounds, and a can-do attitude make us the design partner contractors and architects actually enjoy collaborating with.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Pricing -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <div class="city-section-head">
+          <span class="rebuild-kicker">Pricing</span>
+          <h2>Simple transparent pricing.</h2>
+          <p>Our pricing is a simple, per-square-foot model that keeps every project predictable from day one. You choose the tier that matches your goals&#8212;<strong>Essential</strong> for rapid, budget-savvy rebuilds, <strong>Premium</strong> for forever homes and flagship specs, or <strong>Signature</strong> for fully bespoke, showcase spaces. Each tier&#8217;s price covers our full design fee plus the specification and procurement of all hard-scape finishes; contractor labor and furnishings are separate.</p>
+        </div>
+        <div class="pricing-grid" aria-label="Pricing tiers">
+          <div class="service-card pricing-card">
+            <div class="pricing-tier">
+              <h3>Essential</h3>
+              <span class="pricing-price">from $100 / sq ft</span>
+            </div>
+            <p><strong>Best for:</strong> Rapid rebuilds</p>
+            <p><strong>Material profile:</strong> Quality factory-fabricated finishes (porcelain, engineered stone)</p>
+          </div>
+          <div class="service-card pricing-card">
+            <div class="pricing-tier">
+              <h3>Premium</h3>
+              <span class="pricing-price">&#8776; $200 / sq ft</span>
+            </div>
+            <p><strong>Best for:</strong> Forever homes &amp; flagship spec houses</p>
+            <p><strong>Material profile:</strong> Mix of custom cabinetry &amp; natural stone/wood</p>
+          </div>
+          <div class="service-card pricing-card">
+            <div class="pricing-tier">
+              <h3>Signature</h3>
+              <span class="pricing-price">from $300 / sq ft</span>
+            </div>
+            <p><strong>Best for:</strong> Showcase luxury properties</p>
+            <p><strong>Material profile:</strong> Fully bespoke, artisan-crafted interiors</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Reviews Carousel -->
+    <section class="reviews-section" style="background: #f9f9f9;">
+      <div class="container">
+        <div class="reviews-header">
+          <h2>What our clients say.</h2>
+        </div>
+        <div class="reviews-shell" data-reviews-carousel="1" data-reviews-limit="12">
+          <div class="reviews-trust-row" aria-label="Ratings">
+            <span class="trust-pill"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>5.0 Google</span></span>
+            <span class="trust-pill"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>5.0 Houzz</span></span>
+            <span class="trust-pill"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>5.0 Yelp</span></span>
+            <span class="trust-pill">20x Best of Houzz</span>
+          </div>
+          <div class="reviews-carousel">
+            <button class="reviews-arrow prev" type="button" aria-label="Previous review">&#8249;</button>
+            <div class="reviews-slides" aria-live="polite"></div>
+            <button class="reviews-arrow next" type="button" aria-label="Next review">&#8250;</button>
+          </div>
+          <div class="reviews-dots" aria-label="Review navigation"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. CTA -->
+    <section class="city-cta" id="ready">
+      <div class="container">
+        <div class="city-cta-inner">
+          <h2>Ready to get started?</h2>
+          <p><strong>Call:</strong> <a class="inline" href="tel:+13104282645">310-428-2645</a> &nbsp;|&nbsp; <strong>Email:</strong> <a class="inline" href="mailto:andrea@jacinteriors.com">andrea@jacinteriors.com</a></p>
+          <div class="cta-links">
+            <a class="btn btn-solid-white" href="../../contact.html?intent=call#contactForm">Book a call</a>
+            <a class="btn btn-solid-white" href="../../portfolio.html" style="background:transparent; border:1px solid rgba(255,255,255,0.3);">View full portfolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </main>
+
+    <script>
+      (function () {
+        var img = document.getElementById("cityHeroImg");
+        if (!img) return;
+        var base = (window.R2_IMAGE_BASE || "https://jacinteriorscdn.com").replace(/\/+$/, "");
+        var paths = [
+          "cities/pacific-palisades/josh-olalde-X1P1_EDNnok-unsplash.jpg",
+          "cities/pacific-palisades/hero.jpg",
+          "cities/pacific-palisades/hero.webp",
+          "cities/pacific-palisades/pacific-palisades.jpg",
+          "cities/pacific-palisades/pacific-palisades.webp",
+          "projects/fox-hills/fox-hills-1.jpg"
+        ];
+        var i = 0;
+        function tryNext() {
+          if (i >= paths.length) { img.style.display = "none"; return; }
+          img.src = base + "/" + paths[i++];
+        }
+        img.addEventListener("error", tryNext);
+        tryNext();
+      })();
+    </script>
+    <script src="../../assets/js/reviews-data.js?v=20260131-1"></script>
+    <script src="../../assets/js/reviews-carousel.js?v=20260202-1"></script>
+</body>
+</html>
