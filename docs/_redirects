@@ -253,6 +253,25 @@
 /pages/yellowstone-club             /projects/yellowstone-club.html 301
 /pages/yellowstone-club/            /projects/yellowstone-club.html 301
 
+# /cities/ prefix errors — internal links that used wrong path prefix
+/cities/contact.html                     /contact.html                    301
+/cities/living-spaces.html               /portfolio.html                  301
+/cities/portfolio.html                   /portfolio.html                  301
+/cities/dining-rooms.html                /dining-rooms.html               301
+/cities/projects/fox-hills.html          /projects/fox-hills.html         301
+/cities/projects/peary-way.html          /projects/peary-way.html         301
+/cities/projects/brown-deer-park.html    /projects/brown-deer-park.html   301
+/cities/projects/via-pisa.html           /projects/via-pisa.html          301
+/cities/projects/oakwood.html            /projects/oakwood.html           301
+
+# Old blog post with typo slug → new targeted post
+/blogs/jac-interior-design-blog/tips-for-awkward-living-room-lawyout-designs  /blog/awkward-living-room-layout.html  301
+/blogs/jac-interior-design-blog/tips-for-awkward-living-room-lawyout-designs/ /blog/awkward-living-room-layout.html  301
+
+# Misc system / probe URLs
+/index.php                               /                                301
+/pages/                                  /services.html                   301
+
 # Safety nets / common Shopify patterns
 /products/*                              /services.html              301
 /collections/*                           /services.html              301
