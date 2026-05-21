@@ -8,6 +8,9 @@
 # Canonicalize home URL (avoid /index.html duplicate)
 /index.html                               /                         301
 
+# Legacy redirect pages
+/kitchen-design.html                      /kitchens.html            301
+
 # Shopify blogs → new site
 /blogs/jac-interior-design-blog           /blog.html                 301
 /blogs/jac-interior-design-blog/          /blog.html                 301
@@ -282,6 +285,10 @@
 /checkout                                /services.html              301
 /account/*                               /services.html              301
 /search                                  /services.html              301
+/discount/*                              /services.html              301
+/gift_cards/*                            /services.html              301
+/policies/*                              /about.html                 301
+/challenge                               /                           301
 
 # Catch-all for other Shopify pages (keep LAST)
 /pages/*                                 /services.html              301
