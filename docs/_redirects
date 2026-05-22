@@ -26,6 +26,20 @@
 /blogs/jac-interior-design-blog/mountain-chic-interiors/                             /blog/mountain-chic-interiors.html                              301
 /blogs/jac-interior-design-blog/a-guide-to-the-best-antique-stores-in-la             /blog/a-guide-to-the-best-antique-stores-in-la.html             301
 /blogs/jac-interior-design-blog/a-guide-to-the-best-antique-stores-in-la/            /blog/a-guide-to-the-best-antique-stores-in-la.html             301
+/blogs/jac-interior-design-blog/luxury-condo-interior-design-boca-raton   /blog/interior-designer-boca-raton.html   301
+/blogs/jac-interior-design-blog/luxury-condo-interior-design-boca-raton/  /blog/interior-designer-boca-raton.html   301
+/blogs/jac-interior-design-blog/top-furniture-stores-boca-raton            /blog/interior-designer-boca-raton.html   301
+/blogs/jac-interior-design-blog/top-furniture-stores-boca-raton/           /blog/interior-designer-boca-raton.html   301
+/blogs/jac-interior-design-blog/delray-beach-interior-design-modern-coastal-vs-bohemian   /blog/interior-designer-delray-beach.html   301
+/blogs/jac-interior-design-blog/delray-beach-interior-design-modern-coastal-vs-bohemian/  /blog/interior-designer-delray-beach.html   301
+/blogs/jac-interior-design-blog/wasabi-sabi-interior-design                /blog/warm-minimalism-interior-design.html  301
+/blogs/jac-interior-design-blog/wasabi-sabi-interior-design/               /blog/warm-minimalism-interior-design.html  301
+/blogs/jac-interior-design-blog/how-to-make-your-home-look-and-feel-like-a-desert-retreat  /blog.html  301
+/blogs/jac-interior-design-blog/how-to-make-your-home-look-and-feel-like-a-desert-retreat/ /blog.html  301
+/blogs/jac-interior-design-blog/emerald-gold-together-forever              /blog.html                 301
+/blogs/jac-interior-design-blog/emerald-gold-together-forever/             /blog.html                 301
+/blogs/jac-interior-design-blog/a-millennials-best-friend-plants           /blog.html                 301
+/blogs/jac-interior-design-blog/a-millennials-best-friend-plants/          /blog.html                 301
 /blogs/jac-interior-design-blog/*         /blog.html                 301
 
 # Hand-tuned legacy pages
@@ -289,6 +303,9 @@
 /gift_cards/*                            /services.html              301
 /policies/*                              /about.html                 301
 /challenge                               /                           301
+/customer_authentication/*               /                           301
+/b                                       /                           301
+/wpm@*                                   /                           301
 
 # Catch-all for other Shopify pages (keep LAST)
 /pages/*                                 /services.html              301
