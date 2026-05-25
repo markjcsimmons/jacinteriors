@@ -8,6 +8,15 @@
 # Canonicalize home URL (avoid /index.html duplicate)
 /index.html                               /                         301
 
+# Canonicalize blog extensionless URLs → .html (fixes GSC duplicate indexing)
+/blog/what-is-hollywood-glam                                        /blog/what-is-hollywood-glam.html                                        301
+/blog/accented-neutral-color-scheme-in-interior-design              /blog/accented-neutral-color-scheme-in-interior-design.html              301
+/blog/raised-ranch-interior-design-ideas                            /blog/raised-ranch-interior-design-ideas.html                            301
+/blog/a-guide-to-the-best-antique-stores-in-la                      /blog/a-guide-to-the-best-antique-stores-in-la.html                      301
+/blog/custom-retail-interior-design                                  /blog/custom-retail-interior-design.html                                  301
+/blog/room-addition-los-angeles                                      /blog/room-addition-los-angeles.html                                      301
+/blog/interior-designer-boca-raton                                   /blog/interior-designer-boca-raton.html                                   301
+
 # Legacy redirect pages
 /kitchen-design.html                      /kitchens.html            301
 

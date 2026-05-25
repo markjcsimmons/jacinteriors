@@ -2745,6 +2745,20 @@ body.invero-blog .post-content {
     padding: 2.25rem 0 0;
 }
 
+body.invero-blog .definition-box {
+    background: #f5f3ef;
+    border-left: 3px solid #b89c72;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0 4px 4px 0;
+}
+body.invero-blog .definition-box p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #222a26;
+}
+
 body.invero-blog .post-image-caption {
     font-size: 0.8rem;
     color: rgba(34, 42, 38, 0.5);
