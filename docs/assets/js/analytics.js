@@ -82,6 +82,17 @@
     };
   }
 
+  function detectDirectContactClick(anchor) {
+    const href = safeString(anchor.getAttribute("href"));
+    if (href.startsWith("tel:")) {
+      return { event: "phone_click", number: href.replace("tel:", "") };
+    }
+    if (href.startsWith("mailto:")) {
+      return { event: "email_click", address: href.replace("mailto:", "") };
+    }
+    return null;
+  }
+
   document.addEventListener(
     "click",
     function (e) {
@@ -91,6 +102,13 @@
       const book = detectBookCallClick(a);
       if (book) {
         window.jacTrack("book_call_click", book);
+        return;
+      }
+
+      const contact = detectDirectContactClick(a);
+      if (contact) {
+        const { event, ...props } = contact;
+        window.jacTrack(event, props);
       }
     },
     true
