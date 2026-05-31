@@ -335,12 +335,8 @@
         const candidates = buildCandidatesForLocalSrc(localSrc);
         setImgWithFallback(img, candidates, () => {
           img.dataset.r2Final = "1";
-          if (idxToLoad === 1) {
-            img.src = FALLBACK_PRIMARY;
-          } else {
-            hideTile(tile);
-            document.dispatchEvent(new Event("spaces:gallery-updated"));
-          }
+          hideTile(tile);
+          document.dispatchEvent(new Event("spaces:gallery-updated"));
         });
 
         wireRelayoutOnImg(img);
