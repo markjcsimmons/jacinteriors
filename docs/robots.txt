@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+# Block tracking params and WordPress comment hashes from wasting crawl budget
+Disallow: /*?unapproved=
+Disallow: /*?ref=
+Disallow: /*?gad_source=
+Disallow: /*?utm_source=
+
 Sitemap: https://jacinteriors.com/sitemap.xml

@@ -296,6 +296,57 @@
 /blogs/jac-interior-design-blog/tips-for-awkward-living-room-lawyout-designs  /blog/awkward-living-room-layout.html  301
 /blogs/jac-interior-design-blog/tips-for-awkward-living-room-lawyout-designs/ /blog/awkward-living-room-layout.html  301
 
+# WordPress-era blog category + portfolio-item URLs
+/blog/category/*                         /blog.html                       301
+/blog/portfolio-item/*                   /portfolio.html                  301
+/blog/mountain-chic-interiors            /blog/mountain-chic-interiors.html 301
+/blog/mountain-chic-interiors/           /blog/mountain-chic-interiors.html 301
+/blog/how-to-make-your-home-look-and-feel-like-a-desert-retreat  /blog.html 301
+/blog/how-to-make-your-home-look-and-feel-like-a-desert-retreat/ /blog.html 301
+/blog/a-millennials-best-friend-plants   /blog.html                       301
+/blog/a-millennials-best-friend-plants/  /blog.html                       301
+/blog/small-space-big-styledesigning-small-spaces  /blog.html             301
+/blog/small-space-big-styledesigning-small-spaces/ /blog.html             301
+
+# Root-level legacy slugs (pre-Shopify era, no /pages/ prefix)
+/about-us                                /about.html                      301
+/about-us/                               /about.html                      301
+/design-services                         /services.html                   301
+/design-services/                        /services.html                   301
+/design-questionnaire                    /contact.html                    301
+/design-questionnaire/                   /contact.html                    301
+/by-room                                 /portfolio.html                  301
+/by-room/                                /portfolio.html                  301
+/style                                   /portfolio.html                  301
+/style/                                  /portfolio.html                  301
+/bathrooms                               /bathrooms.html                  301
+/bathrooms/                              /bathrooms.html                  301
+/dining-rooms                            /dining-rooms.html               301
+/dining-rooms/                           /dining-rooms.html               301
+/great-rooms                             /living-spaces.html              301
+/great-rooms/                            /living-spaces.html              301
+/modern-eclectic                         /portfolio.html                  301
+/modern-eclectic/                        /portfolio.html                  301
+/kids-bedrooms                           /bedrooms.html                   301
+/kids-bedrooms/                          /bedrooms.html                   301
+/kids-bedrooms-1                         /bedrooms.html                   301
+/kids-bedrooms-1/                        /bedrooms.html                   301
+/santa-monica                            /cities/santa-monica.html        301
+/santa-monica/                           /cities/santa-monica.html        301
+/beverly-hills                           /cities/beverly-hills.html       301
+/beverly-hills/                          /cities/beverly-hills.html       301
+/mountain-chic-interiors                 /blog/mountain-chic-interiors.html 301
+/mountain-chic-interiors/               /blog/mountain-chic-interiors.html 301
+/desert-drama-achieving-desert-luxe-look /blog.html                       301
+/desert-drama-achieving-desert-luxe-look/ /blog.html                      301
+/cities-we-serve                         /cities-we-serve.html            301
+/cities-we-serve/                        /cities-we-serve.html            301
+/projects                                /portfolio.html                  301
+/projects/                               /portfolio.html                  301
+/blog                                    /blog.html                       301
+/concept-design                          /concept-design.html             301
+/concept-design/                         /concept-design.html             301
+
 # Misc system / probe URLs
 /index.php                               /                                301
 /pages/                                  /services.html                   301
