@@ -282,8 +282,10 @@
 # /cities/ prefix errors — internal links that used wrong path prefix
 # (city pages use relative links that resolve incorrectly; splat catches all current + future)
 /cities/contact.html                     /contact.html                    301
+/cities/gallery.html                     /gallery.html                    301
 /cities/living-spaces.html               /living-spaces.html              301
 /cities/portfolio.html                   /portfolio.html                  301
+/cities/services.html                    /services.html                   301
 /cities/dining-rooms.html                /dining-rooms.html               301
 /cities/bedrooms.html                    /bedrooms.html                   301
 /cities/blog.html                        /blog.html                       301
@@ -314,6 +316,7 @@
 /challenge                               /                           301
 /customer_authentication/*               /                           301
 /b                                       /                           301
+/wpm                                     /                           301
 /wpm@*                                   /                           301
 
 # Catch-all for other Shopify pages (keep LAST)
