@@ -7,6 +7,7 @@
 
 # Canonicalize home URL (avoid /index.html duplicate)
 /index.html                               /                         301
+/v1/produce                               /                         301
 
 # Canonicalize .html → extensionless URLs (matches Netlify Pretty URLs canonical)
 /projects/:slug.html    /projects/:slug    301
