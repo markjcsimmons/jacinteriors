@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bitchin' Kitchens — Instagram Series | JAC Interiors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #111;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── CHROME ─── */
+    .hdr {
+      background: #0c0c0c;
+      border-bottom: 1px solid #222;
+      padding: 11px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+      min-height: 48px;
+    }
+    .hdr-brand {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #444;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .sep { color: #2a2a2a; font-size: 18px; }
+    .tabs { display: flex; gap: 5px; flex-wrap: wrap; }
+    .tab {
+      padding: 5px 11px;
+      border: 1px solid #2a2a2a;
+      border-radius: 2px;
+      background: none;
+      color: #555;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .tab:hover { border-color: #555; color: #bbb; }
+    .tab.on { background: #222a26; border-color: #2e3830; color: #fff; }
+    .hdr-r { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .slide-info { font-size: 11px; color: #444; white-space: nowrap; }
+    .export-btn {
+      padding: 5px 13px;
+      background: none;
+      border: 1px solid #2a2a2a;
+      border-radius: 2px;
+      color: #666;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .export-btn:hover { border-color: #666; color: #ccc; }
+
+    /* ─── STAGE ─── */
+    .stage {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+    .scale-wrap {
+      position: absolute;
+      transform-origin: top left;
+      width: 1080px;
+      height: 1080px;
+    }
+
+    /* ─── FOOTER ─── */
+    .ftr {
+      background: #0c0c0c;
+      border-top: 1px solid #222;
+      padding: 11px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      min-height: 48px;
+    }
+    .nav-btn {
+      padding: 6px 18px;
+      background: none;
+      border: 1px solid #2a2a2a;
+      border-radius: 2px;
+      color: #777;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      letter-spacing: 0.03em;
+    }
+    .nav-btn:hover:not(:disabled) { border-color: #666; color: #ddd; }
+    .nav-btn:disabled { opacity: 0.2; cursor: default; }
+    .ftr-center { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .dots { display: flex; gap: 7px; align-items: center; }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #2a2a2a;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s;
+      padding: 0;
+    }
+    .dot:hover { background: #555; }
+    .dot.on { background: #fff; }
+    .post-name { font-size: 10px; color: #444; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    /* ═══════════════════════════════════════════
+       SLIDE STYLES — 1080 × 1080
+    ═══════════════════════════════════════════ */
+    .slide {
+      width: 1080px;
+      height: 1080px;
+      position: relative;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .dark { background: #222a26; }
+    .light { background: #ffffff; }
+
+    /* ── Universal furniture ── */
+    .s-label {
+      position: absolute;
+      top: 52px; left: 60px;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .dark .s-label { color: rgba(255,255,255,0.28); }
+    .light .s-label { color: #c0c0c0; }
+
+    .s-num {
+      position: absolute;
+      top: 52px; right: 60px;
+      font-size: 12px; font-weight: 400;
+    }
+    .dark .s-num { color: rgba(255,255,255,0.2); }
+    .light .s-num { color: #cccccc; }
+
+    .s-handle {
+      position: absolute;
+      bottom: 50px; right: 60px;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .dark .s-handle { color: rgba(255,255,255,0.25); }
+    .light .s-handle { color: #d0d0d0; }
+
+    /* ── TITLE slide ── */
+    .l-title {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 60px 96px;
+    }
+    .t-bar {
+      width: 52px; height: 3px;
+      background: rgba(255,255,255,0.18);
+      margin-bottom: 48px;
+    }
+    .t-hed {
+      font-size: 108px;
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -7px;
+      color: #ffffff;
+      margin-bottom: 36px;
+    }
+    .t-sub {
+      font-size: 22px; font-weight: 400;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.45;
+      letter-spacing: -0.2px;
+      max-width: 580px;
+    }
+
+    /* ── TYPE-ONLY slide ── */
+    .l-type {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 0 60px;
+    }
+    .c-rule {
+      width: 40px; height: 1px;
+      background: #e0e0e0;
+      margin-bottom: 44px;
+    }
+    .c-hed {
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 0.97;
+      letter-spacing: -5px;
+      color: #222a26;
+      margin-bottom: 32px;
+    }
+    .c-body {
+      font-size: 22px; font-weight: 400;
+      line-height: 1.55;
+      color: #575757;
+      letter-spacing: -0.25px;
+      max-width: 740px;
+    }
+
+    /* ── SPLIT (photo + type) slide ── */
+    .l-split {
+      position: absolute; inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .sp-photo {
+      position: relative;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    .sp-photo img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .sp-ph {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 14px;
+    }
+    .ph-icon {
+      width: 44px; height: 44px;
+      border: 1px solid #333; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #333; font-size: 20px;
+    }
+    .ph-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #383838;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .sp-copy {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 80px 56px 80px 60px;
+    }
+    .sp-hed {
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -3px;
+      color: #222a26;
+      margin-bottom: 28px;
+    }
+    .sp-body {
+      font-size: 20px; font-weight: 400;
+      line-height: 1.55;
+      color: #575757;
+      letter-spacing: -0.2px;
+    }
+
+    /* ── CTA slide ── */
+    .l-cta {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 0 60px;
+    }
+    .cta-tag {
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 40px;
+    }
+    .cta-hed {
+      font-size: 66px;
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -4px;
+      color: white;
+      margin-bottom: 44px;
+    }
+    .cta-div {
+      width: 40px; height: 1px;
+      background: rgba(255,255,255,0.12);
+      margin-bottom: 36px;
+    }
+    .cta-sub {
+      font-size: 20px; font-weight: 400;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.55;
+      letter-spacing: -0.2px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-brand">Bitchin' Kitchens</div>
+  <div class="sep">|</div>
+  <div class="tabs" id="tabs"></div>
+  <div class="hdr-r">
+    <div class="slide-info" id="info"></div>
+    <button class="export-btn" onclick="openFull()">Open 1080px ↗</button>
+  </div>
+</div>
+
+<div class="stage" id="stage">
+  <div class="scale-wrap" id="wrap">
+    <div class="slide" id="slide"></div>
+  </div>
+</div>
+
+<div class="ftr">
+  <button class="nav-btn" id="prevBtn" onclick="go(-1)">← Prev</button>
+  <div class="ftr-center">
+    <div class="dots" id="dots"></div>
+    <div class="post-name" id="pname"></div>
+  </div>
+  <button class="nav-btn" id="nextBtn" onclick="go(1)">Next →</button>
+</div>
+
+<script>
+const CDN = 'https://jacinteriorscdn.com';
+
+// ─── ALL 35 SLIDES ───────────────────────────
+const POSTS = [
+  {
+    id: '01',
+    name: '2026 Trends',
+    slides: [
+      {
+        t: 'title',
+        hed: 'Bitchin\'<br>Kitchens:<br>2026',
+        sub: 'What\'s in. What\'s out.<br>No debate.'
+      },
+      {
+        t: 'type',
+        hed: 'Integrated<br>everything.',
+        body: 'If your appliances are showing,<br>we need to talk.<br>Hidden panels. Flush handles. The kind of kitchen<br>that makes people think you just don\'t cook.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/fox-hills/fox-hills-9.jpg`,
+        ph: 'Kitchen photo — Fox Hills',
+        hed: 'The<br>statement<br>range.',
+        body: 'The range is the jewelry.<br>Everything else is the outfit.<br>A 60″ Wolf or La Cornue earns<br>every inch of square footage.'
+      },
+      {
+        t: 'type',
+        hed: 'Warm stone<br>over white<br>marble.',
+        body: 'Marble had its moment.<br>Warm limestones and quartzite are having theirs.<br>Veining that looks like art,<br>not a geology textbook.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/sunnyside/sunnyside-7.jpg`,
+        ph: 'Kitchen detail photo',
+        hed: 'Unlacquered<br>brass.',
+        body: 'It\'s supposed to age.<br>That\'s the point.<br>Patina isn\'t a flaw — it\'s proof<br>someone actually lives here.'
+      },
+      {
+        t: 'type',
+        hed: 'No upper<br>cabinets.',
+        body: 'The empty wall is the move.<br>Let the backsplash breathe.<br>Open shelf or nothing.'
+      },
+      {
+        t: 'cta',
+        hed: 'Your kitchen<br>should have a<br>point of view.',
+        sub: 'DM us or hit the link in bio.<br>jacinteriors.com'
+      }
+    ]
+  },
+
+  {
+    id: '02',
+    name: 'Remodel Bible',
+    slides: [
+      {
+        t: 'title',
+        hed: 'The<br>Remodel<br>Bible.',
+        sub: 'Before you demo a single cabinet,<br>read this.'
+      },
+      {
+        t: 'type',
+        hed: 'Start with<br>layout.<br>Not finishes.',
+        body: 'Nobody cares about your tile<br>if the flow is wrong.<br>The triangle rules everything.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/columbus-way/columbus-way-27.jpg`,
+        ph: 'Kitchen layout photo',
+        hed: 'Lock your<br>appliances<br>first.',
+        body: 'Cabinets, counters, and ventilation<br>are all sized around them.<br>Pick them in week one.<br>Not week nine.'
+      },
+      {
+        t: 'type',
+        hed: 'Design your<br>lighting early.',
+        body: 'Electrical rough-in waits for no one.<br>Decide in week one or pay<br>an electrician to come back.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/fox-hills/fox-hills-1.jpg`,
+        ph: 'Kitchen renovation photo',
+        hed: 'Budget<br>15–20%<br>for surprises.',
+        body: 'There are always surprises.<br>Old houses especially<br>love surprises.'
+      },
+      {
+        t: 'type',
+        hed: 'Get three<br>bids.<br>Always.',
+        body: 'Even if you love your first contractor.<br><em>Especially</em> if you love<br>your first contractor.'
+      },
+      {
+        t: 'cta',
+        hed: 'The checklist<br>saves you money.<br>The designer<br>saves you from<br>yourself.',
+        sub: 'jacinteriors.com/blog/<br>kitchen-remodel-checklist'
+      }
+    ]
+  },
+
+  {
+    id: '03',
+    name: 'The Numbers',
+    slides: [
+      {
+        t: 'title',
+        hed: 'Let\'s<br>Talk<br>Numbers.',
+        sub: 'Nobody wants to discuss budget.<br>We will.'
+      },
+      {
+        t: 'type',
+        hed: '$50k–$100k<br>A solid<br>kitchen.',
+        body: 'New cabinets, stone counters, updated appliances.<br>Clean, functional, not something<br>you apologize for.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/galewood/galewood-1.jpg`,
+        ph: 'Mid-range kitchen photo',
+        hed: '$100k–$200k<br>A great<br>kitchen.',
+        body: 'Custom cabinets. High-end appliances.<br>Real stone. Statement lighting.<br>This is the sweet spot<br>and we live here.'
+      },
+      {
+        t: 'type',
+        hed: '$200k+<br>A statement.',
+        body: 'Fully custom. Zero compromises.<br>The kitchen your friends photograph<br>without asking permission.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/fox-hills/fox-hills-9.jpg`,
+        ph: 'High-end kitchen photo',
+        hed: 'What<br>actually<br>blows<br>budgets.',
+        body: 'Moving plumbing. Structural surprises.<br>Opening walls in a 1970s house.<br>Budget for them before<br>they budget for you.'
+      },
+      {
+        t: 'type',
+        hed: 'The cheap<br>kitchen always<br>costs more.',
+        body: 'Redoing it in five years is not<br>a savings strategy.<br>Do it once. Do it right.'
+      },
+      {
+        t: 'cta',
+        hed: 'We\'ve done<br>enough LA kitchens<br>to know exactly<br>where the money<br>goes.',
+        sub: 'Link in bio.<br>jacinteriors.com'
+      }
+    ]
+  },
+
+  {
+    id: '04',
+    name: 'The Timeline',
+    slides: [
+      {
+        t: 'title',
+        hed: 'The<br>Real<br>Timeline.',
+        sub: 'Longer than your contractor told you.<br>Here\'s why.'
+      },
+      {
+        t: 'type',
+        hed: 'Weeks 1–8<br>Design &<br>planning.',
+        body: 'This is not wasted time.<br>This is where expensive mistakes<br>don\'t happen.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/sunnyside/sunnyside-1.jpg`,
+        ph: 'Design phase photo',
+        hed: 'Weeks 8–14<br>Permits.',
+        body: 'LA is not in a rush.<br>Neither should you be.'
+      },
+      {
+        t: 'type',
+        hed: 'Weeks 14–16<br>Demo day.',
+        body: 'The most satisfying two weeks<br>of the whole project.<br>Enjoy it. It\'s downhill from here.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/fox-hills/fox-hills-9.jpg`,
+        ph: 'Construction phase photo',
+        hed: 'Weeks 16–24<br>Cabinets &<br>counters.',
+        body: 'Custom cabinets take 8–12 weeks to arrive.<br>Order them early.<br>Order them <em>now</em>.'
+      },
+      {
+        t: 'type',
+        hed: 'Weeks 24–28<br>The home<br>stretch.',
+        body: 'Hardware, appliances, lighting, touch-ups.<br>The detail work that makes<br>or breaks the whole thing.'
+      },
+      {
+        t: 'cta',
+        hed: 'Full kitchen<br>remodel in LA:<br>4–8 months.',
+        sub: 'Rush it and you\'ll know<br>exactly why that was a mistake.<br>jacinteriors.com'
+      }
+    ]
+  },
+
+  {
+    id: '05',
+    name: 'Small Space',
+    slides: [
+      {
+        t: 'title',
+        hed: 'Small<br>Space.<br>Big<br>Statement.',
+        sub: 'Your kitchen is small.<br>Your taste doesn\'t have to be.'
+      },
+      {
+        t: 'type',
+        hed: 'Go floor<br>to ceiling.',
+        body: 'Every inch of vertical space<br>is storage you\'re leaving on the table.<br>Claim it all.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/colby/colby-1.jpg`,
+        ph: 'Small kitchen photo',
+        hed: 'One bold<br>material.',
+        body: 'A small kitchen with a show-stopping<br>backsplash is more memorable than a large<br>kitchen with nothing going on.<br>Commit to something.'
+      },
+      {
+        t: 'type',
+        hed: 'Kill the upper<br>cabinets on<br>one wall.',
+        body: 'Open up the room. Add a floating shelf.<br>It\'ll feel twice the size without<br>spending twice the money.'
+      },
+      {
+        t: 'split',
+        img: `${CDN}/projects/sunnyside/sunnyside-7.jpg`,
+        ph: 'Small kitchen detail',
+        hed: 'Integrated<br>appliances.<br>Non-negotiable.',
+        body: 'In a small kitchen,<br>visible appliances = visual clutter.<br>Panel everything you possibly can.'
+      },
+      {
+        t: 'type',
+        hed: 'One great<br>pendant does<br>the heavy<br>lifting.',
+        body: 'It makes a small kitchen feel<br>considered, not cramped.<br>Lighting is the move nobody thinks about<br>until it\'s too late.'
+      },
+      {
+        t: 'cta',
+        hed: 'Small kitchen.<br>Full potential.',
+        sub: 'We do this in LA every day.<br>DM us or hit the link in bio.<br>@jacinteriors'
+      }
+    ]
+  }
+];
+
+// ─── STATE ───────────────────────────────────
+let pIdx = 0, sIdx = 0;
+
+// ─── RENDER ──────────────────────────────────
+function html(d, n, total) {
+  const num = `${String(n).padStart(2,'0')} / ${String(total).padStart(2,'0')}`;
+  const label = `<div class="s-label">Bitchin' Kitchens</div>`;
+  const numEl = (n > 1 && n < total) ? `<div class="s-num">${num}</div>` : '';
+  const handle = `<div class="s-handle">@jacinteriors</div>`;
+
+  if (d.t === 'title') return `
+    <div class="slide dark">
+      ${label}
+      <div class="l-title">
+        <div class="t-bar"></div>
+        <div class="t-hed">${d.hed}</div>
+        <div class="t-sub">${d.sub}</div>
+      </div>
+      ${handle}
+    </div>`;
+
+  if (d.t === 'type') return `
+    <div class="slide light">
+      ${label}${numEl}
+      <div class="l-type">
+        <div class="c-rule"></div>
+        <div class="c-hed">${d.hed}</div>
+        <div class="c-body">${d.body}</div>
+      </div>
+      ${handle}
+    </div>`;
+
+  if (d.t === 'split') return `
+    <div class="slide light">
+      ${label}${numEl}
+      <div class="l-split">
+        <div class="sp-photo">
+          <div class="sp-ph">
+            <div class="ph-icon">+</div>
+            <div class="ph-label">${d.ph}</div>
+          </div>
+          <img src="${d.img}" alt="${d.ph}" onload="this.previousElementSibling.style.opacity=0">
+        </div>
+        <div class="sp-copy">
+          <div class="c-rule"></div>
+          <div class="sp-hed">${d.hed}</div>
+          <div class="sp-body">${d.body}</div>
+        </div>
+      </div>
+      ${handle}
+    </div>`;
+
+  if (d.t === 'cta') return `
+    <div class="slide dark">
+      ${label}
+      <div class="l-cta">
+        <div class="cta-tag">Get started</div>
+        <div class="cta-hed">${d.hed}</div>
+        <div class="cta-div"></div>
+        <div class="cta-sub">${d.sub}</div>
+      </div>
+      ${handle}
+    </div>`;
+}
+
+function render() {
+  const post = POSTS[pIdx];
+  const d = post.slides[sIdx];
+  const total = post.slides.length;
+
+  document.getElementById('slide').outerHTML; // noop
+  document.querySelector('.scale-wrap').innerHTML =
+    `<div id="slide">${html(d, sIdx+1, total)}</div>`;
+
+  document.getElementById('info').textContent =
+    `Post ${pIdx+1} / ${POSTS.length}  ·  Slide ${sIdx+1} / ${total}`;
+  document.getElementById('pname').textContent = post.name;
+
+  // Dots
+  document.getElementById('dots').innerHTML = post.slides.map((_,i) =>
+    `<button class="dot${i===sIdx?' on':''}" onclick="jump(${i})"></button>`).join('');
+
+  // Tabs
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('on', i===pIdx));
+
+  // Nav
+  const first = pIdx===0 && sIdx===0;
+  const last  = pIdx===POSTS.length-1 && sIdx===POSTS[pIdx].slides.length-1;
+  document.getElementById('prevBtn').disabled = first;
+  document.getElementById('nextBtn').disabled = last;
+
+  fit();
+}
+
+function fit() {
+  const stage = document.getElementById('stage');
+  const sw = stage.offsetWidth - 40;
+  const sh = stage.offsetHeight - 40;
+  const s = Math.min(sw/1080, sh/1080, 1);
+  const x = (stage.offsetWidth  - 1080*s) / 2;
+  const y = (stage.offsetHeight - 1080*s) / 2;
+  const w = document.querySelector('.scale-wrap');
+  w.style.transform = `translate(${x}px,${y}px) scale(${s})`;
+  w.style.transformOrigin = 'top left';
+}
+
+function go(dir) {
+  const total = POSTS[pIdx].slides.length;
+  if (dir===1) {
+    if (sIdx < total-1) { sIdx++; }
+    else if (pIdx < POSTS.length-1) { pIdx++; sIdx=0; }
+  } else {
+    if (sIdx > 0) { sIdx--; }
+    else if (pIdx > 0) { pIdx--; sIdx = POSTS[pIdx].slides.length-1; }
+  }
+  render();
+}
+
+function jump(i) { sIdx=i; render(); }
+
+function goPost(i) { pIdx=i; sIdx=0; render(); }
+
+function openFull() {
+  const inner = document.querySelector('#slide .slide').outerHTML;
+  const styles = Array.from(document.querySelectorAll('style'))
+    .map(s => s.outerHTML).join('\n');
+  const w = window.open('','_blank','width=1080,height=1080');
+  w.document.write(`<!DOCTYPE html><html><head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    ${styles}
+    <style>html,body{width:1080px;height:1080px;overflow:hidden;margin:0;padding:0;background:#fff;}</style>
+    </head><body>${inner}</body></html>`);
+  w.document.close();
+}
+
+// ─── INIT ────────────────────────────────────
+(function init() {
+  document.getElementById('tabs').innerHTML = POSTS.map((p,i) =>
+    `<button class="tab${i===0?' on':''}" onclick="goPost(${i})">${p.id} · ${p.name}</button>`
+  ).join('');
+  render();
+  window.addEventListener('resize', fit);
+  document.addEventListener('keydown', e => {
+    if (e.key==='ArrowRight'||e.key==='ArrowDown') go(1);
+    if (e.key==='ArrowLeft' ||e.key==='ArrowUp')   go(-1);
+  });
+})();
+</script>
+</body>
+</html>
