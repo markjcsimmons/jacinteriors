@@ -278,6 +278,9 @@
 /pages/yellowstone-club             /projects/yellowstone-club 301
 /pages/yellowstone-club/            /projects/yellowstone-club 301
 
+# Pacific Palisades was previously a directory (index.html) — redirect trailing slash
+/cities/pacific-palisades/             /cities/pacific-palisades               301
+
 # /cities/ prefix errors — internal links that used wrong path prefix
 # (city pages use relative links that resolve incorrectly; splat catches all current + future)
 /cities/contact                     /contact                    301
