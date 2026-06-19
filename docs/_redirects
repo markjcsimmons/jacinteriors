@@ -289,6 +289,7 @@
 # (city pages use relative links that resolve incorrectly; splat catches all current + future)
 /cities/contact                     /contact                    301
 /cities/gallery                     /gallery                    301
+/cities/kitchens                    /kitchens                   301
 /cities/living-spaces               /living-spaces              301
 /cities/portfolio                   /portfolio                  301
 /cities/services                    /services                   301
@@ -296,7 +297,8 @@
 /cities/bedrooms                    /bedrooms                   301
 /cities/blog                        /blog                       301
 /cities/spaces                      /spaces                     301
-/cities/projects/*                       /projects/:splat                 301
+/cities/projects/:slug.html         /projects/:slug             301
+/cities/projects/*                  /projects/:splat            301
 
 # Old blog post with typo slug → new targeted post
 /blogs/jac-interior-design-blog/tips-for-awkward-living-room-lawyout-designs  /blog/awkward-living-room-layout  301
