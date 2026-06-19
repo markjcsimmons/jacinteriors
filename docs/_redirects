@@ -213,8 +213,10 @@
 /pages/palm-desert-oasis/           /projects/palm-desert-oasis 301
 /pages/palos-verdes                 /cities/palos-verdes 301
 /pages/palos-verdes/                /cities/palos-verdes 301
-/pages/panorama-views               /projects/panorama-views 301
-/pages/panorama-views/              /projects/panorama-views 301
+/pages/panorama                     /portfolio          301
+/pages/panorama/                    /portfolio          301
+/pages/panorama-views               /portfolio          301
+/pages/panorama-views/              /portfolio          301
 /pages/pasadena                     /cities/pasadena    301
 /pages/pasadena/                    /cities/pasadena    301
 /pages/pembroke-pines               /cities/pembroke-pines 301
@@ -229,6 +231,8 @@
 /pages/pompano-beach-interior/      /cities/pompano-beach 301
 /pages/projects                     /portfolio          301
 /pages/projects/                    /portfolio          301
+/pages/rhonda                       /projects/ronda     301
+/pages/rhonda/                      /projects/ronda     301
 /pages/rebuildla                    /services           301
 /pages/rebuildla/                   /services           301
 /pages/rebuildlahome                /services           301
@@ -335,6 +339,8 @@
 /mountain-chic-interiors/               /blog/mountain-chic-interiors 301
 /desert-drama-achieving-desert-luxe-look /blog                       301
 /desert-drama-achieving-desert-luxe-look/ /blog                      301
+/design-couples-sofa-coffee-table-combinations /blog                 301
+/design-couples-sofa-coffee-table-combinations/ /blog                301
 /projects                                /portfolio                  301
 /projects/                               /portfolio                  301
 
