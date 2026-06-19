@@ -114,12 +114,17 @@
         if (href.startsWith('projects/') && basePath) {
             return basePath + '/' + href;
         }
-        // For relative paths in subdirectories, use relative paths
-        if (depth > 0 && !href.startsWith('../')) {
-            return pathPrefix + href;
+        // On production (basePath=''), strip .html so nav links use clean URLs and Google
+        // doesn't discover .html duplicates. On GitHub Pages (basePath set), keep .html.
+        const h = basePath ? href : href.replace(/\.html(?=[#?]|$)/, '');
+        if (depth > 0 && !h.startsWith('../')) {
+            const rel = pathPrefix + h;
+            // '../index' → '../' (resolves to root)
+            return rel.endsWith('/index') ? rel.slice(0, -5) : rel;
         }
-        // For root-level relative paths, use absolute paths with basePath
-        return basePath + '/' + href;
+        const path = basePath + '/' + h;
+        // '/index' → '/' (root)
+        return path.endsWith('/index') ? path.slice(0, -5) : path;
     }
 
     function ensureSeoMeta() {
