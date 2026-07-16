@@ -28,10 +28,14 @@ Static HTML website for JAC Interiors (luxury interior design, LA + South Florid
 - New blog posts go in `docs/blog/`, get a card prepended to `docs/blog.html`, URL added to `sitemap.xml`
 
 ## Last worked on
+- GSC Page Indexing audit (2026-07-16): worked through 404, duplicate-canonical, crawled-not-indexed, and redirect-error reports
+- Found and fixed a real bug: named-placeholder redirects (`:slug`, `:page`) in `_redirects` matched correctly but never interpolated the destination, producing literal 301s to `/cities/:slug` etc. that redirect-looped forever. Removed the broken generic `.html → extensionless` block (was dead code for real pages anyway — Netlify serves existing static files directly, bypassing `_redirects`, so it only ever fired on legacy/fake paths)
+- Added 177 explicit force-redirects (`301!`) for every real city/project/blog/root `.html` page → its extensionless canonical, fixing ~91 pages GSC flagged as "duplicate, Google chose different canonical" (both URLs were live 200s despite a correct canonical tag — the tag alone wasn't enough)
+- Fixed the same broken-placeholder bug in the legacy `/cities/projects/:slug.html` rule with 38 explicit literal redirects
+- Confirmed "Crawled - not indexed" (98 pages) and most of "Not found (404)" (106 pages) are stale GSC data, not live bugs — spot-checked ~15 sampled URLs, all already resolve correctly; will clear as Google recrawls
 - Rebuilt `space-planning.html` to full service page standard
 - Added blog section + full footer to `kitchens.html`
 - 3 new blog posts: luxury living room, kitchen renovation, home office (LA)
-- Fixed 9 missing redirects: `/cities/` prefix internal link errors
 - GSC: sitemap resubmitted, indexing requested on ~10 key pages
 
 ## Do not re-explain
@@ -39,3 +43,5 @@ Static HTML website for JAC Interiors (luxury interior design, LA + South Florid
 - Why `_redirects` is so long (maps every legacy Shopify `/pages/*` and `/blogs/*` URL)
 - Low indexed page count (28) is post-migration lag, not a structural problem — resolving via GSC requests
 - Images are on CDN, not in the repo — don't suggest adding them locally
+- Never use named placeholders (`:slug`, `:page`, `:splat`) in a `_redirects` destination on this site — confirmed broken in production (matches but doesn't interpolate, causing redirect loops). Always write explicit literal per-page rules instead, even though it's more lines
+- Real `.html` files are served directly by Netlify before `_redirects` is ever consulted — a rule targeting an existing file needs the `301!` force flag or it's silently ignored
