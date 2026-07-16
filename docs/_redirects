@@ -9,13 +9,6 @@
 /index.html                               /                         301
 /v1/produce                               /                         301
 
-# Canonicalize .html → extensionless URLs (matches Netlify Pretty URLs canonical)
-/projects/:slug.html    /projects/:slug    301
-/cities/:slug.html      /cities/:slug      301
-/blog/:slug.html        /blog/:slug        301
-/:page.html             /:page             301
-
-
 # Legacy redirect pages
 /kitchen-design.html                      /kitchens            301
 
