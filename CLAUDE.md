@@ -28,15 +28,11 @@ Static HTML website for JAC Interiors (luxury interior design, LA + South Florid
 - New blog posts go in `docs/blog/`, get a card prepended to `docs/blog.html`, URL added to `sitemap.xml`
 
 ## Last worked on
-- GSC Page Indexing audit (2026-07-16): worked through 404, duplicate-canonical, crawled-not-indexed, and redirect-error reports
-- Found and fixed a real bug: named-placeholder redirects (`:slug`, `:page`) in `_redirects` matched correctly but never interpolated the destination, producing literal 301s to `/cities/:slug` etc. that redirect-looped forever. Removed the broken generic `.html → extensionless` block (was dead code for real pages anyway — Netlify serves existing static files directly, bypassing `_redirects`, so it only ever fired on legacy/fake paths)
-- Added 177 explicit force-redirects (`301!`) for every real city/project/blog/root `.html` page → its extensionless canonical, fixing ~91 pages GSC flagged as "duplicate, Google chose different canonical" (both URLs were live 200s despite a correct canonical tag — the tag alone wasn't enough)
-- Fixed the same broken-placeholder bug in the legacy `/cities/projects/:slug.html` rule with 38 explicit literal redirects
-- Confirmed "Crawled - not indexed" (98 pages) and most of "Not found (404)" (106 pages) are stale GSC data, not live bugs — spot-checked ~15 sampled URLs, all already resolve correctly; will clear as Google recrawls
-- Rebuilt `space-planning.html` to full service page standard
-- Added blog section + full footer to `kitchens.html`
-- 3 new blog posts: luxury living room, kitchen renovation, home office (LA)
-- GSC: sitemap resubmitted, indexing requested on ~10 key pages
+- Keyword research (2026-08-01): mined a 10k-row broad-match "interior" keyword export, filtered out job/education/irrelevant noise, cross-checked against existing `docs/blog/` topics to avoid duplicates
+- 3 new blog posts published: `maximalist-interior-design.html`, `eclectic-interior-design.html`, `paint-color-trends-2026.html` — cards prepended to `docs/blog.html`, URLs added to `sitemap.xml`
+- Found and worked around a real bug in `docs/assets/js/r2-images.js`: `applyR2Images()` rewrites any `<img src="assets/images/projects/<project>/<filename>">` to the CDN, guessing nearby numeric/extension variants (±30, jpg/JPG/jpeg/JPEG/webp/png) if the exact file 404s on `jacinteriorscdn.com`. For projects never uploaded to the CDN — confirmed on `docs/projects/eclectic-sunnyside.html`, which only has local images in the repo — this guessing lands on a plausible but wrong CDN URL instead of falling back to the working local file, so the image never loads (`naturalWidth` stays 0). Worked around it in the new posts by using only verified `jacinteriorscdn.com` images. Real fix (rewrite legacy local-image project pages, or make the script fall back properly) is filed as a separate follow-up, not done yet.
+- Verification method that actually works in the preview browser: screenshots render CDN images as blank/gray in this sandbox even when the image is fine — the reliable check is `document.querySelectorAll('img')` + force `img.loading='eager'` + wait, then check `naturalWidth > 0`. Don't trust the screenshot alone for CDN image issues on this site.
+- Also spotted (not fixed): `vale-crest-3.jpg` referenced in the already-live `warm-minimalism-interior-design.html` resolves with `naturalWidth: 0` — likely the same underlying CDN/fallback issue.
 
 ## Do not re-explain
 - Why Netlify over GitHub Pages (GitHub Pages ignores `_redirects` — this caused the keyword drop)
